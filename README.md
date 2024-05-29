@@ -1,0 +1,1 @@
+FitConnect, an iSpan MSIT_158 project, a web project relies on .NET Core MVC, RESTful API, C#, TSQL, and more. This project aims to power its dynamic web platform for fitness enthusiasts, ensuring seamless experiences and robust data management.
