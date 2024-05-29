@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "projFitConnect/1.0.0": {
+        "runtime": {
+          "projFitConnect.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "projFitConnect/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

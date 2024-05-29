@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - projFitConnect</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-xl navbar-toggleable-xl navbar-light bg-white mb-3">
+            <div class="container-fluid w-75">
+                <a class="navbar-brand" href="#">
+                    <img src="~/images/logo.png" alt="FitConnect" width="150" height="60">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold p-4" asp-area="" asp-controller="Home" asp-action="Index">首頁</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold p-4" asp-area="" asp-controller="Home" asp-action="Privacy">找健身房</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold p-4" asp-area="" asp-controller="Trainer" asp-action="Search">找教練</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold p-4" asp-area="" asp-controller="Home" asp-action="Privacy">找知識</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark fw-bold p-4" asp-area="" asp-controller="Home" asp-action="Privacy">關於我們</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container w-75 m-auto">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="text-muted bg-light">
+        <div class="row row-cols-1 row-cols-md-4 g-4 w-75 m-auto ">
+            <nav class="nav flex-column">
+                <a class="nav-link disabled fw-bold text-black fs-5" aria-disabled="true">網站資訊</a>
+                <a class="nav-link active" aria-current="page" href="#">關於我們</a>
+                <a class="nav-link" href="#">粉絲頁</a>
+                <a class="nav-link" href="#">IG</a>
+                <a class="nav-link" href="#">聯絡我們</a>
+                <a class="nav-link" href="#">隱私政策</a>
+                <a class="nav-link" href="#">服務條款</a>
+            </nav>
+            <nav class="nav flex-column">
+                <a class="nav-link disabled fw-bold text-black fs-5" aria-disabled="true">健身房類別</a>
+                <a class="nav-link active" aria-current="page" href="#">單次入場</a>
+                <a class="nav-link" href="#">以分計費</a>
+                <a class="nav-link" href="#">場地租借</a>
+                <a class="nav-link" href="#">月費方案</a>
+                <a class="nav-link" href="#">簽約會員</a>
+                <a class="nav-link" href="#">工作室</a>
+                <a class="nav-link" href="#">國民運動中心</a>
+            </nav>
+            <nav class="nav flex-column">
+                <a class="nav-link disabled fw-bold text-black fs-5" aria-disabled="true">場館專區</a>
+                <a class="nav-link active" aria-current="page" href="#">如何上架場館?</a>
+                <a class="nav-link" href="#">內容校正</a>
+                <a class="nav-link" href="#">合作邀請</a>
+            </nav>
+            <nav class="nav flex-column">
+                <a class="nav-link" href="#">FB</a>
+                <a class="nav-link" href="#">IG</a>
+                <a class="nav-link" href="#">Email</a>
+            </nav>
+        </div>
+    </footer>
+    <footer class="border-top footer text-muted bg-light">
+        <div class="container w-75 text-black">
+            &copy; 2024 FitConnect. All rights reserved
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
