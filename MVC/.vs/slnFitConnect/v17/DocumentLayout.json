@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\final_proj\\MVC\\",
+  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\final_proj\\mvc\\projfitconnect\\views\\trainer\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\main\\finalproj\\team\\mvc\\projfitconnect\\views\\trainer\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\trainer\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -14,8 +14,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 256,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -25,16 +37,12 @@
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Search.cshtml",
-              "DocumentMoniker": "C:\\final_proj\\MVC\\projFitConnect\\Views\\Trainer\\Search.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\Views\\Trainer\\Search.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Trainer\\Search.cshtml",
-              "ToolTip": "C:\\final_proj\\MVC\\projFitConnect\\Views\\Trainer\\Search.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\Views\\Trainer\\Search.cshtml",
               "RelativeToolTip": "projFitConnect\\Views\\Trainer\\Search.cshtml",
               "ViewState": "AQIAADYAAAAAAAAAAAAAAEMAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
