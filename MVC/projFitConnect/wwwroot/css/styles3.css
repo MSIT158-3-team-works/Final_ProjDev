@@ -34,3 +34,6 @@
 .colored_a {
     color:crimson;
 }
+.footer_top li {
+    font-size: calc(1.325rem + 0.9vw) !important;
+}
