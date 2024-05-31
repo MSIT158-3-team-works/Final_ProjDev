@@ -13,12 +13,136 @@
       "PackagePath": "staticwebassets\\Images\\model.jpg"
     },
     {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\favicon.ico",
+      "PackagePath": "staticwebassets\\assets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\about\\1.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\about\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\about\\2.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\about\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\about\\3.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\about\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\about\\4.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\about\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\close-icon.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\close-icon.svg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\fitlogo.png",
+      "PackagePath": "staticwebassets\\assets\\img\\fitlogo.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\header-backgrd.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\header-backgrd.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\header-background.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\header-background.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\header-bg3.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\header-bg3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\header-bg4.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\header-bg4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\icon_customer_service.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon_customer_service.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\icon_shopping_cart.png",
+      "PackagePath": "staticwebassets\\assets\\img\\icon_shopping_cart.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\logos\\facebook.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\logos\\facebook.svg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\logos\\google.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\logos\\google.svg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\logos\\ibm.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\logos\\ibm.svg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\logos\\microsoft.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\logos\\microsoft.svg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\map-image.png",
+      "PackagePath": "staticwebassets\\assets\\img\\map-image.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\navbar-logo.svg",
+      "PackagePath": "staticwebassets\\assets\\img\\navbar-logo.svg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\portfolio\\1.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\portfolio\\2.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\portfolio\\3.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\portfolio\\4.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\portfolio\\5.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\portfolio\\6.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\portfolio\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\profile.png",
+      "PackagePath": "staticwebassets\\assets\\img\\profile.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\team\\4.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\team\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\team\\5.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\team\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\assets\\img\\team\\6.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\team\\6.jpg"
+    },
+    {
       "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\css\\styles3.css",
+      "PackagePath": "staticwebassets\\css\\styles3.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\js\\scripts.js",
+      "PackagePath": "staticwebassets\\js\\scripts.js"
     },
     {
       "Id": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\MVC\\projFitConnect\\wwwroot\\js\\site.js",

@@ -1,0 +1,36 @@
+﻿.divlightgray {
+    color: white;
+    background-color: #D0CECE;
+    border-color: #D0CECE;
+    text-align:center;
+}
+
+.divblue {
+    color: white;
+    background-color: #517BC5;
+    border-color: #517BC5;
+    text-align: center;
+}
+
+.divlightblue {
+    color: black;
+    background-color: #A2C4E3;
+    border-color: #A2C4E3;
+    text-align: center;
+}
+
+.divwhite {
+    color: black;
+    background-color: #F6F5F5;
+    border-color: #F6F5F5;
+    text-align: center;
+}
+
+.divimg {
+    color: gray;
+    background-color: gray;
+}
+
+.colored_a {
+    color:crimson;
+}
