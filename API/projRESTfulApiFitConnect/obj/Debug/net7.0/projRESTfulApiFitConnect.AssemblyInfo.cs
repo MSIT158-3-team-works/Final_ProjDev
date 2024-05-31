@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("projRESTfulApiFitConnect")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6afe8a4ea086028223940ab9305a52767cb89353")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b46d789ccf8b8726672ced5813af932a6e62934")]
 [assembly: System.Reflection.AssemblyProductAttribute("projRESTfulApiFitConnect")]
 [assembly: System.Reflection.AssemblyTitleAttribute("projRESTfulApiFitConnect")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

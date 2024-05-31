@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -9,6 +9,10 @@
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
     <Content Remove="wwwroot\Images\pexels-polina-tankilevitch-6739044.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\styles.css" />
   </ItemGroup>
 
   <ItemGroup>
