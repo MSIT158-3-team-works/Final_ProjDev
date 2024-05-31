@@ -10904,7 +10904,7 @@ p {
   letter-spacing: 0.0625em;
 }
     #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-        color: #A0C4E5; /*導覽列顏色*/
+        color: #4c77c5; /*導覽列顏色*/
     }
 
 @media (min-width: 992px) {
