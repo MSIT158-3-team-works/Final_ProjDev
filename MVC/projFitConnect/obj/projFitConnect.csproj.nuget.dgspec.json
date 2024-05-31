@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\final_proj\\MVC\\projFitConnect\\projFitConnect.csproj": {}
+    "C:\\Users\\User\\Desktop\\0531\\MVC\\projFitConnect\\projFitConnect.csproj": {}
   },
   "projects": {
-    "C:\\final_proj\\MVC\\projFitConnect\\projFitConnect.csproj": {
+    "C:\\Users\\User\\Desktop\\0531\\MVC\\projFitConnect\\projFitConnect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\final_proj\\MVC\\projFitConnect\\projFitConnect.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\0531\\MVC\\projFitConnect\\projFitConnect.csproj",
         "projectName": "projFitConnect",
-        "projectPath": "C:\\final_proj\\MVC\\projFitConnect\\projFitConnect.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\0531\\MVC\\projFitConnect\\projFitConnect.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\final_proj\\MVC\\projFitConnect\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\0531\\MVC\\projFitConnect\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -22,7 +22,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -30,8 +30,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -47,8 +47,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
