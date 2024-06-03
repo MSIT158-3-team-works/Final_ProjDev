@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <style>
+        .pgmargin {
+            padding: 0 20%;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .disable {
+            display: none;
+        }
+
+        .txtcolor {
+            color: black;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="page" style="padding-top:120px">
+
+        <div id="upside">
+
+            <div id="info_div" class="pgmargin m-2">
+                <div class="d-flex flex-column float-start m-lg-2 mr-5">
+                    <img src="~/images/logo.png" class="rounded-circle" alt="..." height="140px" id="pic1">
+                    <button class="btn btn-primary" id="btn">Button</button>
+                </div>
+                <div>
+                    <p id="txt1">name plus info</p>
+                    <div class="p-3" id="txt2">blank</div>
+                    <div class="d-flex flex-row bd-highlight mb-0  pb-0">
+                        <div class="p-2 flex-fill bd-highlight pb-0">
+                            <div class="d-flex flex-row bd-highlight mb-0">
+                                <div class="m-1 mb-0">
+                                    <img src="~/images/logo.png" class="rounded-circle" alt="not found" width="40px">
+                                </div>
+                                <div class="flex-fill bd-highlight mb-0">
+                                    <p>加入時間</p>
+                                    <p>Flex item 22</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight pb-0">
+                            <div class="d-flex flex-row bd-highlight mb-0">
+                                <div class="m-1 mb-0">
+                                    <img src="~/images/logo.png" class="rounded-circle" alt="not found" width="40px">
+                                </div>
+                                <div class="flex-fill bd-highlight mb-0">
+                                    <p>累計課程</p>
+                                    <p>Flex item 22</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight pb-0">
+                            <div class="d-flex flex-row bd-highlight mb-0">
+                                <div class="m-1 mb-0">
+                                    <img src="~/images/logo.png" class="rounded-circle" alt="not found" width="40px">
+                                </div>
+                                <div class="flex-fill bd-highlight mb-0">
+                                    <p>評論總數</p>
+                                    <p>Flex item 22</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2 flex-fill bd-highlight pb-0">
+                            <div class="d-flex flex-row bd-highlight mb-0">
+                                <div class="m-1 mb-0">
+                                    <img src="~/images/logo.png" class="rounded-circle" alt="not found" width="40px">
+                                </div>
+                                <div class="flex-fill bd-highlight mb-0">
+                                    <p>追蹤教練</p>
+                                    <p>Flex item 22</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="m-1" />
+            </div>
+
+
+            <!--<div id="info_nav" class="pgmargin">
+                <ul class="list-group flex-row m-2">
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-primary border-2 flex-fill">
+                        加入時間
+                        <span class="badge text-bg-primary p-0 rounded-pill txtcolor">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-primary border-2 flex-fill">
+                        累計課程
+                        <span class="badge text-bg-primary rounded-pill txtcolor">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-primary border-2 flex-fill">
+                        評論總數
+                        <span class="badge text-bg-primary rounded-pill txtcolor">1</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-primary border-2 flex-fill">
+                        追蹤教練
+                        <span class="badge text-bg-primary rounded-pill txtcolor">1</span>
+                    </li>
+                </ul>
+            </div>-->
+
+            <div id="info_nav" class="pgmargin">
+                <nav class="navbar-light">
+                    <ul class="list-group flex-row m-2">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-fill">
+                            <button class="btn flex-fill">
+                                <span>教練專區</span>
+                                <span class="badge text-bg-primary p-0 rounded-pill txtcolor">14</span>
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-fill">
+                            <button class="btn flex-fill">
+                                <span>我的課程</span>
+                                <span class="badge text-bg-primary p-0 rounded-pill txtcolor">14</span>
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-fill">
+                            <button class="btn flex-fill">
+                                <span>我的訂單</span>
+                                <span class="badge text-bg-primary p-0 rounded-pill txtcolor">14</span>
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 flex-fill">
+                            <button class="btn flex-fill">
+                                <span>我的蒐藏</span>
+                                <span class="badge text-bg-primary p-0 rounded-pill txtcolor">14</span>
+                            </button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-primary border-2 flex-fill">
+                            <button class="btn flex-fill">
+                                <span>我想要…</span>
+                                <span class="badge text-bg-primary p-0 rounded-pill txtcolor">14</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+
+        <div id="downside">
+            <div id="down_nav" class="pgmargin">
+                <nav class="navbar-light">
+                    <ul class="nav nav-tabs nav-fill" id="nav">
+                        <li class="nav-item mx-3 my-1 disable" id="li_coach">教練專區<span class="badge text-bg-primary p-0 rounded-pill txtcolor">14</span></li>
+                        <li class="nav-item mx-3 my-1" id="">我的課程</li>
+                        <li class="nav-item mx-3 my-1">我的訂單</li>
+                        <li class="nav-item mx-3 my-1">我的蒐藏</li>
+                        <li class="nav-item mx-3 my-1">我想要…</li>
+
+                    </ul>
+                </nav>
+            </div>
+
+
+
+        </div>
+
+        <div id="div_load">
+            <div class="pgmargin">
+                load
+            </div>
+        </div>
+
+        <div id="div_none" class="disable">
+            <div class="pgmargin">
+                none
+            </div>
+        </div>
+
+        <div id="教練專區" class="disable">
+            <div class="pgmargin">
+                coach
+            </div>
+        </div>
+        <div id="我的課程" class="disable">
+            <div class="pgmargin">
+                course
+            </div>
+        </div>
+        <div id="我的訂單" class="disable">
+            <div class="pgmargin">
+                order
+            </div>
+        </div>
+        <div id="我的蒐藏" class="disable">
+            <div class="pgmargin">
+                like
+            </div>
+        </div>
+        <div id="我想要…" class="disable">
+            <div class="pgmargin">
+                wishlist
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <script>
+        (() => {
+            'use strict'
+
+            const _id = 24
+            const cid = 2
+
+            const li_coach = document.getElementById('li_coach')
+            const lis = document.querySelectorAll('#nav li')
+            var temp = document.getElementById('div_load')
+            const btn = document.getElementById('btn')
+
+            document.addEventListener('DOMContentLoaded', () => {
+                if (cid === 2) {
+                    li_coach.classList.remove("disable")
+                }
+            })
+
+            for (let li of lis) {
+                li.addEventListener('click', (event) => {
+                    temp.classList.add("disable")
+                    var div = document.getElementById(`${li.textContent}`)
+                    div.classList.remove("disable")
+                    console.log(temp)
+                    temp = div
+                    console.log(temp)
+                })
+            }
+
+            (async() => {
+                //console.log(`https://localhost:7199/api/Coach/${_id}`)
+                const response = await fetch(`https://localhost:7199/api/Coach/${_id}`)
+                const data = await response.json();
+                //console.log(data)
+                show(data)
+            })();
+
+            function show({ coachDetailDto: { name, intro, photo } }) {
+                const d1 = document.getElementById('txt1')
+                const d2 = document.getElementById('txt2')
+                const p1 = document.getElementById('pic1')
+
+                d1.textContent = name
+                d2.textContent = intro
+                p1.src = `data:image/jpeg;base64,${photo}`
+            }
+
+        })();
+
+    </script>
+
+</body>
+</html>
