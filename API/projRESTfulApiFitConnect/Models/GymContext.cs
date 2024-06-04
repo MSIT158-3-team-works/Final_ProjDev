@@ -45,6 +45,8 @@ public partial class GymContext : DbContext
 
     public virtual DbSet<TcoursePhoto> TcoursePhotos { get; set; }
 
+    public virtual DbSet<Tdiscount> Tdiscounts { get; set; }
+
     public virtual DbSet<Tfield> Tfields { get; set; }
 
     public virtual DbSet<TfieldPhoto> TfieldPhotos { get; set; }
@@ -55,21 +57,55 @@ public partial class GymContext : DbContext
 
     public virtual DbSet<TidentityRoleDetail> TidentityRoleDetails { get; set; }
 
+    public virtual DbSet<TlogisticsStatus> TlogisticsStatuses { get; set; }
+
     public virtual DbSet<TmemberFollow> TmemberFollows { get; set; }
 
     public virtual DbSet<TmemberRateClass> TmemberRateClasses { get; set; }
 
     public virtual DbSet<TmemberStatusDetail> TmemberStatusDetails { get; set; }
 
+    public virtual DbSet<Tnews> Tnews { get; set; }
+
+    public virtual DbSet<TnewsCategory> TnewsCategories { get; set; }
+
+    public virtual DbSet<TnewsComment> TnewsComments { get; set; }
+
+    public virtual DbSet<TnewsMedium> TnewsMedia { get; set; }
+
+    public virtual DbSet<Torder> Torders { get; set; }
+
+    public virtual DbSet<TorderDetail> TorderDetails { get; set; }
+
+    public virtual DbSet<TorderStatus> TorderStatuses { get; set; }
+
     public virtual DbSet<Towner> Towners { get; set; }
+
+    public virtual DbSet<Tpayment> Tpayments { get; set; }
+
+    public virtual DbSet<TpaymentMethod> TpaymentMethods { get; set; }
+
+    public virtual DbSet<Tpaymentrole> Tpaymentroles { get; set; }
+
+    public virtual DbSet<Tproduct> Tproducts { get; set; }
+
+    public virtual DbSet<TproductCategory> TproductCategories { get; set; }
+
+    public virtual DbSet<TproductImage> TproductImages { get; set; }
+
+    public virtual DbSet<TproductShoppingcart> TproductShoppingcarts { get; set; }
+
+    public virtual DbSet<TproductTrack> TproductTracks { get; set; }
 
     public virtual DbSet<TregionTable> TregionTables { get; set; }
 
+    public virtual DbSet<TshippingMethod> TshippingMethods { get; set; }
+
     public virtual DbSet<TtimesDetail> TtimesDetails { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=gym;Integrated Security=True;Trust Server Certificate=True");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=gym;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -80,27 +116,30 @@ public partial class GymContext : DbContext
             entity.ToTable("tGym");
 
             entity.Property(e => e.GymId).HasColumnName("Gym_id");
-            entity.Property(e => e.Address)
-                .HasMaxLength(50)
-                .HasColumnName("address");
             entity.Property(e => e.CompanyId).HasColumnName("company_id");
-            entity.Property(e => e.Describe).HasColumnName("describe");
-            entity.Property(e => e.EMail)
+            entity.Property(e => e.ExpiryDate).HasColumnName("expiry date");
+            entity.Property(e => e.GymAddress)
+                .HasMaxLength(50)
+                .HasColumnName("Gym_address");
+            entity.Property(e => e.GymDescribe).HasColumnName("Gym_describe");
+            entity.Property(e => e.GymName)
                 .HasMaxLength(20)
-                .HasColumnName("e-mail");
-            entity.Property(e => e.Name)
+                .HasColumnName("Gym_name");
+            entity.Property(e => e.GymPark)
+                .HasMaxLength(50)
+                .HasColumnName("Gym_park");
+            entity.Property(e => e.GymPhone)
                 .HasMaxLength(20)
-                .HasColumnName("name");
-            entity.Property(e => e.Phone)
+                .HasColumnName("Gym_phone");
+            entity.Property(e => e.GymPhoto).HasColumnName("Gym_photo");
+            entity.Property(e => e.GymStatus).HasColumnName("Gym_status");
+            entity.Property(e => e.GymTime)
                 .HasMaxLength(20)
-                .HasColumnName("phone");
-            entity.Property(e => e.Photo).HasColumnName("photo");
+                .HasColumnName("Gym_time");
+            entity.Property(e => e.GymTraffic)
+                .HasMaxLength(50)
+                .HasColumnName("Gym_traffic");
             entity.Property(e => e.RegionId).HasColumnName("region_id");
-            entity.Property(e => e.Status).HasColumnName("status");
-            entity.Property(e => e.Time)
-                .HasMaxLength(20)
-                .HasColumnName("time");
-            entity.Property(e => e.Website).HasColumnName("website");
 
             entity.HasOne(d => d.Company).WithMany(p => p.TGyms)
                 .HasForeignKey(d => d.CompanyId)
@@ -121,15 +160,12 @@ public partial class GymContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Activated)
-                .IsRequired()
-                .HasDefaultValueSql("((1))")
+                .HasDefaultValue(true)
                 .HasColumnName("activated");
             entity.Property(e => e.Address)
                 .HasMaxLength(50)
                 .HasColumnName("address");
-            entity.Property(e => e.Birthday)
-                .HasColumnType("date")
-                .HasColumnName("birthday");
+            entity.Property(e => e.Birthday).HasColumnName("birthday");
             entity.Property(e => e.EMail)
                 .HasMaxLength(20)
                 .HasColumnName("e-mail");
@@ -226,8 +262,7 @@ public partial class GymContext : DbContext
             entity.Property(e => e.MemberId).HasColumnName("member_id");
             entity.Property(e => e.PaymentStatus).HasColumnName("payment_status");
             entity.Property(e => e.ReserveStatus)
-                .IsRequired()
-                .HasDefaultValueSql("((1))")
+                .HasDefaultValue(true)
                 .HasColumnName("reserve_status");
 
             entity.HasOne(d => d.ClassSchedule).WithMany(p => p.TclassReserves)
@@ -253,13 +288,11 @@ public partial class GymContext : DbContext
                 .HasColumnType("money")
                 .HasColumnName("class_payment");
             entity.Property(e => e.ClassStatusId)
-                .HasDefaultValueSql("((2))")
+                .HasDefaultValue(2)
                 .HasColumnName("class_status_id");
             entity.Property(e => e.CoachId).HasColumnName("coach_id");
             entity.Property(e => e.CoachPayment).HasColumnName("coach_payment");
-            entity.Property(e => e.CourseDate)
-                .HasColumnType("date")
-                .HasColumnName("course_date");
+            entity.Property(e => e.CourseDate).HasColumnName("course_date");
             entity.Property(e => e.CourseTimeId).HasColumnName("course_time_id");
             entity.Property(e => e.FieldId).HasColumnName("field_id");
             entity.Property(e => e.MaxStudent).HasColumnName("Max_student");
@@ -390,9 +423,7 @@ public partial class GymContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("name");
             entity.Property(e => e.OwnerId).HasColumnName("owner_id");
-            entity.Property(e => e.Timelimit)
-                .HasColumnType("date")
-                .HasColumnName("timelimit");
+            entity.Property(e => e.Timelimit).HasColumnName("timelimit");
 
             entity.HasOne(d => d.Owner).WithMany(p => p.Tcompanies)
                 .HasForeignKey(d => d.OwnerId)
@@ -415,6 +446,31 @@ public partial class GymContext : DbContext
                 .HasConstraintName("FK_tcourse_photo_tclass_schedule");
         });
 
+        modelBuilder.Entity<Tdiscount>(entity =>
+        {
+            entity.HasKey(e => e.DiscountId);
+
+            entity.ToTable("tdiscount");
+
+            entity.Property(e => e.DiscountId).HasColumnName("discount_id");
+            entity.Property(e => e.DiscountCode)
+                .HasMaxLength(16)
+                .HasColumnName("discount_code");
+            entity.Property(e => e.DiscountCondition)
+                .HasMaxLength(20)
+                .HasColumnName("discount_condition");
+            entity.Property(e => e.DiscountExpire)
+                .HasMaxLength(20)
+                .HasColumnName("discount_expire");
+            entity.Property(e => e.DiscountOpened)
+                .HasDefaultValue(true)
+                .HasColumnName("discount_opened");
+            entity.Property(e => e.DiscountValue)
+                .HasMaxLength(10)
+                .HasDefaultValueSql("((30))")
+                .HasColumnName("discount_value");
+        });
+
         modelBuilder.Entity<Tfield>(entity =>
         {
             entity.HasKey(e => e.FieldId).HasName("PK_field");
@@ -422,6 +478,7 @@ public partial class GymContext : DbContext
             entity.ToTable("tfield");
 
             entity.Property(e => e.FieldId).HasColumnName("field_id");
+            entity.Property(e => e.FieldDescribe).HasColumnName("field_describe");
             entity.Property(e => e.FieldName)
                 .HasMaxLength(50)
                 .HasColumnName("field_name");
@@ -463,11 +520,12 @@ public partial class GymContext : DbContext
 
             entity.Property(e => e.FieldReserveId).HasColumnName("field_reserve_id");
             entity.Property(e => e.CoachId).HasColumnName("coach_id");
+            entity.Property(e => e.FieldDate).HasColumnName("field_date");
             entity.Property(e => e.FieldId).HasColumnName("field_id");
+            entity.Property(e => e.FieldTime).HasColumnName("field_time");
             entity.Property(e => e.PaymentStatus).HasColumnName("payment_status");
             entity.Property(e => e.ReserveStatus)
-                .IsRequired()
-                .HasDefaultValueSql("((1))")
+                .HasDefaultValue(true)
                 .HasColumnName("reserve_status");
 
             entity.HasOne(d => d.Coach).WithMany(p => p.TfieldReserves)
@@ -503,6 +561,18 @@ public partial class GymContext : DbContext
             entity.Property(e => e.RoleDescribe)
                 .HasMaxLength(50)
                 .HasColumnName("role_describe");
+        });
+
+        modelBuilder.Entity<TlogisticsStatus>(entity =>
+        {
+            entity.HasKey(e => e.LogisticsStatusId);
+
+            entity.ToTable("tlogistics_status");
+
+            entity.Property(e => e.LogisticsStatusId).HasColumnName("logistics_status_id");
+            entity.Property(e => e.LogisticsStatus)
+                .HasMaxLength(20)
+                .HasColumnName("logistics_status");
         });
 
         modelBuilder.Entity<TmemberFollow>(entity =>
@@ -565,6 +635,184 @@ public partial class GymContext : DbContext
                 .HasColumnName("status_describe");
         });
 
+        modelBuilder.Entity<Tnews>(entity =>
+        {
+            entity.HasKey(e => e.NewsId);
+
+            entity.ToTable("tnews");
+
+            entity.Property(e => e.NewsId).HasColumnName("news_id");
+            entity.Property(e => e.NewsCategoryId).HasColumnName("news_category_id");
+            entity.Property(e => e.NewsContent).HasColumnName("news_content");
+            entity.Property(e => e.NewsDate).HasColumnName("news_date");
+            entity.Property(e => e.NewsTitle)
+                .HasMaxLength(50)
+                .HasColumnName("news_title");
+
+            entity.HasOne(d => d.NewsCategory).WithMany(p => p.Tnews)
+                .HasForeignKey(d => d.NewsCategoryId)
+                .HasConstraintName("FK_tnews_tnews_categories");
+        });
+
+        modelBuilder.Entity<TnewsCategory>(entity =>
+        {
+            entity.HasKey(e => e.NewsCategoryId);
+
+            entity.ToTable("tnews_categories");
+
+            entity.Property(e => e.NewsCategoryId).HasColumnName("news_category_id");
+            entity.Property(e => e.NewsCategory)
+                .HasMaxLength(20)
+                .HasColumnName("news_category");
+        });
+
+        modelBuilder.Entity<TnewsComment>(entity =>
+        {
+            entity.HasKey(e => e.NewsCommentId);
+
+            entity.ToTable("tnews_comment");
+
+            entity.Property(e => e.NewsCommentId)
+                .ValueGeneratedNever()
+                .HasColumnName("news_comment_id");
+            entity.Property(e => e.CommenterId).HasColumnName("commenter_id");
+            entity.Property(e => e.NewsComment).HasColumnName("news_comment");
+            entity.Property(e => e.NewsId).HasColumnName("news_id");
+
+            entity.HasOne(d => d.Commenter).WithMany(p => p.TnewsComments)
+                .HasForeignKey(d => d.CommenterId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tnews_comment_tIdentity");
+
+            entity.HasOne(d => d.News).WithMany(p => p.TnewsComments)
+                .HasForeignKey(d => d.NewsId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tnews_comment_tnews");
+        });
+
+        modelBuilder.Entity<TnewsMedium>(entity =>
+        {
+            entity.HasKey(e => e.NewsPhotoId).HasName("PK_tnews_photo");
+
+            entity.ToTable("tnews_media");
+
+            entity.Property(e => e.NewsPhotoId)
+                .ValueGeneratedNever()
+                .HasColumnName("news_photo_id");
+            entity.Property(e => e.NewsId).HasColumnName("news_id");
+            entity.Property(e => e.NewsPhoto).HasColumnName("news_photo");
+            entity.Property(e => e.NewsVideolink).HasColumnName("news_videolink");
+
+            entity.HasOne(d => d.News).WithMany(p => p.TnewsMedia)
+                .HasForeignKey(d => d.NewsId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tnews_photo_tnews");
+        });
+
+        modelBuilder.Entity<Torder>(entity =>
+        {
+            entity.HasKey(e => e.OrderId);
+
+            entity.ToTable("torder");
+
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.Consignee)
+                .HasMaxLength(20)
+                .HasColumnName("consignee");
+            entity.Property(e => e.ConsigneePhone)
+                .HasMaxLength(16)
+                .HasColumnName("consignee_phone");
+            entity.Property(e => e.LogisticsStatus)
+                .HasDefaultValue(1)
+                .HasColumnName("logistics_status");
+            entity.Property(e => e.MemberId).HasColumnName("member_id");
+            entity.Property(e => e.Note).HasColumnName("note");
+            entity.Property(e => e.OrderStatus)
+                .HasDefaultValue(1)
+                .HasColumnName("order_status");
+            entity.Property(e => e.OrderedTime)
+                .HasMaxLength(50)
+                .HasColumnName("ordered_time");
+            entity.Property(e => e.PaymentMethod)
+                .HasDefaultValue(1)
+                .HasColumnName("payment_method");
+            entity.Property(e => e.ShippingAddress)
+                .HasMaxLength(50)
+                .HasColumnName("shipping_address");
+            entity.Property(e => e.ShippingMethod)
+                .HasDefaultValue(1)
+                .HasColumnName("shipping_method");
+
+            entity.HasOne(d => d.LogisticsStatusNavigation).WithMany(p => p.Torders)
+                .HasForeignKey(d => d.LogisticsStatus)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_torder_tlogistics_status");
+
+            entity.HasOne(d => d.Member).WithMany(p => p.Torders)
+                .HasForeignKey(d => d.MemberId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_torder_tIdentity");
+
+            entity.HasOne(d => d.OrderStatusNavigation).WithMany(p => p.Torders)
+                .HasForeignKey(d => d.OrderStatus)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_torder_torder_status");
+
+            entity.HasOne(d => d.PaymentMethodNavigation).WithMany(p => p.Torders)
+                .HasForeignKey(d => d.PaymentMethod)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_torder_tpayment_method");
+
+            entity.HasOne(d => d.ShippingMethodNavigation).WithMany(p => p.Torders)
+                .HasForeignKey(d => d.ShippingMethod)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_torder_tshipping_method");
+        });
+
+        modelBuilder.Entity<TorderDetail>(entity =>
+        {
+            entity.HasKey(e => e.OrderDetailId);
+
+            entity.ToTable("torder_detail");
+
+            entity.Property(e => e.OrderDetailId).HasColumnName("order_detail_id");
+            entity.Property(e => e.DiscountId).HasColumnName("discount_id");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.OrderQuantity)
+                .HasDefaultValue(1)
+                .HasColumnName("order_quantity");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.ProductUnitprice)
+                .HasColumnType("money")
+                .HasColumnName("product_unitprice");
+
+            entity.HasOne(d => d.Discount).WithMany(p => p.TorderDetails)
+                .HasForeignKey(d => d.DiscountId)
+                .HasConstraintName("FK_torder_detail_tdiscount");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.TorderDetails)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_torder_detail_torder");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.TorderDetails)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_torder_detail_tproduct");
+        });
+
+        modelBuilder.Entity<TorderStatus>(entity =>
+        {
+            entity.HasKey(e => e.OrderStatusId);
+
+            entity.ToTable("torder_status");
+
+            entity.Property(e => e.OrderStatusId).HasColumnName("order_status_id");
+            entity.Property(e => e.OrderStatus)
+                .HasMaxLength(20)
+                .HasColumnName("order_status");
+        });
+
         modelBuilder.Entity<Towner>(entity =>
         {
             entity.HasKey(e => e.OwnerId);
@@ -575,6 +823,155 @@ public partial class GymContext : DbContext
             entity.Property(e => e.Owner)
                 .HasMaxLength(20)
                 .HasColumnName("owner");
+        });
+
+        modelBuilder.Entity<Tpayment>(entity =>
+        {
+            entity.HasKey(e => e.PaymentId);
+
+            entity.ToTable("tpayment");
+
+            entity.Property(e => e.PaymentId).HasColumnName("payment_id");
+            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.Payment)
+                .HasColumnType("money")
+                .HasColumnName("payment");
+            entity.Property(e => e.PaymentroleId).HasColumnName("paymentrole_id");
+            entity.Property(e => e.PersonId).HasColumnName("person_id");
+
+            entity.HasOne(d => d.Paymentrole).WithMany(p => p.Tpayments)
+                .HasForeignKey(d => d.PaymentroleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tpayment_tpaymentrole");
+        });
+
+        modelBuilder.Entity<TpaymentMethod>(entity =>
+        {
+            entity.HasKey(e => e.PaymentMethodId);
+
+            entity.ToTable("tpayment_method");
+
+            entity.Property(e => e.PaymentMethodId).HasColumnName("payment_method_id");
+            entity.Property(e => e.PaymentMethod)
+                .HasMaxLength(20)
+                .HasColumnName("payment_method");
+        });
+
+        modelBuilder.Entity<Tpaymentrole>(entity =>
+        {
+            entity.HasKey(e => e.PaymentroleId);
+
+            entity.ToTable("tpaymentrole");
+
+            entity.Property(e => e.PaymentroleId).HasColumnName("paymentrole_id");
+            entity.Property(e => e.Paymentdetail)
+                .HasMaxLength(50)
+                .HasColumnName("paymentdetail");
+        });
+
+        modelBuilder.Entity<Tproduct>(entity =>
+        {
+            entity.HasKey(e => e.ProductId);
+
+            entity.ToTable("tproduct");
+
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.CategoryId).HasColumnName("category_id");
+            entity.Property(e => e.ProductDetail).HasColumnName("product_detail");
+            entity.Property(e => e.ProductImage)
+                .HasMaxLength(50)
+                .HasColumnName("product_image");
+            entity.Property(e => e.ProductName)
+                .HasMaxLength(50)
+                .HasColumnName("product_name");
+            entity.Property(e => e.ProductSupplied).HasColumnName("product_supplied");
+            entity.Property(e => e.ProductUnitprice)
+                .HasColumnType("money")
+                .HasColumnName("product_unitprice");
+
+            entity.HasOne(d => d.Category).WithMany(p => p.Tproducts)
+                .HasForeignKey(d => d.CategoryId)
+                .HasConstraintName("FK_tproduct_tproduct_category");
+        });
+
+        modelBuilder.Entity<TproductCategory>(entity =>
+        {
+            entity.HasKey(e => e.ProductCategoryId);
+
+            entity.ToTable("tproduct_category");
+
+            entity.Property(e => e.ProductCategoryId).HasColumnName("product_category_id");
+            entity.Property(e => e.CategoryDescription).HasColumnName("category_description");
+            entity.Property(e => e.CategoryImage)
+                .HasMaxLength(50)
+                .HasColumnName("category_image");
+            entity.Property(e => e.CategoryName)
+                .HasMaxLength(50)
+                .HasColumnName("category_name");
+        });
+
+        modelBuilder.Entity<TproductImage>(entity =>
+        {
+            entity.HasKey(e => e.ProductImagesId);
+
+            entity.ToTable("tproduct_images");
+
+            entity.Property(e => e.ProductImagesId).HasColumnName("product_images_id");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.ProductImages).HasColumnName("product_images");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.TproductImages)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tproduct_images_tproduct");
+        });
+
+        modelBuilder.Entity<TproductShoppingcart>(entity =>
+        {
+            entity.HasKey(e => e.ProductShoppingcartId);
+
+            entity.ToTable("tproduct_shoppingcart");
+
+            entity.Property(e => e.ProductShoppingcartId).HasColumnName("product_shoppingcart_id");
+            entity.Property(e => e.MemberId).HasColumnName("member_id");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.ProductQuantity)
+                .HasDefaultValue(1)
+                .HasColumnName("product_quantity");
+            entity.Property(e => e.ProductUnitprice)
+                .HasColumnType("money")
+                .HasColumnName("product_unitprice");
+
+            entity.HasOne(d => d.Member).WithMany(p => p.TproductShoppingcarts)
+                .HasForeignKey(d => d.MemberId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tproduct_shoppingcart_tIdentity");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.TproductShoppingcarts)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tproduct_shoppingcart_tproduct");
+        });
+
+        modelBuilder.Entity<TproductTrack>(entity =>
+        {
+            entity.HasKey(e => e.ProductTrackId);
+
+            entity.ToTable("tproduct_track");
+
+            entity.Property(e => e.ProductTrackId).HasColumnName("product_track_id");
+            entity.Property(e => e.MemberId).HasColumnName("member_id");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+            entity.HasOne(d => d.Member).WithMany(p => p.TproductTracks)
+                .HasForeignKey(d => d.MemberId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tproduct_track_tIdentity");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.TproductTracks)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tproduct_track_tproduct");
         });
 
         modelBuilder.Entity<TregionTable>(entity =>
@@ -595,6 +992,18 @@ public partial class GymContext : DbContext
                 .HasConstraintName("FK_tregion_table_tcity");
         });
 
+        modelBuilder.Entity<TshippingMethod>(entity =>
+        {
+            entity.HasKey(e => e.ShippingMethodId);
+
+            entity.ToTable("tshipping_method");
+
+            entity.Property(e => e.ShippingMethodId).HasColumnName("shipping_method_id");
+            entity.Property(e => e.ShippingMethod)
+                .HasMaxLength(20)
+                .HasColumnName("shipping_method");
+        });
+
         modelBuilder.Entity<TtimesDetail>(entity =>
         {
             entity.HasKey(e => e.TimeId);
@@ -603,7 +1012,7 @@ public partial class GymContext : DbContext
 
             entity.Property(e => e.TimeId).HasColumnName("time_id");
             entity.Property(e => e.TimeName)
-                .HasPrecision(0)
+                .HasMaxLength(50)
                 .HasColumnName("time_name");
         });
 

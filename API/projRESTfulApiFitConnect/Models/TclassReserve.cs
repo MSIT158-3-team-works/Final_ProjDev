@@ -13,7 +13,7 @@ public partial class TclassReserve
 
     public bool PaymentStatus { get; set; }
 
-    public bool? ReserveStatus { get; set; }
+    public bool ReserveStatus { get; set; }
 
     public virtual TclassSchedule ClassSchedule { get; set; } = null!;
 

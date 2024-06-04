@@ -13,7 +13,7 @@ public partial class TclassSchedule
 
     public int FieldId { get; set; }
 
-    public DateTime CourseDate { get; set; }
+    public DateOnly CourseDate { get; set; }
 
     public int CourseTimeId { get; set; }
 
