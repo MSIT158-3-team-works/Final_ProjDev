@@ -117,6 +117,55 @@ namespace projRESTfulApiFitConnect.Controllers
                 RoleDescription = coach.Role.RoleDescribe,
                 GenderDescription = coach.Gender.GenderText
             };
+<<<<<<< HEAD
+            foreach (var rate in rates)
+            {
+                RateDetailDto rateDetailDto = new RateDetailDto()
+                {
+                    ReserveId = rate.ReserveId,
+                    Member = rate.Reserve.Member.Name,
+                    Class = rate.Reserve.ClassSchedule.Class.ClassName,
+                    RateClass = rate.RateClass,
+                    ClassDescribe = rate.ClassDescribe,
+                    RateCoach = rate.RateCoach,
+                    CoachDescribe = rate.CoachDescribe
+                };
+                rateDetailDtos.Add(rateDetailDto);
+            }
+            foreach (var field in fields)
+            {
+                FieldDetailDto fieldDetailDto = new FieldDetailDto()
+                {
+                    FieldReserveId = field.FieldReserveId,
+                    City = field.Field.Gym.Region.City.City,
+                    Region = field.Field.Gym.Region.Region,
+                    Gym = field.Field.Gym.GymName,
+                    Field = field.Field.FieldName,
+                    PaymentStatus = field.PaymentStatus,
+                    ReserveStatus = field.ReserveStatus
+                };
+                fieldDetailDtos.Add(fieldDetailDto);
+            }
+            foreach (var schedule in schedules)
+            {
+                ScheduleDatailDto scheduleDatailDto = new ScheduleDatailDto()
+                {
+                    ClassScheduleId = schedule.ClassScheduleId,
+                    Class = schedule.Class.ClassName,
+                    Coach = schedule.Coach.Name,
+                    Field = schedule.Field.FieldName,
+                    CourseDate = schedule.CourseDate,
+                    //CourseTime = schedule.CourseTime.TimeName,
+                    MaxStudent = schedule.MaxStudent,
+                    ClassStatus = schedule.ClassStatus.ClassStatusDiscribe,
+                    ClassPayment = schedule.ClassPayment,
+                    CoachPayment = schedule.CoachPayment
+                };
+                scheduleDatailDtos.Add(scheduleDatailDto);
+            }
+
+=======
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
 
             var result = new
             {
@@ -240,7 +289,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 }
                 coach.Photo = fileName;
             }
-            coach.Birthday = putCoachDto.Birthday;
+            //coach.Birthday = putCoachDto.Birthday;
             coach.Address = putCoachDto.Address;
             coach.GenderId = putCoachDto.GenderId;
             await _context.SaveChangesAsync();
@@ -268,7 +317,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     putCoachDto.Photo.CopyTo(fileStream);
                 }
             }
-            identity.Birthday = putCoachDto.Birthday;
+            //identity.Birthday = putCoachDto.Birthday;
             identity.Address = putCoachDto.Address;
             identity.GenderId = putCoachDto.GenderId;
             identity.RoleId = putCoachDto.RoleId;

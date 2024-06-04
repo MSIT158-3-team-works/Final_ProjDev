@@ -10,7 +10,7 @@ namespace projRESTfulApiFitConnect.DTO.Coach
         public string? EMail { get; set; }
         public string Photo { get; set; } = null!;
         public string? Intro { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateOnly Birthday { get; set; }
         public List<ExpertiseDto>? Experties {  get; set; }
         public string Address { get; set; } = null!;
         public string? RoleDescription { get; set; } = null!;

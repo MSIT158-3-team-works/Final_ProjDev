@@ -11,9 +11,13 @@ public partial class TfieldReserve
 
     public int CoachId { get; set; }
 
+    public DateOnly? FieldDate { get; set; }
+
+    public int? FieldTime { get; set; }
+
     public bool PaymentStatus { get; set; }
 
-    public bool? ReserveStatus { get; set; }
+    public bool ReserveStatus { get; set; }
 
     public virtual TIdentity Coach { get; set; } = null!;
 

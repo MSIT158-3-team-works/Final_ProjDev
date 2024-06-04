@@ -11,23 +11,25 @@ public partial class TGym
 
     public int RegionId { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string GymName { get; set; } = null!;
 
-    public string Address { get; set; } = null!;
+    public string GymAddress { get; set; } = null!;
 
-    public string? EMail { get; set; }
+    public string GymPhone { get; set; } = null!;
 
-    public string Phone { get; set; } = null!;
+    public DateOnly ExpiryDate { get; set; }
 
-    public string? Website { get; set; }
+    public string GymTime { get; set; } = null!;
 
-    public string Time { get; set; } = null!;
+    public string? GymPhoto { get; set; }
 
-    public string? Photo { get; set; }
+    public bool GymStatus { get; set; }
 
-    public bool Status { get; set; }
+    public string? GymPark { get; set; }
 
-    public string? Describe { get; set; }
+    public string? GymTraffic { get; set; }
+
+    public string? GymDescribe { get; set; }
 
     public virtual Tcompany Company { get; set; } = null!;
 

@@ -15,6 +15,8 @@ public partial class Tfield
 
     public decimal FieldPayment { get; set; }
 
+    public string? FieldDescribe { get; set; }
+
     public virtual TGym Gym { get; set; } = null!;
 
     public virtual ICollection<TclassSchedule> TclassSchedules { get; set; } = new List<TclassSchedule>();

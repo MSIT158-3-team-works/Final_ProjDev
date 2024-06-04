@@ -1,6 +1,19 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\ting0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {}
+  },
+  "projects": {
+    "C:\\ting0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\ting0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+        "projectName": "projRESTfulApiFitConnect",
+        "projectPath": "C:\\ting0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\ting0604\\API\\projRESTfulApiFitConnect\\obj\\",
+=======
     "C:\\Users\\User\\Downloads\\0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {}
   },
   "projects": {
@@ -12,6 +25,7 @@
         "projectPath": "C:\\Users\\User\\Downloads\\0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\User\\Downloads\\0604\\API\\projRESTfulApiFitConnect\\obj\\",
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
