@@ -148,7 +148,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     FieldReserveId = field.FieldReserveId,
                     City = field.Field.Gym.Region.City.City,
                     Region = field.Field.Gym.Region.Region,
-                    Gym = field.Field.Gym.Name,
+                    Gym = field.Field.Gym.GymName,
                     Field = field.Field.FieldName,
                     PaymentStatus = field.PaymentStatus,
                     ReserveStatus = field.ReserveStatus
@@ -164,7 +164,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     Coach = schedule.Coach.Name,
                     Field = schedule.Field.FieldName,
                     CourseDate = schedule.CourseDate,
-                    CourseTime = schedule.CourseTime.TimeName,
+                    //CourseTime = schedule.CourseTime.TimeName,
                     MaxStudent = schedule.MaxStudent,
                     ClassStatus = schedule.ClassStatus.ClassStatusDiscribe,
                     ClassPayment = schedule.ClassPayment,
@@ -199,7 +199,7 @@ namespace projRESTfulApiFitConnect.Controllers
             {
                 coach.Photo = img.FileName;
             }
-            coach.Birthday = putCoachDto.Birthday;
+            //coach.Birthday = putCoachDto.Birthday;
             coach.Address = putCoachDto.Address;
             coach.GenderId = putCoachDto.GenderId;
             await _context.SaveChangesAsync();
@@ -227,7 +227,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     putCoachDto.Photo.CopyTo(fileStream);
                 }
             }
-            identity.Birthday = putCoachDto.Birthday;
+            //identity.Birthday = putCoachDto.Birthday;
             identity.Address = putCoachDto.Address;
             identity.GenderId = putCoachDto.GenderId;
             identity.RoleId = putCoachDto.RoleId;

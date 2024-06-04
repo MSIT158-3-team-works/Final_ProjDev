@@ -10,7 +10,7 @@
 
         public string? Field { get; set; }
 
-        public DateTime CourseDate { get; set; }
+        public DateOnly CourseDate { get; set; }
 
         public TimeSpan CourseTime { get; set; }
 
