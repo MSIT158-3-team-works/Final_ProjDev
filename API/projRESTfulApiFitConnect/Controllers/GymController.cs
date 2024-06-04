@@ -46,6 +46,8 @@ namespace projRESTfulApiFitConnect.Controllers
 
                 GymDto gymDto = new GymDto()
                 {
+                    GymId = item.GymId,
+                    RegionId = item.RegionId,
                     GymName=item.GymName,
                     GymAddress=item.GymAddress,
                     GymPhone=item.GymPhone,
