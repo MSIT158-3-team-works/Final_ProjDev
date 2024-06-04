@@ -129,6 +129,14 @@
       "PackagePath": "staticwebassets\\assets\\img\\team\\6.jpg"
     },
     {
+      "Id": "C:\\ting0604\\MVC\\projFitConnect\\wwwroot\\css\\rwd.css",
+      "PackagePath": "staticwebassets\\css\\rwd.css"
+    },
+    {
+      "Id": "C:\\ting0604\\MVC\\projFitConnect\\wwwroot\\css\\rwd780.css",
+      "PackagePath": "staticwebassets\\css\\rwd780.css"
+    },
+    {
       "Id": "C:\\ting0604\\MVC\\projFitConnect\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
