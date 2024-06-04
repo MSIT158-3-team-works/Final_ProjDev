@@ -13,6 +13,8 @@ public partial class TmemberFollow
 
     public int StatusId { get; set; }
 
+    public virtual TIdentity Coach { get; set; } = null!;
+
     public virtual TIdentity Member { get; set; } = null!;
 
     public virtual TmemberStatusDetail Status { get; set; } = null!;

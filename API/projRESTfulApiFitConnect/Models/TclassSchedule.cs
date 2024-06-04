@@ -36,6 +36,4 @@ public partial class TclassSchedule
     public virtual Tfield Field { get; set; } = null!;
 
     public virtual ICollection<TclassReserve> TclassReserves { get; set; } = new List<TclassReserve>();
-
-    public virtual ICollection<TcoursePhoto> TcoursePhotos { get; set; } = new List<TcoursePhoto>();
 }
