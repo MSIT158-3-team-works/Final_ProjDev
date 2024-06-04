@@ -1,5 +1,6 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "C:\\ting0604\\API\\",
   "Documents": [
     {
@@ -23,6 +24,28 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\ting0604\\api\\projrestfulapifitconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+=======
+  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev1\\api\\projrestfulapifitconnect\\dto\\member\\dateandtimedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\member\\dateandtimedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev1\\api\\projrestfulapifitconnect\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev1\\api\\projrestfulapifitconnect\\controllers\\coachcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\coachcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev1\\api\\projrestfulapifitconnect\\dto\\coach\\scheduledataildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\coach\\scheduledataildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projrestfulapifitconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -33,7 +56,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 390,
+<<<<<<< HEAD
           "SelectedChildIndex": 1,
+=======
+          "SelectedChildIndex": 3,
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
           "Children": [
             {
               "$type": "Document",
@@ -122,6 +149,7 @@
             },
             {
               "$type": "Bookmark",
+<<<<<<< HEAD
               "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
@@ -158,6 +186,79 @@
               "ToolTip": "C:\\ting0604\\API\\projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
               "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
               "ViewState": "AQIAAL4AAAAAAAAAAIAzwKcAAAA1AAAA",
+=======
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DateAndTimeDto.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\DTO\\Member\\DateAndTimeDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Member\\DateAndTimeDto.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\DTO\\Member\\DateAndTimeDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Member\\DateAndTimeDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T03:42:54.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ScheduleDatailDto.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAxwA4AAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T03:39:27.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MemberController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\Controllers\\MemberController.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\MemberController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\Controllers\\MemberController.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\MemberController.cs",
+              "ViewState": "AQIAAMgAAAAAAAAAAAAiwNMAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T03:35:40.802Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\Program.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Program.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\Program.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Program.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABsAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T13:44:35.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CoachController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
+              "ViewState": "AQIAALMAAAAAAAAAAAAiwMEAAAAdAAAA",
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-24T05:25:40.249Z",
               "EditorCaption": ""

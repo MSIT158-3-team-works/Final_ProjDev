@@ -43,10 +43,13 @@ public partial class GymContext : DbContext
 
     public virtual DbSet<Tcompany> Tcompanies { get; set; }
 
+<<<<<<< HEAD
     public virtual DbSet<TcoursePhoto> TcoursePhotos { get; set; }
 
     public virtual DbSet<Tdiscount> Tdiscounts { get; set; }
 
+=======
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
     public virtual DbSet<Tfield> Tfields { get; set; }
 
     public virtual DbSet<TfieldPhoto> TfieldPhotos { get; set; }
@@ -245,7 +248,9 @@ public partial class GymContext : DbContext
 
             entity.ToTable("tclass_limit_details");
 
-            entity.Property(e => e.ClassLimitedId).HasColumnName("class_limited_id");
+            entity.Property(e => e.ClassLimitedId)
+                .ValueGeneratedNever()
+                .HasColumnName("class_limited_id");
             entity.Property(e => e.Describe)
                 .HasMaxLength(50)
                 .HasColumnName("describe");
@@ -431,6 +436,7 @@ public partial class GymContext : DbContext
                 .HasConstraintName("FK_tcompany_towner");
         });
 
+<<<<<<< HEAD
         modelBuilder.Entity<TcoursePhoto>(entity =>
         {
             entity.HasKey(e => e.CoursePhotoId);
@@ -471,6 +477,8 @@ public partial class GymContext : DbContext
                 .HasColumnName("discount_value");
         });
 
+=======
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
         modelBuilder.Entity<Tfield>(entity =>
         {
             entity.HasKey(e => e.FieldId).HasName("PK_field");
@@ -586,7 +594,12 @@ public partial class GymContext : DbContext
             entity.Property(e => e.MemberId).HasColumnName("member_id");
             entity.Property(e => e.StatusId).HasColumnName("status_id");
 
-            entity.HasOne(d => d.Member).WithMany(p => p.TmemberFollows)
+            entity.HasOne(d => d.Coach).WithMany(p => p.TmemberFollowCoaches)
+                .HasForeignKey(d => d.CoachId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tmember_follow_tIdentity");
+
+            entity.HasOne(d => d.Member).WithMany(p => p.TmemberFollowMembers)
                 .HasForeignKey(d => d.MemberId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_member_follow_Identity1");
@@ -603,7 +616,9 @@ public partial class GymContext : DbContext
 
             entity.ToTable("tmember_rate_class");
 
-            entity.Property(e => e.RateId).HasColumnName("rate_id");
+            entity.Property(e => e.RateId)
+                .ValueGeneratedNever()
+                .HasColumnName("rate_id");
             entity.Property(e => e.ClassDescribe).HasColumnName("class_describe");
             entity.Property(e => e.ClassId).HasColumnName("class_id");
             entity.Property(e => e.CoachDescribe).HasColumnName("coach_describe");
@@ -616,6 +631,11 @@ public partial class GymContext : DbContext
                 .HasColumnType("decimal(2, 1)")
                 .HasColumnName("rate_coach");
             entity.Property(e => e.ReserveId).HasColumnName("reserve_id");
+
+            entity.HasOne(d => d.Coach).WithMany(p => p.TmemberRateClasses)
+                .HasForeignKey(d => d.CoachId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tmember_rate_class_tIdentity");
 
             entity.HasOne(d => d.Reserve).WithMany(p => p.TmemberRateClasses)
                 .HasForeignKey(d => d.ReserveId)

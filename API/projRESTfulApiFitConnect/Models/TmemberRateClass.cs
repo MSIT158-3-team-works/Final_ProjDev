@@ -23,5 +23,7 @@ public partial class TmemberRateClass
 
     public string? CoachDescribe { get; set; }
 
+    public virtual TIdentity Coach { get; set; } = null!;
+
     public virtual TclassReserve Reserve { get; set; } = null!;
 }

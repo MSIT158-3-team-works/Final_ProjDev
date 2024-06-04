@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "fqSMJHztf6A=",
   "success": true,
   "projectFilePath": "C:\\ting0604\\MVC\\projFitConnect\\projFitConnect.csproj",
+=======
+  "dgSpecHash": "Tjzha/RV5+0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\User\\Downloads\\0604\\MVC\\projFitConnect\\projFitConnect.csproj",
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
   "expectedPackageFiles": [],
   "logs": []
 }

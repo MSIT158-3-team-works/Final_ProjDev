@@ -14,11 +14,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\ting0604\\MVC\\projFitConnect\\projFitConnect.csproj",
       "projectName": "projFitConnect",
       "projectPath": "C:\\ting0604\\MVC\\projFitConnect\\projFitConnect.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
       "outputPath": "C:\\ting0604\\MVC\\projFitConnect\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\User\\Downloads\\0604\\MVC\\projFitConnect\\projFitConnect.csproj",
+      "projectName": "projFitConnect",
+      "projectPath": "C:\\Users\\User\\Downloads\\0604\\MVC\\projFitConnect\\projFitConnect.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Downloads\\0604\\MVC\\projFitConnect\\obj\\",
+>>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
