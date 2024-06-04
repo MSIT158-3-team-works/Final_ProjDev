@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {}
+    "C:\\Users\\User\\Downloads\\0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {
+    "C:\\Users\\User\\Downloads\\0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Downloads\\0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
         "projectName": "projRESTfulApiFitConnect",
-        "projectPath": "C:\\Users\\User\\source\\repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+        "projectPath": "C:\\Users\\User\\Downloads\\0604\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\Final_ProjDev1\\API\\projRESTfulApiFitConnect\\obj\\",
+        "outputPath": "C:\\Users\\User\\Downloads\\0604\\API\\projRESTfulApiFitConnect\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
