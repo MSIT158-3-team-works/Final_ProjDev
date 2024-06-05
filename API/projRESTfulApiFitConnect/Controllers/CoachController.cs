@@ -117,7 +117,6 @@ namespace projRESTfulApiFitConnect.Controllers
                 RoleDescription = coach.Role.RoleDescribe,
                 GenderDescription = coach.Gender.GenderText
             };
-<<<<<<< HEAD
             foreach (var rate in rates)
             {
                 RateDetailDto rateDetailDto = new RateDetailDto()
@@ -164,8 +163,6 @@ namespace projRESTfulApiFitConnect.Controllers
                 scheduleDatailDtos.Add(scheduleDatailDto);
             }
 
-=======
->>>>>>> 4abd91d94b16100d6ad33e823bccd6dfb13e6f13
 
             var result = new
             {
@@ -260,7 +257,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 FieldReserveId = field.FieldReserveId,
                 City = field.Field.Gym.Region.City.City,
                 Region = field.Field.Gym.Region.Region,
-                Gym = field.Field.Gym.Name,
+                Gym = field.Field.Gym.GymName,
                 Field = field.Field.FieldName,
                 PaymentStatus = field.PaymentStatus,
                 ReserveStatus = field.ReserveStatus

@@ -7,7 +7,9 @@ public partial class TtimesDetail
 {
     public int TimeId { get; set; }
 
-    public string TimeName { get; set; } = null!;
+    public TimeOnly TimeName { get; set; }
 
-    public virtual ICollection<TclassSchedule> TclassSchedules { get; set; } = new List<TclassSchedule>();
+    public virtual ICollection<TclassSchedule> TclassScheduleCourseEndTimes { get; set; } = new List<TclassSchedule>();
+
+    public virtual ICollection<TclassSchedule> TclassScheduleCourseStartTimes { get; set; } = new List<TclassSchedule>();
 }
