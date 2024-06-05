@@ -15,6 +15,10 @@ public partial class GymContext : DbContext
     {
     }
 
+    public virtual DbSet<ClassReservedDetail> ClassReservedDetails { get; set; }
+
+    public virtual DbSet<FieldReservedDetail> FieldReservedDetails { get; set; }
+
     public virtual DbSet<TGym> TGyms { get; set; }
 
     public virtual DbSet<TGymTime> TGymTimes { get; set; }
@@ -111,6 +115,68 @@ public partial class GymContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ClassReservedDetail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("class_reserved_detail");
+
+            entity.Property(e => e.ClassIntroduction).HasColumnName("class_introduction");
+            entity.Property(e => e.ClassName)
+                .HasMaxLength(50)
+                .HasColumnName("class_name");
+            entity.Property(e => e.ClassPayment)
+                .HasColumnType("money")
+                .HasColumnName("class_payment");
+            entity.Property(e => e.CoachId).HasColumnName("coach_id");
+            entity.Property(e => e.CourseDate).HasColumnName("course_date");
+            entity.Property(e => e.CourseEndTimeId).HasColumnName("course_end_time_id");
+            entity.Property(e => e.CourseStartTimeId).HasColumnName("course_start_time_id");
+            entity.Property(e => e.FieldId).HasColumnName("field_id");
+            entity.Property(e => e.MaxStudent).HasColumnName("Max_student");
+            entity.Property(e => e.MemberId).HasColumnName("member_id");
+            entity.Property(e => e.PaymentStatus).HasColumnName("payment_status");
+            entity.Property(e => e.ReserveId).HasColumnName("reserve_id");
+            entity.Property(e => e.ReserveStatus).HasColumnName("reserve_status");
+        });
+
+        modelBuilder.Entity<FieldReservedDetail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("field_reserved_detail");
+
+            entity.Property(e => e.City)
+                .HasMaxLength(50)
+                .HasColumnName("city");
+            entity.Property(e => e.CoachId).HasColumnName("coach_id");
+            entity.Property(e => e.FieldDate).HasColumnName("field_date");
+            entity.Property(e => e.FieldDescribe).HasColumnName("field_describe");
+            entity.Property(e => e.FieldId).HasColumnName("field_id");
+            entity.Property(e => e.FieldName)
+                .HasMaxLength(50)
+                .HasColumnName("field_name");
+            entity.Property(e => e.FieldPayment)
+                .HasColumnType("money")
+                .HasColumnName("field_payment");
+            entity.Property(e => e.FieldReserveEndTime).HasColumnName("field_reserve__end_time");
+            entity.Property(e => e.FieldReserveId).HasColumnName("field_reserve_id");
+            entity.Property(e => e.FieldReserveStartTime).HasColumnName("field_reserve__start_time");
+            entity.Property(e => e.Floor)
+                .HasMaxLength(50)
+                .HasColumnName("floor");
+            entity.Property(e => e.GymAddress)
+                .HasMaxLength(50)
+                .HasColumnName("Gym_address");
+            entity.Property(e => e.GymDescribe).HasColumnName("Gym_describe");
+            entity.Property(e => e.GymName)
+                .HasMaxLength(20)
+                .HasColumnName("Gym_name");
+            entity.Property(e => e.Region)
+                .HasMaxLength(50)
+                .HasColumnName("region");
+        });
+
         modelBuilder.Entity<TGym>(entity =>
         {
             entity.HasKey(e => e.GymId);

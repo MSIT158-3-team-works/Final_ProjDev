@@ -49,6 +49,7 @@ namespace projRESTfulApiFitConnect.Controllers
 
                 FieldInfoDto fieldinfoDto = new FieldInfoDto()
                 {
+                    GymId = item.GymId,
                     FieldName = item.FieldName,
                     Floor = item.Floor,
                     FieldPhoto = base64Image
