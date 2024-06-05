@@ -24,19 +24,15 @@
             width: 50px;
         }
 
-        .border {
-            width: 310px;
-            height: 370px;
-        }
-
         .s1 {
             display: flex;
             overflow-x: auto;
             gap: 5px;
         }
-        .size2{
-            height: 300px;
-            width: 350px;
+
+        #img2 {
+            width: 400px;
+            height: 250px;
         }
     </style>
 }
@@ -47,7 +43,7 @@
             <h1 id="head"></h1>
             <div class="col-md-5">
                 <div id="carouselExample" class="carousel slide">
-                    <div class="carousel-inner size2">
+                    <div class="carousel-inner ">
                         <div class="carousel-item active" id="img2">
                             <img src="" class="d-block img-fluid " id="main-photo" alt="">
                         </div>
@@ -125,7 +121,7 @@
                 let str = '';
                 data.forEach(item => {
                     str += `
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-4 mb-2">
                             <a href="field?id=${item.gymId}" class="text-decoration-none text-dark">
                                 <div class="card" style="height:400px;">
                                     <img src="data:image/png;base64,${item.gymPhoto}" class="card-img-top" style="height:200px;" alt="${item.gymName}">
@@ -161,7 +157,7 @@
                 fieldPhotos = filteredData.map(item => item.fieldPhoto);
 
                 let list = fieldPhotos.map(photo => `
-                    <img src="data:image/jpg;base64,${photo}" class="img-fluid  rounded-1 size" alt="">
+                            <img src="data:image/jpg;base64,${photo}" class="img-fluid  rounded-1 size" alt="">
                 `).join('');
 
                 img.innerHTML = list;
@@ -170,7 +166,6 @@
                     updateMainImage(0);
                 }
 
-                // Add event listeners for thumbnail clicks
                 const imgList = img.querySelectorAll("img");
                 imgList.forEach((imgItem, index) => {
                     imgItem.addEventListener("click", () => {
@@ -178,7 +173,6 @@
                     });
                 });
 
-                // Add event listeners for carousel controls
                 document.querySelector(".carousel-control-prev").addEventListener("click", (event) => {
                     updateMainImage((currentImageIndex - 1 + fieldPhotos.length) % fieldPhotos.length);
                 });
@@ -196,7 +190,7 @@
             currentImageIndex = index;
             img2.innerHTML = `
                 <div class="carousel-item active">
-                    <img src="data:image/jpg;base64,${fieldPhotos[index]}" class="d-block img-fluid " alt="">
+                    <img src="data:image/jpg;base64,${fieldPhotos[index]}" class="d-block img-fluid active" alt="">
                 </div>
             `;
             console.log(`Current image index: ${currentImageIndex}`);
