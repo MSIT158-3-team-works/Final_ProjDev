@@ -5,8 +5,10 @@ using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using projRESTfulApiFitConnect.DTO.Coach;
 using projRESTfulApiFitConnect.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -31,6 +33,12 @@ namespace projRESTfulApiFitConnect.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CoachDetailDto>>> GetCoaches()
         {
+            List<CoachDetailDto> coachDetailDtos = await coachesDetail();
+            return Ok(coachDetailDtos);
+        }
+
+        private async Task<List<CoachDetailDto>> coachesDetail()
+        {
             string filepath = "";
 
             List<CoachDetailDto> coachDetailDtos = new List<CoachDetailDto>();
@@ -41,13 +49,19 @@ namespace projRESTfulApiFitConnect.Controllers
                         .Include(x => x.TcoachInfoIds)
                         .Include(x => x.TcoachExperts)
                         .ThenInclude(te => te.Class)
+                        .Include(x => x.TcoachExperts)
+                        .ThenInclude(te => te.Class.ClassSort1)//有氧、無氧、其他
+                        .Include(x => x.TcoachExperts)
+                        .ThenInclude(te => te.Class.ClassSort2)//課程種類
                         .ToListAsync();
 
             foreach (var item in coaches)
             {
                 var experts = item.TcoachExperts.Select(te => new ExpertiseDto
                 {
-                    ClassName = te.Class.ClassName
+                    ClassName = te.Class.ClassName,
+                    ClassSort1 = te.Class.ClassSort1.ClassSort1Detail.ToString(),
+                    ClassSort2 = te.Class.ClassSort2.ClassSort2Detail.ToString()
                 }).ToList();
                 string base64Image = "";
                 filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", item.Photo);
@@ -73,8 +87,64 @@ namespace projRESTfulApiFitConnect.Controllers
                 };
                 coachDetailDtos.Add(coachDetailDto);
             }
-            return Ok(coachDetailDtos);
+
+            return coachDetailDtos;
         }
+
+        [HttpPost]
+        [Route("SEARCH")]
+        public async Task<ActionResult<CoachPagingDTO>> GetCoachesSearch(/*[FromQuery]*/ CoachSearchDTO coachSearchDTO)
+        {
+            List<CoachDetailDto> coachDetailDtos = await coachesDetail();
+            //根據分類編號搜尋教練資料
+            var everyCoach = coachSearchDTO.gender == null || coachSearchDTO.gender == "" ? coachDetailDtos : coachDetailDtos.Where(s => s.GenderDescription == coachSearchDTO.gender);
+            everyCoach = coachSearchDTO.sort1 == null || coachSearchDTO.sort1 == "" ? everyCoach : everyCoach.Where(s => s.Experties[0].ClassSort1 == coachSearchDTO.sort1);
+            everyCoach = coachSearchDTO.sort2 == null || coachSearchDTO.sort2 == "" ? everyCoach : everyCoach.Where(s => s.Experties[0].ClassSort2 == coachSearchDTO.sort2);
+            //根據關鍵字搜尋教練資料(姓名、性別、教練資訊、專長名稱)
+            if (!string.IsNullOrEmpty(coachSearchDTO.keyword))
+            {
+                everyCoach = everyCoach.Where(s => s.Name.Contains(coachSearchDTO.keyword) ||
+                 s.GenderDescription.Contains(coachSearchDTO.keyword) ||
+                 s.Experties.Any(e => e.ClassName.Contains(coachSearchDTO.keyword)) ||
+                 s.Experties.Any(e => e.ClassSort1.Contains(coachSearchDTO.keyword)) ||
+                 s.Experties.Any(e => e.ClassSort2.Contains(coachSearchDTO.keyword)) ||
+                 s.Intro.Contains(coachSearchDTO.keyword));
+            }
+
+            //排序
+            switch (coachSearchDTO.sortBy)
+            {
+                //依性別
+                case "GenderDescription":
+                    everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.GenderDescription) : everyCoach.OrderByDescending(s => s.GenderDescription);
+                    break;
+                //預設為id
+                default:
+                    everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.Id) : everyCoach.OrderByDescending(s => s.Id);
+                    break;
+            }
+            //總共有多少筆資料
+            int totalCount = everyCoach.Count();
+            //每頁要顯示幾筆資料
+            int pageSize = (int)coachSearchDTO.pageSize;
+            //目前第幾頁
+            int page = (int)coachSearchDTO.page;
+            //計算總共有幾頁
+            int totalPages = (int)Math.Ceiling((decimal)totalCount / pageSize);
+            //分頁
+            everyCoach = everyCoach.Skip((page - 1) * pageSize).Take(pageSize);
+            //包裝要傳給client端的資料
+            CoachPagingDTO coachPaging = new CoachPagingDTO();
+            coachPaging.TotalCount = totalCount;
+            coachPaging.TotalPages = totalPages;
+            coachPaging.CoachResult = everyCoach.ToList();
+            return Ok(coachPaging);
+        }
+
+
+
+
+
 
         // GET: api/Coach/5
         //取得特定教練資料
@@ -96,7 +166,7 @@ namespace projRESTfulApiFitConnect.Controllers
             var coachInfo = coach.TcoachInfoIds.FirstOrDefault();
             var experts = await _context.TcoachExperts.Where(x => x.CoachId == id).Include(x => x.Class).ToListAsync();
             var rates = await _context.TmemberRateClasses.Where(x => x.CoachId == id).Include(x => x.Reserve.Member).Include(x => x.Reserve.ClassSchedule.Class).ToListAsync();
-            var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseTime).Include(x => x.ClassStatus).ToListAsync();
+            var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseTimeId).Include(x => x.ClassStatus).ToListAsync();
             var fields = await _context.TfieldReserves.Where(x => x.CoachId == id).Include(x => x.Field.Gym.Region.City).ToListAsync();
 
             if (!string.IsNullOrEmpty(coach.Photo))
@@ -164,7 +234,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     Coach = schedule.Coach.Name,
                     Field = schedule.Field.FieldName,
                     CourseDate = schedule.CourseDate,
-                    //CourseTime = schedule.CourseTime.TimeName,
+                    CourseTime = schedule.CourseTimeId,
                     MaxStudent = schedule.MaxStudent,
                     ClassStatus = schedule.ClassStatus.ClassStatusDiscribe,
                     ClassPayment = schedule.ClassPayment,

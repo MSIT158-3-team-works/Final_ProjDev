@@ -1,0 +1,127 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <style>
+        #content {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .article {
+            width: 73%;
+            float: right;
+        }
+
+        .section {
+            background-color: lightslategray;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 20px 26px;
+            line-height: 2em;
+        }
+
+        .aside {
+            width: 23%;
+            float: left;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .pagination {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .pagination li {
+                margin: 18px 5px;
+            }
+
+            .pagination a {
+                text-decoration: none;
+                color: black;
+                padding: 8px 16px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            .pagination .active a {
+                background-color: cornflowerblue;
+                color: white;
+                border: 1px solid cornflowerblue;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+            }
+    </style>
+}
+
+<h1 style="margin-top:100px; text-align:center; font-size:4.5em;color:aliceblue;">健康專欄</h1>
+
+<div id="content">
+    <aside class="aside">
+        <section class="section" style="margin-top:87px">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
+                <span style="font-weight:700;font-size:2em;"><a href="#">分類</a></span>
+            </div>
+            <div class="list-group">
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="nutrition">
+                    運動健康
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="fitness">
+                    食物營養
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="mental-health">
+                    醫學保健
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="diseases">
+                    其他
+                </label>
+            </div>
+        </section>
+        <section class="section">
+            <h2><a href="#">熱門文章</a></h2>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="~/assets/img/popular-article.jpg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">如何保持健康飲食</h5>
+                            <p class="card-text" style="font-weight:600;font-style:italic;">2024年6月1日</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>
+    <article class="article">
+        <section class="section">
+            <h2>文章標題</h2>
+            <p>這是一篇健康專欄的文章內容。可以在這裡添加更多內容來描述健康的各個方面，如營養、健身、心理健康等。</p>
+            <p>繼續閱讀，以了解更多有關保持健康的方法和建議。</p>
+        </section>
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li><a href="#" style="margin-right:16px; border:none;"><</a></li>
+                <li><a href="#">1</a></li>
+                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                <li><a href="#" style="margin-left:16px; border:none;">></a></li>
+            </ul>
+        </div>
+    </article>
+</div>

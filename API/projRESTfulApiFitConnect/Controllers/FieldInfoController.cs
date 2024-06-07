@@ -49,6 +49,7 @@ namespace projRESTfulApiFitConnect.Controllers
 
                 FieldInfoDto fieldinfoDto = new FieldInfoDto()
                 {
+                    GymId = item.GymId,
                     Floor = item.Floor,
                     FieldName = item.FieldName,
                     //FieldPhoto = base64Image
@@ -59,10 +60,22 @@ namespace projRESTfulApiFitConnect.Controllers
             return Ok(fieldinfoDtos);
         }
 
-        // POST api/<FieldInfoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // get api/<回傳id場地>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Tfield>> GetTField(int id)
         {
+            if (_context.Tfields == null)
+            {
+                return NotFound();
+            }
+            var tField = await _context.Tfields.FindAsync(id);
+
+            if (tField == null)
+            {
+                return NotFound();
+            }
+
+            return tField;
         }
 
         // PUT api/<FieldInfoController>/5

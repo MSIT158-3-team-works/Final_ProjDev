@@ -43,7 +43,11 @@ public partial class TIdentity
 
     public virtual ICollection<TfieldReserve> TfieldReserves { get; set; } = new List<TfieldReserve>();
 
-    public virtual ICollection<TmemberFollow> TmemberFollows { get; set; } = new List<TmemberFollow>();
+    public virtual ICollection<TmemberFollow> TmemberFollowCoaches { get; set; } = new List<TmemberFollow>();
+
+    public virtual ICollection<TmemberFollow> TmemberFollowMembers { get; set; } = new List<TmemberFollow>();
+
+    public virtual ICollection<TmemberRateClass> TmemberRateClasses { get; set; } = new List<TmemberRateClass>();
 
     public virtual ICollection<TnewsComment> TnewsComments { get; set; } = new List<TnewsComment>();
 

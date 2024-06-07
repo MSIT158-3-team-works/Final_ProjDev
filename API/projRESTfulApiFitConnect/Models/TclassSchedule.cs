@@ -17,6 +17,10 @@ public partial class TclassSchedule
 
     public int CourseTimeId { get; set; }
 
+    public int? CourseStartTimeId { get; set; }
+
+    public int? CourseEndTimeId { get; set; }
+
     public int MaxStudent { get; set; }
 
     public int ClassStatusId { get; set; }
@@ -31,7 +35,9 @@ public partial class TclassSchedule
 
     public virtual TIdentity Coach { get; set; } = null!;
 
-    public virtual TtimesDetail CourseTime { get; set; } = null!;
+    public virtual TtimesDetail? CourseEndTime { get; set; }
+
+    public virtual TtimesDetail? CourseStartTime { get; set; }
 
     public virtual Tfield Field { get; set; } = null!;
 

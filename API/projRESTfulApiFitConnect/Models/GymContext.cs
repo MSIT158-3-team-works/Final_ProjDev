@@ -15,7 +15,13 @@ public partial class GymContext : DbContext
     {
     }
 
+    public virtual DbSet<ClassReservedDetail> ClassReservedDetails { get; set; }
+
+    public virtual DbSet<FieldReservedDetail> FieldReservedDetails { get; set; }
+
     public virtual DbSet<TGym> TGyms { get; set; }
+
+    public virtual DbSet<TGymTime> TGymTimes { get; set; }
 
     public virtual DbSet<TIdentity> TIdentities { get; set; }
 
@@ -109,6 +115,68 @@ public partial class GymContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ClassReservedDetail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("class_reserved_detail");
+
+            entity.Property(e => e.ClassIntroduction).HasColumnName("class_introduction");
+            entity.Property(e => e.ClassName)
+                .HasMaxLength(50)
+                .HasColumnName("class_name");
+            entity.Property(e => e.ClassPayment)
+                .HasColumnType("money")
+                .HasColumnName("class_payment");
+            entity.Property(e => e.CoachId).HasColumnName("coach_id");
+            entity.Property(e => e.CourseDate).HasColumnName("course_date");
+            entity.Property(e => e.CourseEndTimeId).HasColumnName("course_end_time_id");
+            entity.Property(e => e.CourseStartTimeId).HasColumnName("course_start_time_id");
+            entity.Property(e => e.FieldId).HasColumnName("field_id");
+            entity.Property(e => e.MaxStudent).HasColumnName("Max_student");
+            entity.Property(e => e.MemberId).HasColumnName("member_id");
+            entity.Property(e => e.PaymentStatus).HasColumnName("payment_status");
+            entity.Property(e => e.ReserveId).HasColumnName("reserve_id");
+            entity.Property(e => e.ReserveStatus).HasColumnName("reserve_status");
+        });
+
+        modelBuilder.Entity<FieldReservedDetail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("field_reserved_detail");
+
+            entity.Property(e => e.City)
+                .HasMaxLength(50)
+                .HasColumnName("city");
+            entity.Property(e => e.CoachId).HasColumnName("coach_id");
+            entity.Property(e => e.FieldDate).HasColumnName("field_date");
+            entity.Property(e => e.FieldDescribe).HasColumnName("field_describe");
+            entity.Property(e => e.FieldId).HasColumnName("field_id");
+            entity.Property(e => e.FieldName)
+                .HasMaxLength(50)
+                .HasColumnName("field_name");
+            entity.Property(e => e.FieldPayment)
+                .HasColumnType("money")
+                .HasColumnName("field_payment");
+            entity.Property(e => e.FieldReserveEndTime).HasColumnName("field_reserve__end_time");
+            entity.Property(e => e.FieldReserveId).HasColumnName("field_reserve_id");
+            entity.Property(e => e.FieldReserveStartTime).HasColumnName("field_reserve__start_time");
+            entity.Property(e => e.Floor)
+                .HasMaxLength(50)
+                .HasColumnName("floor");
+            entity.Property(e => e.GymAddress)
+                .HasMaxLength(50)
+                .HasColumnName("Gym_address");
+            entity.Property(e => e.GymDescribe).HasColumnName("Gym_describe");
+            entity.Property(e => e.GymName)
+                .HasMaxLength(20)
+                .HasColumnName("Gym_name");
+            entity.Property(e => e.Region)
+                .HasMaxLength(50)
+                .HasColumnName("region");
+        });
+
         modelBuilder.Entity<TGym>(entity =>
         {
             entity.HasKey(e => e.GymId);
@@ -150,6 +218,20 @@ public partial class GymContext : DbContext
                 .HasForeignKey(d => d.RegionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tGym_tregion_table");
+        });
+
+        modelBuilder.Entity<TGymTime>(entity =>
+        {
+            entity.ToTable("tGym_time");
+
+            entity.Property(e => e.TGymTimeId).HasColumnName("tGym_time_id");
+            entity.Property(e => e.GymId).HasColumnName("Gym_id");
+            entity.Property(e => e.GymTime).HasColumnName("Gym_time");
+
+            entity.HasOne(d => d.Gym).WithMany(p => p.TGymTimes)
+                .HasForeignKey(d => d.GymId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tGym_time_tGym");
         });
 
         modelBuilder.Entity<TIdentity>(entity =>
@@ -293,6 +375,8 @@ public partial class GymContext : DbContext
             entity.Property(e => e.CoachId).HasColumnName("coach_id");
             entity.Property(e => e.CoachPayment).HasColumnName("coach_payment");
             entity.Property(e => e.CourseDate).HasColumnName("course_date");
+            entity.Property(e => e.CourseEndTimeId).HasColumnName("course_end_time_id");
+            entity.Property(e => e.CourseStartTimeId).HasColumnName("course_start_time_id");
             entity.Property(e => e.CourseTimeId).HasColumnName("course_time_id");
             entity.Property(e => e.FieldId).HasColumnName("field_id");
             entity.Property(e => e.MaxStudent).HasColumnName("Max_student");
@@ -312,9 +396,12 @@ public partial class GymContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_class_schedule_Identity");
 
-            entity.HasOne(d => d.CourseTime).WithMany(p => p.TclassSchedules)
-                .HasForeignKey(d => d.CourseTimeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+            entity.HasOne(d => d.CourseEndTime).WithMany(p => p.TclassScheduleCourseEndTimes)
+                .HasForeignKey(d => d.CourseEndTimeId)
+                .HasConstraintName("FK_tclass_schedule_ttimes_detail1");
+
+            entity.HasOne(d => d.CourseStartTime).WithMany(p => p.TclassScheduleCourseStartTimes)
+                .HasForeignKey(d => d.CourseStartTimeId)
                 .HasConstraintName("FK_tclass_schedule_ttimes_detail");
 
             entity.HasOne(d => d.Field).WithMany(p => p.TclassSchedules)
@@ -522,7 +609,8 @@ public partial class GymContext : DbContext
             entity.Property(e => e.CoachId).HasColumnName("coach_id");
             entity.Property(e => e.FieldDate).HasColumnName("field_date");
             entity.Property(e => e.FieldId).HasColumnName("field_id");
-            entity.Property(e => e.FieldTime).HasColumnName("field_time");
+            entity.Property(e => e.FieldReserveEndTime).HasColumnName("field_reserve__end_time");
+            entity.Property(e => e.FieldReserveStartTime).HasColumnName("field_reserve__start_time");
             entity.Property(e => e.PaymentStatus).HasColumnName("payment_status");
             entity.Property(e => e.ReserveStatus)
                 .HasDefaultValue(true)
@@ -537,6 +625,14 @@ public partial class GymContext : DbContext
                 .HasForeignKey(d => d.FieldId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_field_reserve_field");
+
+            entity.HasOne(d => d.FieldReserveEndTimeNavigation).WithMany(p => p.TfieldReserveFieldReserveEndTimeNavigations)
+                .HasForeignKey(d => d.FieldReserveEndTime)
+                .HasConstraintName("FK_tfield_reserve_tGym_time1");
+
+            entity.HasOne(d => d.FieldReserveStartTimeNavigation).WithMany(p => p.TfieldReserveFieldReserveStartTimeNavigations)
+                .HasForeignKey(d => d.FieldReserveStartTime)
+                .HasConstraintName("FK_tfield_reserve_tGym_time");
         });
 
         modelBuilder.Entity<TgenderTable>(entity =>
@@ -586,7 +682,12 @@ public partial class GymContext : DbContext
             entity.Property(e => e.MemberId).HasColumnName("member_id");
             entity.Property(e => e.StatusId).HasColumnName("status_id");
 
-            entity.HasOne(d => d.Member).WithMany(p => p.TmemberFollows)
+            entity.HasOne(d => d.Coach).WithMany(p => p.TmemberFollowCoaches)
+                .HasForeignKey(d => d.CoachId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tmember_follow_tIdentity");
+
+            entity.HasOne(d => d.Member).WithMany(p => p.TmemberFollowMembers)
                 .HasForeignKey(d => d.MemberId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_member_follow_Identity1");
@@ -616,6 +717,11 @@ public partial class GymContext : DbContext
                 .HasColumnType("decimal(2, 1)")
                 .HasColumnName("rate_coach");
             entity.Property(e => e.ReserveId).HasColumnName("reserve_id");
+
+            entity.HasOne(d => d.Coach).WithMany(p => p.TmemberRateClasses)
+                .HasForeignKey(d => d.CoachId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tmember_rate_class_tIdentity");
 
             entity.HasOne(d => d.Reserve).WithMany(p => p.TmemberRateClasses)
                 .HasForeignKey(d => d.ReserveId)
@@ -1012,7 +1118,7 @@ public partial class GymContext : DbContext
 
             entity.Property(e => e.TimeId).HasColumnName("time_id");
             entity.Property(e => e.TimeName)
-                .HasMaxLength(50)
+                .HasPrecision(0)
                 .HasColumnName("time_name");
         });
 

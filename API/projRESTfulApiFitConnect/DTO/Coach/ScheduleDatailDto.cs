@@ -12,7 +12,7 @@
 
         public DateOnly CourseDate { get; set; }
 
-        public TimeSpan CourseTime { get; set; }
+        public int CourseTime { get; set; }
 
         public int MaxStudent { get; set; }
 

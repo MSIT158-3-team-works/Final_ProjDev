@@ -1,0 +1,442 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitConnect</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            display: flex; /* 使用Flexbox */
+            justify-content: space-between; /* logo靠左，ul靠右 */
+            align-items: flex-end; /* ul靠下 */
+        }
+
+            nav img {
+                margin-right: auto;
+            }}
+
+
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                justify-content: flex-end;
+            }
+}
+                nav ul li {
+                    margin-left: 20px;
+                }
+
+                    nav ul li a {
+                        color: white; /* 將連結文字顏色設為灰色 */
+                    }
+
+                        nav ul li a:hover {
+                            color: dodgerblue; /* 滑鼠滑過時將連結文字顏色變為黑色 */
+                        }
+
+
+        .search-and-select {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+        }
+
+            .search-and-select input[type="text"], .search-and-select select {
+                flex: 1;
+                margin-right: 10px;
+                font-size: 1.2em;
+                padding: 10px;
+            }
+
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .block {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            width: 70%;
+            margin: auto;
+        }
+
+            .block img {
+                width: 100%;
+                height: auto;
+            }
+
+            .block h3 {
+                margin-top: 0;
+            }
+
+        .button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+
+        h3 {
+            font-size: 2em;
+        }
+
+        .course-count {
+            text-align: left;
+            padding: 20px;
+            font-size: 1.5em;
+        }
+
+        .card-body {
+            background-color: whitesmoke
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            margin-top: -25px;
+        }
+
+            .info img {
+                margin-right: 5px; 
+            }
+
+            .info p {
+                margin-top: 15px; 
+            }
+            .price{
+             text-align:right;
+            color:red;
+            }
+        /* 分頁控制元素的CSS */
+        #pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+            #pagination button {
+                padding: 5px 15px;
+                margin: 0 10px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                #pagination button:hover {
+                    background-color: #0056b3;
+                }
+
+            #pagination #page-info {
+                margin: 0 10px;
+            }
+
+    </style>
+</head>
+<body>
+
+
+
+    <!-- 搜索框 -->
+    <div id="search-container" class="search-and-select">
+        <input type="text" id="search-input" placeholder="搜索...">
+
+        <!-- 地區下拉式選單 -->
+        <select id="gym-select" class="form-select" aria-label="Default select example">
+            <option value="">選擇地區</option>
+        </select>
+
+        <!-- 課程類別下拉式選單 -->
+        <select id="sort-select" class="form-select" aria-label="Default select example">
+            <option value="">選擇課程類別</option>
+        </select>
+    </div>
+    <div id="course-count" class="course-count">
+        <h2 >
+            共有--個課程
+        </h2>
+    </div>
+    <!-- 內容 -->
+    @* <div class="content">
+    <div class="block">
+    <img src="images/pilatis.jpg" alt="產品圖片">
+    <h3>[團體班] 超級小班 | 器械皮拉提斯 </h3>
+    <p>
+    2~4人精緻小班教學，強度依上課學員調整。
+    皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+    </p>
+    <a href="#" class="button">了解更多</a>
+    </div>
+    <div class="block">
+    <img src="images/pilatis.jpg" alt="產品圖片">
+    <h3>[團體班] 超級小班 | 器械皮拉提斯 </h3>
+    <p>
+    2~4人精緻小班教學，強度依上課學員調整。
+    皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+    </p>
+    <a href="#" class="button">了解更多</a>
+    </div>
+    <div class="block">
+    <img src="images/pilatis.jpg" alt="產品圖片">
+    <h3>[團體班] 超級小班 | 器械皮拉提斯 </h3>
+    <p>
+    2~4人精緻小班教學，強度依上課學員調整。
+    皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+    </p>
+    <a href="#" class="button">了解更多</a>
+    </div>
+    <div class="block">
+    <img src="images/pilatis.jpg" alt="產品圖片">
+    <h3>[團體班] 超級小班 | 器械皮拉提斯</h3>
+    <p>
+    2~4人精緻小班教學，強度依上課學員調整。
+    皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+    </p>
+    <a href="#" class="button">了解更多</a>
+    </div>
+    </div>
+    *@
+    <div class="row row-cols-1 row-cols-md-2 g-4" id="main_div">
+        <div class="col">
+            <div class="card">
+                <img src="~/Images/pilatis.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">[團體班] 超級小班 | 器械皮拉提斯</h5>
+                    <p class="card-text">
+                        2~4人精緻小班教學，強度依上課學員調整。
+                        皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+                    </p>
+                    <div class="info">
+                        <img src="~/images/time.png" /><p>2024.7.15</p>
+                    </div>
+                    <div class="info">
+                        <img src="~/images/location.png" /><p>大安區</p>
+                    </div>
+                        <div>
+                            <p class="price">每堂7,990元</p>
+                        </div>
+                    
+                    <a href="#" class="button">了解更多</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="~/Images/pilatis.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">[團體班] 超級小班 | 器械皮拉提斯</h5>
+                    <p class="card-text">
+                        2~4人精緻小班教學，強度依上課學員調整。
+                        皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+                    </p>
+                    <div class="info">
+                        <img src="~/images/time.png" /><p>2024.7.15</p>
+                    </div>
+                    <div class="info">
+                    <img src="~/images/location.png" /><p>大安區</p>
+                    </div>
+                    <a href="#" class="button">了解更多</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="~/Images/pilatis.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">[團體班] 超級小班 | 器械皮拉提斯</h5>
+                    <p class="card-text">
+                        2~4人精緻小班教學，強度依上課學員調整。
+                        皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+                    </p>
+                    <div class="info">
+                        <img src="~/images/time.png" /><p>2024.7.15</p>
+                    </div>
+                    <div class="info">
+                        <img src="~/images/location.png" /><p>大安區</p>
+                    </div>
+                    <a href="#" class="button">了解更多</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="~/Images/pilatis.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">[團體班] 超級小班 | 器械皮拉提斯</h5>
+                    <p class="card-text">
+                        2~4人精緻小班教學，強度依上課學員調整。
+                        皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+                    </p>
+                    <div class="info">
+                        <img src="~/images/time.png" /><p>2024.7.15</p>
+                    </div>
+                    <div class="info">
+                        <img src="~/images/location.png" /><p>大安區</p>
+                    </div>
+                    <a href="#" class="button">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 分頁控制元素的HTML -->
+    <div id="pagination">
+        <button onclick="changePage('prev')">上一頁</button>
+        <span id="page-info">第 1 頁，共 10 頁</span>
+        <button onclick="changePage('next')">下一頁</button>
+    </div>
+
+
+
+</body>
+</html>
+@section Scripts{
+<script>
+
+        (async () => {
+            const div = document.getElementById("main_div");
+            const courseCountDiv = document.getElementById("course-count"); // 獲取顯示課程總數的元素
+            const selectGym = document.getElementById("gym-select");
+            const selectSort = document.getElementById("sort-select");
+            const response = await fetch("https://localhost:7199/api/Course");
+            const gymResponse = await fetch("https://localhost:7199/api/TGyms");
+            const sortResponse = await fetch("https://localhost:7199/api/TclassSort訓練");
+            const gyms = await gymResponse.json();
+            const sorts = await sortResponse.json();
+            const originalData = await response.json(); // 保存原始資料
+            let data = [...originalData]; // 複製原始資料到新陣列以供過濾
+            const pageSize = 20; // 每頁顯示的資料數量
+            let currentPage = 1; // 當前頁數
+            let pageCount = Math.ceil(data.length / pageSize); // 計算總頁數
+
+            // 將場館資訊添加到下拉式選單中
+            gyms.forEach(gym => {
+                const option = document.createElement("option");
+                option.value = gym.gymId
+                option.text = gym.gymName;
+                selectGym.appendChild(option);
+            });
+
+            // 將Sort資訊添加到下拉式選單中
+            sorts.forEach(sort => {
+                const option = document.createElement("option");
+                option.value = sort.classSort2Id;
+                option.text = sort.classSort2Detail;
+                selectSort.appendChild(option);
+            });
+
+            // 新增搜尋框和事件監聽器
+            const searchInput = document.getElementById("search-input");
+            searchInput.addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    const keyword = event.target.value;
+                    const selectedGymId = selectGym.value;
+                    data = originalData.filter(item => {
+                        const matchKeyword = item.class.includes(keyword) || item.introduction.includes(keyword) || item.gym.includes(keyword);
+                        const matchGym = selectedGymId ? item.gymId === selectedGymId : true;
+                        return matchKeyword && matchGym;
+                    });
+                    pageCount = Math.ceil(data.length / pageSize);
+                    currentPage = 1;
+                    displayData(data.slice(0, pageSize));
+                    updatePageInfo();
+                    updateCourseCount(data.length); // 更新課程總數
+                    // event.target.value = ''; // 清空搜尋框
+                }
+            });
+            selectGym.addEventListener("change", filterAndDisplayData);
+            selectSort.addEventListener("change", filterAndDisplayData);
+
+            function filterAndDisplayData() {
+                const selectedGymId = selectGym.value;
+                const selectedSortId = selectSort.value;
+                data = originalData.filter(item => {
+                    const gymId = item.gymId ? item.gymId.toString() : '';
+                    const classSort2Id = item.classSort2Id ? item.classSort2Id.toString() : '';
+                    return (gymId === selectedGymId || selectedGymId === '') && (classSort2Id === selectedSortId || selectedSortId === '');
+                });
+                pageCount = Math.ceil(data.length / pageSize);
+                currentPage = 1;
+                displayData(data.slice(0, pageSize));
+                updatePageInfo();
+                updateCourseCount(data.length); // 更新課程總數
+            }
+
+            function displayData(pageData) {
+                let str = '';
+                pageData.forEach(item => {
+                    str += `<div class="col">
+                        <div class="card">
+                            <img src="data:image/jpeg;base64,${item.photo}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">${item.class}</h5>
+                                <p class="card-text">${item.introduction}</p>
+                                <div class="info">
+                                    <img src="/images/time.png" /><p>${item.courseDate}</p>
+                                </div>
+                                <div class="info">
+                                    <img src="/images/location.png" /><p>${item.gym}</p>
+                                </div>
+                                <div>
+                                    <p class="price">每堂${item.classPayment}元</p>
+                                </div>
+                                <a href="#" class="button">了解更多</a>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                div.innerHTML = str;
+            }
+
+            function changePage(direction) {
+                if (direction === 'next' && currentPage < pageCount) {
+                    currentPage++;
+                } else if (direction === 'prev' && currentPage > 1) {
+                    currentPage--;
+                }
+                const currentData = data.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+                displayData(currentData);
+                updatePageInfo();
+
+                // 滾動到頁面最上方
+                window.scrollTo(0, 0);
+            }
+
+            function updatePageInfo() {
+                const pageInfo = document.getElementById('page-info');
+                pageInfo.textContent = `第 ${currentPage} 頁，共 ${pageCount} 頁`;
+            }
+            function updateCourseCount(count) {
+                courseCountDiv.textContent = `共有 ${count} 堂課程`; // 更新顯示課程總數的元素
+            }
+
+            // 初始顯示第一頁的資料
+            displayData(data.slice(0, pageSize));
+            updatePageInfo();
+            updateCourseCount(data.length);
+
+            // 將changePage函數暴露到全局範圍，以便HTML按鈕可以訪問
+            window.changePage = changePage;
+        })();
+
+</script>
+    }

@@ -35,5 +35,7 @@ public partial class TGym
 
     public virtual TregionTable Region { get; set; } = null!;
 
+    public virtual ICollection<TGymTime> TGymTimes { get; set; } = new List<TGymTime>();
+
     public virtual ICollection<Tfield> Tfields { get; set; } = new List<Tfield>();
 }
