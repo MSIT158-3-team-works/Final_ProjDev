@@ -1,0 +1,532 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@section Styles {
+    <style>
+        #content {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .article {
+            width: 73%;
+            float: right;
+        }
+
+        .section {
+            background-color: lightslategray;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 20px 26px;
+            line-height: 2em;
+        }
+
+        .aside {
+            width: 23%;
+            float: left;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .pagination {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .pagination li {
+                margin: 18px 5px;
+            }
+
+            .pagination a {
+                text-decoration: none;
+                color: black;
+                padding: 8px 16px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            .pagination .active a {
+                background-color: cornflowerblue;
+                color: white;
+                border: 1px solid cornflowerblue;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+            }
+
+        .tag {
+            font-style: italic;
+            color: lightblue;
+        }
+
+            .tag:hover {
+                font-size: 1.02em;
+                color: deepskyblue;
+            }
+
+        .hover{
+            text-shadow: 0.5px 0.5px 0.8px darkgray;
+        }
+
+            .hover:hover{
+                border: 2px solid deepskyblue;
+            }
+
+            .btn-track:hover {
+                border-color: #dc3545;
+            }
+
+            .btn-cart:hover {
+                background-color:paleturquoise;
+                border-color: deepskyblue;
+            }
+    </style>
+}
+<a href="https://localhost:7168/shop/merchandise/1" style="text-decoration:none;">
+    <h1 style="margin-top:100px; text-align:center; font-size:4.5em;color:aliceblue;">吠!特麽坑吶~商城</h1>
+</a>
+
+<div id="content">
+    <aside class="aside">
+        <section class="section" style="margin-top:87px">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
+                <span style="font-weight:700;font-size:2em;"><a href="#">Sort</a></span>
+                <button class="btn btn-outline-success" type="button" id="checkAll" value="0">
+                    ALL
+                </button>
+            </div>
+            <div class="list-group">
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="1">
+                    乳清蛋白
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="2">
+                    健康食品
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="3">
+                    運動配件
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="4">
+                    健身器材
+                </label>
+                <label class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="5">
+                    服飾
+                </label>
+            </div>
+        </section>
+        <section class="section" style="margin-top:100px;">
+            <h2><a href="#">Popular</a></h2>
+            <div id="divpopular">
+                <div class="card mb-3 hover" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="~/assets/img/fitlogo.png" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Top 1 goods</h5>
+                                <p class="card-text" style="font-weight:600;font-style:italic;">$3.49USD</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>
+    <article class="article">
+        <div class="row mb-3">
+            <div class="col-4">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        --排序依據--
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#" data-type="productId">Update</a></li>
+                        <li><a class="dropdown-item" href="#" data-type="unitPrice">Price</a></li>
+                        <li><a class="dropdown-item" href="#" data-type="popular">Popular</a></li>
+                        <li><a class="dropdown-item" data-type="categoryId">Sort</a></li>
+                    </ul>
+                    <button class="btn btn-outline-secondary" style="margin-left:12px;" id="orderbtn">正序</button>
+                </div>
+            </div>
+            <div class="col-4" style="text-align:right;">
+                <input type="search" placeholder="輸入搜尋商品..." class="form-control" id="inputSearch" />
+                <div class="list-group" id="autodiv">
+                    <button type="button" class="list-group-item list-group-item-action" style="display:none;" onclick="" value="0">
+                        ALL
+                    </button>
+                </div>
+                <div class="list-group" id="autodiv">
+                    <button type="button" class="list-group-item list-group-item-action" style="display:none;" onclick="autobtnClicked(event)" value="Humm">
+                        蛋白棒棒!!
+                    </button>
+                </div>
+            </div>
+            <div class="col-4" style="text-align:right;">
+                <label class="form-check-label">顯示筆數：</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" value="9" checked>
+                    <label class="form-check-label" for="inlineRadio1">9</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" value="15">
+                    <label class="form-check-label" for="inlineRadio2">15</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" value="24">
+                    <label class="form-check-label" for="inlineRadio3">24</label>
+                </div>
+            </div>
+        </div>
+        <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
+        <section class="section">
+            <h2><a href="#">Products</a></h2>
+            <a href="#" style="text-decoration:none;">
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="divmain">
+                <div class="col">
+                    <div class="card h-100 hover">
+                        <img src="https://www.superjumpmagazine.com/content/images/size/w2000/2022/05/kirby-feat-image-2.jpg" class="card-img-top" alt=".c">
+                        <div class="card-body">
+                            <h4 class="card-title">RabbitAndDeerArePlayingInTheWoods</h4>
+                            <div style="text-align:right;float:right;">
+                                <button type="button" class="btn btn-track" onclick="track(this)">
+                                    <img src="~/assets/img/blankheart.png" />
+                                </button>
+                                <button type="button" class="btn btn-cart">
+                                    <img src="~/assets/img/shoppingcart.png" />
+                                </button>
+                            </div>
+                            <label class="tag" data-Id="87">#Category</label>
+                            <p class="card-text">$39.99 USD</p>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-warning">See more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </section>
+        <div class="pagination-container">
+            <ul class="pagination" id="ulpaging">
+                <li><a href="#" style="margin-right:16px; border:none;"><</a></li>
+                <li><a href="#">1</a></li>
+                <li class="page-item active" onclick="pagingHandler(3)"><a class="page-link">2</a></li>
+                <li><a href="#" style="margin-left:16px; border:none;">></a></li>
+            </ul>
+        </div>
+    </article>
+</div>
+<div style="width:85%;max-height:150px;margin:40px auto;position:relative;bottom">
+    <section class="section" style="text-align:center;">
+        <h2><a href="#">Recommendation</a></h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="divrecommend">
+            <div class="card recommend m-3 hover" style="min-width:150px;padding-top:8px">
+                <img class="card-img-top" src="~/assets/img/header-backgrd.jpg" alt=".C" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">Joy</h4>
+                    <span class="" style="font-style:italic;color:lightblue;">#category</span>
+                    <p class="card-text">$1.99 USD</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div style="padding-bottom:350px;">
+    &emsp;
+</div>
+
+
+@section Scripts {
+    <script>
+        let MaxPage = 0;
+        const divMain = document.getElementById('divmain');
+        const ulPaging = document.getElementById('ulpaging');
+        const checkboxAll = document.getElementById('checkAll');
+        const everyCheckBox = document.querySelectorAll('.form-check-input.me-1');
+        const popular = document.querySelector('#divpopular');
+        const typeofsort = document.querySelectorAll('.dropdown-item');
+        const orderby = document.getElementById('orderbtn');
+        const inpSearch = document.querySelector('#inputSearch');
+        const pagesize = document.querySelectorAll('[name="inlineRadioOptions"]');
+        const recommend = document.querySelector('#divrecommend');
+        const searchData = {
+            "categoryId": 0,
+            "keyword": "",
+            "page": 1,
+            "pageSize": 9,
+            "sortBy": "",
+            "sortType": "asc"
+        };
+        //aside---------------------------------------------------------------------------------------------------------
+        checkboxAll.addEventListener('click', function () {
+            for (var item of everyCheckBox) {
+                item.checked = false;
+            }
+            searchData.categoryId = this.value;
+            CategoryloadProducts();
+        });
+        //類別分類#CheckBox
+        everyCheckBox.forEach(item => item.addEventListener('change', async () => {
+            await CategoryloadProducts();
+        }));
+        //熱門商品
+        const PopularProducts = async () => {
+            let url = 'https://localhost:7199/api/Products/search';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "categoryId": 0,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 3,
+                    "sortBy": "popular",
+                    "sortType": "asc"
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            console.log('PopularProducts', data.productsResult);
+            //顯示資料
+            const goods = data.productsResult.map(good => {
+                //data:image/jpeg;base64,${good.productImage}
+                //merchandise/${good.productId}
+                return (`<a href="#${good.productId}" style="text-decoration:none;">
+                <div class="card mb-3 hover" style="max-width: 540px;">
+                                            <div class="row g-0">
+                                               <div class="col-md-4" style="text-align:center; padding-top:10px">
+                                                 <img src="data:image/jpeg;base64,${good.productImage}" class="img-fluid rounded-start" alt="Top3">
+                                               </div>
+                                               <div class="col-md-8">
+                                                  <div class="card-body">
+                                                    <h6 class="card-title">${good.productName}</h6>
+                                                    <p class="card-text" style="font-weight:400;font-style:italic;">$${good.unitPrice}NTD</p>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                        </div>
+                                        </a>`)
+            })
+            popular.innerHTML = goods.join("");
+        }
+
+        //main---------------------------------------------------------------------------------------------------------
+        //排序依據
+        for (var type of typeofsort) {
+            type.addEventListener('click', function () {
+                console.log(this.dataset.type);
+                searchData.sortBy = this.dataset.type;
+                searchData.page = 1;
+                CategoryloadProducts();
+            })
+        }
+        //排序
+        var orderClicked = true;
+        orderby.addEventListener('click', (event) => {
+            console.log(event.target);
+            if (orderClicked) {
+                event.target.textContent = "倒序";
+                event.target.className = "btn btn-secondary";
+                orderClicked = false;
+                searchData.sortType = "desc";
+                CategoryloadProducts();
+            } else {
+                event.target.textContent = "正序";
+                event.target.className = "btn btn-outline-secondary";
+                orderClicked = true;
+                searchData.sortType = "asc";
+                CategoryloadProducts();
+            }
+        });
+        //搜尋關鍵字
+        inpSearch.addEventListener('keydown', event => {
+            if (event.keyCode === 13) {
+                if (event.target.value != null)
+                    searchData.keyword = event.target.value;
+                else
+                    searchData.keyword = "";
+                searchData.categoryId = 0;
+                searchData.page = 1;
+                CategoryloadProducts();
+            }
+        })
+        //顯示筆數
+        for (var radio of pagesize) {
+            //console.log(radio.value);
+            radio.addEventListener('click', function () {
+                searchData.pageSize = this.value;
+                searchData.page = 1;
+                CategoryloadProducts();
+            })
+        }
+        //追蹤
+        function track(event) {
+            const trackedImg = '<img src="https://cdn3.iconfinder.com/data/icons/emoji-1-4/64/_love_heart_smiley-32.png" />';
+            event.innerHTML = trackedImg;
+        }
+        //換頁按鈕
+        const CategorypagingHandler = (event,page) => {
+            console.log(event);
+            if (page === -1) {page = 1; }
+            if (page === 0) {page = MaxPage; }
+            searchData.page = page;
+            console.log(searchData.page);
+            CategoryloadProducts();
+        }
+
+        //bottom---------------------------------------------------------------------------------------------------------
+        //推薦商品
+        const RecommendProducts = async () => {
+            let url = 'https://localhost:7199/api/Products/search';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "categoryId": searchData.categoryId,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 4,
+                    "sortBy": "",
+                    "sortType": "asc"
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            console.log('PopularProducts', data.productsResult);
+            //顯示資料
+            const goods = data.productsResult.map(good => {
+                //data:image/jpeg;base64,${good.productImage}
+                return (` <a href="#${good.productId}" style="text-decoration:none;">
+                            <div class="card recommend m-3 hover" style="min-width:150px;padding-top:8px">
+                                  <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="recommend" style="width:100%">
+                                  <div class="card-body">
+                                    <h6 class="card-title">${good.productName}</h6>
+                                    <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
+                                    <p class="card-text">$${good.unitPrice}NTD</p>
+                                </div> </div></a>`)
+            })
+            recommend.innerHTML = goods.join("");
+        }
+
+        //載入商品資料
+        const CategoryloadProducts = async () => {
+            var allCount = 0; var allData = []; var s = "";
+            pickedPage = searchData.page;
+            searchData.page = 1;
+            searchData.pageSize = 45;
+            for (var all of everyCheckBox) {
+                //尋找CheckBox (that been checked) value.
+                if (all.checked) {
+                    //console.log(all.value);
+                    searchData.categoryId = all.value;
+                    let url = 'https://localhost:7199/api/Products/search';
+                    let response = await fetch(url, {
+                        method: 'POST',
+                        body: JSON.stringify(searchData),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    let data = await response.json();
+                    //console.log(data.productsResult);
+                    allData.push(...data.productsResult);
+                    allCount += data.totalCount;
+                }
+            }
+            if (!allCount) {
+                searchData.categoryId = 0;
+                let url = 'https://localhost:7199/api/Products/search';
+                let response = await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(searchData),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                let data = await response.json();
+                allCount = data.totalCount;
+                allData = data.productsResult;
+            }
+            // console.log('allData', allData);
+            // console.log('totalcount', allCount);
+            // console.log('PageNow', pickedPage);
+            for (var radio of pagesize) { if (radio.checked) searchData.pageSize = radio.value; }//尋找Current-PageSize
+            //顯示資料
+            document.getElementById('datafound').innerHTML = `共${allCount}筆資料`;
+            currentPosition = allCount - (allCount - (pickedPage - 1) * searchData.pageSize);
+            var loop = searchData.pageSize;
+            if ((allCount - currentPosition) < searchData.pageSize) loop = (allCount - currentPosition);
+            for (var i = 0; i < loop; i++) {
+                //console.log(allData[i].productId);
+                position = currentPosition + i;
+                s += `<a href="#${allData[position].productId}" style="text-decoration:none;">
+                       <div class="col">
+                       <div class="card h-100 hover">
+                        <img src="data:image/jpeg;base64,${allData[position].productImage}" class="card-img-top" alt="${allData[position].productName}">
+                         <div class="card-body">
+                          <h5 class="card-title">${allData[position].productName}</h5>
+                         <div style="text-align:right;float:right;">
+                         <button type="button" class="btn btn-track" onclick="track(this)">
+                          <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/heart-outline-32.png" />
+                         </button>
+                         <button type="button" class="btn btn-cart">
+                          <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png" />
+                         </button>
+                        </div>
+                        <label class="tag" data-Id="${allData[position].productCategoryId}">#${allData[position].productCategory}</label>
+                        <p class="card-text">$${allData[position].unitPrice}NTD</p>
+                       </div>
+                       <div class="d-grid gap-2">
+                        <button class="btn btn-warning">See more</button>
+                       </div></div></div></a>`
+            }
+            divMain.innerHTML = s;
+
+            const categoryTag = document.querySelectorAll('.tag');
+            for (var card of categoryTag) {
+                card.addEventListener('click', function () {
+                    //console.log(this.dataset.id);
+                    for (var item of everyCheckBox) {
+                        if (this.dataset.id == item.value) item.checked = true;
+                        else item.checked = false;
+                    }
+                    searchData.categoryId = this.dataset.id;
+                    searchData.page = 1;
+                    CategoryloadProducts();
+                });
+            }
+            //顯示分頁按鈕
+            let liPages = "", pageCount = 0;
+            MaxPage = Math.ceil(allCount / searchData.pageSize);
+            var currentPage = pickedPage;
+            for (let i = 1; i <= MaxPage; i++) {
+                pageCount++;
+                if (currentPage == i)
+                    liPages += `<li class="page-item active" onclick="CategorypagingHandler(this,${i})"><a class="page-link" href="#">${i}</a></li>`
+                else
+                    liPages += `<li class="page-item" onclick="CategorypagingHandler(this,${i})"><a class="page-link" href="#">${i}</a></li>`
+            }
+            ulPaging.innerHTML = '<li class="page-item" onclick="CategorypagingHandler(this,-1)"><a class="page-link" href="#" style = "margin-right:16px;">|<</a></li>' + liPages + '<li class="page-item" onclick="CategorypagingHandler(this,0)"><a class="page-link" href="#" style = "margin-left:16px;">>|</a></li>';
+
+            //推薦商品
+            RecommendProducts();
+            //熱門商品
+            PopularProducts();
+        }
+        CategoryloadProducts();
+    </script>
+}

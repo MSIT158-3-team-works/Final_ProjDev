@@ -5690,23 +5690,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Users\\chester\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\MVC\\projFitConnect\\projFitConnect.csproj",
+      "projectUniqueName": "D:\\C#_course\\期末專題\\0607\\MVC\\projFitConnect\\projFitConnect.csproj",
       "projectName": "projFitConnect",
-      "projectPath": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\MVC\\projFitConnect\\projFitConnect.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\MVC\\projFitConnect\\obj\\",
+      "projectPath": "D:\\C#_course\\期末專題\\0607\\MVC\\projFitConnect\\projFitConnect.csproj",
+      "packagesPath": "C:\\Users\\chester\\.nuget\\packages\\",
+      "outputPath": "D:\\C#_course\\期末專題\\0607\\MVC\\projFitConnect\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\chester\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

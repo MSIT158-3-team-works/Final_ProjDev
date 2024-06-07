@@ -1,93 +1,113 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\",
+  "WorkspaceRootPath": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\controllers\\gymlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\product\\productspagingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\product\\productspagingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\product\\productsearchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\product\\productsearchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\product\\productimagesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\product\\productimagesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\product\\productdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\product\\productdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\controllers\\gymlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\gymlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\controllers\\gymcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\controllers\\gymcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\gymcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\gym\\gymlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\gym\\gymlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\gym\\gymlistdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\coach\\expertisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\coach\\expertisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\coach\\expertisedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\gym\\fielddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\gym\\fielddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\gym\\fielddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\gym\\gymdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\gym\\gymdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\gym\\gymdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\gym\\fieldinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\gym\\fieldinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\gym\\fieldinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\controllers\\coachcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\controllers\\coachcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\coachcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\coach\\scheduledataildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\coach\\scheduledataildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\coach\\scheduledataildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\controllers\\fieldinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\controllers\\fieldinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\fieldinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\controllers\\tclasssort\u8A13\u7DF4controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\controllers\\tclasssort\u8A13\u7DF4controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\tclasssort\u8A13\u7DF4controller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\course\\opencoursedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\course\\opencoursedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\course\\opencoursedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\models\\gymcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\models\\gymcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\models\\gymcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\coach\\coachdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\coach\\coachdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\coach\\coachdetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\coach\\fielddetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\coach\\fielddetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\coach\\fielddetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\coach\\ratedetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\coach\\ratedetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\coach\\ratedetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\coach\\coachpagingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\coach\\coachpagingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\coach\\coachpagingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\dto\\coach\\coachsearchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\dto\\coach\\coachsearchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\dto\\coach\\coachsearchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\models\\tidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\models\\tidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\models\\tidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|c:\\users\\user\\downloads\\asd\\fitconnect_hank\\fitconnect_hank\\api\\projrestfulapifitconnect\\models\\tgendertable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|d:\\c#_course\\\u671F\u672B\u5C08\u984C\\0607\\api\\projrestfulapifitconnect\\models\\tgendertable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B241ED3D-FBCF-4848-9D47-0FE37C52A586}|projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj|solutionrelative:projrestfulapifitconnect\\models\\tgendertable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -98,21 +118,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 390,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Program.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Program.cs",
               "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Program.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Program.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Program.cs",
               "RelativeToolTip": "projRESTfulApiFitConnect\\Program.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAQwCEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-26T13:44:35.573Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
@@ -144,240 +167,292 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "Name": "ST:1:0:{e8b06f53-6d01-11d2-aa7d-00c04f990343}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:1:0:{e8b06f53-6d01-11d2-aa7d-00c04f990343}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GymListController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\GymListController.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\GymListController.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\GymListController.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\GymListController.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAAwB0AAAAhAAAA",
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\ProductsController.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\ProductsController.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAAwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T07:27:46.795Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GymListDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\GymListDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Gym\\GymListDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\GymListDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Gym\\GymListDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T07:24:57.298Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ExpertiseDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ExpertiseDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\ExpertiseDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ExpertiseDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\ExpertiseDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T03:21:11.872Z",
+              "WhenOpened": "2024-06-07T13:49:11.913Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GymController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\GymController.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\GymController.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\GymController.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\GymController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABYAAAAXAAAA",
+              "Title": "ProductsPagingDTO.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Product\\ProductsPagingDTO.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Product\\ProductsPagingDTO.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Product\\ProductsPagingDTO.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Product\\ProductsPagingDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T07:36:40.786Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-07T13:48:41.708Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "CoachDetailDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachDetailDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\CoachDetailDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachDetailDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\CoachDetailDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAFAAAA",
+              "DocumentIndex": 2,
+              "Title": "ProductSearchDTO.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Product\\ProductSearchDTO.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Product\\ProductSearchDTO.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Product\\ProductSearchDTO.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Product\\ProductSearchDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T12:03:18.196Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-07T13:48:39.936Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CoachController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
-              "ViewState": "AQIAAN0AAAAAAAAAAAAwwOwAAAA2AAAA",
+              "DocumentIndex": 3,
+              "Title": "ProductImagesDTO.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Product\\ProductImagesDTO.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Product\\ProductImagesDTO.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Product\\ProductImagesDTO.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Product\\ProductImagesDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-24T05:25:40.249Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-07T13:48:37.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductDetailDTO.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Product\\ProductDetailDTO.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Product\\ProductDetailDTO.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Product\\ProductDetailDTO.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Product\\ProductDetailDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T13:48:30.834Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "FieldDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\FieldDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Gym\\FieldDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\FieldDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Gym\\FieldDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAFAAAA",
+              "Title": "GymListController.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\GymListController.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\GymListController.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\GymListController.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\GymListController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T02:18:24.14Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-07T07:27:46.795Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "FieldInfoDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\FieldInfoDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Gym\\FieldInfoDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\FieldInfoDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Gym\\FieldInfoDto.cs",
+              "DocumentIndex": 8,
+              "Title": "GymListDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\GymListDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Gym\\GymListDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\GymListDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Gym\\GymListDto.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T02:19:07.425Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "FieldInfoController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\FieldInfoController.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\FieldInfoController.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\FieldInfoController.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\FieldInfoController.cs",
-              "ViewState": "AQIAACIAAAAAAAAAAAAAADYAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T06:23:38.635Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GymDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\GymDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Gym\\GymDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\GymDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Gym\\GymDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T02:18:15.883Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "CourseController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\CourseController.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\CourseController.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\CourseController.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\CourseController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T06:30:56.361Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "OpenCourseDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Course\\OpenCourseDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Course\\OpenCourseDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Course\\OpenCourseDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Course\\OpenCourseDto.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAIBAwBAAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T06:31:47.81Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TclassSort\u8A13\u7DF4Controller.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\TclassSort\u8A13\u7DF4Controller.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\TclassSort\u8A13\u7DF4Controller.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Controllers\\TclassSort\u8A13\u7DF4Controller.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\TclassSort\u8A13\u7DF4Controller.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAgwCEAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T06:47:58.645Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "FieldDetailDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\FieldDetailDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\FieldDetailDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\FieldDetailDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\FieldDetailDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T06:23:11.78Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "RateDetailDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\RateDetailDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\RateDetailDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\RateDetailDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\RateDetailDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T06:22:21.496Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-07T07:24:57.298Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "ScheduleDatailDto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAABAwA4AAAASAAAA",
+              "Title": "ExpertiseDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ExpertiseDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\ExpertiseDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ExpertiseDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\ExpertiseDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T06:22:03.222Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T03:21:11.872Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "GymContext.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Models\\GymContext.cs",
-              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Models\\GymContext.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Models\\GymContext.cs",
-              "RelativeToolTip": "projRESTfulApiFitConnect\\Models\\GymContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "DocumentIndex": 6,
+              "Title": "GymController.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\GymController.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\GymController.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\GymController.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\GymController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABYAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T06:33:46.349Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-07T07:36:40.786Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
+              "Title": "CoachDetailDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachDetailDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\CoachDetailDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachDetailDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\CoachDetailDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T12:03:18.196Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CoachController.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\CoachController.cs",
+              "ViewState": "AQIAAN0AAAAAAAAAAAAwwOwAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-24T05:25:40.249Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "FieldDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\FieldDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Gym\\FieldDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\FieldDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Gym\\FieldDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T02:18:24.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "FieldInfoDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\FieldInfoDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Gym\\FieldInfoDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\FieldInfoDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Gym\\FieldInfoDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T02:19:07.425Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "FieldInfoController.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\FieldInfoController.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\FieldInfoController.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\FieldInfoController.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\FieldInfoController.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAAADYAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T06:23:38.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GymDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\GymDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Gym\\GymDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Gym\\GymDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Gym\\GymDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T02:18:15.883Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "CourseController.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\CourseController.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\CourseController.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\CourseController.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\CourseController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACMAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T06:30:56.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "OpenCourseDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Course\\OpenCourseDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Course\\OpenCourseDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Course\\OpenCourseDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Course\\OpenCourseDto.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAIBAwBAAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T06:31:47.81Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "TclassSort\u8A13\u7DF4Controller.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\TclassSort\u8A13\u7DF4Controller.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Controllers\\TclassSort\u8A13\u7DF4Controller.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Controllers\\TclassSort\u8A13\u7DF4Controller.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Controllers\\TclassSort\u8A13\u7DF4Controller.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAgwCEAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T06:47:58.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FieldDetailDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\FieldDetailDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\FieldDetailDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\FieldDetailDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\FieldDetailDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T06:23:11.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "RateDetailDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\RateDetailDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\RateDetailDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\RateDetailDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\RateDetailDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T06:22:21.496Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ScheduleDatailDto.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\ScheduleDatailDto.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAABAwA4AAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T06:22:03.222Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "GymContext.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Models\\GymContext.cs",
+              "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Models\\GymContext.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Models\\GymContext.cs",
+              "RelativeToolTip": "projRESTfulApiFitConnect\\Models\\GymContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T06:33:46.349Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
               "Title": "TIdentity.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Models\\TIdentity.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Models\\TIdentity.cs",
               "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Models\\TIdentity.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Models\\TIdentity.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Models\\TIdentity.cs",
               "RelativeToolTip": "projRESTfulApiFitConnect\\Models\\TIdentity.cs",
               "ViewState": "AQIAACwAAAAAAAAAAAAIwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -385,24 +460,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "CoachPagingDTO.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachPagingDTO.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachPagingDTO.cs",
               "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\CoachPagingDTO.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachPagingDTO.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachPagingDTO.cs",
               "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\CoachPagingDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T01:41:47.922Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T01:41:47.922Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "CoachSearchDTO.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachSearchDTO.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachSearchDTO.cs",
               "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\DTO\\Coach\\CoachSearchDTO.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachSearchDTO.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\DTO\\Coach\\CoachSearchDTO.cs",
               "RelativeToolTip": "projRESTfulApiFitConnect\\DTO\\Coach\\CoachSearchDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -410,11 +484,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "TgenderTable.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Models\\TgenderTable.cs",
+              "DocumentMoniker": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Models\\TgenderTable.cs",
               "RelativeDocumentMoniker": "projRESTfulApiFitConnect\\Models\\TgenderTable.cs",
-              "ToolTip": "C:\\Users\\User\\Downloads\\asd\\FitConnect_hank\\FitConnect_hank\\API\\projRESTfulApiFitConnect\\Models\\TgenderTable.cs",
+              "ToolTip": "D:\\C#_course\\\u671F\u672B\u5C08\u984C\\0607\\API\\projRESTfulApiFitConnect\\Models\\TgenderTable.cs",
               "RelativeToolTip": "projRESTfulApiFitConnect\\Models\\TgenderTable.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
