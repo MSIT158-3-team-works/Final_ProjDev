@@ -19,13 +19,13 @@ public partial class TIdentity
 
     public string? Photo { get; set; }
 
-    public DateTime Birthday { get; set; }
+    public DateOnly Birthday { get; set; }
 
     public string Address { get; set; } = null!;
 
     public int GenderId { get; set; }
 
-    public bool? Activated { get; set; }
+    public bool Activated { get; set; }
 
     public decimal? Payment { get; set; }
 
@@ -43,5 +43,17 @@ public partial class TIdentity
 
     public virtual ICollection<TfieldReserve> TfieldReserves { get; set; } = new List<TfieldReserve>();
 
-    public virtual ICollection<TmemberFollow> TmemberFollows { get; set; } = new List<TmemberFollow>();
+    public virtual ICollection<TmemberFollow> TmemberFollowCoaches { get; set; } = new List<TmemberFollow>();
+
+    public virtual ICollection<TmemberFollow> TmemberFollowMembers { get; set; } = new List<TmemberFollow>();
+
+    public virtual ICollection<TmemberRateClass> TmemberRateClasses { get; set; } = new List<TmemberRateClass>();
+
+    public virtual ICollection<TnewsComment> TnewsComments { get; set; } = new List<TnewsComment>();
+
+    public virtual ICollection<Torder> Torders { get; set; } = new List<Torder>();
+
+    public virtual ICollection<TproductShoppingcart> TproductShoppingcarts { get; set; } = new List<TproductShoppingcart>();
+
+    public virtual ICollection<TproductTrack> TproductTracks { get; set; } = new List<TproductTrack>();
 }

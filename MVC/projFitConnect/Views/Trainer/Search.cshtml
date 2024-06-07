@@ -1,87 +1,225 @@
 ﻿@{
 }
-<link href="~/css/coachsearch.css" rel="stylesheet" />
-<div class="my-3">
-    <form class="d-flex float-start" role="search" style="width:50%">
-        <input type="search" class="form-control me-2" aria-label="Search" placeholder="找教練" />
-    </form>
-    <div class="d-flex" >
-        <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city">
-            <option>地區</option>
-        </select>
-        <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course">
-            <option>訓練需求</option>
-        </select>
-        <select class="w-100 mx-3 px-3 rounded-3 form-select" name="gender">
-            <option>性別</option>
-        </select>
-    </div>
-</div>
-
-<h2 class="fw-bold my-3">共有 -- 位教練</h2>
-<div class="d-flex flex-row flex-wrap justify-content-between" id="div">
-
-    <div class="card mb-3" style="max-width: 540px;" >
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="" id="image" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Polina Tankilevitch</h5>
-                    <p class="card-text">新北市、台北市</p>
-                    <p class="card-text">#體態優化 #運動表現 #舉重 #CrossFit #自由教練 #肌力體能</p>
-                </div>
-            </div>
+<div style="padding-top:85px;">
+    <link href="~/css/coachsearch.css" rel="stylesheet" />
+    <div class="my-4" style="margin-top:30px;">
+        <div class="d-flex float-start" role="search" style="width:50%">
+            <input type="search" class="form-control me-2" aria-label="Search" placeholder="找教練" id="inputSearch" />
         </div>
+        <form class="d-flex">
+            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="regionSearch">
+                <option>地區</option>
+            </select>
+            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort1Search">
+                <option>有氧、無氧</option>
+            </select>
+            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort2Search">
+                <option>訓練需求</option>
+            </select>
+            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="gender" aria-label="Default select example" id="genderSearch">
+                <option value="性別">性別</option>
+                <option value="男性">男性</option>
+                <option value="女性">女性</option>
+                <option value="其他">其他</option>
+            </select>
+        </form>
     </div>
 
+    <h2 class="fw-bold my-4" id="totalcoaches">共有 -- 位教練</h2>
+    <div class="d-flex flex-row flex-wrap justify-content-between" id="div">
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" onclick="pagingHandler('prev')">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <nav>
+                <ul class="pagination" id="ulpage">
+                </ul>
+            </nav>
+            <li>
+                <a class="page-link" aria-label="Next" onclick="pagingHandler('next')">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
-<script>
-    const div = document.getElementById("div");
-    (async () => {
-        const response = await fetch("https://localhost:7199/api/Coach");
-        const data = await response.json();
-        let str = '';
-        console.log(data);
-        data.forEach(item => {
-            str += `<div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Polina Tankilevitch</h5>
-                        <p class="card-text">新北市、台北市</p>
-                        <p class="card-text">#體態優化 #運動表現 #舉重 #CrossFit #自由教練 #肌力體能</p>
+
+@section Scripts {
+    <script>
+        const div = document.getElementById("div");//教練卡
+        const totalcoaches = document.getElementById("totalcoaches");
+        const inpSearch = document.querySelector('#inputSearch');//依關鍵字搜尋
+        const sort1Search = document.querySelector('#sort1Search');//依課程分類搜尋sort1
+        const sort2Search = document.querySelector('#sort2Search');//依課程分類搜尋sort2
+        const genderSearch = document.querySelector('#genderSearch');//依性別搜尋
+        const regionSearch = document.querySelector('#regionSearch');//依性別搜尋
+        const ulPaging = document.querySelector('#ulpage');//分頁
+        const searchData =
+        {
+            "sort1": "",
+            "sort2": "",
+            "gender": "",
+            "classId": 0,
+            "keyword": "",
+            "page": 1,
+            "pageSize": 10,
+            "sortBy": "",
+            "sortType": "asc"
+        };
+        //載入頁面資訊function
+        const loadCoaches = async () => {
+            const url = 'https://localhost:7199/api/Coach/SEARCH';
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(searchData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            data = await response.json();
+            //console.log(data);
+
+            let str = '';
+            let exps = '';
+            //教練卡片生成
+            data.coachResult.map(item => {
+                exps = item.experties.map(exp => {
+                    return `#${exp.className} #${exp.classSort1} #${exp.classSort2}`;
+                }).join(`<br>`);
+
+                str += `<div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                    <h5 class="card-title">${item.name}</h5>
+                                <p class="card-text">新北市、台北市</p>
+                                <p class="card-text">${item.intro}</p>
+                               <p class="card-text"><a>${exps}</a></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>`;
+                </div>`;
+            })
+            // const imageUrl = `data:image/jpeg;base64,${data[0].photo}`;
+            // document.getElementById('image').src = imageUrl;
+            div.innerHTML = str;
+            totalcoaches.textContent = `共有${data.totalCount}位教練`;
+            //顯示分頁按鈕
+            let liPages = "";
+            for (let i = 1, max = data.totalPages; i <= max; i++) {
+                liPages += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link">${i}</a></li>`
+            }
+            ulPaging.innerHTML = liPages;
+        };
+
+        //載入sort1選項function
+        const loadSort1 = async () => {
+            const url = 'https://localhost:7199/api/ClassSort1'; // 獲取分類的 API
+            const response = await fetch(url);
+            if (!response.ok) {
+                return;
+            }
+            const sort1 = await response.json();
+            sort1Search.innerHTML = "";
+            // 添加一個預設選項
+            const defaultOption = document.createElement('option');
+            defaultOption.text = '有氧/無氧';
+            sort1Search.appendChild(defaultOption);
+
+            // 動態生成選項
+            sort1.forEach(course => {
+                var option = document.createElement('option');
+                option.text = course.classSort1Detail;
+                sort1Search.appendChild(option);
+            });
+        };
+
+        //載入sort2選項function
+        const loadSort2 = async () => {
+            const url = 'https://localhost:7199/api/ClassSort2'; // 獲取分類的 API
+            const response = await fetch(url);
+            if (!response.ok) {
+                return;
+            }
+            const sort2 = await response.json();
+            sort2Search.innerHTML = "";
+            // 添加一個預設選項
+            const defaultOption = document.createElement('option');
+            defaultOption.text = '課程種類';
+            sort2Search.appendChild(defaultOption);
+            // 動態生成選項
+            sort2.forEach(course => {
+                var option = document.createElement('option');
+                option.text = course.classSort2Detail;
+                sort2Search.appendChild(option);
+            });
+        };
+
+        loadCoaches();
+        loadSort1();
+        loadSort2();
+
+        //關鍵字搜尋事件
+        inpSearch.addEventListener('keydown', event => {
+            searchData.page = 1;
+            if (event.keyCode === 13) {
+                searchData.keyword = event.target.value;
+                loadCoaches();
+            }
         })
-        // const imageUrl = `data:image/jpeg;base64,${data[0].photo}`;
-        // document.getElementById('image').src = imageUrl;
-        div.innerHTML = str;
-    })();
+        //分頁選擇事件
+        const pagingHandler = page => {
 
-
-
-</script>
+            if (page === 'next') {
+                if (searchData.page < data.totalPages) searchData.page++;
+            } else if (page === 'prev') {
+                searchData.page--;
+            } else {
+                searchData.page = page;
+            }
+            loadCoaches();
+        }
+        //依有氧、無氧分類搜尋事件sort1
+        sort1Search.addEventListener('change', event => {
+            if (event.target.value === '有氧/無氧') {
+                searchData.sort1 = "";
+            } else {
+                // 當選擇發生時，更新 searchData 中的 sort1 屬性
+                searchData.sort1 = event.target.value;
+            }
+            // 調用 loadCoaches 重新加載數據
+            loadCoaches();
+        });
+        //依課程分類搜尋事件sort2
+        sort2Search.addEventListener('change', event => {
+            if (event.target.value === '課程種類') {
+                searchData.sort2 = "";
+            } else {
+                // 當選擇發生時，更新 searchData 中的 sort2 屬性
+                searchData.sort2 = event.target.value;
+            }
+            // 調用 loadCoaches 重新加載數據
+            loadCoaches();
+        });
+        //依性別搜尋
+        genderSearch.addEventListener('change', event => {
+            if (event.target.value === '性別') {
+                searchData.gender = "";
+            } else {
+                // 當選擇發生時，更新 searchData 中的 sort2 屬性
+                searchData.gender = event.target.value;
+            }
+            // 調用 loadCoaches 重新加載數據
+            loadCoaches();
+        });
+        //依服務地區搜尋
+        regionSearch.addEventListener
+    </script>
+}

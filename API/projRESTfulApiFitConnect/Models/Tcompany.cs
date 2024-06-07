@@ -11,7 +11,7 @@ public partial class Tcompany
 
     public string Name { get; set; } = null!;
 
-    public DateTime Timelimit { get; set; }
+    public DateOnly Timelimit { get; set; }
 
     public virtual Towner Owner { get; set; } = null!;
 

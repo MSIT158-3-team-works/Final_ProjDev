@@ -12,11 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\css\styles.css" />
+    <None Include="compilerconfig.json" />
+    <None Include="Views\Course\Search.cshtml" />
+    <None Include="Views\GymList\Index.cshtml" />
+    <None Include="Views\Gym\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="compilerconfig.json" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
   </ItemGroup>
 
 </Project>
