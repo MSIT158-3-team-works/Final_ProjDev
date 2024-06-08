@@ -16,6 +16,8 @@
     <None Include="Views\Course\Search.cshtml" />
     <None Include="Views\GymList\Index.cshtml" />
     <None Include="Views\Gym\Index.cshtml" />
+    <None Include="Views\Shop\Index.cshtml" />
+    <None Include="Views\Shop\merchandise.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
