@@ -71,12 +71,25 @@
                 color: deepskyblue;
             }
 
-        .hover{
-            text-shadow: 0.5px 0.5px 0.8px darkgray;
+        .hover {
+            position: relative;
         }
 
-            .hover:hover{
-                border: 2px solid deepskyblue;
+            .hover::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border: 1px solid transparent;
+                transition: border-color 0.3s;
+                pointer-events: none;
+            }
+
+            .hover:hover::before {
+                border-color: #0080FF;
+                border-width: 3px;
             }
 
             .btn-track:hover {
@@ -87,6 +100,20 @@
                 background-color:paleturquoise;
                 border-color: deepskyblue;
             }
+
+        .seemore {
+            color: #fff;
+            background-color: #ffc107;
+            border-color: #ffc107;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+            .seemore:hover {
+                color: #fff;
+                background-color: #0080FF;
+                border-color: darkcyan;
+            }
     </style>
 }
 <a href="https://localhost:7168/shop/merchandise/1" style="text-decoration:none;">
@@ -95,7 +122,7 @@
 
 <div id="content">
     <aside class="aside">
-        <section class="section" style="margin-top:87px">
+        <section class="section" style="margin-top:100px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
                 <span style="font-weight:700;font-size:2em;"><a href="#">Sort</a></span>
                 <button class="btn btn-outline-success" type="button" id="checkAll" value="0">
@@ -132,6 +159,7 @@
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="~/assets/img/fitlogo.png" class="img-fluid rounded-start" alt="...">
+                            <h6 style="color:crimson">已售出 X</h6>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -152,10 +180,10 @@
                         --排序依據--
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#" data-type="productId">Update</a></li>
-                        <li><a class="dropdown-item" href="#" data-type="unitPrice">Price</a></li>
-                        <li><a class="dropdown-item" href="#" data-type="popular">Popular</a></li>
-                        <li><a class="dropdown-item" data-type="categoryId">Sort</a></li>
+                        <li><a class="dropdown-item" href="#" data-type="productId">上架日期</a></li>
+                        <li><a class="dropdown-item" href="#" data-type="unitPrice">價格</a></li>
+                        <li><a class="dropdown-item" href="#" data-type="popular">熱門程度</a></li>
+                        <li><a class="dropdown-item" data-type="categoryId">商品類別</a></li>
                     </ul>
                     <button class="btn btn-outline-secondary" style="margin-left:12px;" id="orderbtn">正序</button>
                 </div>
@@ -192,7 +220,6 @@
         <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
         <section class="section">
             <h2><a href="#">Products</a></h2>
-            <a href="#" style="text-decoration:none;">
             <div class="row row-cols-1 row-cols-md-3 g-4" id="divmain">
                 <div class="col">
                     <div class="card h-100 hover">
@@ -216,7 +243,6 @@
                     </div>
                 </div>
             </div>
-            </a>
         </section>
         <div class="pagination-container">
             <ul class="pagination" id="ulpaging">
@@ -228,7 +254,7 @@
         </div>
     </article>
 </div>
-<div style="width:85%;max-height:150px;margin:40px auto;position:relative;bottom">
+<div style="width:100%;max-height:150px;margin:40px auto;position:relative;bottom">
     <section class="section" style="text-align:center;">
         <h2><a href="#">Recommendation</a></h2>
         <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="divrecommend">
@@ -304,21 +330,22 @@
             const goods = data.productsResult.map(good => {
                 //data:image/jpeg;base64,${good.productImage}
                 //merchandise/${good.productId}
-                return (`<a href="#${good.productId}" style="text-decoration:none;">
-                <div class="card mb-3 hover" style="max-width: 540px;">
-                                            <div class="row g-0">
-                                               <div class="col-md-4" style="text-align:center; padding-top:10px">
-                                                 <img src="data:image/jpeg;base64,${good.productImage}" class="img-fluid rounded-start" alt="Top3">
-                                               </div>
-                                               <div class="col-md-8">
-                                                  <div class="card-body">
-                                                    <h6 class="card-title">${good.productName}</h6>
-                                                    <p class="card-text" style="font-weight:400;font-style:italic;">$${good.unitPrice}NTD</p>
-                                                  </div>
-                                               </div>
-                                            </div>
-                                        </div>
-                                        </a>`)
+                return (`<a href="merchandise/${good.productId}" style="text-decoration:none;">
+                           <div class="card mb-3 hover" style="max-width: 540px;">
+                            <div class="row g-0">
+                             <div class="col-md-4" style="text-align:center; padding-top:10px">
+                               <img src="data:image/jpeg;base64,${good.productImage}" class="img-fluid rounded-start" alt="Top3">
+                                 <h6 style="font-size:0.5em;color:white;text-shadow:-1px -1px 0 crimson, 1px -1px 0 red,-1px  1px 0 red,1px  1px 0 crimson;">已售出 ${good.productSold}</h6>
+                             </div>
+                             <div class="col-md-8">
+                              <div class="card-body">
+                                <h6 class="card-title">${good.productName}</h6>
+                                <p class="card-text" style="font-weight:400;font-style:italic;">$${good.unitPrice}NTD</p>
+                              </div>
+                             </div>
+                            </div>
+                           </div>
+                          </a>`)
             })
             popular.innerHTML = goods.join("");
         }
@@ -406,11 +433,11 @@
                 }
             });
             let data = await response.json();
-            console.log('PopularProducts', data.productsResult);
+            console.log('RecommendProducts', data.productsResult);
             //顯示資料
             const goods = data.productsResult.map(good => {
                 //data:image/jpeg;base64,${good.productImage}
-                return (` <a href="#${good.productId}" style="text-decoration:none;">
+                return (` <a href="merchandise/${good.productId}" style="text-decoration:none;">
                             <div class="card recommend m-3 hover" style="min-width:150px;padding-top:8px">
                                   <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="recommend" style="width:100%">
                                   <div class="card-body">
@@ -473,7 +500,7 @@
             for (var i = 0; i < loop; i++) {
                 //console.log(allData[i].productId);
                 position = currentPosition + i;
-                s += `<a href="#${allData[position].productId}" style="text-decoration:none;">
+                s += `
                        <div class="col">
                        <div class="card h-100 hover">
                         <img src="data:image/jpeg;base64,${allData[position].productImage}" class="card-img-top" alt="${allData[position].productName}">
@@ -491,8 +518,8 @@
                         <p class="card-text">$${allData[position].unitPrice}NTD</p>
                        </div>
                        <div class="d-grid gap-2">
-                        <button class="btn btn-warning">See more</button>
-                       </div></div></div></a>`
+                       <a href="merchandise/${allData[position].productId}" class="btn seemore">商品詳細</a>
+                       </div></div></div>`
             }
             divMain.innerHTML = s;
 

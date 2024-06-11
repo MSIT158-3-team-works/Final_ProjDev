@@ -1,37 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\0611\\MVC\\",
+  "WorkspaceRootPath": "C:\\Users\\User\\Downloads\\0600\\MVC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0611\\mvc\\projfitconnect\\views\\home\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\views\\demo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\demo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\views\\home\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\home\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0611\\mvc\\projfitconnect\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0611\\mvc\\projfitconnect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0611\\mvc\\projfitconnect\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0611\\mvc\\projfitconnect\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0611\\mvc\\projfitconnect\\views\\healthboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\views\\healthboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\healthboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0611\\mvc\\projfitconnect\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0611\\mvc\\projfitconnect\\views\\field\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\downloads\\0600\\mvc\\projfitconnect\\views\\field\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\field\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -42,33 +46,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 517,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "projFitConnect\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AQIAADIAAAAAAAAAAAAAAEwAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-06-04T03:12:46.021Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{e8b06f53-6d01-11d2-aa7d-00c04f990343}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -92,11 +83,19 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f53-6d01-11d2-aa7d-00c04f990343}"
             },
             {
               "$type": "Bookmark",
@@ -113,102 +112,99 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Home\\Register.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\Register.cshtml",
-              "ToolTip": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Home\\Register.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\Home\\Register.cshtml",
-              "ViewState": "AQIAAEUBAAAAAAAAAAAAAA0AAAAkAAAA",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\demo\\Index.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\demo\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\demo\\Index.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\demo\\Index.cshtml",
+              "ViewState": "AQIAALQAAAAAAAAAAAAAAL8AAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-11T08:54:29.037Z",
+              "WhenOpened": "2024-06-11T12:15:44.666Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAGoAAABUAAAA",
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Home\\Register.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\Register.cshtml",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Home\\Register.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Home\\Register.cshtml",
+              "ViewState": "AQIAAEUBAAAAAAAAAAAAAA0AAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-11T08:27:31.469Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-11T08:54:29.037Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Home\\Login.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\Login.cshtml",
-              "ToolTip": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Home\\Login.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\Home\\Login.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAOwAAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAAAGoAAABUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-07T05:58:36.448Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-11T08:27:31.469Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "projFitConnect\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "projFitConnect\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T05:55:41.761Z",
-              "EditorCaption": ""
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Home\\Login.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\Login.cshtml",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Home\\Login.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Home\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAOwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-07T05:58:36.448Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\HealthBoard\\Index.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\HealthBoard\\Index.cshtml",
-              "ToolTip": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\HealthBoard\\Index.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\HealthBoard\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-07T06:02:41.488Z",
-              "EditorCaption": ""
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "projFitConnect\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "projFitConnect\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-07T05:55:41.761Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Privacy.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Home\\Privacy.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\Privacy.cshtml",
-              "ToolTip": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Home\\Privacy.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\Home\\Privacy.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEIAAAAAAAAA",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\HealthBoard\\Index.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\HealthBoard\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\HealthBoard\\Index.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\HealthBoard\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-11T07:55:46.076Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-07T06:02:41.488Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-11T07:55:46.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Field\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Field\\Index.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Field\\Index.cshtml",
-              "ToolTip": "C:\\Users\\User\\Desktop\\0611\\MVC\\projFitConnect\\Views\\Field\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\Downloads\\0600\\MVC\\projFitConnect\\Views\\Field\\Index.cshtml",
               "RelativeToolTip": "projFitConnect\\Views\\Field\\Index.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-06-04T08:57:28.689Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 83,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }

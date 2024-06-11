@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\0611\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {}
+    "C:\\Users\\User\\Downloads\\0600\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\0611\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {
+    "C:\\Users\\User\\Downloads\\0600\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\0611\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Downloads\\0600\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
         "projectName": "projRESTfulApiFitConnect",
-        "projectPath": "C:\\Users\\User\\Desktop\\0611\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+        "projectPath": "C:\\Users\\User\\Downloads\\0600\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\0611\\API\\projRESTfulApiFitConnect\\obj\\",
+        "outputPath": "C:\\Users\\User\\Downloads\\0600\\API\\projRESTfulApiFitConnect\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
