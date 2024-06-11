@@ -1,0 +1,397 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/styles3.css" rel="stylesheet" />
+<div class="register-container">
+    <div class="register-box">
+        <br><br><br><br>
+        <h1 style="font-weight:700">註冊會員</h1>
+        <div class="logo-container">
+            <img src="~/assets/img/join us.png" style="width:440px" />
+        </div>
+        <div class="logo-container">
+            <img src="~/assets/img/fitlogo.png" alt="Logo" style="height:120px" />
+        </div>
+        <form action="@Url.Action("Register")" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="name" class="control-label col-md-2" style="font-size:23px;">姓名:</label>
+                <div class="col-md-10">
+                    <input type="text" id="idName" name="name" required="required" class="form-control" style="width:500px;" />
+                    <span id="spName"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="control-label col-md-2" style="font-size:23px;">手機:</label>
+                <div class="col-md-10">
+                    <input type="text" id="idPhone" name="phone" required="required" class="form-control" style="width:500px;" />
+                    <span id="spPhone"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="control-label col-md-2" style="font-size:23px;">電子郵件:</label>
+                <div class="col-md-10">
+                    <input type="text" id="idEmail" name="email" required="required" class="form-control" style="width:500px;" />
+                    <span id="spEmail"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="gender" class="control-label col-md-2 fw-bold" style="font-size:23px;">性別:</label>
+                <div class="col-md-10">
+                    <select id="idGender" name="gender" required="required" class="form-control" style="width: 400px;">
+                        <option value="" disabled selected>請選擇</option>
+                        <option value="male">男</option>
+                        <option value="female">女</option>
+                        <option value="other">其他</option>
+                    </select>
+                    <span id="spGender"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="birthday" class="control-label col-md-2 fw-bold" style="font-size:23px;">生日:</label>
+                <div class="col-md-10">
+                    <input type="date" id="idBirthday" name="birthday" required="required" class="form-control" size="16" style="width: 200px;" />
+                    <span id="spBirthday"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="pwd" class="control-label col-md-2 fw-bold" style="font-size:23px;">密碼:</label>
+                <div class="col-md-10">
+                    <div style="display: flex; flex-direction: column;">
+                        <input type="password" id="idPwd" name="pwd" required="required" class="form-control" size="16" style="width: 400px;" />
+                        <span id="spPwd"></span>
+                    </div>
+                    <div style="color: #6C6C6C;font-weight:bold; font-size:18px; margin-right:200px;">至少6個字且必須包含英文、數字、特殊符號</div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="pwd" class="control-label col-md-2 fw-bold" style="font-size:23px;">再次確認密碼:</label>
+                <div class="col-md-10">
+                    <input type="password" id="idPwdConfirm" name="pwd" required="required" class="form-control" size="16" style="width: 400px;" />
+                    <span id="spPwdConfirm"></span>
+                </div>
+            </div>
+            <br>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-secondary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">註冊</button>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 檢查姓名
+            document.getElementById("idName").addEventListener("blur", checkName);
+
+            function checkName() {
+                let theNameObj = document.getElementById("idName");
+                let theNameVal = theNameObj.value;
+
+                let spName = document.getElementById("spName");
+
+                if (theNameVal === "") {
+                    spName.innerHTML = "<img src=\"/assets/img/error.png\" /> 請填寫姓名";
+                    spName.className = 'text-danger';
+                } else {
+                    spName.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
+                    spName.className = 'text-success';
+                }
+            }
+
+            //檢查手機號碼
+            document.getElementById("idPhone").addEventListener("blur", checkPhone);
+
+            function checkPhone() {
+                let thePhoneObj = document.getElementById("idPhone");
+                let thePhoneVal = thePhoneObj.value;
+
+                let spPhone = document.getElementById("spPhone");
+
+                if (thePhoneVal === "") {
+                    spPhone.innerHTML = "<img src=\"/assets/img/error.png\" /> 請填寫手機號碼";
+                    spPhone.className = 'text-danger';
+                } else if (!/^\d{10}$/.test(thePhoneVal)) {
+                    spPhone.innerHTML = "<img src=\"/assets/img/error.png\" /> 手機號碼必須是10位數字";
+                    spPhone.className = 'text-danger';
+                } else if (!/^09/.test(thePhoneVal)) {
+                    spPhone.innerHTML = "<img src=\"/assets/img/error.png\" /> 手機號碼必須以09開頭";
+                    spPhone.className = 'text-danger';
+                } else {
+                    spPhone.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
+                    spPhone.className = 'text-success';
+                }
+            }
+
+            //檢查電子郵件
+            document.getElementById("idEmail").addEventListener("blur", checkEmail);
+
+            function checkEmail() {
+                let theEmailObj = document.getElementById("idEmail");
+                let theEmailVal = theEmailObj.value;
+
+                let spEmail = document.getElementById("spEmail");
+
+                const emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+
+                if (theEmailVal === "") {
+                    spEmail.innerHTML = "<img src=\"/assets/img/error.png\" /> 請填寫電子郵件";
+                    spEmail.className = 'text-danger';
+                } else if (!emailPattern.test(theEmailVal)) {
+                    spEmail.innerHTML = "<img src=\"/assets/img/error.png\" /> 電子郵件格式不正確";
+                    spEmail.className = 'text-danger';
+                } else {
+                    spEmail.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
+                    spEmail.className = 'text-success';
+                }
+            }
+            //檢查年齡
+            document.getElementById("idBirthday").addEventListener("blur", checkBirthday);
+
+            function checkBirthday() {
+                let birthdayInput = document.getElementById("idBirthday");
+                let birthday = new Date(birthdayInput.value);
+                let currentDate = new Date();
+
+                let sp = document.getElementById("spBirthday");
+                // 年齡計算
+                let age = currentDate.getFullYear() - birthday.getFullYear();
+                if (currentDate.getMonth() < birthday.getMonth() || (currentDate.getMonth() === birthday.getMonth() && currentDate.getDate() < birthday.getDate())) {
+                    age--;
+                }
+                if (birthday >= currentDate) {
+                    sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 請選填正確出生日期";
+                    sp.className = 'text-danger';
+                } else if (age < 18) {
+                    sp.innerHTML = "<img src=\"/assets/img/error.png\" />年齡必須大於或等於18歲 ";
+                    sp.className = 'text-danger';
+                } else {
+                    sp.innerHTML = "<img src=\"/assets/img/correct.png\" /> 符合條件";
+                    sp.className = 'text-success';
+                }
+                console.log("Birthday Input Value:", birthdayInput.value);
+                console.log("Birthday Date:", birthday);
+                console.log("Current Date:", currentDate);
+            }
+            //檢查性別
+            document.getElementById("idGender").addEventListener("blur", checkGender);
+
+            function checkGender() {
+                let theGenderObj = document.getElementById("idGender");
+                let theGenderVal = theGenderObj.value;
+
+                let spGender = document.getElementById("spGender");
+
+                if (theGenderVal === "") {
+                    spGender.innerHTML = "<img src=\"/assets/img/error.png\" /> 請選擇性別";
+                    spGender.className = 'text-danger';
+                } else {
+                    spGender.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
+                    spGender.className = 'text-success';
+                }
+            }
+            //檢查密碼
+            document.getElementById("idPwd").addEventListener("blur", checkPwd);
+
+            function checkPwd() {
+                let thePwdObj = document.getElementById("idPwd");
+                let thePwdVal = thePwdObj.value;
+
+                let sp = document.getElementById("spPwd");
+                let thePwdValLen = thePwdVal.length;
+                let flag1 = false, flag2 = false, flag3 = false;
+
+                if (thePwdVal === "") {
+                    sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 請輸入密碼";
+                    spPwd.className = 'text-danger';
+                } else if (thePwdValLen >= 6) {
+                    let specialChars = /[!#&#64$%^&*]/
+
+                    for (let i = 0; i < thePwdValLen; i++) {
+                        let ch = thePwdVal.charAt(i).toUpperCase();
+                        if (ch >= "A" && ch <= "Z") {
+                            flag1 = true;
+                        } else if (ch >= "0" && ch <= "9") {
+                            flag2 = true;
+                        } else if (specialChars.test(ch)) {
+                            flag3 = true;
+                        }
+                        if (flag1 && flag2 && flag3) break;
+                    }
+
+                    if (flag1 && flag2 && flag3) {
+                        sp.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
+                        spPwd.className = 'text-success';
+                    } else {
+                        sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼必須包含英文、數字和特殊字符";
+                        spPwd.className = 'text-danger';
+                    }
+                } else {
+                    sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼必須大於6碼";
+                    spPwd.className = 'text-danger';
+                }
+            }
+
+            // 檢查再次確認密碼
+            function checkPwdConfirm() {
+                let thePwdObj = document.getElementById("idPwd");
+                let thePwdConfirmObj = document.getElementById("idPwdConfirm");
+                let thePwdVal = thePwdObj.value;
+                let thePwdConfirmVal = thePwdConfirmObj.value;
+
+                let spPwdConfirm = document.getElementById("spPwdConfirm");
+
+                if (thePwdConfirmVal === "") {
+                    spPwdConfirm.innerHTML = "<img src=\"/assets/img/error.png\" /> 請再次輸入密碼";
+                    spPwdConfirm.className = 'text-danger';
+                } else if (thePwdConfirmVal !== thePwdVal) {
+                    spPwdConfirm.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼不一致";
+                    spPwdConfirm.className = 'text-danger';
+                } else {
+                    spPwdConfirm.innerHTML = "<img src=\"/assets/img/correct.png\" /> 密碼一致";
+                    spPwdConfirm.className = 'text-success';
+                }
+            }
+
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        #mainpg {
+            background-image: url('/assets/img/run.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .register-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+            .register-box h1, .register-box h3 {
+                text-align: center;
+            }
+
+            .register-box .logo-container {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+        .form-group span {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            font-size: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                flex: 0 0 150px;
+                margin-right: 10px;
+                text-align: left;
+            }
+
+            .form-group input,
+            .form-group select {
+                flex: 1;
+            }
+
+                .form-group input.form-control,
+                .form-group select.form-control {
+                    width: auto;
+                }
+
+        .form-horizontal .form-group {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .logo-container {
+            text-align: center;
+        }
+
+        .form-horizontal .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-horizontal .control-label {
+            font-weight: bold;
+            width: 120px;
+            margin-right: 20px;
+        }
+
+        .form-horizontal .form-control {
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        .form-horizontal .btn {
+            width: 60%;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .btn-secondary {
+            font-size: 18px;
+            height: 45px;
+            width: 50%;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+            line-height: 45px;
+        }
+
+        .text-success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .text-danger {
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+}

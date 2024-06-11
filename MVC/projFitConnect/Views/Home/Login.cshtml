@@ -1,7 +1,236 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/css/styles3.css" rel="stylesheet" />
+<div class="login-container">
+    <div class="login-box">
+        <h1 style="font-weight:700">登入系統</h1>
+        <div style="margin:auto;text-align:center;">
+            <img src="~/assets/img/fitlogo.png" style="height:90px" />
+        </div>
+        <form action="@Url.Action("Login")" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="account" class="control-label col-md-2 fw-bold" style="font-size:23px; ">帳號:</label>
+                <div class="col-md-10">
+                    <input type="text" id="idAccount" name="account" required="required" class="form-control" size="16" style="width: 400px;" />
+                    <span id="spAccount"></span>
+                    <div style="color: #6C6C6C;font-weight:bold;">請輸入電子郵件或手機</div>
+                </div>
+            </div>
 
-<h1>Login</h1>
+            <div class="form-group">
+                <label for="pwd" class="control-label col-md-2 fw-bold" style="font-size:23px;">密碼:</label>
+                <div class="col-md-10">
+                    <input type="password" id="idPwd" name="pwd" required="required" class="form-control" size="16" style="width: 400px;" />
+                    <span id="spPwd"></span>
+                    <div style="color: #6C6C6C;font-weight:bold;">1.不可空白 <br />2.至少6個字且必須包含英文、數字、特殊符號</div>
+                </div>
+            </div>
+            @* <div class="col-md-offset-2 col-md-10 text-center" id="button-group"> *@
 
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">登入</button>
+
+                @ViewBag.Message
+                <br>
+                <a href="https://m.shein.tw/" target="_blank" class="login_link" style="font-size:22px;font-weight:bold">忘記密碼</a>
+                <br>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='https://localhost:7168/home/register'" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">點我註冊</button>
+            </div>
+            <br><br>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // //驗證
+        // //處理登入表單提交
+        // document.getElementById("loginForm").addEventListener("submit", async function(event) {
+        //     event.preventDefault(); // 防止表單自動提交
+
+        //     let account = document.getElementById("idAccount").value;
+        //     let password = document.getElementById("idPwd").value;
+
+        //     // 發送登入請求到後端的 CheckTIdentity 端點
+        //     let response = await fetch("/api/your-controller/verify", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({
+        //             phone: account,
+        //             email: account, //帳號可能是電話號碼或電子郵件
+        //             password: password
+        //         })
+        //     });
+
+        //     // 解析後端的回應
+        //     let data = await response.json();
+
+        //     if (response.ok) {
+        //         // 登入成功，導向到相應的頁面
+        //         window.location.href = 'https://localhost:7168';
+        //     } else {
+        //         // 登入失敗，顯示錯誤訊息
+        //         alert(data);
+        //     }
+        // });
+
+        //防呆驗證
+        //檢查帳號
+        document.getElementById("idAccount").addEventListener("blur", checkAccount);
+
+        function checkAccount() {
+            let theAccountObj = document.getElementById("idAccount");
+            let theAccountVal = theAccountObj.value;
+
+            let sp = document.getElementById("spAccount");
+            console.log(sp)
+            if (theAccountVal === "") {
+                spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號不可空白";
+                spAccount.className = 'text-danger';
+            } else if (/[\u4e00-\u9fff]/.test(theAccountVal)) {
+                spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號不能包含中文字";
+                spAccount.className = 'text-danger';
+            } else if (theAccountVal.length < 6) {
+                spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號至少要6個字以上";
+                spAccount.className = 'text-danger';
+            } else {
+                spAccount.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
+                spAccount.className = 'text-success';
+            }
+        }
+
+        // 檢查密碼
+        document.getElementById("idPwd").addEventListener("blur", checkPwd);
+
+        function checkPwd() {
+            let thePwdObj = document.getElementById("idPwd");
+            let thePwdVal = thePwdObj.value;
+
+            let sp = document.getElementById("spPwd");
+            let thePwdValLen = thePwdVal.length;
+            let flag1 = false, flag2 = false, flag3 = false;
+
+            if (thePwdVal === "") {
+                sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 請輸入密碼";
+                spPwd.className = 'text-danger';
+            } else if (thePwdValLen >= 6) {
+                let specialChars = /[!#&#64$%^&*]/
+
+                for (let i = 0; i < thePwdValLen; i++) {
+                    let ch = thePwdVal.charAt(i).toUpperCase();
+                    if (ch >= "A" && ch <= "Z") {
+                        flag1 = true;
+                    } else if (ch >= "0" && ch <= "9") {
+                        flag2 = true;
+                    } else if (specialChars.test(ch)) {
+                        flag3 = true;
+                    }
+                    if (flag1 && flag2 && flag3) break;
+                }
+
+                if (flag1 && flag2 && flag3) {
+                    sp.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
+                    spPwd.className = 'text-success';
+                } else {
+                    sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼必須包含英文、數字和特殊字符";
+                    spPwd.className = 'text-danger';
+                }
+            } else {
+                sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼必須大於6碼";
+                spPwd.className = 'text-danger';
+            }
+        }
+    </script>
+}
+@section Styles {
+    <style>
+        #mainpg {
+            background-image: url('/assets/img/header-bg6.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .button-group {
+            margin-top: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .button-group button {
+                margin-bottom: 10px;
+            }
+
+        .login-container {
+            display: flex;
+            height: 90vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+
+            .login-box h1 {
+                text-align: center;
+                vertical-align: middle;
+                margin-bottom: 20px;
+            }
+
+            .login-box img {
+                text-align: center;
+                vertical-align: middle;
+                margin-bottom: 10px;
+            }
+
+        .form-horizontal .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-horizontal .control-label {
+            font-weight: bold;
+        }
+
+        .form-horizontal .form-control {
+            border-radius: 10px;
+        }
+
+        .form-horizontal .btn {
+            width: 80%;
+            padding: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .login_link {
+            color: #0072E3;
+            font-weight: bold;
+        }
+
+            .login_link:hover {
+                color: #6C6C6C;
+                font-weight: bold;
+            }
+
+        .text-success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .text-danger {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+}
