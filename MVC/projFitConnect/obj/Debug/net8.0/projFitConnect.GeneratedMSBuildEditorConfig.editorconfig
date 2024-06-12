@@ -17,95 +17,95 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = projFitConnect
 build_property.RootNamespace = projFitConnect
-build_property.ProjectDir = C:\Users\User\Downloads\0600\MVC\projFitConnect\
+build_property.ProjectDir = C:\Users\User\Desktop\Main\FinalProj\team\MVC\projFitConnect\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\User\Downloads\0600\MVC\projFitConnect
+build_property.MSBuildProjectDirectory = C:\Users\User\Desktop\Main\FinalProj\team\MVC\projFitConnect
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Course/Search.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Course/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXFNlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/demo/Index.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/demo/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZGVtb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/demo/try1.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/demo/try1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZGVtb1x0cnkxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/demo/try2.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/demo/try2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZGVtb1x0cnkyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Field/Index.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Field/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/GymList/Index.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/GymList/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3ltTGlzdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Gym/Index.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Gym/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3ltXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/HealthBoard/Index.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/HealthBoard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVhbHRoQm9hcmRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Home/Index.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Home/Login.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Home/Privacy.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Home/Register.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Home/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Shared/Error.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Shop/Index.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Shop/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Shop/merchandise.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Shop/merchandise.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxtZXJjaGFuZGlzZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Trainer/Search.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Trainer/Search.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhaW5lclxTZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/_ViewImports.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/_ViewStart.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/demo/_Layout.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/demo/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcZGVtb1xfTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = b-qzkzeei90n
 
-[C:/Users/User/Downloads/0600/MVC/projFitConnect/Views/Shared/_Layout.cshtml]
+[C:/Users/User/Desktop/Main/FinalProj/team/MVC/projFitConnect/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-26lhyo9a1i
