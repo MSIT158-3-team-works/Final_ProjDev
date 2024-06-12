@@ -2,15 +2,15 @@
 }
 <div style="padding-top:85px;">
     <link href="~/css/coachsearch.css" rel="stylesheet" />
-    <div class="my-4" style="margin-top:30px;">
-        <div class="d-flex float-start" role="search" style="width:50%">
+    <div class="mt-4" style="margin-top:30px;">
+        <div class="d-flex float-start" role="search" style="width:30%">
             <input type="search" class="form-control me-2" aria-label="Search" placeholder="找教練" id="inputSearch" />
         </div>
         <form class="d-flex">
-            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="citySearch">
+            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="citys">
                 <option>縣市</option>
             </select>
-            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="regionSearch">
+            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="regions">
                 <option>地區</option>
             </select>
             <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort1Search">
@@ -27,8 +27,20 @@
             </select>
         </form>
     </div>
-
-    <h2 class="fw-bold my-4" id="totalcoaches">共有 -- 位教練</h2>
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width:50%">
+            <h2 class="fw-bold my-4 " id="totalcoaches">共有 -- 位教練</h2>
+        </div>
+        <form class="d-flex">
+            @* <select class="w-100 mx-3 my-4 px-3 rounded-3 form-select" name="city" id="citys">
+            <option>縣市</option>
+            </select>
+            <select class="w-100 mx-3 my-4 px-3 rounded-3 form-select" name="city" id="regions">
+            <option>地區</option>
+            </select> *@
+            <button type="button" class="w-100 mx-3 my-4 px-3 rounded-3 btn btn-info" id="resetButton" style="width:50px;">重新篩選</button>
+        </form>
+    </div>
     <div class="d-flex flex-row flex-wrap justify-content-between" id="div">
     </div>
     <nav aria-label="Page navigation example">
@@ -54,14 +66,16 @@
 @section Scripts {
     <script>
         const div = document.getElementById("div");//教練卡
+        const rateData = document.getElementById("rateData");//評分資料
         const totalcoaches = document.getElementById("totalcoaches");
         const inpSearch = document.querySelector('#inputSearch');//依關鍵字搜尋
         const sort1Search = document.querySelector('#sort1Search');//依課程分類搜尋sort1
         const sort2Search = document.querySelector('#sort2Search');//依課程分類搜尋sort2
         const genderSearch = document.querySelector('#genderSearch');//依性別搜尋
-        const citySearch = document.querySelector('#citySearch');//依縣市搜尋
-        const regionSearch = document.querySelector('#regionSearch');//依地區搜尋
+        const citys = document.querySelector('#citys');//依縣市搜尋
+        const regions = document.querySelector('#regions');//依地區搜尋
         const ulPaging = document.querySelector('#ulpage');//分頁
+        const resetButton = document.querySelector('#resetButton');//重設
         const searchData =
         {
             "sort1": "",
@@ -76,6 +90,24 @@
             "sortBy": "",
             "sortType": "asc"
         };
+        //重設
+        resetButton.addEventListener('click', () => {
+            // 重設表單數據
+            searchData.sort1 = "";
+            searchData.sort2 = "";
+            searchData.gender = "";
+            searchData.city = "";
+            searchData.region = "";
+            searchData.keyword = "";
+            searchData.page = 1;
+            citys.value = "縣市";
+            regions.value = "請選擇地區";
+            genderSearch.value = "性別";
+            sort1Search.value = "有氧/無氧";
+            sort2Search.value = "課程種類";
+            inpSearch.value = "";
+            loadCoaches();
+        });
         //載入頁面資訊function
         const loadCoaches = async () => {
             const url = 'https://localhost:7199/api/Coach/SEARCH';
@@ -87,46 +119,85 @@
                 }
             });
             data = await response.json();
-
             let str = '';
             let exps = '';
             let regs = '';
             //教練卡片生成
             data.coachResult.map(item => {
-                exps = item.experties.map(exp => {
-                    return `#${exp.className} #${exp.classSort1} #${exp.classSort2}`;
-                }).join(`<br>`);
-                regs = item.region.map(reg => {
-                    return `${reg.city}-${reg.region}`;
-                }).join(`<br>`);
-
-                str += `<div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                    <h5 class="card-title">${item.name}</h5>
+                //專長(不重複)
+                const uniqueExp = {};
+                const exps = item.experties.map(exp => {
+                    const key = `${exp.className}-${exp.classSort1}-${exp.classSort2}`;
+                    if (!uniqueExp[key]) {
+                        uniqueExp[key] = true;
+                        return `#${exp.className} #${exp.classSort1} #${exp.classSort2}`;
+                    }
+                    return null;
+                }).filter(exp => exp !== null).join(`<br>`);
+                console.log(exps);
+                //開課地區(不重複)
+                const uniqueReg = {};
+                const regs = item.region.map(reg => {
+                    const keyReg = `${reg.city}-${reg.region}`;
+                    if (!uniqueReg[keyReg]) {
+                        uniqueReg[keyReg] = true;
+                        return `${reg.city}_${reg.region}`;
+                    }
+                    return null;
+                }).filter(reg => reg !== null).join(`<br>`);
+                console.log(regs);
+                //教練評分
+                coachRates = item.coachRate.map(rate => {
+                    return `${rate.rateCoach}`
+                })
+                let sum = parseFloat('0')
+                for (let i = 0; i < coachRates.length; i++) {
+                    sum += parseFloat(coachRates[i])
+                }
+                let averageRate;
+                if (coachRates.length > 0) {
+                    averageRate = sum / coachRates.length;
+                    console.log(averageRate);
+                } else {
+                    averageRate = "尚無評價";
+                }
+                //生成教練卡
+                str += `<div class="card mb-3" style="max-width: 540px;" onclick="findCoach${item.id}">
+                            <div class="row g-0">
+                                <div class="col-md-4 d-flex align-items-center justify-content-center" style="overflow: hidden;">
+                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <p class="card-text">${item.id}</p>
+                                        <h4 class="card-title">${item.name}</h4>
+                                        <h6 class="card-text"><img src="/assets/img/star1.png">${averageRate}</h6>
                                         <p class="card-text">${regs}</p>
-                                <p class="card-text">${item.intro}</p>
-                               <p class="card-text"><a>${exps}</a></p>
+                                        <p class="card-text">${item.intro}</p>
+                                        <p class="card-text"><a>${exps}</a></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>`;
+                        </div>`;
+                console.log(item);
+
             })
             // const imageUrl = `data:image/jpeg;base64,${data[0].photo}`;
             // document.getElementById('image').src = imageUrl;
             div.innerHTML = str;
             totalcoaches.textContent = `共有${data.totalCount}位教練`;
+
+
             //顯示分頁按鈕
             let liPages = "";
             for (let i = 1, max = data.totalPages; i <= max; i++) {
-                liPages += `liPages += ` < li class="page-item" onclick = "pagingHandler(${i})" > <a class="page-link" href = "#" > ${ i } </a></li > ``
+                liPages += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
             }
             ulPaging.innerHTML = liPages;
         };
+
+        //轉頁
+
 
         //載入sort1選項function
         const loadSort1 = async () => {
@@ -172,39 +243,118 @@
         };
 
         //載入場館選項function
-        const loadGym = async () => {
-            const url = 'https://localhost:7199/api/Region'; // 獲取分類的 API
-            const response = await fetch(url);
-            if (!response.ok) {
-                return;
+        // 載入縣市
+        async function loadCitiesWithGyms() {
+            const citySelect = document.getElementById('citys');
+            try {
+                const response = await fetch("https://localhost:7199/api/Region");
+                allData = await response.json();
+                const uniqueCities = new Set();
+
+                //console.log('Fetched region data:', allData); //檢查縣市讀取
+
+                // 過濾出至少有一個場館的城市
+                allData.forEach(item => {
+                    if (!uniqueCities.has(item.city) && item.gymId !== 0) {
+                        uniqueCities.add(item.city);
+                        const option = document.createElement('option');
+                        option.value = item.city;
+                        option.textContent = item.city;
+                        citySelect.appendChild(option);
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching data:", error);
             }
-            //const response = await fetch("https://localhost:7199/api/GymList");
-            const gyms = await response.json();
-            regionSearch.innerHTML = "";
-            citySearch.innerHTML = "";
-            // 添加一個預設縣市選項
-            const defCityOption = document.createElement('option');
-            defCityOption.text = '縣市';
-            citySearch.appendChild(defCityOption);
-            // 添加一個預設地區選項
-            const defRegionOption = document.createElement('option');
-            defRegionOption.text = '地區';
-            regionSearch.appendChild(defRegionOption);
-            // 動態生成選項
-            gyms.forEach(gym => {
-                var regionOption = document.createElement('option');
-                var cityOption = document.createElement('option');
-                cityOption.text = gym.city;
-                regionOption.text = gym.region;
-                citySearch.appendChild(cityOption);
-                regionSearch.appendChild(regionOption);
+        }
+        // 載入地區
+        async function loadRegions() {
+            // const regions = document.getElementById('regions');
+            // const citys = document.getElementById('citys');
+            const selectedCity = citys.value;
+
+            let regionOptions = '<option>請選擇地區</option>';
+            const filteredRegions = allData.filter(item => item.city === selectedCity && item.gymId !== 0);
+            filteredRegions.forEach(item => {
+                regionOptions += `<option value="${item.region}">${item.region}</option>`;
             });
-        };
+
+            regions.innerHTML = regionOptions;
+        }
+        //載入有場館的縣市
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCitiesWithGyms();
+            loadRegions();
+        });
+        // 事件監聽器，當城市選項發生變化時更新地區選項
+        citys.addEventListener('change', event => {
+            searchData.page = 1;
+            if (event.target.value === '縣市') {
+                searchData.city = "";
+                searchData.region = "";
+            } else {
+                searchData.city = event.target.value;
+            }
+            loadRegions();
+            loadCoaches();
+        });
+        // 事件監聽器，當地區選項發生變化時過濾場館
+        regions.addEventListener('change', event => {
+            searchData.page = 1;
+            if (event.target.value === '地區') {
+                searchData.city = "";
+                searchData.region = "";
+            } else {
+                searchData.region = event.target.value;
+                regions.value = event.target.value;
+            }
+            console.log('choose', searchData.region);
+            event.target.textContent = searchData.region;
+            loadRegions();
+            loadCoaches();
+        });
+
+        // const loadGym = async () => {
+        //     const url = 'https://localhost:7199/api/Region'; // 獲取分類的 API
+        //     const response = await fetch(url);
+        //     if (!response.ok) {
+        //         return;
+        //     }
+        //     const gyms = await response.json();
+        //     regionSearch.innerHTML = "";
+        //     citySearch.innerHTML = "";
+        //     // 添加一個預設縣市選項
+        //     const defCityOption = document.createElement('option');
+        //     defCityOption.text = '縣市';
+        //     citySearch.appendChild(defCityOption);
+        //     // 添加一個預設地區選項
+        //     const defRegionOption = document.createElement('option');
+        //     defRegionOption.text = '地區';
+        //     regionSearch.appendChild(defRegionOption);
+        //     // 動態生成選項
+        //     var addedCities = {};
+        //     var addedRegions = {};
+        //     gyms.forEach(gym => {
+        //         if (!addedCities[gym.city]) {
+        //             var cityOption = document.createElement('option');
+        //             cityOption.text = gym.city;
+        //             citySearch.appendChild(cityOption);
+        //             addedCities[gym.city] = true;
+        //         }
+        //         if (!addedRegions[gym.region]) {
+        //             var regionOption = document.createElement('option');
+        //             regionOption.text = gym.region;
+        //             regionSearch.appendChild(regionOption);
+        //             addedRegions[gym.region] = true;
+        //         }
+        //     });
+        // };
 
         loadCoaches();
         loadSort1();
         loadSort2();
-        loadGym();
+        //loadGym();
+
 
         //關鍵字搜尋事件
         inpSearch.addEventListener('keydown', event => {
@@ -216,7 +366,6 @@
         })
         //分頁選擇事件
         const pagingHandler = page => {
-
             if (page === 'next') {
                 if (searchData.page < data.totalPages) searchData.page++;
             } else if (page === 'prev') {
@@ -225,9 +374,12 @@
                 searchData.page = page;
             }
             loadCoaches();
+            // 滾動到頁面最上方
+            //window.scrollTo(0, 0);
         }
         //依有氧、無氧分類搜尋事件sort1
         sort1Search.addEventListener('change', event => {
+            searchData.page = 1;
             if (event.target.value === '有氧/無氧') {
                 searchData.sort1 = "";
             } else {
@@ -239,6 +391,7 @@
         });
         //依課程分類搜尋事件sort2
         sort2Search.addEventListener('change', event => {
+            searchData.page = 1;
             if (event.target.value === '課程種類') {
                 searchData.sort2 = "";
             } else {
@@ -250,6 +403,7 @@
         });
         //依性別搜尋
         genderSearch.addEventListener('change', event => {
+            searchData.page = 1;
             if (event.target.value === '性別') {
                 searchData.gender = "";
             } else {
@@ -260,26 +414,28 @@
             loadCoaches();
         });
         //依縣市搜尋
-        citySearch.addEventListener('change', event => {
-            if (event.target.value === '縣市') {
-                searchData.city = "";
-            } else {
-                // 當選擇發生時，更新 searchData 中的 sort2 屬性
-                searchData.city = event.target.value;
-            }
-            // 調用 loadCoaches 重新加載數據
-            loadCoaches();
-        })
+        // citySearch.addEventListener('change', event => {
+        //     if (event.target.value === '縣市') {
+        //         searchData.city = "";
+        //     } else {
+        //         // 當選擇發生時，更新 searchData 中的 sort2 屬性
+        //         searchData.city = event.target.value;
+        //     }
+        //     // 調用 loadCoaches 重新加載數據
+        //     loadCoaches();
+        // })
         //依地區搜尋
-        regionSearch.addEventListener('change', event => {
-            if (event.target.value === '地區') {
-                searchData.region = "";
-            } else {
-                // 當選擇發生時，更新 searchData 中的 sort2 屬性
-                searchData.region = event.target.value;
-            }
-            // 調用 loadCoaches 重新加載數據
-            loadCoaches();
-        })
+        // regionSearch.addEventListener('change', event => {
+        //     if (event.target.value === '地區') {
+        //         searchData.region = "";
+        //     } else {
+        //         // 當選擇發生時，更新 searchData 中的 sort2 屬性
+        //         searchData.region = event.target.value;
+        //     }
+        //     // 調用 loadCoaches 重新加載數據
+        //     loadCoaches();
+        // })
+
+
     </script>
 }

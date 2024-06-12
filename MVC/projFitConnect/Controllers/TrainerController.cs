@@ -12,5 +12,9 @@ namespace projFitConnect.Controllers
         {
             return View();
         }
+        public IActionResult Coach()
+        {
+            return View();
+        }
     }
 }
