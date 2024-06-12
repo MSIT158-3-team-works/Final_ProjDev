@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("projFitConnect")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77eed2b843cfbdd4d0522b0ab21e94413db91388")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a670ed72cff4ade5cdb64b6aec52107b62eb81b")]
 [assembly: System.Reflection.AssemblyProductAttribute("projFitConnect")]
 [assembly: System.Reflection.AssemblyTitleAttribute("projFitConnect")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

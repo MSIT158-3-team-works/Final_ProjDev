@@ -9,7 +9,7 @@
         <div style="margin:auto;text-align:center;">
             <img src="~/assets/img/fitlogo.png" style="height:90px" />
         </div>
-        <form action="@Url.Action("Login")" method="post" class="form-horizontal">
+        <form class="form-horizontal">
             <div class="form-group">
                 <label for="account" class="control-label col-md-2 fw-bold" style="font-size:23px; ">帳號:</label>
                 <div class="col-md-10">
@@ -27,13 +27,11 @@
                     <div style="color: #6C6C6C;font-weight:bold;">1.不可空白 <br />2.至少6個字且必須包含英文、數字、特殊符號</div>
                 </div>
             </div>
-            @* <div class="col-md-offset-2 col-md-10 text-center" id="button-group"> *@
 
             <div class="button-group">
-                <button type="submit" class="btn btn-primary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">登入</button>
-
-                @ViewBag.Message
+                <button type="button" class="btn btn-primary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">登入</button>
                 <br>
+                @* TODO *@
                 <a href="https://m.shein.tw/" target="_blank" class="login_link" style="font-size:22px;font-weight:bold">忘記密碼</a>
                 <br>
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='https://localhost:7168/home/register'" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">點我註冊</button>
@@ -45,105 +43,136 @@
 
 @section Scripts {
     <script>
-        // //驗證
-        // //處理登入表單提交
-        // document.getElementById("loginForm").addEventListener("submit", async function(event) {
-        //     event.preventDefault(); // 防止表單自動提交
+        (() => {
+            'use strict'
 
-        //     let account = document.getElementById("idAccount").value;
-        //     let password = document.getElementById("idPwd").value;
+            // 檢查帳號
+            document.getElementById("idAccount").addEventListener("blur", checkAccount);
+            let count = 0
 
-        //     // 發送登入請求到後端的 CheckTIdentity 端點
-        //     let response = await fetch("/api/your-controller/verify", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify({
-        //             phone: account,
-        //             email: account, //帳號可能是電話號碼或電子郵件
-        //             password: password
-        //         })
-        //     });
+            function checkAccount() {
+                let theAccountObj = document.getElementById("idAccount");
+                let theAccountVal = theAccountObj.value;
 
-        //     // 解析後端的回應
-        //     let data = await response.json();
+                let sp = document.getElementById("spAccount");
 
-        //     if (response.ok) {
-        //         // 登入成功，導向到相應的頁面
-        //         window.location.href = 'https://localhost:7168';
-        //     } else {
-        //         // 登入失敗，顯示錯誤訊息
-        //         alert(data);
-        //     }
-        // });
-
-        //防呆驗證
-        //檢查帳號
-        document.getElementById("idAccount").addEventListener("blur", checkAccount);
-
-        function checkAccount() {
-            let theAccountObj = document.getElementById("idAccount");
-            let theAccountVal = theAccountObj.value;
-
-            let sp = document.getElementById("spAccount");
-            console.log(sp)
-            if (theAccountVal === "") {
-                spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號不可空白";
-                spAccount.className = 'text-danger';
-            } else if (/[\u4e00-\u9fff]/.test(theAccountVal)) {
-                spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號不能包含中文字";
-                spAccount.className = 'text-danger';
-            } else if (theAccountVal.length < 6) {
-                spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號至少要6個字以上";
-                spAccount.className = 'text-danger';
-            } else {
-                spAccount.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
-                spAccount.className = 'text-success';
-            }
-        }
-
-        // 檢查密碼
-        document.getElementById("idPwd").addEventListener("blur", checkPwd);
-
-        function checkPwd() {
-            let thePwdObj = document.getElementById("idPwd");
-            let thePwdVal = thePwdObj.value;
-
-            let sp = document.getElementById("spPwd");
-            let thePwdValLen = thePwdVal.length;
-            let flag1 = false, flag2 = false, flag3 = false;
-
-            if (thePwdVal === "") {
-                sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 請輸入密碼";
-                spPwd.className = 'text-danger';
-            } else if (thePwdValLen >= 6) {
-                let specialChars = /[!#&#64$%^&*]/
-
-                for (let i = 0; i < thePwdValLen; i++) {
-                    let ch = thePwdVal.charAt(i).toUpperCase();
-                    if (ch >= "A" && ch <= "Z") {
-                        flag1 = true;
-                    } else if (ch >= "0" && ch <= "9") {
-                        flag2 = true;
-                    } else if (specialChars.test(ch)) {
-                        flag3 = true;
-                    }
-                    if (flag1 && flag2 && flag3) break;
-                }
-
-                if (flag1 && flag2 && flag3) {
-                    sp.innerHTML = "<img src=\"/assets/img/correct.png\" /> 格式正確";
-                    spPwd.className = 'text-success';
+                if (theAccountVal === "") {
+                    spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號不可空白";
+                    spAccount.className = 'text-danger';
+                } else if (/[\u4e00-\u9fff]/.test(theAccountVal)) {
+                    spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號不能包含中文字";
+                    spAccount.className = 'text-danger';
+                } else if (theAccountVal.length < 6) {
+                    spAccount.innerHTML = "<img src=\"/assets/img/error.png\" /> 帳號至少要6個字以上";
+                    spAccount.className = 'text-danger';
                 } else {
-                    sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼必須包含英文、數字和特殊字符";
-                    spPwd.className = 'text-danger';
+                    spAccount.innerHTML = "<img src=\"/assets/img/correctt.png\" /> 格式正確";
+                    spAccount.className = 'text-success';
                 }
-            } else {
-                sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼必須大於6碼";
-                spPwd.className = 'text-danger';
-            }
-        }
+            };
+
+            // 檢查密碼
+            document.getElementById("idPwd").addEventListener("blur", checkPwd);
+
+            function checkPwd() {
+                let thePwdObj = document.getElementById("idPwd");
+                let thePwdVal = thePwdObj.value;
+
+                let sp = document.getElementById("spPwd");
+                let thePwdValLen = thePwdVal.length;
+                let flag1 = false, flag2 = false, flag3 = false;
+
+                if (thePwdVal === "") {
+                    sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 請輸入密碼";
+                    spPwd.className = 'text-danger';
+                } else if (thePwdValLen >= 6) {
+                    let specialChars = /[!#&#64$%^&*]/
+
+                    for (let i = 0; i < thePwdValLen; i++) {
+                        let ch = thePwdVal.charAt(i).toUpperCase();
+                        if (ch >= "A" && ch <= "Z") {
+                            flag1 = true;
+                        } else if (ch >= "0" && ch <= "9") {
+                            flag2 = true;
+                        } else if (specialChars.test(ch)) {
+                            flag3 = true;
+                        }
+                        if (flag1 && flag2 && flag3) break;
+                    }
+
+                    if (flag1 && flag2 && flag3) {
+                        sp.innerHTML = "<img src=\"/assets/img/correctt.png\" /> 格式正確";
+                        spPwd.className = 'text-success';
+                    } else {
+                        sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼必須包含英文、數字和特殊字符";
+                        spPwd.className = 'text-danger';
+                    }
+                } else {
+                    sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 密碼必須大於6碼";
+                    sp.classList.add('text-danger');
+                }
+            };
+
+            const btn = document.getElementById('buttonSubmit')
+            btn.addEventListener('click', (evt) => {
+                evt.stopPropagation()
+                evt.preventDefault()
+                submit()
+            });
+
+            async function submit() {
+                const acc = document.getElementById("idAccount")
+                const psw = document.getElementById("idPwd")
+                const sp = document.getElementById("spPwd");
+
+                let user = {
+                    username: `${acc.value}`,
+                    password: `${psw.value}`,
+                }
+
+                const response = await fetch(`https://localhost:7199/api/login`, {
+                    method: 'POST',
+                    body: JSON.stringify(user),
+                    // mode: 'cors',
+                    // credentials:'same-origin',
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                const data = await response.json()
+                //console.log('data =', data)
+                let text = data.text
+
+                if (text === 'notfound') {
+                    //alert, jump to to login page
+                    window.alert('查無帳號，跳轉至註冊頁面...')
+                    window.location.href = '@Url.Content("~/home/register")'
+                    return;
+                }
+                else if (text === 'pswwrong') {
+                    //ajax, reinput
+                    count++
+                    //console.log(count)
+                    if (count === 3) {
+                        window.alert('密碼錯誤達三次，即將跳轉頁面')
+                        window.location.href = '@Url.Content("~/home/index")'
+                    }
+                    sp.innerHTML = `<img src=\"/assets/img/error.png\" /> 密碼錯誤，已錯誤${count}次`
+                    sp.classList.add('text-danger');
+                    return;
+                }
+
+                //setsession
+                setSession(data)
+                //window.location.href = '@Url.Content("~/home/session")'
+                //assign? replace?
+            };
+
+            function setSession({ id, roleId }) {
+                sessionStorage.setItem('ID', id)
+                sessionStorage.setItem('role_ID', roleId)
+                //console.log('sessionStorage', sessionStorage)
+            };
+
+        })();
     </script>
 }
 @section Styles {
