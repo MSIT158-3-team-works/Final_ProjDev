@@ -1,4 +1,5 @@
-﻿using System;
+﻿using projRESTfulApiFitConnect.DTO.Gym;
+using System;
 
 namespace projRESTfulApiFitConnect.DTO.Coach
 {
@@ -15,7 +16,6 @@ namespace projRESTfulApiFitConnect.DTO.Coach
         public string Address { get; set; } = null!;
         public string? RoleDescription { get; set; } = null!;
         public string? GenderDescription { get; set; } = null!;
-
-        
+        public List<CityDto>? Region { get; set; }
     }
 }

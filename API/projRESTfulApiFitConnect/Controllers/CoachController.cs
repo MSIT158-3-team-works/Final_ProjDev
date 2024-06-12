@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using projRESTfulApiFitConnect.DTO.Coach;
+using projRESTfulApiFitConnect.DTO.Gym;
 using projRESTfulApiFitConnect.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -53,6 +54,10 @@ namespace projRESTfulApiFitConnect.Controllers
                         .ThenInclude(te => te.Class.ClassSort1)//有氧、無氧、其他
                         .Include(x => x.TcoachExperts)
                         .ThenInclude(te => te.Class.ClassSort2)//課程種類
+                        .Include(x => x.TfieldReserves)
+                        .ThenInclude(fr => fr.Field.Gym.Region)
+                        .Include(x => x.TfieldReserves)
+                        .ThenInclude(fr => fr.Field.Gym.Region.City)
                         .ToListAsync();
 
             foreach (var item in coaches)
@@ -62,6 +67,11 @@ namespace projRESTfulApiFitConnect.Controllers
                     ClassName = te.Class.ClassName,
                     ClassSort1 = te.Class.ClassSort1.ClassSort1Detail.ToString(),
                     ClassSort2 = te.Class.ClassSort2.ClassSort2Detail.ToString()
+                }).ToList();
+                var regions = item.TfieldReserves.Select(fr => new CityDto
+                {
+                    City = fr.Field.Gym.Region.City.City.ToString(),
+                    Region = fr.Field.Gym.Region.Region.ToString()
                 }).ToList();
                 string base64Image = "";
                 filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", item.Photo);
@@ -83,7 +93,8 @@ namespace projRESTfulApiFitConnect.Controllers
                     Birthday = item.Birthday,
                     Address = item.Address,
                     Experties = experts,
-                    GenderDescription = item.Gender.GenderText
+                    GenderDescription = item.Gender.GenderText,
+                    Region = regions
                 };
                 coachDetailDtos.Add(coachDetailDto);
             }
@@ -96,10 +107,12 @@ namespace projRESTfulApiFitConnect.Controllers
         public async Task<ActionResult<CoachPagingDTO>> GetCoachesSearch(/*[FromQuery]*/ CoachSearchDTO coachSearchDTO)
         {
             List<CoachDetailDto> coachDetailDtos = await coachesDetail();
-            //根據分類編號搜尋教練資料
+            //根據分類搜尋教練資料
             var everyCoach = coachSearchDTO.gender == null || coachSearchDTO.gender == "" ? coachDetailDtos : coachDetailDtos.Where(s => s.GenderDescription == coachSearchDTO.gender);
             everyCoach = coachSearchDTO.sort1 == null || coachSearchDTO.sort1 == "" ? everyCoach : everyCoach.Where(s => s.Experties[0].ClassSort1 == coachSearchDTO.sort1);
             everyCoach = coachSearchDTO.sort2 == null || coachSearchDTO.sort2 == "" ? everyCoach : everyCoach.Where(s => s.Experties[0].ClassSort2 == coachSearchDTO.sort2);
+            everyCoach = coachSearchDTO.city == null || coachSearchDTO.city == "" ? everyCoach : everyCoach.Where(s => s.Region[0].City == coachSearchDTO.city).Distinct();
+            everyCoach = coachSearchDTO.region == null || coachSearchDTO.region == "" ? everyCoach : everyCoach.Where(s => s.Region[0].Region == coachSearchDTO.region);
             //根據關鍵字搜尋教練資料(姓名、性別、教練資訊、專長名稱)
             if (!string.IsNullOrEmpty(coachSearchDTO.keyword))
             {

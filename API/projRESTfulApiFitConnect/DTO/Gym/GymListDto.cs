@@ -17,7 +17,7 @@
         public string? GymDescribe { get; set; }
         public int CityId { get; set; }
 
-        public string Region { get; set; } = null!;
+        public string? Region { get; set; } = null!;
         public string? FieldDescribe { get; set; } = null!;
     }
 }

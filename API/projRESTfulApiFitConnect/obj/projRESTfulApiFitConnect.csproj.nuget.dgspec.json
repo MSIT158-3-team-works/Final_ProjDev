@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {}
+    "C:\\期末資料夾\\Final_ProjDev_Hank\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {
+    "C:\\期末資料夾\\Final_ProjDev_Hank\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+        "projectUniqueName": "C:\\期末資料夾\\Final_ProjDev_Hank\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
         "projectName": "projRESTfulApiFitConnect",
-        "projectPath": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+        "projectPath": "C:\\期末資料夾\\Final_ProjDev_Hank\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\Main\\FinalProj\\team\\API\\projRESTfulApiFitConnect\\obj\\",
+        "outputPath": "C:\\期末資料夾\\Final_ProjDev_Hank\\API\\projRESTfulApiFitConnect\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
