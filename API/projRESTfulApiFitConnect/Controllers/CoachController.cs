@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using projRESTfulApiFitConnect.DTO;
 using projRESTfulApiFitConnect.DTO.Coach;
 using projRESTfulApiFitConnect.DTO.Gym;
 using projRESTfulApiFitConnect.Models;
@@ -58,8 +59,13 @@ namespace projRESTfulApiFitConnect.Controllers
                         .ThenInclude(fr => fr.Field.Gym.Region)
                         .Include(x => x.TfieldReserves)
                         .ThenInclude(fr => fr.Field.Gym.Region.City)
+                        .Include(x => x.TmemberRateClasses)
                         .ToListAsync();
 
+
+            //List<TmemberRateClass> ratelist = new List<TmemberRateClass>();
+            //TmemberRateClass[] rlist = new TmemberRateClass[coaches.Count];
+            //ratelist = coaches.
             foreach (var item in coaches)
             {
                 var experts = item.TcoachExperts.Select(te => new ExpertiseDto
@@ -72,6 +78,21 @@ namespace projRESTfulApiFitConnect.Controllers
                 {
                     City = fr.Field.Gym.Region.City.City.ToString(),
                     Region = fr.Field.Gym.Region.Region.ToString()
+                }).ToList();
+                //rlist.Append(item.TmemberRateClasses);
+
+                //var rates = item.TmemberRateClasses.Select(x => new List<decimal>
+                //[
+                //    RateCoach = x.RateCoach
+                //]).ToList();
+                //decimal avRate=0;
+                //foreach (var itemRate in rates)
+                //{
+                //    avRate = avRate + (decimal)itemRate;
+                //}
+                var rates = item.TmemberRateClasses.Select(x => new rateCoachDTO
+                {
+                    RateCoach = x.RateCoach
                 }).ToList();
                 string base64Image = "";
                 filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", item.Photo);
@@ -94,7 +115,8 @@ namespace projRESTfulApiFitConnect.Controllers
                     Address = item.Address,
                     Experties = experts,
                     GenderDescription = item.Gender.GenderText,
-                    Region = regions
+                    Region = regions,
+                    CoachRate = rates
                 };
                 coachDetailDtos.Add(coachDetailDto);
             }
@@ -109,10 +131,10 @@ namespace projRESTfulApiFitConnect.Controllers
             List<CoachDetailDto> coachDetailDtos = await coachesDetail();
             //根據分類搜尋教練資料
             var everyCoach = coachSearchDTO.gender == null || coachSearchDTO.gender == "" ? coachDetailDtos : coachDetailDtos.Where(s => s.GenderDescription == coachSearchDTO.gender);
-            everyCoach = coachSearchDTO.sort1 == null || coachSearchDTO.sort1 == "" ? everyCoach : everyCoach.Where(s => s.Experties[0].ClassSort1 == coachSearchDTO.sort1);
-            everyCoach = coachSearchDTO.sort2 == null || coachSearchDTO.sort2 == "" ? everyCoach : everyCoach.Where(s => s.Experties[0].ClassSort2 == coachSearchDTO.sort2);
-            everyCoach = coachSearchDTO.city == null || coachSearchDTO.city == "" ? everyCoach : everyCoach.Where(s => s.Region[0].City == coachSearchDTO.city).Distinct();
-            everyCoach = coachSearchDTO.region == null || coachSearchDTO.region == "" ? everyCoach : everyCoach.Where(s => s.Region[0].Region == coachSearchDTO.region);
+            everyCoach = coachSearchDTO.sort1 == null || coachSearchDTO.sort1 == "" ? everyCoach : everyCoach.Where(s => s.Experties.Any(s => s.ClassSort1 == coachSearchDTO.sort1));
+            everyCoach = coachSearchDTO.sort2 == null || coachSearchDTO.sort2 == "" ? everyCoach : everyCoach.Where(s => s.Experties.Any(s => s.ClassSort2 == coachSearchDTO.sort2));
+            everyCoach = coachSearchDTO.city == null || coachSearchDTO.city == "" ? everyCoach : everyCoach.Where(s => s.Region.Any(s => s.City == coachSearchDTO.city));
+            everyCoach = coachSearchDTO.region == null || coachSearchDTO.region == "" ? everyCoach : everyCoach.Where(s => s.Region.Any(s => s.Region == coachSearchDTO.region));
             //根據關鍵字搜尋教練資料(姓名、性別、教練資訊、專長名稱)
             if (!string.IsNullOrEmpty(coachSearchDTO.keyword))
             {
@@ -136,6 +158,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.Id) : everyCoach.OrderByDescending(s => s.Id);
                     break;
             }
+            //int totalrate = everyCoach.
             //總共有多少筆資料
             int totalCount = everyCoach.Count();
             //每頁要顯示幾筆資料
@@ -179,7 +202,7 @@ namespace projRESTfulApiFitConnect.Controllers
             var coachInfo = coach.TcoachInfoIds.FirstOrDefault();
             var experts = await _context.TcoachExperts.Where(x => x.CoachId == id).Include(x => x.Class).ToListAsync();
             var rates = await _context.TmemberRateClasses.Where(x => x.CoachId == id).Include(x => x.Reserve.Member).Include(x => x.Reserve.ClassSchedule.Class).ToListAsync();
-            var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseTimeId).Include(x => x.ClassStatus).ToListAsync();
+            var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseStartTime).Include(x => x.ClassStatus).ToListAsync();
             var fields = await _context.TfieldReserves.Where(x => x.CoachId == id).Include(x => x.Field.Gym.Region.City).ToListAsync();
 
             if (!string.IsNullOrEmpty(coach.Photo))
