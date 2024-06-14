@@ -2,7 +2,7 @@
     color: white;
     background-color: #D0CECE;
     border-color: #D0CECE;
-    text-align:center;
+    text-align: center;
 }
 
 .divblue {
@@ -29,11 +29,42 @@
 .divimg {
     color: gray;
     background-color: gray;
+    
 }
 
 .colored_a {
-    color:crimson;
+    color: white;
+    text-decoration: none; /* 移除下划线 */
 }
+
+    .colored_a:hover {
+        color: lightblue;
+        text-decoration: none; 
+    }
+
 .footer_top li {
-    font-size: calc(1.325rem + 0.9vw) !important;
+    font-size: 20px;
 }
+
+#footer-text {
+    color: white;
+    font-weight: bold;
+}
+
+
+/*.masthead {
+    padding: 20px 0;
+}
+
+    .masthead .container {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .masthead .masthead-subheading {
+        margin-top: 10px;
+    }
+
+    .masthead .masthead-heading {
+        margin-bottom: 10px;
+    }*/

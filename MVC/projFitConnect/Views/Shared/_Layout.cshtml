@@ -18,26 +18,30 @@
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body id="page-top">
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background:rgba(128, 128, 128, 0.7)">
             <div class="container">
-                <a href="#page-top"><img src="~/assets/img/fitlogo.png" width=80px; /></a>
+                <a href="https://localhost:7168/Home"><img src="~/assets/img/fitlogo.png" width=80px; alt="FitConnect Logo" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0 ">
-                        <li class="nav-item"><a class="nav-link fs-5" href="#services">HOME</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5"  asp-area="" asp-controller="Trainer" asp-action="Search">找教練</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" href="#about">找場地</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" href="#team">商城</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" href="#contact">健康專欄</a></li>
-                        <li @*class="nav-item"*@ style="margin-right:20px"><a class="nav-link fs-5">登入</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="https://localhost:7168/Home">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" asp-area="" asp-controller="Trainer" asp-action="Search">找教練</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" asp-area="" asp-controller="Course" asp-action="Search">找課程</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/gymlist/index">找場地</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/shop/index">商城</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/healthboard/index">健康專欄</a></li>
+
                         <li></li>
-                        <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/profile.png" width="48px;"/></a></li>
+                        <li class="nav-item"><a class="navbar-brand fs-6 " href="https://localhost:7168/Home/Login"><img src="~/assets/img/icon_profile.png" /></a></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_shopping_cart.png" /></a></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_customer_service.png" /></a></li>
+                        <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_heart_like.png" /></a></li>
+
                     </ul>
                 </div>
             </div>
@@ -53,9 +57,8 @@
     </div>
 
     <footer>
-
-        <div style="background-color: #A2C4E3; padding:20px 50px;">
-            <div class="container text-center">
+        <div style="background-color: #A2C4E3; padding:90px 90px;">
+            <div class="container text-center" id="footer-text">
                 <div class="row footer_top">
                     <div class="col-md-3 footer_information_block">
                         <div class="footer_logo_summary">
@@ -65,26 +68,26 @@
                         </div>
                     </div>
                     <div class="col-3 footer_list_block">
-                        <div class="list_head fw-bold fs-4">關於我們</div>
+                        <div class="list_head fw-bold fs-5">關於我們</div>
                         <ul class="nav flex-column m-2">
                             <li class="nav-item">最新消息</li>
-                            <li class="nav-item"><a href="" target="_blank">聯絡我們</a></li>
+                            <li class="nav-item"><a href="" target="_blank" style="color:white">聯絡我們</a></li>
                         </ul>
                     </div>
                     <div class="col-3 footer_list_block">
-                        <div class="list_head fw-bold fs-4">服務提供</div>
+                        <div class="list_head fw-bold fs-5">服務提供</div>
                         <ul class="nav flex-column m-2">
-                            <li class="nav-item">課程</li>
-                            <li class="nav-item"><a href="https://m.shein.tw/" target="_blank">商城</a></li>
-                            <li class="nav-item">健康專欄</li>
-                            <li class="nav-item">成為教練</li>
-                            <li class="nav-item">提供場館</li>
+                            <li class="nav-item"><a href="~/Course/Search" target="_blank" style="color:white">課程</a></li>
+                            <li class="nav-item"><a href="~/shop/index" target="_blank">商城</a></li>
+                            <li class="nav-item"><a href="~/healthboard/index" target="_blank" style="color:white">健康專欄</a></li>
+                            <li class="nav-item"><a href="~/" target="_blank" style="color:white">成為教練</a></li>
+                            <li class="nav-item"><a href="~/" target="_blank" style="color:white">提供場館</a></li>
                         </ul>
                     </div>
                     <div class="col-3 footer_list_block">
-                        <div class="list_head fw-bold fs-4">條款與聲明</div>
+                        <div class="list_head fw-bold fs-5">條款與聲明</div>
                         <ul class="nav flex-column m-2">
-                            <li class="nav-item">服務條款</li>
+                            <li class="nav-item"><a href="~/home/privacy" target="_blank" style="color:white">服務條款</a></li>
                             <li class="nav-item">隱私權政策</li>
                             <li class="nav-item">退款政策</li>
                         </ul>
@@ -92,8 +95,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="border-top footer text-muted bg-light">
+        <div class="footer_bottom text-muted">
             <div class="container w-75 text-black" id="copyright">
                 &copy; 2024 FitConnect. All rights reserved.
             </div>

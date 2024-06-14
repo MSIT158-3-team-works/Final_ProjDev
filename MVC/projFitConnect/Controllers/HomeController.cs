@@ -28,8 +28,29 @@ namespace projFitConnect.Controllers
             return View();
         }
 
+        public IActionResult Session()
+        {
+            string id = HttpContext.Session.GetString("ID");
+            string role_id = HttpContext.Session.GetString("role_ID");
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Policy()
+        {
+            //  服務條款 勿刪勿改名
+            return View();
+        }
+
         public IActionResult Privacy()
         {
+            //  隱私權政策 勿刪勿改名
+            return View();
+        }
+
+        public IActionResult Service()
+        {
+            //  退款政策 勿刪勿改名
             return View();
         }
 

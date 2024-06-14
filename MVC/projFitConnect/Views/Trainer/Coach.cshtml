@@ -1,0 +1,226 @@
+﻿
+@{
+    // ViewData["Title"] = "Coach";
+}
+<main style="padding-top:85px;">
+    <div class="container marketing">
+        <h1>返回</h1>
+    </div>
+    <div class="container marketing ">
+         <div class="mx-2 wid">
+            <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img src="@Url.Content("~/assets/img/portfolio/1.jpg")" class="d-block w-100"  alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img src="@Url.Content("~/assets/img/portfolio/2.jpg")" class="d-block w-100"  alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="3000">
+                        <img src="@Url.Content("~/assets/img/portfolio/3.jpg")" class="d-block w-100"  alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div> 
+    </div>
+    
+    <div class="container marketing mt-3">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" href="#section-home" role="tab" aria-controls="section-home" aria-selected="true">課程方案</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#section-coachdetail" role="tab" aria-controls="section-coachdetail" aria-selected="false">教練資料</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#section-experience" role="tab" aria-controls="section-experience" aria-selected="false">教學經歷</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#section-location" role="tab" aria-controls="section-location" aria-selected="false">可上課地點</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#section-certifications" role="tab" aria-controls="section-certifications" aria-selected="false">證照</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#section-training" role="tab" aria-controls="section-training" aria-selected="false">研習訓練</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="#section-sharing" role="tab" aria-controls="section-sharing" aria-selected="false">教練分享</a>
+            </li>
+        </ul>
+
+        <div id="section-coachdetail" class="section" tabindex="0">
+            <div >
+                <h2>教練資料</h2>
+                <div class=" mx-2  d-flex">
+                    <div class="container marketing">
+                        <h1 class="chakra-text css-w2lj3k">Eric 陳伯維｜「運動訓練讀書會」主持人、教練研習課程講師、松山區自由教練</h1>
+                        <div class="css-1hdexa8 d-flex">
+                            <h3 class="chakra-text css-sr43l4">#<!-- -->體態優化</h3>
+                            <h3 class="chakra-text css-sr43l4">#<!-- -->新手健身</h3>
+                            <h3 class="chakra-text css-sr43l4">#<!-- -->運動表現</h3>
+                        </div>
+                        <div class="chakra-stack css-n1vvi7">
+                            <div class="css-1lekzkb">
+                                <h3 class="chakra-text css-fei0tw">關於教練</h3>
+                            </div>
+                            <div class="container marketing">
+
+                                <div class="coachDetail css-1hwypia">
+                                    陳伯維 ( Eric )，中國醫藥大學 - 運動醫學系畢業，曾任運動醫學系系友會會長、中大型俱樂部教練、副理、經理，健身工作室與運動醫學診所顧問，與業界培訓講師。
+
+                                    自2011年進入職場擔任私人教練，迄今十餘年接觸運動醫學與人體訓練，持續進修，學習更新更專業的運動知識與技術，至今擁有40張以上證書/證照。
+
+                                    個人教學上結合理論與實務，訓練風格 : 「簡易有強度、俐落與實際」 。
+
+                                    擁有10,000小時以上教學經驗時數，1000小時培訓教育經驗，100人次以上訓練經驗。
+                                    <div>
+                                        #松山區健身教練 #小巨蛋自由教練 #教練培訓
+                                    </div>
+                                </div>
+                                <div class="css-15x71qu">
+                                    <button type="button" class="chakra-button css-1qmctmy" onclick="toggleReadMore()">Read More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="section-location" class="section" tabindex="0">
+            <div>
+                <h2>可上課地點</h2>
+                <img src="~/images/ricky.jpg" />
+            </div>
+        </div>
+        <div id="section-home" class="section" tabindex="0">
+            <div>
+                <h2>課程方案</h2>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="~/assets/img/portfolio/4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="~/assets/img/portfolio/5.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a short card.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="~/assets/img/portfolio/6.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="~/assets/img/portfolio/3.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="section-experience" class="section" tabindex="0">
+            <div>
+                <h2>教學經歷</h2>
+                <img src="~/images/ricky.jpg" />
+            </div>
+        </div>
+        <!-- Add other sections similarly -->
+    </div>
+    <hr class="featurette-divider">
+</main>
+
+@section Scripts {
+    <script>
+
+
+
+        //資料收折
+        function toggleReadMore() {
+            const textElement = document.querySelector('.coachDetail');
+            const buttonElement = document.querySelector('.chakra-button');
+            if (textElement.classList.contains('expanded')) {
+                textElement.classList.remove('expanded');
+                buttonElement.textContent = 'Read More';
+            } else {
+                textElement.classList.add('expanded');
+                buttonElement.textContent = 'Read Less';
+            }
+        }
+        //
+
+
+
+    </script>
+}
+
+@section Styles {
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section {
+            padding-top: 125px;
+            /*margin-bottom: 50px; /* Add some space between sections */
+        }
+
+        .wid{
+            width:75%
+        }
+
+        /* 固定导航 */
+        #pills-tab {
+            position: sticky;
+            top: 85px;
+            background-color: white; /* 可选：设置背景颜色 */
+            z-index: 1000; /* 确保元素位于其他内容之上 */
+        }
+
+        /*文字摺疊效果*/
+        .coachDetail {
+            word-wrap: break-word;
+            word-break: break-all;
+            white-space: normal;
+            max-height: 80px; /* 设定初始高度 */
+            overflow: hidden; /* 隐藏超出部分 */
+            transition: max-height 0.3s ease; /* 添加过渡效果 */
+        }
+
+            .coachDetail.expanded {
+                max-height: 800px; /* 设定展开后的高度 */
+            }
+
+    </style>
+}
+

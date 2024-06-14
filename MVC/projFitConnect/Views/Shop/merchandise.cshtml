@@ -1,0 +1,377 @@
+﻿@{
+    ViewData["Title"] = "merchandise";
+}
+
+@section Styles {
+    <style>
+        #content {
+            width: 99%;
+            overflow: hidden;
+            margin: 5px auto;
+        }
+
+        .main-top{
+            width: 100%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            margin: 40px auto;
+            background-color: #FDFFFF;
+            border-radius: 33px 0 0 0;
+            border-right: 5px double #003060;
+            box-shadow: 3px 0 0 #000093, 0 5px 10px rgba(0, 0, 0, 0.3);
+            padding:50px 50px 50px 30px;
+        }
+
+        .article {
+            width: 73%;
+            float: right;
+        }
+
+        .section {
+            background-color: #FBFBFF;
+            border: 3px solid #FFD306;
+            border-radius: 15px;
+            margin: 10px 0;
+            padding: 20px 26px;
+            line-height: 2em;
+        }
+
+        .aside {
+            width: 24%;
+            float: left;
+        }
+
+        .zoom-container {
+            overflow: hidden;
+        }
+
+        .zoom-img {
+            transition: transform 0.5s ease;
+            border-radius: 33px 0 0 0;
+        }
+
+        .zoom-container:hover .zoom-img {
+            transform: scale(1.2);
+        }
+
+        .hover {
+            position: relative;
+        }
+
+            .hover::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border: 1px solid transparent;
+                transition: border-color 0.3s;
+                pointer-events: none;
+            }
+
+            .hover:hover::before {
+                border-color: #0080FF;
+                border-width: 3px;
+            }
+
+        .square-btn {
+            margin-right:13px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            text-align: center;
+            font-weight: 600;
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            border-radius:100px;
+            background-color: #FF8000;
+            border: 3px double #FF2D2D;
+        }
+
+            .square-btn:hover {
+                background-color: #AE0000;
+            }
+
+        .subtital{
+            font-weight:700;
+            font-style:italic;
+            text-decoration:underline;
+            margin-bottom:15px;
+            color: #530766;
+        }
+    </style>
+}
+<a href="https://localhost:7168/shop/" style="text-decoration:none;">
+    <h1 style="margin:100px 0 55px 0; text-align:center; font-size:4.5em;">商品頁面</h1>
+</a>
+
+<div class="main-top">
+    <div style="width:100%">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="max-width: 440px; max-height: 600px;">
+            <div class="carousel-inner" id="divimage">
+                <div class="carousel-item active">
+                    <div class="zoom-container">
+                        <img src="https://media.tenor.com/vNB3iUXsxnQAAAAC/loading-gif.gif" class="d-block w-100 h-auto zoom-img" alt="...">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="zoom-container">
+                        <img src="https://thumb.ac-illust.com/f1/f138ce399f19d54fc308ecd82dedd105_t.jpeg" class="d-block w-100 h-auto zoom-img" alt="...">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="zoom-container">
+                        <img src="https://th.bing.com/th/id/OIP.oX-GhPy_vxElwWNphXC7cQHaKe?w=842&h=1191&rs=1&pid=ImgDetMain" class="d-block w-100 h-auto zoom-img" alt="...">
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div style="width:98%;">
+        <div id="divinfo">
+            <h2 style="font-weight: 600; font-family: 'Microsoft JhengHei', Arial, sans-serif;">merch title</h2>
+            <a href="https://localhost:7168/shop/" style="text-decoration:none;">
+                <h5 style="font-style:italic;color:	#000079;">#category</h5>
+            </a><br /><br />
+            <h6 class="card-text" style="font-weight:600;font-style:italic;">$79.99 USD</h6>
+        </div><br />
+        
+        <div style="float:left;">
+            <label class="t">購買數量：</label>
+        <div class="input-group mb-3" style="width:69%;">
+            <button class="btn btn-secondary" id="btnminus">-</button>
+            <input type="text" name="inppurchase" min="1" max="20" step="1" class="form-control" value="1" style="text-align:center;" />
+            <button class="btn btn-primary" id="btnplus">+</button>
+        </div> <br />
+        <button type="button" class="btn btn-outline-danger">
+            <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/heart-outline-32.png" />
+            追蹤
+        </button>
+        <button type="button" class="btn btn-outline-success">
+            <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png" />
+            加入購物車
+        </button></div>
+        <div style="float:right;">
+            <a href="~/shop/index" class="btn square-btn">立即購買</a>
+        </div>
+    </div>
+</div>
+
+
+<div id="content">
+    <aside class="aside">
+        <section class="section">
+            <div style=" margin-bottom:8px;">
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="https://localhost:7168/shop/">回到商城</a>
+                    <a class="nav-link" href="#">健康專欄</a>
+                    <a class="nav-link" href="#">我的收藏</a>
+                    <a class="nav-link" href="#">購物車</a>
+                </nav>
+            </div>
+        </section>
+        <section class="section" style="margin-top:50px;">
+            <h2 class="subtital">熱門商品</h2>
+            <div id="divpopular">
+                <div class="card mb-3 hover" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="~/assets/img/fitlogo.png" class="img-fluid rounded-start" alt="...">
+                            <h6 style="color:crimson">已售出 X</h6>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Top 1 goods</h5>
+                                <p class="card-text" style="font-weight:600;font-style:italic;">$3.49USD</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </aside>
+    <article class="article">
+        <section class="section">
+            <h2 class="subtital">商品介紹</h2>
+            <div id="divdetail"></div>
+        </section>
+    </article>
+</div>
+<div style="width:80%;max-height:150px;margin:40px auto;">
+    <section class="section" style="text-align:center; background-color:lightslategray;border:none;">
+        <h2 class="subtital">為您推薦</h2>
+        <div class="row row-cols-1 row-cols-md-6 g-4 m-auto" id="divrecommend">
+            <div class="card m-2 hover" style="min-width:150px;padding-top:8px;">
+                <img class="card-img-top" src="~/assets/img/header-backgrd.jpg" alt=".C" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">Joy</h4>
+                    <span class="" style="font-style:italic;color:lightblue;">#category</span>
+                    <p class="card-text">$1.99 USD</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div style="padding-bottom:256px;">
+    &emsp;
+</div>
+@section Scripts {
+    <script>
+        let productID = @ViewBag.id;
+        const productDetail = document.querySelector('#divdetail');
+        const productImage = document.querySelector('#divimage');
+        const productInfo = document.querySelector('#divinfo');
+        const plus = document.querySelector('#btnplus');
+        const minus = document.querySelector('#btnminus');
+        const purchase = document.getElementsByName("inppurchase")[0];
+        const popular = document.querySelector('#divpopular');
+        const recommend = document.querySelector('#divrecommend');
+
+        //top---------------------------------------------------------------------------------------------------------
+        purchase.addEventListener('blur', event => {
+            const value = parseFloat(event.target.value);
+            const max = parseFloat(event.target.max);
+            if (value >= max) 
+                event.target.value = max.toString();
+        });
+        plus.addEventListener('click', () => { if ((+purchase.value + 1) > purchase.max) return; purchase.value = (+purchase.value + 1); })
+        minus.addEventListener('click', () => { if ((+purchase.value - 1) < purchase.min) return; purchase.value = (+purchase.value - 1); })
+        
+        //left---------------------------------------------------------------------------------------------------------
+        //熱門商品
+        const PopularProducts = async () => {
+            let url = 'https://localhost:7199/api/Products/search';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "categoryId": 0,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 3,
+                    "sortBy": "popular",
+                    "sortType": "asc"
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            console.log('PopularProducts', data.productsResult);
+            //顯示資料
+            const goods = data.productsResult.map(good => {
+                //data:image/jpeg;base64,${good.productImage}
+                //merchandise/${good.productId}
+                return (`<a href="${good.productId}" style="text-decoration:none;">
+                                   <div class="card mb-3 hover" style="max-width: 540px;">
+                                    <div class="row g-0">
+                                     <div class="col-md-4" style="text-align:center; padding-top:10px">
+                                       <img src="data:image/jpeg;base64,${good.productImage}" class="img-fluid rounded-start" alt="Top3">
+                                         <h6 style="font-size:0.5em;color:white;text-shadow:-1px -1px 0 crimson, 1px -1px 0 red,-1px  1px 0 red,1px  1px 0 crimson;">已售出 ${good.productSold}</h6>
+                                     </div>
+                                     <div class="col-md-8">
+                                      <div class="card-body">
+                                        <h6 class="card-title">${good.productName}</h6>
+                                        <p class="card-text" style="font-weight:400;font-style:italic;">$${good.unitPrice}NTD</p>
+                                      </div>
+                                     </div>
+                                    </div>
+                                   </div>
+                                  </a>`)
+            })
+            popular.innerHTML = goods.join("");
+        }
+
+        //right---------------------------------------------------------------------------------------------------------
+
+        //botton---------------------------------------------------------------------------------------------------------
+        //推薦商品
+        const RecommendProducts = async () => {
+            let sortBy = ["", "popular", "unitPrice", "categoryId", "", ""];
+            let sortType = ["", "desc", "asc", "desc", "asc", "desc"];
+            let randomNumber = Math.ceil(Math.random() * 5);
+            //console.log(sortBy[randomNumber]);console.log(sortType[randomNumber]);
+            let url = 'https://localhost:7199/api/Products/search';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "categoryId": randomNumber,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 5,
+                    "sortBy": sortBy[randomNumber],
+                    "sortType": sortType[randomNumber]
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            //顯示資料
+            const goods = data.productsResult.map(good => {
+                return (`<div class="card m-auto hover" style="min-width:150px;padding-top:8px;">
+                        <a href="${good.productId}" style="text-decoration:none;color:black">
+                        <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="Recommend" style="width:100%">
+                        <div class="card-body">
+                            <h6 class="card-title">${good.productName}</h6>
+                            <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
+                            <p class="card-text">$${good.unitPrice}NTD</p>
+                        </div></a></div>`)
+            });
+            recommend.innerHTML = goods.join("");
+        }
+
+        //載入商品資料
+        const loadProduct = async () => {
+            let url = 'https://localhost:7199/api/Products/' + productID;
+            //console.log('url=', url);
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data);
+
+            //顯示照片
+            //data=>{ base64Images, images, productCategory, productCategoryId, productDetail, productId, productImage, productName, productSold, unitPrice }
+            s = `<div class="carousel-item active">
+                    <div class="zoom-container">
+                       <img src="data:image/jpeg;base64,${data.productImage}" class="d-block w-100 h-auto zoom-img" alt="notFound">
+                    </div>
+                 </div>`;
+            if (data.images) {
+                for (var pic of data.base64Images) {
+                    s += `<div class="carousel-item">
+                            <div class="zoom-container">
+                              <img src="data:image/jpeg;base64,${pic}" class="d-block w-100 h-auto zoom-img" alt="error">
+                            </div></div>`;}}
+            productImage.innerHTML = s;
+
+            //顯示資料
+            s = `<h2 style="font-weight: 600; font-family: 'Microsoft JhengHei', Arial, sans-serif;">${data.productName}</h2>
+                <a href="https://localhost:7168/shop/" style="text-decoration:none;">
+                <h5 style="font-style:italic;color:	#000079;">#${data.productCategory}</h5></a><br/><br/>
+                <p class="card-text" style="font-weight:600;font-style:italic;">$${data.unitPrice}NTD</p>`;
+            productInfo.innerHTML = s;
+
+            //顯示詳細
+            s = `${data.productDetail}`;
+            productDetail.innerHTML = s;
+
+            //推薦商品
+            RecommendProducts();
+            //熱門商品
+            PopularProducts();
+            }
+        loadProduct();
+    </script>
+}
+
