@@ -113,7 +113,7 @@ public partial class GymContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=gym;Integrated Security=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=gym;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -201,6 +201,7 @@ public partial class GymContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("Gym_park");
             entity.Property(e => e.GymPhoto).HasColumnName("Gym_photo");
+            entity.Property(e => e.GymStatus).HasColumnName("Gym_status");
             entity.Property(e => e.GymTime)
                 .HasMaxLength(20)
                 .HasColumnName("Gym_time");
@@ -268,6 +269,11 @@ public partial class GymContext : DbContext
                 .HasForeignKey(d => d.GymId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tGym_time_tGym");
+
+            entity.HasOne(d => d.GymTimeNavigation).WithMany(p => p.TGymTimes)
+                .HasForeignKey(d => d.GymTime)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tGym_time_ttimes_detail");
         });
 
         modelBuilder.Entity<TIdentity>(entity =>

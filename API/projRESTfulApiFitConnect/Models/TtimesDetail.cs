@@ -9,6 +9,8 @@ public partial class TtimesDetail
 
     public TimeOnly TimeName { get; set; }
 
+    public virtual ICollection<TGymTime> TGymTimes { get; set; } = new List<TGymTime>();
+
     public virtual ICollection<TclassSchedule> TclassScheduleCourseEndTimes { get; set; } = new List<TclassSchedule>();
 
     public virtual ICollection<TclassSchedule> TclassScheduleCourseStartTimes { get; set; } = new List<TclassSchedule>();

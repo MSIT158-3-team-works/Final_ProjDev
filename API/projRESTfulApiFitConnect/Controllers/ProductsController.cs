@@ -200,6 +200,11 @@ namespace projRESTfulApiFitConnect.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTproduct(int id, AddProductDTO addProductDTO)
         {
+            byte[] imageBytes = Convert.FromBase64String(addProductDTO.ImageBase64);
+            // Save the image to the server
+            string filepath = Path.Combine(_env.ContentRootPath, "Images", "ProductImages", addProductDTO.ProductImage);
+            await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+
             Tproduct tproduct = new Tproduct();
             tproduct.ProductId = id;
             if(!string.IsNullOrEmpty(addProductDTO.ProductName))
@@ -239,13 +244,21 @@ namespace projRESTfulApiFitConnect.Controllers
         [HttpPost]
         public async Task<ActionResult<Tproduct>> PostTproduct(AddProductDTO addProductDTO)
         {
-            Tproduct tproduct = new Tproduct();
-            tproduct.ProductName = addProductDTO.ProductName;
-            tproduct.CategoryId = addProductDTO.CategoryId;
-            tproduct.ProductUnitprice = addProductDTO.ProductUnitprice;
-            tproduct.ProductDetail = addProductDTO.ProductDetail;
-            tproduct.ProductImage = addProductDTO.ProductImage;
-            tproduct.ProductSupplied = true;
+            // Decode the base64 image string
+            byte[] imageBytes = Convert.FromBase64String(addProductDTO.ImageBase64);
+            // Save the image to the server
+            string filepath = Path.Combine(_env.ContentRootPath, "Images", "ProductImages", addProductDTO.ProductImage);
+            await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+
+            Tproduct tproduct = new Tproduct
+            {
+                ProductName = addProductDTO.ProductName,
+                CategoryId = addProductDTO.CategoryId,
+                ProductUnitprice = addProductDTO.ProductUnitprice,
+                ProductDetail = addProductDTO.ProductDetail,
+                ProductImage = addProductDTO.ProductImage, 
+                ProductSupplied = true
+            };
             _context.Tproducts.Add(tproduct);
             await _context.SaveChangesAsync();
 

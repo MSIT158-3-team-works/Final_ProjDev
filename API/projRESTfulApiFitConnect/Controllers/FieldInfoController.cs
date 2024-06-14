@@ -20,7 +20,7 @@ namespace projRESTfulApiFitConnect.Controllers
         }
         // GET api/Field
         [HttpGet(Name = "GetFieldInfos")]
-        public async Task<ActionResult<IEnumerable<FieldInfoDto>>> GetFields()
+        public async Task<ActionResult<IEnumerable<FieldInfoDto>>> GetFieldsInfo()
         {
             string filepath = "";
 
@@ -50,17 +50,15 @@ namespace projRESTfulApiFitConnect.Controllers
                 FieldInfoDto fieldinfoDto = new FieldInfoDto()
                 {
                     GymId = item.GymId,
-                    Floor = item.Floor,
                     FieldName = item.FieldName,
-                    //FieldPhoto = base64Image
-                    //FieldDescribe = item.FieldDescribe,
+                    FieldPhoto = base64Image
                 };
                 fieldinfoDtos.Add(fieldinfoDto);
             }
             return Ok(fieldinfoDtos);
         }
 
-        // get api/<回傳id場地>
+        // POST api/<FieldInfoController>
         [HttpGet("{id}")]
         public async Task<ActionResult<Tfield>> GetTField(int id)
         {
@@ -76,18 +74,6 @@ namespace projRESTfulApiFitConnect.Controllers
             }
 
             return tField;
-        }
-
-        // PUT api/<FieldInfoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<FieldInfoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

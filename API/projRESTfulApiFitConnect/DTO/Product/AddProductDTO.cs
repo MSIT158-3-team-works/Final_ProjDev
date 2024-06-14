@@ -11,5 +11,7 @@
         public string? ProductDetail { get; set; }
 
         public string? ProductImage { get; set; }
+
+        public string? ImageBase64 { get; set; }
     }
 }

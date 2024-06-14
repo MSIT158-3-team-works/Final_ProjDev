@@ -1,0 +1,155 @@
+﻿@{
+    ViewData["Title"] = "GymReview";
+}
+<div style="padding-top:120px;"></div>
+<h1>審核場館</h1>
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <h3>負責人</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">負責人姓名</span>
+                    <input type="text" class="form-control" id="Owner" value=" " aria-describedby="basic-addon1" name="Owner">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h3>公司名</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">公司名</span>
+                    <input type="text" class="form-control" id="Name" aria-describedby="basic-addon1" name="Name">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h3>電話</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">電話</span>
+                    <input type="text" class="form-control" id="GymPhone" aria-describedby="basic-addon1" name="GymPhone">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h3>場館照片</h3>
+                <img src=" data:image /png;base64,${item.gymPhoto}" id="GymPhoto" class="img-fluid rounded-start">
+            </div>
+
+            <a href="https://localhost:7168/admin/reviewlist" class="btn btn-primary" id="btnsubmit">返回列表</a>
+
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="mb-3">
+                <h3>場館名</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">場館名</span>
+                    <input type="text" class="form-control" id="GymName" aria-describedby="basic-addon1" name="GymName">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h3>營業時間</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">開始時間</span>
+                    <input type="text" class="form-control" id="start_time" aria-describedby="basic-addon1" name="start_time">
+                </div><div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">結束時間</span>
+                    <input type="text" class="form-control" id="end_time" aria-describedby="basic-addon1" name="end_time">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h3>縣市   地區</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">開始時間</span>
+                    <input type="text" class="form-control" id="citys" aria-describedby="basic-addon1" name="city">
+                </div><div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">結束時間</span>
+                    <input type="text" class="form-control" id="regions" aria-describedby="basic-addon1" name="region">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h3>地址</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">地址</span>
+                    <input type="text" class="form-control" id="GymAddress" aria-describedby="basic-addon1" name="GymAddress">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h3>停車場資訊</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">停車場</span>
+                    <input type="text" class="form-control" id="GymPark" aria-describedby="basic-addon1" name="GymPark">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h3>交通資訊</h3>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">交通</span>
+                    <input type="text" class="form-control" id="GymTraffic" aria-describedby="basic-addon1" name="GymTraffic">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-text">場地簡介</span>
+                <textarea class="form-control" id="GymDescribe" aria-label="GymDescribe" name="GymDescribe"></textarea>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const params = new URLSearchParams(window.location.search);
+            const gymId = params.get('id');
+
+            if (gymId) {
+                try {
+                    const response = await fetch(`https://localhost:7199/api/AdminGymlist/${gymId}`);
+                    const data = await response.json();
+                    if (data) {
+                        console.log("Fetched data:", data);
+                        //資料設定唯讀
+                        const setReadonly = (elementId, value) => {
+                            const element = document.getElementById(elementId);
+                            element.value = value || '';
+                            element.setAttribute('readonly', true);
+                        };
+                        //讀取API回傳資料
+                        setReadonly('Owner', data.owner);
+                        setReadonly('Name', data.name);
+                        setReadonly('GymPhone', data.gymPhone);
+                        setReadonly('GymName', data.gymName);
+                        setReadonly('start_time', data.start_time);
+                        setReadonly('end_time', data.end_time);
+                        setReadonly('citys', data.city);
+                        setReadonly('regions', data.region);
+                        setReadonly('GymAddress', data.gymAddress);
+                        setReadonly('GymPark', data.gymPark);
+                        setReadonly('GymTraffic', data.gymTraffic);
+
+                        const gymDescribeElement = document.getElementById('GymDescribe');
+                        gymDescribeElement.value = data.gymDescribe || '';
+                        gymDescribeElement.setAttribute('readonly', true);
+                        //如果有圖片則顯示
+                        if (data.gymPhoto) {
+                            const img = document.getElementById('GymPhoto');
+                            img.src = `data:image/png;base64,${data.gymPhoto}`;
+                            img.style.display = 'block';
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching gym data:', error);
+                }
+            }
+        });
+    </script>
+}

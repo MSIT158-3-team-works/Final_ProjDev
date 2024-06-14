@@ -42,5 +42,22 @@ namespace projFitConnect.Controllers
         {
             return View();
         }
+
+        public IActionResult GymCreate()
+        {
+            return View();
+        }
+        public IActionResult ReviewList()
+        {
+            return View();
+        }
+        public IActionResult GymReview()
+        {
+            return View();
+        }
+        public IActionResult FieldCreate()
+        {
+            return View();
+        }
     }
 }

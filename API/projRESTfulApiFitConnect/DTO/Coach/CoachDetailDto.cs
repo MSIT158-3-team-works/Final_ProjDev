@@ -15,9 +15,9 @@ namespace projRESTfulApiFitConnect.DTO.Coach
         public List<ExpertiseDto>? Experties { get; set; }
         public string Address { get; set; } = null!;
         public string? RoleDescription { get; set; } = null!;
+        public int? GenderID { get; set; } = null!;
         public string? GenderDescription { get; set; } = null!;
         public List<CityDto>? Region { get; set; }
         public List<rateCoachDTO>? CoachRate { get; set; }
-        public decimal? AverageRate { get; set; } = null!;
     }
 }
