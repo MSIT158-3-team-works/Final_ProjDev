@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1f6vuQDX2lc=",
+  "dgSpecHash": "UbS8Y2X8+wU=",
   "success": true,
-  "projectFilePath": "C:\\期末資料夾\\Final_ProjDev_Hank\\MVC\\projFitConnect\\projFitConnect.csproj",
+  "projectFilePath": "C:\\Users\\User\\Desktop\\0613333\\MVC\\projFitConnect\\projFitConnect.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

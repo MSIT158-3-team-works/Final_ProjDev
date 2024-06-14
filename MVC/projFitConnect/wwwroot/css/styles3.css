@@ -29,11 +29,18 @@
 .divimg {
     color: gray;
     background-color: gray;
+    
 }
 
 .colored_a {
-    color: crimson;
+    color: white;
+    text-decoration: none; /* 移除下划线 */
 }
+
+    .colored_a:hover {
+        color: lightblue;
+        text-decoration: none; 
+    }
 
 .footer_top li {
     font-size: 20px;
@@ -44,7 +51,8 @@
     font-weight: bold;
 }
 
-.masthead {
+
+/*.masthead {
     padding: 20px 0;
 }
 
@@ -59,4 +67,4 @@
 
     .masthead .masthead-heading {
         margin-bottom: 10px;
-    }
+    }*/
