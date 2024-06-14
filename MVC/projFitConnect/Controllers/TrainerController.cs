@@ -12,8 +12,10 @@ namespace projFitConnect.Controllers
         {
             return View();
         }
-        public IActionResult Coach()
+        public IActionResult Coach(int? id)
         {
+            if (id == null || id <= 0) { return RedirectToAction("Search"); }
+            ViewBag.id = id;
             return View();
         }
     }

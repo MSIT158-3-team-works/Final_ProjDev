@@ -19,6 +19,8 @@ public partial class GymContext : DbContext
 
     public virtual DbSet<FieldReservedDetail> FieldReservedDetails { get; set; }
 
+    public virtual DbSet<GymInfoDetail> GymInfoDetails { get; set; }
+
     public virtual DbSet<TGym> TGyms { get; set; }
 
     public virtual DbSet<TGymTime> TGymTimes { get; set; }
@@ -175,6 +177,45 @@ public partial class GymContext : DbContext
             entity.Property(e => e.Region)
                 .HasMaxLength(50)
                 .HasColumnName("region");
+        });
+
+        modelBuilder.Entity<GymInfoDetail>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("gym_info_detail");
+
+            entity.Property(e => e.City)
+                .HasMaxLength(50)
+                .HasColumnName("city");
+            entity.Property(e => e.CityId).HasColumnName("city_id");
+            entity.Property(e => e.FieldId).HasColumnName("field_id");
+            entity.Property(e => e.FieldName)
+                .HasMaxLength(50)
+                .HasColumnName("field_name");
+            entity.Property(e => e.FieldPhoto).HasColumnName("field_photo");
+            entity.Property(e => e.GymAddress)
+                .HasMaxLength(50)
+                .HasColumnName("Gym_address");
+            entity.Property(e => e.GymDescribe).HasColumnName("Gym_describe");
+            entity.Property(e => e.GymId).HasColumnName("Gym_id");
+            entity.Property(e => e.GymName)
+                .HasMaxLength(20)
+                .HasColumnName("Gym_name");
+            entity.Property(e => e.GymPark)
+                .HasMaxLength(50)
+                .HasColumnName("Gym_park");
+            entity.Property(e => e.GymPhoto).HasColumnName("Gym_photo");
+            entity.Property(e => e.GymTime)
+                .HasMaxLength(20)
+                .HasColumnName("Gym_time");
+            entity.Property(e => e.GymTraffic)
+                .HasMaxLength(50)
+                .HasColumnName("Gym_traffic");
+            entity.Property(e => e.Region)
+                .HasMaxLength(50)
+                .HasColumnName("region");
+            entity.Property(e => e.RegionId).HasColumnName("region_id");
         });
 
         modelBuilder.Entity<TGym>(entity =>
@@ -480,7 +521,7 @@ public partial class GymContext : DbContext
             entity.HasOne(d => d.Coach).WithMany(p => p.TcoachInfoIds)
                 .HasForeignKey(d => d.CoachId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_coach_info_id_Identity");
+                .HasConstraintName("FK_tcoach_info_id_tIdentity");
         });
 
         modelBuilder.Entity<TcoachPhoto>(entity =>
