@@ -28,10 +28,4 @@ public partial class GymInfoDetail
     public string? GymTraffic { get; set; }
 
     public string? GymDescribe { get; set; }
-
-    public int FieldId { get; set; }
-
-    public string FieldName { get; set; } = null!;
-
-    public string FieldPhoto { get; set; } = null!;
 }
