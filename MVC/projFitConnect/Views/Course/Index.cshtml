@@ -1,0 +1,437 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitConnect</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            display: flex; /* 使用Flexbox */
+            justify-content: space-between; /* logo靠左，ul靠右 */
+            align-items: flex-end; /* ul靠下 */
+        }
+
+            nav img {
+                margin-right: auto;
+            }
+
+        }
+
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+            nav ul li a {
+                color: white; /* 將連結文字顏色設為灰色 */
+            }
+
+                nav ul li a:hover {
+                    color: dodgerblue; /* 滑鼠滑過時將連結文字顏色變為黑色 */
+                }
+
+
+        .search-and-select {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+        }
+
+            .search-and-select input[type="text"], .search-and-select select {
+                flex: 1;
+                margin-right: 10px;
+                font-size: 1.2em;
+                padding: 10px;
+            }
+
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .block {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            width: 70%;
+            margin: auto;
+        }
+
+            .block img {
+                width: 100%;
+                height: auto;
+            }
+
+            .block h3 {
+                margin-top: 0;
+            }
+
+        .button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+
+        h3 {
+            font-size: 2em;
+        }
+
+        .course-count {
+            text-align: left;
+            padding: 20px;
+            font-size: 1.5em;
+        }
+
+        .card-body {
+            background-color: whitesmoke
+        }
+
+        .info {
+            display: flex;
+            align-items: center;
+            margin-top: -25px;
+        }
+
+            .info img {
+                margin-right: 5px;
+            }
+
+            .info p {
+                margin-top: 15px;
+            }
+
+        .price {
+            text-align: right;
+            color: red;
+        }
+        /* 分頁控制元素的CSS */
+        #pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+            #pagination button {
+                padding: 5px 15px;
+                margin: 0 10px;
+                background-color: white;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                #pagination button:hover {
+                    background-color: white;
+                }
+
+            #pagination #page-info {
+                margin: 0 10px;
+            }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .pagination {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .pagination li {
+                margin: 18px 5px;
+            }
+
+            .pagination a {
+                text-decoration: none;
+                color: black;
+                padding: 8px 16px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            .pagination .active a {
+                background-color: cornflowerblue;
+                color: black;
+                border: 1px solid cornflowerblue;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+            }
+    </style>
+</head>
+<body>
+
+    <h1 style="margin-top:100px;">健身課程</h1>
+
+    <!-- 搜索框 -->
+    <div id="search-container" class="search-and-select">
+        <input type="text" id="search-input" placeholder="搜索...">
+
+        <!-- 地區下拉式選單 -->
+        <select id="gym-select" class="form-select" aria-label="Default select example">
+            <option value="">選擇地區</option>
+        </select>
+
+        <!-- 課程類別下拉式選單 -->
+        <select id="sort1-select" class="form-select" aria-label="Default select example">
+            <option value="0">選擇課程類別</option>
+            <option value="1">有氧</option>
+            <option value="2">無氧</option>
+            <option value="3">其他</option>
+        </select>
+        <select id="sort2-select" class="form-select" aria-label="Default select example">
+            <option value="0">選擇課程類別</option>
+            <option value="1">肌耐力訓練</option>
+            <option value="2">瑜珈系列</option>
+            <option value="3">舞蹈系列</option>
+            <option value="4">拳擊系列</option>
+            <option value="5">重量訓練</option>
+            <option value="6">身體雕塑</option>
+        </select>
+        <input type="date" id="date-select" name="name" value="" />
+    </div>
+    
+    <div id="course-count" class="course-count">
+        <h2>
+            共有--個課程
+        </h2>
+    </div>
+    <!-- 內容 -->
+    <div class="row row-cols-1 row-cols-md-2 g-4" id="main_div">
+        <div class="col">
+            <div class="card">
+                <img src="~/Images/pilatis.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">[團體班] 超級小班 | 器械皮拉提斯</h5>
+                    <p class="card-text">
+                        2~4人精緻小班教學，強度依上課學員調整。
+                        皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
+                    </p>
+                    <div class="info">
+                        <img src="~/images/time.png" /><p>2024.7.15</p>
+                    </div>
+                    <div class="info">
+                        <img src="~/images/location.png" /><p>大安區</p>
+                    </div>
+                    <div>
+                        <p class="price">每堂7,990元</p>
+                    </div>
+
+                    <a href="#" class="button">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 分頁控制元素的HTML -->
+    <div id="pagination">
+        <button onclick="pagingHandler(-1)"><a href="#"><<</a></button>
+        <div class="pagination-container">
+            <ul class="pagination" id="ulpaging">
+                <li><a href="#">1</a></li>
+                <li class="page-item active" onclick="pagingHandler(3)"><a class="page-link">2</a></li>
+            </ul>
+        </div>
+        <button onclick="pagingHandler(0)"><a href="#">>></a></button>
+    </div>
+
+
+
+</body>
+</html>
+@section Scripts {
+    <script>
+        let s = "";
+        let array = [];
+        let Maxpage = 0;
+        const main = document.getElementById("main_div");
+        const searchInput = document.getElementById("search-input");
+        const selectGym = document.getElementById("gym-select");
+        const selectSort1 = document.getElementById("sort1-select");
+        const selectSort2 = document.getElementById("sort2-select");
+        const selectDate = document.getElementById("date-select");
+        const courseCount = document.getElementById("course-count");
+        const ulPaging = document.getElementById('ulpaging');
+        const searchData = {
+            "sort1": 0,
+            "sort2": 0,
+            "field": "",
+            "courseDate": null,
+            "courseStartTime": null,
+            "keyword": "",
+            "page": 1,
+            "pageSize": 10,
+            "sortBy": "",
+            "sortType": "asc"
+        };
+
+        //選擇場館
+        selectGym.addEventListener('change', (event) => {
+            //console.log(event.target.value);
+            searchData.field = event.target.value;
+            searchData.page = 1;
+            loadCourse();
+        })
+        //選擇類別
+        selectSort1.addEventListener('change', (event) => {
+            //console.log(event.target.value);
+            searchData.sort1 = event.target.value;
+            searchData.page = 1;
+            loadCourse();
+        })
+        //選擇類別
+        selectSort2.addEventListener('change', (event) => {
+            //console.log(event.target.value);
+            searchData.sort2 = event.target.value;
+            searchData.page = 1;
+            loadCourse();
+        })
+        //選擇日期
+        selectDate.addEventListener('change', (event) => {
+            //console.log(event.target.value);
+            searchData.courseDate = event.target.value;
+            searchData.page = 1;
+            loadCourse();
+        })
+        //搜尋關鍵字
+        searchInput.addEventListener('keydown', event => {
+            if (event.keyCode === 13) {
+                if (event.target.value != null)
+                    searchData.keyword = event.target.value;
+                else
+                    searchData.keyword = "";
+                searchData.page = 1;
+                loadCourse();
+            }
+        })
+        //換頁按鈕
+        const pagingHandler = (page) => {
+            if (page < 0) { console.log("-1"); page=searchData.page-1; if (page <= 0) page = 1; }
+            if (page == 0) { console.log("+1"); page = searchData.page + 1; if (page >= Maxpage) page = Maxpage; }
+            searchData.page = page;
+            loadCourse();
+        }
+        //載入場館
+        const loadGym = async () => {
+            let url = 'https://localhost:7199/api/Course/SEARCH';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "sort1": 0,
+                    "sort2": 0,
+                    "courseDate": null,
+                    "courseStartTime": null,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 999,
+                    "sortBy": "",
+                    "sortType": "asc"
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+
+            array = []; // 清空場館陣列
+            s = ''; // 清空選項字串
+            for (var field of data.courseResult) {
+                var fieldName = field.gym;
+                if (!array.includes(fieldName)) {
+                    array.push(fieldName);
+                    s += `<option value="${fieldName}"${fieldName === searchData.field ? ' selected' : ''}>${fieldName}</option>`;
+                }
+            }
+            selectGym.innerHTML = '<option value="0">選擇場館</option>' + s;
+        }
+        //載入
+
+        //載入課程
+        const loadCourse = async () => {
+            let url = 'https://localhost:7199/api/Course/SEARCH';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(searchData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            console.log('allCourse', data);
+            Maxpage = data.totalPages;
+            //顯示資料
+            courseCount.innerHTML = `<h2>共有${data.totalCount}個課程</h2>`;
+            const courses = data.courseResult.map(course => {
+                //data:image/jpeg;base64,${course.photo}
+                return (`<div class="col">
+                           <div class="card">
+                           <input type="hidden" value="${course.classScheduleId}" id="course-select"/>
+                              <img src="data:image/jpeg;base64,${course.photo}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                  <h5 class="card-title">${course.class}</h5>
+                                  <p class="card-text">${course.introduction}</p>
+                                  <div class="info">
+                                    <img src="/images/time.png" /><p>${course.courseDate}</p>
+                                   </div>
+                                   <div class="info">
+                                    <img src="/images/location.png" /><p>${course.gym}</p>
+                                   </div>
+                                    <div>
+                                      <p class="price">每堂${course.classPayment}元</p>
+                                    </div>
+                                    <a href="https://localhost:7168/course/search/${course.classScheduleId}" class="button">了解更多</a>
+                                  </div>
+                                </div>
+                             </div>`)
+            })
+             main.innerHTML = courses.join("");
+
+             //載入場館
+            loadGym();
+
+            //顯示分頁按鈕
+            let liPages = "", pageCount = 0;
+            MaxPage = data.totalPages;
+            for (let i = 1; i <= MaxPage; i++) {
+                pageCount++;
+                liPages += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+            }
+            ulPaging.innerHTML = liPages;
+        }
+        loadCourse();
+        
+
+    </script>
+}
