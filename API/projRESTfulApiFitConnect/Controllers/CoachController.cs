@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Composition;
+using System.Drawing;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -71,12 +72,14 @@ namespace projRESTfulApiFitConnect.Controllers
                 var experts = item.TcoachExperts.Select(te => new ExpertiseDto
                 {
                     ClassName = te.Class.ClassName,
+                    ClassSort1ID = te.Class.ClassSort1.ClassSort1Id,
                     ClassSort1 = te.Class.ClassSort1.ClassSort1Detail.ToString(),
                     ClassSort2 = te.Class.ClassSort2.ClassSort2Detail.ToString()
                 }).ToList();
                 var regions = item.TfieldReserves.Select(fr => new CityDto
                 {
                     City = fr.Field.Gym.Region.City.City.ToString(),
+                    RegionId = fr.Field.Gym.Region.RegionId,
                     Region = fr.Field.Gym.Region.Region.ToString()
                 }).ToList();
                 //rlist.Append(item.TmemberRateClasses);
@@ -114,6 +117,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     Birthday = item.Birthday,
                     Address = item.Address,
                     Experties = experts,
+                    GenderID = item.Gender.GenderId,
                     GenderDescription = item.Gender.GenderText,
                     Region = regions,
                     CoachRate = rates
@@ -149,9 +153,17 @@ namespace projRESTfulApiFitConnect.Controllers
             //排序
             switch (coachSearchDTO.sortBy)
             {
+                //依地區
+                case "RegionId":
+                    everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.Region[0].RegionId) : everyCoach.OrderByDescending(s => s.Region[0].RegionId);
+                    break;
+                //依有/無氧
+                case "Sort1ID":
+                    everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.Experties[0].ClassSort1ID) : everyCoach.OrderByDescending(s => s.Experties[0].ClassSort1ID);
+                    break;
                 //依性別
-                case "GenderDescription":
-                    everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.GenderDescription) : everyCoach.OrderByDescending(s => s.GenderDescription);
+                case "GenderID":
+                    everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.GenderID) : everyCoach.OrderByDescending(s => s.GenderID);
                     break;
                 //預設為id
                 default:
@@ -200,7 +212,7 @@ namespace projRESTfulApiFitConnect.Controllers
             }
 
             var coachInfo = coach.TcoachInfoIds.FirstOrDefault();
-            var experts = await _context.TcoachExperts.Where(x => x.CoachId == id).Include(x => x.Class).ToListAsync();
+            var experts = await _context.TcoachExperts.Where(x => x.CoachId == id).Include(x => x.Class.ClassSort2).ToListAsync();
             var rates = await _context.TmemberRateClasses.Where(x => x.CoachId == id).Include(x => x.Reserve.Member).Include(x => x.Reserve.ClassSchedule.Class).ToListAsync();
             var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseStartTime).Include(x => x.ClassStatus).ToListAsync();
             var fields = await _context.TfieldReserves.Where(x => x.CoachId == id).Include(x => x.Field.Gym.Region.City).ToListAsync();
@@ -212,13 +224,21 @@ namespace projRESTfulApiFitConnect.Controllers
                 base64Image = Convert.ToBase64String(bytes);
             }
             foreach (var expert in experts)
-            {
+            { 
                 ExpertiseDto expertiseDto = new ExpertiseDto()
                 {
                     ClassName = expert.Class.ClassName,
+                    ClassSort2 = expert.Class.ClassSort2.ClassSort2Detail
                 };
                 expertiseDtos.Add(expertiseDto);
             }
+            //foreach(var co in coach)
+            //{
+            //    rateCoachDTO rateDTO = new rateCoachDTO
+            //    {
+            //        RateCoach = expert.Class
+            //    };
+            //};
             CoachDetailDto coachDetailDto = new CoachDetailDto()
             {
                 Id = coach.Id,
@@ -249,12 +269,26 @@ namespace projRESTfulApiFitConnect.Controllers
             }
             foreach (var field in fields)
             {
+                string filepath = "";
+                string base64Image1 = "";
+                filepath = Path.Combine(_env.ContentRootPath, "Images", "GymImages", field.Field.Gym.GymPhoto);
+                if (System.IO.File.Exists(filepath))
+                {
+                    byte[] bytes = await System.IO.File.ReadAllBytesAsync(filepath);
+                    base64Image1 = Convert.ToBase64String(bytes);
+                }
+
                 FieldDetailDto fieldDetailDto = new FieldDetailDto()
                 {
+                    GymPhoto = base64Image1,
                     FieldReserveId = field.FieldReserveId,
+                    GymId = field.Field.GymId,
                     City = field.Field.Gym.Region.City.City,
                     Region = field.Field.Gym.Region.Region,
-                    Gym = field.Field.Gym.GymName,
+                    GymName = field.Field.Gym.GymName,
+                    GymTime = field.Field.Gym.GymTime,
+                    GymPhone = field.Field.Gym.GymPhone,
+                    GymAddress = field.Field.Gym.GymAddress,
                     Field = field.Field.FieldName,
                     PaymentStatus = field.PaymentStatus,
                     ReserveStatus = field.ReserveStatus
@@ -366,6 +400,16 @@ namespace projRESTfulApiFitConnect.Controllers
         private bool TIdentityExists(int id)
         {
             return (_context.TIdentities?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        [HttpGet("ma/{id}")]
+        public async Task<IActionResult>ma(int id)
+        {
+            var maa = _context.TIdentities
+                .Where(x => x.Id == id)
+                .Include(x => x.TcoachInfoIds)
+                .FirstOrDefault();
+
+            return Ok(maa);
         }
     }
 }
