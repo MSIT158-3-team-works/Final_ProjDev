@@ -1,10 +1,10 @@
 ﻿namespace projRESTfulApiFitConnect.DTO.Course
 {
-    public class OpenCourseDto
+    public class PutCourseDTO
     {
         public int ClassScheduleId { get; set; }
 
-        public string? Class { get; set; }
+        public string? Class { get; set; }= null!;
 
         public string? Coach { get; set; }
         public string? Introduction { get; set; }

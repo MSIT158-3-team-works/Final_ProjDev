@@ -8,8 +8,10 @@ namespace projFitConnect.Controllers
         {
             return View();
         }
-        public IActionResult Search()
+        public IActionResult Search(int? id)
         {
+            if (id == null || id <= 0) { return RedirectToAction("Index"); }
+            ViewBag.classScheduleId = id;
             return View();
         }
     }

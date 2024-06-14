@@ -32,16 +32,11 @@
             <h2 class="fw-bold my-4 " id="totalcoaches">共有 -- 位教練</h2>
         </div>
         <form class="d-flex">
-            @* <select class="w-100 mx-3 my-4 px-3 rounded-3 form-select" name="city" id="citys">
-            <option>縣市</option>
-            </select>
-            <select class="w-100 mx-3 my-4 px-3 rounded-3 form-select" name="city" id="regions">
-            <option>地區</option>
-            </select> *@
             <button type="button" class="w-100 mx-3 my-4 px-3 rounded-3 btn btn-info" id="resetButton" style="width:50px;">重新篩選</button>
         </form>
     </div>
     <div class="d-flex flex-row flex-wrap justify-content-between" id="div">
+        教練卡
     </div>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
@@ -108,6 +103,9 @@
             inpSearch.value = "";
             loadCoaches();
         });
+
+        
+
         //載入頁面資訊function
         const loadCoaches = async () => {
             const url = 'https://localhost:7199/api/Coach/SEARCH';
@@ -123,7 +121,7 @@
             let exps = '';
             let regs = '';
             //教練卡片生成
-            data.coachResult.map(item => {
+            const card = data.coachResult.map(item => {
                 //專長(不重複)
                 const uniqueExp = {};
                 const exps = item.experties.map(exp => {
@@ -147,46 +145,45 @@
                 }).filter(reg => reg !== null).join(`<br>`);
                 console.log(regs);
                 //教練評分
-                coachRates = item.coachRate.map(rate => {
-                    return `${rate.rateCoach}`
-                })
-                let sum = parseFloat('0')
-                for (let i = 0; i < coachRates.length; i++) {
-                    sum += parseFloat(coachRates[i])
-                }
-                let averageRate;
-                if (coachRates.length > 0) {
-                    averageRate = sum / coachRates.length;
-                    console.log(averageRate);
-                } else {
-                    averageRate = "尚無評價";
-                }
+                const coachRates = item.coachRate.map(rate => parseFloat(rate.rateCoach));
+                const sum = coachRates.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+                const averageRate = coachRates.length > 0 ? sum / coachRates.length : "尚無評價";
+                // coachRates = item.coachRate.map(rate => {
+                //     return `${rate.rateCoach}`
+                // })
+                // let sum = parseFloat('0')
+                // for (let i = 0; i < coachRates.length; i++) {
+                //     sum += parseFloat(coachRates[i])
+                // }
+                // let averageRate;
+                // if (coachRates.length > 0) {
+                //     averageRate = sum / coachRates.length;
+                //     console.log(averageRate);
+                // } else {
+                //     averageRate = "尚無評價";
+                // }
                 //生成教練卡
-                str += `<div class="card mb-3" style="max-width: 540px;" onclick="findCoach${item.id}">
-                            <div class="row g-0">
+                return( `<a href="/Trainer/Coach?id=${item.id}" class="card mb-3" style="max-width: 540px; text-decoration: none;">
+                                <div class="row g-0">
                                 <div class="col-md-4 d-flex align-items-center justify-content-center" style="overflow: hidden;">
                                     <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <p class="card-text">${item.id}</p>
                                         <h4 class="card-title">${item.name}</h4>
                                         <h6 class="card-text"><img src="/assets/img/star1.png">${averageRate}</h6>
                                         <p class="card-text">${regs}</p>
                                         <p class="card-text">${item.intro}</p>
-                                        <p class="card-text"><a>${exps}</a></p>
+                                        <p class="card-text">${exps}</p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>`;
-                console.log(item);
-
+                                </div>
+                        </a>`)
             })
             // const imageUrl = `data:image/jpeg;base64,${data[0].photo}`;
             // document.getElementById('image').src = imageUrl;
-            div.innerHTML = str;
+            div.innerHTML = card.join("");
             totalcoaches.textContent = `共有${data.totalCount}位教練`;
-
 
             //顯示分頁按鈕
             let liPages = "";
@@ -195,9 +192,6 @@
             }
             ulPaging.innerHTML = liPages;
         };
-
-        //轉頁
-
 
         //載入sort1選項function
         const loadSort1 = async () => {
@@ -250,9 +244,6 @@
                 const response = await fetch("https://localhost:7199/api/Region");
                 allData = await response.json();
                 const uniqueCities = new Set();
-
-                //console.log('Fetched region data:', allData); //檢查縣市讀取
-
                 // 過濾出至少有一個場館的城市
                 allData.forEach(item => {
                     if (!uniqueCities.has(item.city) && item.gymId !== 0) {
@@ -269,8 +260,6 @@
         }
         // 載入地區
         async function loadRegions() {
-            // const regions = document.getElementById('regions');
-            // const citys = document.getElementById('citys');
             const selectedCity = citys.value;
 
             let regionOptions = '<option>請選擇地區</option>';
@@ -313,48 +302,9 @@
             loadRegions();
             loadCoaches();
         });
-
-        // const loadGym = async () => {
-        //     const url = 'https://localhost:7199/api/Region'; // 獲取分類的 API
-        //     const response = await fetch(url);
-        //     if (!response.ok) {
-        //         return;
-        //     }
-        //     const gyms = await response.json();
-        //     regionSearch.innerHTML = "";
-        //     citySearch.innerHTML = "";
-        //     // 添加一個預設縣市選項
-        //     const defCityOption = document.createElement('option');
-        //     defCityOption.text = '縣市';
-        //     citySearch.appendChild(defCityOption);
-        //     // 添加一個預設地區選項
-        //     const defRegionOption = document.createElement('option');
-        //     defRegionOption.text = '地區';
-        //     regionSearch.appendChild(defRegionOption);
-        //     // 動態生成選項
-        //     var addedCities = {};
-        //     var addedRegions = {};
-        //     gyms.forEach(gym => {
-        //         if (!addedCities[gym.city]) {
-        //             var cityOption = document.createElement('option');
-        //             cityOption.text = gym.city;
-        //             citySearch.appendChild(cityOption);
-        //             addedCities[gym.city] = true;
-        //         }
-        //         if (!addedRegions[gym.region]) {
-        //             var regionOption = document.createElement('option');
-        //             regionOption.text = gym.region;
-        //             regionSearch.appendChild(regionOption);
-        //             addedRegions[gym.region] = true;
-        //         }
-        //     });
-        // };
-
         loadCoaches();
         loadSort1();
         loadSort2();
-        //loadGym();
-
 
         //關鍵字搜尋事件
         inpSearch.addEventListener('keydown', event => {
@@ -383,10 +333,8 @@
             if (event.target.value === '有氧/無氧') {
                 searchData.sort1 = "";
             } else {
-                // 當選擇發生時，更新 searchData 中的 sort1 屬性
                 searchData.sort1 = event.target.value;
             }
-            // 調用 loadCoaches 重新加載數據
             loadCoaches();
         });
         //依課程分類搜尋事件sort2
@@ -395,10 +343,8 @@
             if (event.target.value === '課程種類') {
                 searchData.sort2 = "";
             } else {
-                // 當選擇發生時，更新 searchData 中的 sort2 屬性
                 searchData.sort2 = event.target.value;
             }
-            // 調用 loadCoaches 重新加載數據
             loadCoaches();
         });
         //依性別搜尋
@@ -407,35 +353,22 @@
             if (event.target.value === '性別') {
                 searchData.gender = "";
             } else {
-                // 當選擇發生時，更新 searchData 中的 sort2 屬性
                 searchData.gender = event.target.value;
             }
-            // 調用 loadCoaches 重新加載數據
             loadCoaches();
         });
-        //依縣市搜尋
-        // citySearch.addEventListener('change', event => {
-        //     if (event.target.value === '縣市') {
-        //         searchData.city = "";
-        //     } else {
-        //         // 當選擇發生時，更新 searchData 中的 sort2 屬性
-        //         searchData.city = event.target.value;
-        //     }
-        //     // 調用 loadCoaches 重新加載數據
-        //     loadCoaches();
-        // })
-        //依地區搜尋
-        // regionSearch.addEventListener('change', event => {
-        //     if (event.target.value === '地區') {
-        //         searchData.region = "";
-        //     } else {
-        //         // 當選擇發生時，更新 searchData 中的 sort2 屬性
-        //         searchData.region = event.target.value;
-        //     }
-        //     // 調用 loadCoaches 重新加載數據
-        //     loadCoaches();
-        // })
-
 
     </script>
+}
+@section Styles {
+<style>
+        /*滑鼠覆蓋卡片效果*/
+        .card {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+            .card:hover {
+                transform: scale(1.03);
+            }
+</style>
 }

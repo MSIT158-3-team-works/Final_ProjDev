@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     // ViewData["Title"] = "Coach";
 }
 <main style="padding-top:85px;">
@@ -7,7 +6,7 @@
         <h1>返回</h1>
     </div>
     <div class="container marketing ">
-         <div class="mx-2 wid">
+        <div class="mx-2 wid">
             <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -16,13 +15,13 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="3000">
-                        <img src="@Url.Content("~/assets/img/portfolio/1.jpg")" class="d-block w-100"  alt="...">
+                        <img src="@Url.Content("~/assets/img/portfolio/1.jpg")" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item" data-bs-interval="3000">
-                        <img src="@Url.Content("~/assets/img/portfolio/2.jpg")" class="d-block w-100"  alt="...">
+                        <img src="@Url.Content("~/assets/img/portfolio/2.jpg")" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item" data-bs-interval="3000">
-                        <img src="@Url.Content("~/assets/img/portfolio/3.jpg")" class="d-block w-100"  alt="...">
+                        <img src="@Url.Content("~/assets/img/portfolio/3.jpg")" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -34,52 +33,45 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        </div> 
+        </div>
     </div>
-    
+
     <div class="container marketing mt-3">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" href="#section-home" role="tab" aria-controls="section-home" aria-selected="true">課程方案</a>
-            </li>
-            <li class="nav-item" role="presentation">
                 <a class="nav-link" href="#section-coachdetail" role="tab" aria-controls="section-coachdetail" aria-selected="false">教練資料</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" href="#section-experience" role="tab" aria-controls="section-experience" aria-selected="false">教學經歷</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="#section-location" role="tab" aria-controls="section-location" aria-selected="false">可上課地點</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="#section-certifications" role="tab" aria-controls="section-certifications" aria-selected="false">證照</a>
+                <a class="nav-link" href="#section-rate" role="tab" aria-controls="section-rate" aria-selected="false">評價</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="#section-training" role="tab" aria-controls="section-training" aria-selected="false">研習訓練</a>
+                <a class="nav-link" href="#section-home" role="tab" aria-controls="section-home" aria-selected="true">課程方案</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="#section-sharing" role="tab" aria-controls="section-sharing" aria-selected="false">教練分享</a>
+                <a class="nav-link" href="#section-recommand" role="tab" aria-controls="section-recommand" aria-selected="false">推薦教練</a>
             </li>
         </ul>
 
         <div id="section-coachdetail" class="section" tabindex="0">
-            <div >
-                <h2>教練資料</h2>
-                <div class=" mx-2  d-flex">
+            <div>
+                <h2><strong>教練資料</strong></h2>
+                <div id="coachDetail" class=" mx-2  d-flex" style=" background-color:white; border:solid 2px navy; border-radius:5px; padding:5px">
                     <div class="container marketing">
-                        <h1 class="chakra-text css-w2lj3k">Eric 陳伯維｜「運動訓練讀書會」主持人、教練研習課程講師、松山區自由教練</h1>
-                        <div class="css-1hdexa8 d-flex">
-                            <h3 class="chakra-text css-sr43l4">#<!-- -->體態優化</h3>
-                            <h3 class="chakra-text css-sr43l4">#<!-- -->新手健身</h3>
-                            <h3 class="chakra-text css-sr43l4">#<!-- -->運動表現</h3>
+                        <h1 class="chakra-text">Eric 陳伯維</h1>
+                        <div class="d-flex">
+                            <h3 class="chakra-text">#<!-- -->體態優化</h3>
+                            <h3 class="chakra-text">#<!-- -->新手健身</h3>
+                            <h3 class="chakra-text">#<!-- -->運動表現</h3>
                         </div>
-                        <div class="chakra-stack css-n1vvi7">
+                        <div class="chakra-stack">
                             <div class="css-1lekzkb">
-                                <h3 class="chakra-text css-fei0tw">關於教練</h3>
+                                <h3 class="chakra-text css-fei0tw">教練簡介</h3>
                             </div>
                             <div class="container marketing">
-
-                                <div class="coachDetail css-1hwypia">
+                                <div class="coachDetail">
                                     陳伯維 ( Eric )，中國醫藥大學 - 運動醫學系畢業，曾任運動醫學系系友會會長、中大型俱樂部教練、副理、經理，健身工作室與運動醫學診所顧問，與業界培訓講師。
 
                                     自2011年進入職場擔任私人教練，迄今十餘年接觸運動醫學與人體訓練，持續進修，學習更新更專業的運動知識與技術，至今擁有40張以上證書/證照。
@@ -91,7 +83,7 @@
                                         #松山區健身教練 #小巨蛋自由教練 #教練培訓
                                     </div>
                                 </div>
-                                <div class="css-15x71qu">
+                                <div class="">
                                     <button type="button" class="chakra-button css-1qmctmy" onclick="toggleReadMore()">Read More</button>
                                 </div>
                             </div>
@@ -102,14 +94,24 @@
         </div>
         <div id="section-location" class="section" tabindex="0">
             <div>
-                <h2>可上課地點</h2>
-                <img src="~/images/ricky.jpg" />
+                <h2><strong>可上課地點</strong></h2>
+                <div id="gymDetail">
+                    場館卡------
+                </div>
+            </div>
+        </div>
+        <div id="section-rate" class="section" tabindex="0">
+            <div>
+                <h2><strong>教練評價</strong></h2>
+                <div id="rateDetail">
+                    評價卡------
+                </div>
             </div>
         </div>
         <div id="section-home" class="section" tabindex="0">
             <div>
-                <h2>課程方案</h2>
-                <div class="row row-cols-1 row-cols-md-3 g-4">
+                <h2><strong>課程方案</strong></h2>
+                <div id="classDetail" class="row row-cols-1 row-cols-md-3 g-4">
                     <div class="col">
                         <div class="card h-100">
                             <img src="~/assets/img/portfolio/4.jpg" class="card-img-top" alt="...">
@@ -149,10 +151,20 @@
                 </div>
             </div>
         </div>
-        <div id="section-experience" class="section" tabindex="0">
+        <div id="section-recommand" class="section" tabindex="0">
             <div>
-                <h2>教學經歷</h2>
-                <img src="~/images/ricky.jpg" />
+                <h2><strong>推薦教練</strong></h2>
+                <div id="coachRecommand" class="row row-cols-1 row-cols-md-3 g-4 ">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="~/assets/img/portfolio/4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Add other sections similarly -->
@@ -161,7 +173,199 @@
 </main>
 
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">jquery設定</script>
     <script>
+        let coachID = @ViewBag.id;
+        const coachDetail = document.querySelector('#coachDetail');//教練資訊
+        const gymDetail = document.querySelector('#gymDetail');//場館資訊
+        const rateDetail = document.querySelector('#rateDetail')//評價資訊
+        const classDetail = document.querySelector('#classDetail')//課程卡片
+        const coachRecommand = document.querySelector('#coachRecommand')//教練卡
+        
+        //載入教練資料
+        const loadCoach = async () => {
+            let url = 'https://localhost:7199/api/Coach/' + coachID;
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data);
+            //取出教練專長
+            var aa = ''
+            var bb = data.coachDetailDto.experties.map(ex => ex.classSort2);
+            console.log('bb', bb);
+            var cc = [];
+            for (let i of bb) {
+                if (!cc.includes(i)) {
+                    cc.push(i);
+                }
+            }
+            for (let i of cc) {
+                aa += `#${i} `
+            }
+            // 平均評分
+            let coachRates = '';
+            let sum = 0;
+            let averageRate = '';
+            data.rateDetailDtos.forEach(item => {
+                sum += item.rateCoach;
+            });
+            if (data.rateDetailDtos.length !== 0) {
+                averageRate = sum / data.rateDetailDtos.length;
+            } else {
+                averageRate = "";
+            }
+            console.log(sum / data.rateDetailDtos.length);
+            //教練資訊
+            det = `
+              <div class="container marketing" style="position: relative;">
+                           <div class="rate"><h1>${averageRate}</h1></div>
+                    <h1 class="chakra-text">${data.coachDetailDto.name}</h1>
+                        <h5>${aa}</h5>
+                        <h5>性別 : ${data.coachDetailDto.genderDescription}</h5>
+                         <h5>聯絡電話 : ${data.coachDetailDto.phone}</h5>
+                         <h5>電子郵件 : ${data.coachDetailDto.eMail}</h5>
+                         <h3 class="chakra-text"> 教練簡介 </h3>
+                         <div class="container marketing">
+                           <div class="coachDetail">
+                                  ${data.coachDetailDto.intro}</br></br>
+                                  <p>我有什麼優點與價值 ?</p>
+                                  我是一名喜歡訓練與了解人體奧秘的訓練者/教練。</br>
+                                  喜歡簡易的邏輯與實務的內容，不喜歡繁鎖無序與繞遠路的訓練過程，喜歡探討追求訓練的本質與身體進步的重點。</br>
+                                  無痛訓練」與「運動狀況排除」是我的強項，「強化人體機能」與協助您「運動目標達成」，更是我的渴望。</br>
+                                  若有我未竟、未解之處，我會為您尋求解方與轉介比我厲害的人。</br>
+                                  我可以理解您運動上的障礙與苦惱，具備同理心的陪伴您進步。</br>
+                                  我追求能讓客戶與生活共融的訓練生活，讓「運動」走入您的生命，進而成為您的習慣。</br>
+                                  <p>而我是這樣的傳道人~盼能與您同行~~~</p>
+                            </div>
+                            <div>
+                               <button type="button" class="chakra-button css-1qmctmy" onclick = "toggleReadMore()"> Read More </button>
+                             </div>
+                     </div>`;
+            console.log(data.fieldDetailDtos);
+            //場館資訊卡
+            const gymCard = data.fieldDetailDtos.map(item => {
+                return (`<a href="/Gym/Index?id=${item.gymId}" class="card mb-3 act"  style="max-width: 800px; text-decoration:none;">
+                                      <div class="row g-0">
+                                         <div class="col-md-5 d-flex align-items-center justify-content-center" style="overflow: hidden;">
+                                           <img src="data:image/png;base64,${item.gymPhoto}" class="img-fluid rounded-start imgsize">
+                                         </div>
+                                              <div class="col-md-7">
+                                                   <div class="card-body">
+                                                      <h2 class="card-title">${item.gymName}</h2>
+                                                      <p class="card-text"><b>營業時間 :</b> ${item.gymTime}</p>
+                                                      <p class="card-text"><b>聯絡電話 :</b> ${item.gymPhone}</p>
+                                                      <p class="card-text"><b>地址 :</b> ${item.gymAddress}</p>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                </a>`)    
+            })
+            //評價資訊卡
+            let rating = '';
+            data.rateDetailDtos.map(item => {
+                rating += `<div class="card mb-3" style="max-width: 540px;">
+                              <div class="row g-0">
+                                     <div class="card-body">
+                                           <h4 class="card-title">${item.member}</h4>
+                                             <h6 class="card-text"><img src="/assets/img/star1.png">${item.rateCoach}</h6>
+                                            <p class="card-text"><b>評語 :</b> ${item.coachDescribe}</p>
+                                       </div>
+                                     </div>
+                                 </div>`;
+                console.log(rating);
+            })
+            //課程卡--未完
+            const classCard = data.fieldDetailDtos.map(item => {
+                return (`<a href="" class="card mb-3 act"  style="max-width: 800px; text-decoration:none;">
+                                              <div class="row g-0">
+                                                 <div class="col-md-5 d-flex align-items-center justify-content-center" style="overflow: hidden;">
+                                                   <img src="data:image/png;base64,${item.gymPhoto}" class="img-fluid rounded-start imgsize">
+                                                 </div>
+                                                      <div class="col-md-7">
+                                                           <div class="card-body">
+                                                              <h2 class="card-title">${item.gymName}</h2>
+                                                              <p class="card-text"><b>營業時間 :</b> ${item.gymTime}</p>
+                                                              <p class="card-text"><b>聯絡電話 :</b> ${item.gymPhone}</p>
+                                                              <p class="card-text"><b>地址 :</b> ${item.gymAddress}</p>
+                                                          </div>
+                                                     </div>
+                                                </div>
+                                        </a>`)
+            })
+            
+            gymDetail.innerHTML = gymCard.join("");
+            coachDetail.innerHTML = det;
+            rateDetail.innerHTML = rating;
+        }
+//--------------------------------------
+
+
+        //載入推薦教練
+        const recommandCoach = async () => {
+            let sortBy = ["", "RegionId", "Sort1ID", "GenderID"];
+            let sortType = [ "asc", "desc", "asc", "desc"];
+            let randomNumber = Math.ceil(Math.random() * 3);
+            console.log(randomNumber);
+            const url = 'https://localhost:7199/api/Coach/SEARCH';
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "sort1": "",
+                    "sort2": "",
+                    "gender": "",
+                    "city": "",
+                    "region": "",
+                    "classId": 0,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 3,
+                    "sortBy": sortBy[randomNumber],
+                    "sortType": sortType[randomNumber]
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                 
+            });
+            data = await response.json();
+            console.log(sortBy[randomNumber]);
+            console.log(sortType[randomNumber]);
+            //console.log(data);
+            //教練卡
+            const coachCard = data.coachResult.map(item => {
+                //專長(不重複)
+                const uniqueExp = {};
+                const exps = item.experties.map(exp => {
+                    const key = `${exp.classSort2}`;
+                    if (!uniqueExp[key]) {
+                        uniqueExp[key] = true;
+                        return `#${exp.classSort2}`;
+                    }
+                    return null;
+                }).filter(exp => exp !== null).join(`<br>`);
+                console.log(exps);
+                //console.log(item.experties.classSort2)
+                return (`<a href="/Trainer/Coach?id=${item.id}" class="card mb-3 act"  style="text-decoration:none;">
+                                <div class="card h-100">
+                                            <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
+                                    <div class="card-body">
+                                         <h5 class="card-title">${item.name}</h5>
+                                          <p class="card-text">${item.intro}</p>
+                                          <p class="card-text">${exps}</p>
+                                    </div>
+                                </div>
+
+                       </a>`)
+                console.log("888",item.id);
+            })
+            
+            coachRecommand.innerHTML = coachCard.join("");
+        }
+
+
+
+        ///////////////////
+        loadCoach();
+        recommandCoach();
 
 
 
@@ -177,10 +381,23 @@
                 buttonElement.textContent = 'Read Less';
             }
         }
-        //
-
-
-
+        //觸發索引標籤事件(使用jquery)
+        $(document).ready(function () {
+            $('.nav-link').hover(
+                function () {
+                    $(this).addClass('active');
+                },
+                function () {
+                    if (!$(this).hasClass('clicked')) {
+                        $(this).removeClass('active');
+                    }
+                }
+            );
+            $('.nav-link').click(function () {
+                $('.nav-link').removeClass('active').removeClass('clicked');
+                $(this).addClass('active').addClass('clicked');
+            });
+        });
     </script>
 }
 
@@ -195,15 +412,31 @@
             /*margin-bottom: 50px; /* Add some space between sections */
         }
 
-        .wid{
-            width:75%
+        .wid {
+            width: 75%
         }
 
-        /* 固定导航 */
+        .rate{
+            position: absolute; 
+            top: 0; 
+            right: 0; 
+            width: 100px; 
+            height: 100px; 
+            background-color:DarkBlue;
+            border-radius:10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        /* 固定索引標籤 */
         #pills-tab {
             position: sticky;
             top: 85px;
-            background-color: white; /* 可选：设置背景颜色 */
+            border-radius: 8px;
+            border: solid 2px navy;
+            background-color: white;
             z-index: 1000; /* 确保元素位于其他内容之上 */
         }
 
@@ -212,13 +445,21 @@
             word-wrap: break-word;
             word-break: break-all;
             white-space: normal;
-            max-height: 80px; /* 设定初始高度 */
+            max-height: 60px; /* 设定初始高度 */
             overflow: hidden; /* 隐藏超出部分 */
             transition: max-height 0.3s ease; /* 添加过渡效果 */
         }
-
             .coachDetail.expanded {
                 max-height: 800px; /* 设定展开后的高度 */
+            }
+        /*滑鼠覆蓋卡片效果*/
+        .act {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+            .act:hover {
+                transform: scale(0.98);
             }
 
     </style>
