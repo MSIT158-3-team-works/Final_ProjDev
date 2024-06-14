@@ -9,5 +9,7 @@ public partial class Towner
 
     public string Owner { get; set; } = null!;
 
+    public bool Status { get; set; }
+
     public virtual ICollection<Tcompany> Tcompanies { get; set; } = new List<Tcompany>();
 }
