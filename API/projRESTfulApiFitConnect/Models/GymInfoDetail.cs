@@ -28,4 +28,6 @@ public partial class GymInfoDetail
     public string? GymTraffic { get; set; }
 
     public string? GymDescribe { get; set; }
+
+    public bool GymStatus { get; set; }
 }

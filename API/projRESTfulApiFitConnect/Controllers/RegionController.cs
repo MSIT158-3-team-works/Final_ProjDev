@@ -53,40 +53,5 @@ namespace projRESTfulApiFitConnect.Controllers
 
             return Ok(cityDtos);
         }
-        // GET api/<GymListController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TGym>> GetTRegion(int id)
-        {
-            if (_context.TGyms == null)
-            {
-                return NotFound();
-            }
-            var tRegion = await _context.TGyms.FindAsync(id);
-
-            if (tRegion == null)
-            {
-                return NotFound();
-            }
-
-            return tRegion;
-        }
-
-        // POST api/<RegionController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<RegionController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<RegionController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

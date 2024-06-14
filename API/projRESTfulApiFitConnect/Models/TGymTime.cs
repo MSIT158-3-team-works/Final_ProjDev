@@ -13,6 +13,8 @@ public partial class TGymTime
 
     public virtual TGym Gym { get; set; } = null!;
 
+    public virtual TtimesDetail GymTimeNavigation { get; set; } = null!;
+
     public virtual ICollection<TfieldReserve> TfieldReserveFieldReserveEndTimeNavigations { get; set; } = new List<TfieldReserve>();
 
     public virtual ICollection<TfieldReserve> TfieldReserveFieldReserveStartTimeNavigations { get; set; } = new List<TfieldReserve>();

@@ -201,6 +201,7 @@ public partial class GymContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("Gym_park");
             entity.Property(e => e.GymPhoto).HasColumnName("Gym_photo");
+            entity.Property(e => e.GymStatus).HasColumnName("Gym_status");
             entity.Property(e => e.GymTime)
                 .HasMaxLength(20)
                 .HasColumnName("Gym_time");
@@ -268,6 +269,11 @@ public partial class GymContext : DbContext
                 .HasForeignKey(d => d.GymId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tGym_time_tGym");
+
+            entity.HasOne(d => d.GymTimeNavigation).WithMany(p => p.TGymTimes)
+                .HasForeignKey(d => d.GymTime)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_tGym_time_ttimes_detail");
         });
 
         modelBuilder.Entity<TIdentity>(entity =>
