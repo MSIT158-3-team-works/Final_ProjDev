@@ -171,8 +171,8 @@
                 if (birthday >= currentDate) {
                     sp.innerHTML = "<img src=\"/assets/img/error.png\" /> 請選填正確出生日期";
                     sp.className = 'text-danger';
-                } else if (age < 18) {
-                    sp.innerHTML = "<img src=\"/assets/img/error.png\" />年齡必須大於或等於18歲 ";
+                } else if (age < 16) {
+                    sp.innerHTML = "<img src=\"/assets/img/error.png\" />年齡必須大於或等於16歲 ";
                     sp.className = 'text-danger';
                 } else {
                     sp.innerHTML = "<img src=\"/assets/img/correct.png\" /> 符合條件";

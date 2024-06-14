@@ -8316,11 +8316,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\06140900\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\0614\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
       "projectName": "projRESTfulApiFitConnect",
-      "projectPath": "C:\\Users\\User\\Desktop\\06140900\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\0614\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\06140900\\API\\projRESTfulApiFitConnect\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\0614\\API\\projRESTfulApiFitConnect\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

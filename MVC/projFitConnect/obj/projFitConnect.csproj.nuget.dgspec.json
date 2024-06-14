@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\06140900\\MVC\\projFitConnect\\projFitConnect.csproj": {}
+    "C:\\Users\\User\\Desktop\\0614\\MVC\\projFitConnect\\projFitConnect.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\06140900\\MVC\\projFitConnect\\projFitConnect.csproj": {
+    "C:\\Users\\User\\Desktop\\0614\\MVC\\projFitConnect\\projFitConnect.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\06140900\\MVC\\projFitConnect\\projFitConnect.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\0614\\MVC\\projFitConnect\\projFitConnect.csproj",
         "projectName": "projFitConnect",
-        "projectPath": "C:\\Users\\User\\Desktop\\06140900\\MVC\\projFitConnect\\projFitConnect.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\0614\\MVC\\projFitConnect\\projFitConnect.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\06140900\\MVC\\projFitConnect\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\0614\\MVC\\projFitConnect\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -2,46 +2,46 @@
     ViewData["Title"] = "Home Page";
 }
 
-<header class="masthead divimg">
-    <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="container">
-            <br><br>
-            <div class="masthead-subheading">Welcome To <br /><br />FitConnect!</div>
-            <div class="masthead-heading text-uppercase">找到適合你的場館、教練、課程!</div>
-            <a class="btn btn-primary btn-xl text-uppercase divblue" href="#services">立即體驗</a>
-            <br>
-        </div>
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
 
+@* <header class="masthead">
+    <div id="heardercarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heardercarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heardercarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heardercarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="~/assets/img/header-bg6.jpg" width=1180px height="1200px" class="d-block w-100" />
+                <img src="~/assets/img/header-bg6.jpg" class="d-block w-100" alt="Slide 1">
             </div>
             <div class="carousel-item">
-                <img src="~/assets/img/header-background.jpg" class="d-block w-100" width=1180px height="1200px" />
+                <img src="~/assets/img/header-background.jpg" class="d-block w-100" alt="Slide 2">
             </div>
             <div class="carousel-item">
-                <img src="~/assets/img/header-bg5.jpg" class="d-block w-100" width=1180px height="1200px" />
+                <img src="~/assets/img/header-bg5.jpg" class="d-block w-100" alt="Slide 3">
             </div>
-
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#heardercarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#heardercarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <style>
 
-    </style>
-</header>
+    <div class="container">
+        <div class="masthead-subheading">Welcome To <br><br> FitConnect!</div>
+        <div class="masthead-heading text-uppercase">找到適合你的場館、教練、課程!</div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#services">立即體驗</a>
+    </div>
+    <link href="/path/to/bootstrap.min.css" rel="stylesheet">
+</header> *@
+
+
+ 
+
 <!-- Services-->
 <section class="page-section" id="services">
     <div class="container">
@@ -197,27 +197,27 @@
             <div class="col-lg-10">
                 <div class="team-slider" id="trainer-slider">
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="~/assets/img/team/4.jpg"/>
+                        <img class="mx-auto rounded-circle coach_photo" src="~/assets/img/team/4.jpg"/>
                         <h4>Kerry Wu</h4>
                         <p class="text-muted">針對不同客群給予客製化的訓練內容，循序漸進，不用害怕影響到正常生活</p>
                     </div>
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="~/assets/img/team/6.jpg" alt="Mr.巧克力" />
+                        <img class="mx-auto rounded-circle coach_photo" src="~/assets/img/team/6.jpg" alt="Mr.巧克力" />
                         <h4>Mr.巧克力</h4>
                         <p class="text-muted">優良的雙語能力，能給你帶來更多好吃的巧克力!</p>
                     </div>
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="~/assets/img/team/5.jpg" alt="Diana Hsu"/>
+                        <img class="mx-auto rounded-circle coach_photo" src="~/assets/img/team/5.jpg" alt="Diana Hsu" />
                         <h4>Diana Hsu</h4>
                         <p class="text-muted">透過皮拉提斯或是重訓來保持健康、優化運動表現，讓自己行走坐臥都開心自如！</p>
                     </div>
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="~/assets/img/team/7.jpg"/>
+                        <img class="mx-auto rounded-circle coach_photo" src="~/assets/img/team/7.jpg" />
                         <h4>Hello</h4>
                         <p class="text-muted">測試右按鍵</p>
                     </div>
                     <div class="team-member">
-                        <img class="mx-auto rounded-circle" src="~/assets/img/team/10.jpg" />
+                        <img class="mx-auto rounded-circle coach_photo" src="~/assets/img/team/10.jpg" />
                         <h4>找巧克力</h4>
                         <p class="text-muted">測試右按鍵222</p>
                     </div>
@@ -290,8 +290,8 @@
                         <ul>
                             <li>2024/04/28</li>
                         </ul>
-                        <h5><a href=""></a>身體組成分析「內在身材」－你是C型、I型、D型人？</h5>
-                        <p>使過現代化的身體組成分析儀器（如InBody、Tanita、Omron），可以快速準確地幫助我們了解身體概況，包括體重、身體水分、體脂率、肌肉量、內臟脂肪等數值，讓了解自己是健康的體態，或是只是表面看起來健康的泡芙人，讓了解自己是健康的體態，健康的泡芙人。</p>
+                        <h5><a href=""></a>身體組成分析「內在身材」<br/>－你是C型、I型、D型人？</h5>
+                        <p>使過現代化的身體組成分析儀器（如InBody、Tanita、Omron），可以快速準確地幫助我們了解身體概況，包括體重、身體水分、體脂率、肌肉量、內臟脂肪、身體水分等數值，讓了解自己是健康的體態，或是只是表面看起來健康的泡芙人，讓了解自己是健康的體態，健康的泡芙人健康的泡芙人，健康的泡芙人，健康的泡芙人。</p>
                     </div>
                 </div>
             </div>
@@ -303,6 +303,15 @@
 
 @section Scripts {
     <script>
+        $(document).ready(function () {
+            // 启动轮播并设置间隔时间为3秒
+            $('#heardercarousel').carousel({
+                interval: 3000
+            });
+        });
+
+
+
         document.addEventListener("DOMContentLoaded", function () {
             const slider = document.getElementById('trainer-slider');
             const prevButton = document.getElementById('prev-trainer-slide');
@@ -338,11 +347,19 @@
             nextButton.addEventListener('click', scrollRight);
         });
 
+
+
+
     </script>
+    <script src="/path/to/bootstrap.bundle.min.js"></script>
 
 }
 @section Styles {
     <style>
+        .page-section {
+            padding: 20px 0;
+        }
+
         .row {
             display: flex;
             align-items: center;
@@ -375,10 +392,67 @@
             width: 100%;
         }
 
+        .coach_photo:hover {
+            animation: hoverAnimation 0.45s ease-in-out;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
         .team-member {
             flex: 1 0 30%;
             margin: 0 15px;
         }
+
+
+        /*===================================================this is  test===========================================================*/
+
+/*         body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .masthead {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .carousel-item {
+            height: 100vh;
+        }
+
+            .carousel-item img {
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+                filter: brightness(60%) blur(3px); 
+            }
+
+        .masthead .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .masthead-subheading {
+            font-size: 2.5rem; 
+            margin-bottom: 1.5rem; 
+        }
+
+        .masthead-heading {
+            font-size: 4rem; 
+            font-weight: bold;
+            margin-bottom: 2.5rem; 
+        }
+
+        .btn-xl {
+            padding: 1.5rem 3rem; 
+            font-size: 1.5rem; 
+        }
+ */
 
 
     </style>
