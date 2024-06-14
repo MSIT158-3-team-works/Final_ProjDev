@@ -1,0 +1,212 @@
+﻿@{
+    ViewData["Title"] = "ProductCreate";
+}
+
+@section Styles {
+    <style>
+        #content {
+            width: 70%;
+            overflow: hidden;
+            margin: 5px auto;
+        }
+
+        .article {
+            width: 64%;
+            float: right;
+        }
+
+        .section {
+            background-color: #FBFBFF;
+            border: 3px solid #FFD306;
+            border-radius: 15px;
+            margin: 50px 0;
+            padding: 20px 26px;
+            line-height: 2em;
+        }
+
+        .aside {
+            width: 30%;
+            float: left;
+        }
+
+        .zoom-container {
+            overflow: hidden;
+        }
+
+        .zoom-img {
+            transition: transform 0.5s ease;
+            border-radius: 33px 0 0 0;
+        }
+
+        .zoom-container:hover .zoom-img {
+            transform: scale(1.2);
+        }
+
+        .oncheck{
+            color:red;
+            display:none;
+        }
+    </style>
+}
+
+<h1 style="padding-left:64px;margin:15px 0;">上架商品</h1>
+
+<div id="content">
+    <aside class="aside">
+        <section class="section">
+            <h3 class="subtital">商品顯示圖</h3>
+            <div id="divimage">
+                <img id="preview" src="https://pbs.twimg.com/profile_images/1001436225402621952/bdez2BKN_400x400.jpg" alt="Image Preview" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">預覽商品圖</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">更多商品圖</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+        </section>
+    </aside>
+
+    <article class="article">
+        <section class="section">
+            <h3 class="subtital">商品介紹</h3>
+            <div class="mb-3">
+                <label for="inpproductName" class="form-label">商品名稱</label>
+                <input type="text" class="form-control" id="inpproductName">
+                <span class="oncheck" id="spanproductName">*必填</span>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 ">
+                    <label class="form-label">類別</label>
+                    <select class="form-select" aria-label="Default select example" id="category">
+                        <option selected value="">--選擇類別--</option>
+                        <option value="1">乳清蛋白</option>
+                        <option value="2">健康食品</option>
+                        <option value="3">運動配件</option>
+                        <option value="4">健身器材</option>
+                        <option value="5">服飾</option>
+                        <option value="6">其他</option>
+                    </select>
+                </div>
+                <div class="col-4 m-auto">
+                    <label for="inpunitPrice" class="form-label">商品單價</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="inpunitPrice" min="20" max="20000" step="1" value="20" style="text-align:center;">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="inpproductDetail" class="form-label">商品詳細</label><span class="oncheck" id="spanproductDetail">*必填</span>
+                <textarea class="form-control" id="inpproductDetail" rows="3" style="min-height: 256px"></textarea>
+            </div>
+            <div style="text-align:right;">
+                <a href="https://localhost:7168/Admin/ProductList" class="btn btn-outline-secondary">取消</a>
+                <button type="button" class="btn btn-outline-primary" id="btnadd" onclick="getall()">新增上架</button>
+            </div>
+        </section>
+    </article>
+</div>
+@section Scripts {
+    <script>
+        const productImage = document.querySelector('#divimage');
+        const productName = document.querySelector('#inpproductName');
+        const category = document.querySelector('#category');
+        const thePrice = document.querySelector('#inpunitPrice');
+        const detail = document.querySelector('#inpproductDetail');
+        const add = document.querySelector('#btnadd');
+        const postData = {
+            "productName": "",
+            "categoryId": 6,
+            "productUnitprice": 20,
+            "productDetail": "",
+            "productImage": ""
+        }
+
+        //預覽選擇影像
+        document.getElementById('formFile').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const files = fileInput.files;
+            const preview = document.getElementById('preview');
+            if (files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        //檢查商品名稱
+        productName.addEventListener('blur', (event) => {
+            if(event.target.value==""){
+                document.getElementById('spanproductName').style.display = 'block';
+                return;
+            }
+            document.getElementById('spanproductName').style.display = 'none';
+            postData.productName = event.target.value;
+        })
+        //商品類別
+        category.addEventListener('change', (event) => {
+            if (event.target.value == "") return;
+            postData.categoryId=parseInt(event.target.value);
+        })
+        //單價限制
+        thePrice.addEventListener('blur', event => {
+            const value = parseFloat(event.target.value);
+            const max = parseFloat(event.target.max);
+            const min = parseFloat(event.target.min);
+            if (value >= max)
+                event.target.value = max.toString();
+            if (value <= min)
+                event.target.value = min.toString();
+            postData.productUnitprice = parseInt(event.target.value);
+        });
+        //檢查商品介紹
+        detail.addEventListener('blur', (event) => {
+            if (event.target.value == "") {
+                document.getElementById('spanproductDetail').style.display = 'block';
+                return;
+            }
+            document.getElementById('spanproductDetail').style.display = 'none';
+            postData.productDetail = event.target.value;
+        })
+
+        //獲取所有資料
+        function getall() {
+            const fileInput = document.getElementById('formFile');
+            const files = fileInput.files;
+            if (files.length > 0) {
+                const file = files[0];
+                console.log('Selected file:', file);
+                postData.productImage = file.name;
+            } else {
+                alert('請選擇商品預覽圖');
+                return;
+            }
+            if (postData.productName == "") { alert('請填寫商品名稱'); return; }
+            if (postData.productDetail == "") { alert('請填寫商品詳細'); return; }
+            console.log(postData);
+            addProducts();
+            window.location.assign('https://localhost:7168/Admin/ProductList');
+        }
+
+        //新增商品資料
+        const addProducts = async () => {
+            let url = 'https://localhost:7199/api/Products/';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(postData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.text();
+            alert('商品新增成功');
+        }
+
+    </script>
+}
+

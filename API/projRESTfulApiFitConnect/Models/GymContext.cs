@@ -189,11 +189,6 @@ public partial class GymContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("city");
             entity.Property(e => e.CityId).HasColumnName("city_id");
-            entity.Property(e => e.FieldId).HasColumnName("field_id");
-            entity.Property(e => e.FieldName)
-                .HasMaxLength(50)
-                .HasColumnName("field_name");
-            entity.Property(e => e.FieldPhoto).HasColumnName("field_photo");
             entity.Property(e => e.GymAddress)
                 .HasMaxLength(50)
                 .HasColumnName("Gym_address");
@@ -521,7 +516,7 @@ public partial class GymContext : DbContext
             entity.HasOne(d => d.Coach).WithMany(p => p.TcoachInfoIds)
                 .HasForeignKey(d => d.CoachId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_tcoach_info_id_tIdentity");
+                .HasConstraintName("FK_coach_info_id_Identity");
         });
 
         modelBuilder.Entity<TcoachPhoto>(entity =>
@@ -551,6 +546,7 @@ public partial class GymContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("name");
             entity.Property(e => e.OwnerId).HasColumnName("owner_id");
+            entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Timelimit).HasColumnName("timelimit");
 
             entity.HasOne(d => d.Owner).WithMany(p => p.Tcompanies)
@@ -970,6 +966,7 @@ public partial class GymContext : DbContext
             entity.Property(e => e.Owner)
                 .HasMaxLength(20)
                 .HasColumnName("owner");
+            entity.Property(e => e.Status).HasColumnName("status");
         });
 
         modelBuilder.Entity<Tpayment>(entity =>

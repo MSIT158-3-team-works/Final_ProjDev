@@ -5696,11 +5696,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\期末資料夾\\Final_ProjDev_Hank\\MVC\\projFitConnect\\projFitConnect.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\Final_ProjDev\\MVC\\projFitConnect\\projFitConnect.csproj",
       "projectName": "projFitConnect",
-      "projectPath": "C:\\期末資料夾\\Final_ProjDev_Hank\\MVC\\projFitConnect\\projFitConnect.csproj",
+      "projectPath": "C:\\Users\\User\\Source\\Repos\\Final_ProjDev\\MVC\\projFitConnect\\projFitConnect.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\期末資料夾\\Final_ProjDev_Hank\\MVC\\projFitConnect\\obj\\",
+      "outputPath": "C:\\Users\\User\\Source\\Repos\\Final_ProjDev\\MVC\\projFitConnect\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

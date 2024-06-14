@@ -26,6 +26,12 @@
             float: left;
         }
 
+        .subtital {
+            font-weight: 700;
+            font-style: italic;
+            color: #342081;
+        }
+
         .pagination-container {
             display: flex;
             justify-content: center;
@@ -116,7 +122,7 @@
             }
     </style>
 }
-<a href="https://localhost:7168/shop/merchandise/1" style="text-decoration:none;">
+<a href="https://localhost:7168/shop/merchandise/17" style="text-decoration:none;">
     <h1 style="margin-top:100px; text-align:center; font-size:4.5em;color:aliceblue;">吠!特麽坑吶~商城</h1>
 </a>
 
@@ -124,7 +130,7 @@
     <aside class="aside">
         <section class="section" style="margin-top:100px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
-                <span style="font-weight:700;font-size:2em;"><a href="#">Sort</a></span>
+                <h2 class="subtital">商品類別</h2>
                 <button class="btn btn-outline-success" type="button" id="checkAll" value="0">
                     ALL
                 </button>
@@ -153,7 +159,7 @@
             </div>
         </section>
         <section class="section" style="margin-top:100px;">
-            <h2><a href="#">Popular</a></h2>
+            <h2 class="subtital">熱門商品</h2>
             <div id="divpopular">
                 <div class="card mb-3 hover" style="max-width: 540px;">
                     <div class="row g-0">
@@ -219,27 +225,22 @@
         </div>
         <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
         <section class="section">
-            <h2><a href="#">Products</a></h2>
+            <h2 class="subtital">商品</h2>
             <div class="row row-cols-1 row-cols-md-3 g-4" id="divmain">
-                <div class="col">
-                    <div class="card h-100 hover">
-                        <img src="https://www.superjumpmagazine.com/content/images/size/w2000/2022/05/kirby-feat-image-2.jpg" class="card-img-top" alt=".c">
-                        <div class="card-body">
-                            <h4 class="card-title">RabbitAndDeerArePlayingInTheWoods</h4>
-                            <div style="text-align:right;float:right;">
-                                <button type="button" class="btn btn-track" onclick="track(this)">
-                                    <img src="~/assets/img/blankheart.png" />
-                                </button>
-                                <button type="button" class="btn btn-cart">
-                                    <img src="~/assets/img/shoppingcart.png" />
-                                </button>
-                            </div>
-                            <label class="tag" data-Id="87">#Category</label>
-                            <p class="card-text">$39.99 USD</p>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-warning">See more</button>
-                        </div>
+                <div class="card" aria-hidden="true">
+                    <img src="https://media.tenor.com/vNB3iUXsxnQAAAAC/loading-gif.gif" class="card-img-top" alt="Wait A minute...">
+                    <div class="card-body">
+                        <h5 class="card-title placeholder-glow">
+                            <span class="placeholder col-6"></span>
+                        </h5>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-7"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-4"></span>
+                            <span class="placeholder col-6"></span>
+                            <span class="placeholder col-8"></span>
+                        </p>
+                        <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
                     </div>
                 </div>
             </div>
@@ -256,8 +257,8 @@
 </div>
 <div style="width:100%;max-height:150px;margin:40px auto;position:relative;bottom">
     <section class="section" style="text-align:center;">
-        <h2><a href="#">Recommendation</a></h2>
-        <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="divrecommend">
+        <h2 class="subtital" style="font-size:2.5em;">推薦商品</h2>
+        <div class="row row-cols-1 row-cols-md-5 g-4 m-1" id="divrecommend">
             <div class="card recommend m-3 hover" style="min-width:150px;padding-top:8px">
                 <img class="card-img-top" src="~/assets/img/header-backgrd.jpg" alt=".C" style="width:100%">
                 <div class="card-body">
@@ -269,7 +270,7 @@
         </div>
     </section>
 </div>
-<div style="padding-bottom:350px;">
+<div style="padding-bottom:369px;">
     &emsp;
 </div>
 
@@ -325,7 +326,7 @@
                 }
             });
             let data = await response.json();
-            console.log('PopularProducts', data.productsResult);
+            //console.log('PopularProducts', data.productsResult);
             //顯示資料
             const goods = data.productsResult.map(good => {
                 //data:image/jpeg;base64,${good.productImage}
@@ -424,7 +425,7 @@
                     "categoryId": searchData.categoryId,
                     "keyword": "",
                     "page": 1,
-                    "pageSize": 4,
+                    "pageSize": 5,
                     "sortBy": "",
                     "sortType": "asc"
                 }),
@@ -433,12 +434,12 @@
                 }
             });
             let data = await response.json();
-            console.log('RecommendProducts', data.productsResult);
+            //console.log('RecommendProducts', data.productsResult);
             //顯示資料
             const goods = data.productsResult.map(good => {
                 //data:image/jpeg;base64,${good.productImage}
                 return (` <a href="merchandise/${good.productId}" style="text-decoration:none;">
-                            <div class="card recommend m-3 hover" style="min-width:150px;padding-top:8px">
+                            <div class="card recommend m-auto hover" style="min-width:150px;padding-top:8px">
                                   <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="recommend" style="width:100%">
                                   <div class="card-body">
                                     <h6 class="card-title">${good.productName}</h6>
@@ -500,8 +501,7 @@
             for (var i = 0; i < loop; i++) {
                 //console.log(allData[i].productId);
                 position = currentPosition + i;
-                s += `
-                       <div class="col">
+                s += `<div class="col">
                        <div class="card h-100 hover">
                         <img src="data:image/jpeg;base64,${allData[position].productImage}" class="card-img-top" alt="${allData[position].productName}">
                          <div class="card-body">

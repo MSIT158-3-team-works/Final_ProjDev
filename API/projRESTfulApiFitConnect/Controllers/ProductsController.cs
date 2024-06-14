@@ -48,6 +48,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     byte[] bytes = await System.IO.File.ReadAllBytesAsync(filepath);
                     base64Image = Convert.ToBase64String(bytes);
                 }
+
                 int sold = item.TorderDetails.Sum(od => od.OrderQuantity);
 
                 ProductDetailDTO productDetailDto = new ProductDetailDTO()
@@ -197,13 +198,21 @@ namespace projRESTfulApiFitConnect.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTproduct(int id, Tproduct tproduct)
+        public async Task<IActionResult> PutTproduct(int id, AddProductDTO addProductDTO)
         {
-            if (id != tproduct.ProductId)
-            {
-                return BadRequest();
-            }
-
+            Tproduct tproduct = new Tproduct();
+            tproduct.ProductId = id;
+            if(!string.IsNullOrEmpty(addProductDTO.ProductName))
+                tproduct.ProductName = addProductDTO.ProductName;
+            if(addProductDTO.CategoryId!=null|| addProductDTO.CategoryId!=0)
+                tproduct.CategoryId = addProductDTO.CategoryId;
+            if (addProductDTO.ProductUnitprice != 0)
+                tproduct.ProductUnitprice = addProductDTO.ProductUnitprice;
+            if(!string.IsNullOrEmpty(addProductDTO.ProductDetail))
+                tproduct.ProductDetail = addProductDTO.ProductDetail;
+            if (!string.IsNullOrEmpty(addProductDTO.ProductImage))
+                tproduct.ProductImage = addProductDTO.ProductImage;
+            tproduct.ProductSupplied = true;
             _context.Entry(tproduct).State = EntityState.Modified;
 
             try
@@ -214,7 +223,7 @@ namespace projRESTfulApiFitConnect.Controllers
             {
                 if (!TproductExists(id))
                 {
-                    return NotFound();
+                    return Ok("找瞴~");
                 }
                 else
                 {
@@ -222,18 +231,25 @@ namespace projRESTfulApiFitConnect.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok("EditSuccess");
         }
 
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tproduct>> PostTproduct(Tproduct tproduct)
+        public async Task<ActionResult<Tproduct>> PostTproduct(AddProductDTO addProductDTO)
         {
+            Tproduct tproduct = new Tproduct();
+            tproduct.ProductName = addProductDTO.ProductName;
+            tproduct.CategoryId = addProductDTO.CategoryId;
+            tproduct.ProductUnitprice = addProductDTO.ProductUnitprice;
+            tproduct.ProductDetail = addProductDTO.ProductDetail;
+            tproduct.ProductImage = addProductDTO.ProductImage;
+            tproduct.ProductSupplied = true;
             _context.Tproducts.Add(tproduct);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTproduct", new { id = tproduct.ProductId }, tproduct);
+            return Ok("product add");
         }
 
 
@@ -247,10 +263,11 @@ namespace projRESTfulApiFitConnect.Controllers
                 return NotFound();
             }
 
-            _context.Tproducts.Remove(tproduct);
+            //_context.Tproducts.Remove(tproduct);
+            tproduct.ProductSupplied = false;
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("已停售");
         }
 
         private bool TproductExists(int id)

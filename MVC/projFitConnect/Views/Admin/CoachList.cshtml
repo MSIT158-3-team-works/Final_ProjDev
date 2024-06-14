@@ -1,0 +1,184 @@
+﻿@{
+    ViewData["Title"] = "CoachList";
+}
+@section Styles {
+    <style>
+        .main {
+            width: 92%;
+            margin: auto;
+        }
+
+        thead {
+            background-color: #101F41;
+        }
+
+        .head {
+            color: #D0D0D0 !important;
+        }
+
+        .row1 {
+            text-align: center;
+        }
+    </style>
+}
+<h1 style="padding-left:64px;">教練清單</h1>
+<div class="input-group w-25 m-auto">
+    <input type="search" placeholder="輸入搜尋..." class="form-control" id="inputSearch" style="margin:0 auto;background-color:darkgrey;" />
+    <button class="btn btn-outline-warning" id="btnNavbarSearch" type="button"><img src="https://cdn4.iconfinder.com/data/icons/essentials-71/24/002_-_Search-32.png" alt="Search"></button>
+</div>
+<div class="main">
+    <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="row1 head">ID</th>
+                <th class="head">Photo</th>
+                <th class="head">Name</th>
+                <th class="head">Age</th>
+                <th class="head">Gender</th>
+                <th class="head">City</th>
+                <th class="head">E-mail</th>
+            </tr>
+        </thead>
+        <tbody id="tablebody">
+            <tr>
+                <td>1</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <p>
+                        <button class="btn btn-outline-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePhoto" aria-expanded="false" aria-controls="collapsePhoto">
+                            照片
+                        </button>
+                    </p>
+                    <div style="max-height: 120px;">
+                        <div class="collapse collapse-vertical" id="collapsePhoto">
+                            <img src="https://cdn3.iconfinder.com/data/icons/forall/1062/gym-225.png" alt="Coach">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="pagination-container w-25 m-auto">
+    <ul class="pagination" id="ulpaging">
+        <li><a href="#" style="margin-right:16px; border:none;"><</a></li>
+        <li><a href="#">1</a></li>
+        <li class="page-item active" onclick="pagingHandler(3)"><a class="page-link">2</a></li>
+        <li><a href="#" style="margin-left:16px; border:none;">></a></li>
+    </ul>
+</div>
+@section Scripts {
+    <script>
+        let MaxPage = 0;
+        const inpSearch = document.querySelector('#inputSearch');
+        const body = document.querySelector('#tablebody')
+        const ulPaging = document.getElementById('ulpaging');
+        const searchData = {
+            "sort1": "",
+            "sort2": "",
+            "gender": "",
+            "classId": 0,
+            "keyword": "",
+            "page": 1,
+            "pageSize": 20,
+            "sortBy": "",
+            "sortType": "asc"
+        };
+        //計算年紀
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const currentDate = `${year}/${month}/${day}`;
+        console.log('currentDate', currentDate);
+        let birthday = '1988/06/08';
+        function calculateAges(currentDate, birthday) {
+            const d1 = new Date(currentDate);
+            const d2 = new Date(birthday);
+            let yearDiff = d1.getFullYear() - d2.getFullYear();
+            if (d1.getMonth() < d2.getMonth() ||
+                (d1.getMonth() === d2.getMonth() && d1.getDate() < d2.getDate()))
+                yearDiff--;
+            return yearDiff;
+        }
+        let Ages = calculateAges(currentDate, birthday);
+
+        inpSearch.addEventListener('keydown', event => {
+            if (event.keyCode === 13) {
+                if (event.target.value != null)
+                    searchData.keyword = event.target.value;
+                else
+                    searchData.keyword = "";
+                searchData.page = 1;
+                loadCoaches();
+            }
+        })
+        const pagingHandler = (page) => {
+            if (page === -1) { page = parseInt(searchData.page) - 1; if (page <= 0) return; }
+            if (page === 0) { page = parseInt(searchData.page) + 1; if (page > MaxPage) return; }
+            searchData.page = page;
+            console.log('toPage',searchData.page);
+            loadCoaches();
+        }
+
+        const loadCoaches = async () => {
+            let url = 'https://localhost:7199/api/Coach/SEARCH';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(searchData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            console.log('coaches', data);
+            //顯示資料
+            document.getElementById('datafound').innerHTML = `共${data.totalCount}筆資料`;
+            const coaches = data.coachResult.map(coach => {
+                //data:image/jpeg;base64,${good.productImage}
+                //address,birthday,eMail,genderDescription,id,name,phone,photo
+                birthday = coach.birthday;
+                Ages = calculateAges(currentDate, birthday);
+                return (`<tr>
+                           <td class="row1">${coach.id}</td>
+                           <td>
+                           <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePhoto${coach.id}" aria-expanded="false" aria-controls="collapsePhoto${coach.id}">
+                           照片
+                           </button>
+                           <div style="max-height:120px;">
+                           <div class="collapse collapse-vertical" id="collapsePhoto${coach.id}">
+                           <img src="data:image/jpeg;base64,${coach.photo}" alt="Coach" style="max-height:200px;margin-left:80px;">
+                           </div>
+                           </div>
+                           </td>
+                           <td>${coach.name}</td>
+                           <td>${Ages}</td>
+                           <td>${coach.genderDescription}</td>
+                           <td>${coach.address.substring(0, 3)}</td>
+                           <td>${coach.eMail}</td>
+                           </tr>`)
+            })
+            body.innerHTML = coaches.join("");
+
+            //顯示分頁按鈕
+            let liPages = "", pageCount = 0;
+            MaxPage = data.totalPages;
+            var currentPage = searchData.page;//pickedPage;
+            for (let i = 1; i <= MaxPage; i++) {
+                pageCount++;
+                if (currentPage == i)
+                    liPages += `<li class="page-item active" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+                else
+                    liPages += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+            }
+            ulPaging.innerHTML = '<li class="page-item" onclick="pagingHandler(-1)"><a class="page-link" href="#" style = "margin-right:16px;"><</a></li>' + liPages + '<li class="page-item" onclick="pagingHandler(0)"><a class="page-link" href="#" style = "margin-left:16px;">></a></li>';
+
+        }
+        loadCoaches();
+    </script>
+}

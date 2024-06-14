@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NxBcovizQ8g=",
+  "dgSpecHash": "rbANdoJbMPw=",
   "success": true,
-  "projectFilePath": "C:\\期末資料夾\\Final_ProjDev_Hank\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
+  "projectFilePath": "C:\\Users\\User\\Source\\Repos\\Final_ProjDev\\API\\projRESTfulApiFitConnect\\projRESTfulApiFitConnect.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
