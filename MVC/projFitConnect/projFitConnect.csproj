@@ -13,6 +13,13 @@
 
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="Views\Admin\CoachList.cshtml" />
+    <None Include="Views\Admin\Index.cshtml" />
+    <None Include="Views\Admin\MemberList.cshtml" />
+    <None Include="Views\Admin\ProductCreate.cshtml" />
+    <None Include="Views\Admin\ProductEdit.cshtml" />
+    <None Include="Views\Admin\ProductList.cshtml" />
+    <None Include="Views\Admin\_Layout.cshtml" />
     <None Include="Views\Course\Search.cshtml" />
     <None Include="Views\GymList\Index.cshtml" />
     <None Include="Views\Gym\Index.cshtml" />

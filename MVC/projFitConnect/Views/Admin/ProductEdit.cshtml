@@ -1,0 +1,218 @@
+﻿@{
+    ViewData["Title"] = "ProductEdit";
+}
+
+@section Styles {
+    <style>
+        #content {
+            width: 70%;
+            overflow: hidden;
+            margin: 5px auto;
+        }
+
+        .article {
+            width: 64%;
+            float: right;
+        }
+
+        .section {
+            background-color: #FBFFFD;
+            border: 3px solid #007979;
+            border-radius: 15px;
+            margin: 50px 0;
+            padding: 20px 26px;
+            line-height: 2em;
+        }
+
+        .aside {
+            width: 30%;
+            float: left;
+        }
+
+        .zoom-container {
+            overflow: hidden;
+        }
+
+        .zoom-img {
+            transition: transform 0.5s ease;
+            border-radius: 33px 0 0 0;
+        }
+
+        .zoom-container:hover .zoom-img {
+            transform: scale(1.2);
+        }
+    </style>
+}
+
+<h1 style="padding-left:64px;margin:15px 0;">商品編輯</h1>
+
+<div id="content">
+    <aside class="aside">
+        <section class="section">
+            <h3 class="subtital">商品顯示圖</h3>
+            <div id="divimage">
+                <img id="preview" src="" alt="Image Preview" style="max-width: 100%; height: auto; display: none;">
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">預覽商品圖</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">更多商品圖</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+        </section>
+    </aside>
+
+    <article class="article">
+        <section class="section">
+            <h3 class="subtital">商品介紹</h3>
+            <div class="mb-3">
+                <label for="inpproductName" class="form-label">商品名稱</label>
+                <input type="text" class="form-control" id="inpproductName">
+            </div>
+            <div class="row mb-3">
+                <div class="col-4 ">
+                    <label class="form-label">類別</label>
+                    <select class="form-select" aria-label="Default select example" id="selecategory">
+                        <option selected value="" id="category"></option>
+                        <option value="1">乳清蛋白</option>
+                        <option value="2">健康食品</option>
+                        <option value="3">運動配件</option>
+                        <option value="4">健身器材</option>
+                        <option value="5">服飾</option>
+                        <option value="6">其他</option>
+                    </select>
+                </div>
+                <div class="col-4 m-auto">
+                    <label for="inpunitPrice" class="form-label">商品單價</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="inpunitPrice" min="20" max="20000" step="1" value="20" style="text-align:center;">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="inpproductDetail" class="form-label">商品介紹</label>
+                <textarea class="form-control" id="inpproductDetail" rows="3" style="min-height: 256px"></textarea>
+            </div>
+            <div style="text-align:right;">
+                <a href="https://localhost:7168/Admin/ProductList" class="btn btn-secondary">取消</a>
+                <button type="button" class="btn btn-success" id="btnrevise" onclick="getall()">確認修改</button>
+            </div>
+        </section>
+    </article>
+</div>
+@section Scripts {
+    <script>
+        let productID = @ViewBag.id;
+        let url = 'https://localhost:7199/api/Products/' + productID;
+        const productImage = document.querySelector('#divimage');
+        const productName = document.querySelector('#inpproductName');
+        const selectedcategory = document.querySelector('#selecategory');
+        const category = document.querySelector('#category');
+        const thePrice = document.querySelector('#inpunitPrice');
+        const detail = document.querySelector('#inpproductDetail');
+        const revise = document.querySelector('#btnrevise');
+        let image = productID + '.jpg';
+        if (productID < 10) { image = '0' + image; }
+        const putData = {
+            "productName": "",
+            "categoryId": 6,
+            "productUnitprice": 20,
+            "productDetail": "",
+            "productImage": image
+        }
+
+        //預覽選擇影像
+        document.getElementById('formFile').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const files = fileInput.files;
+            const preview = document.getElementById('preview');
+            if (files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+        //單價限制
+        thePrice.addEventListener('blur', event => {
+            const value = parseFloat(event.target.value);
+            const max = parseFloat(event.target.max);
+            const min = parseFloat(event.target.min);
+            if (value >= max)
+                event.target.value = max.toString();
+            if (value <= min)
+                event.target.value = min.toString();
+        });
+        //獲取所有資料
+        function getall() {
+            if (putData.productName == "") { alert('請填寫商品名稱'); return; }
+            if (putData.productDetail == "") { alert('請填寫商品詳細'); return; }
+            putData.productName = productName.value;
+            if (selectedcategory.value != "")
+                putData.categoryId = parseInt(selectedcategory.value);
+            putData.productUnitprice = parseInt(thePrice.value);
+            putData.productDetail = detail.value;
+            //console.log(putData);
+            editProducts();
+            window.location.assign('https://localhost:7168/Admin/ProductList');
+        }
+
+        //載入商品資料
+        const loadProduct = async () => {
+            //console.log('url=', url);
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data);
+
+            putData.productName = data.productName;
+            putData.categoryId = data.productCategoryId;
+            putData.productUnitprice = data.unitPrice;
+            putData.productDetail = data.productDetail;
+
+            //顯示照片
+            s = ` <div class="zoom-container">
+                            <img src="data:image/jpeg;base64,${data.productImage}" class="d-block w-100 h-auto zoom-img" alt="notFound" id="preview">
+                           </div>`;
+            /*if (data.images) {
+                for (var pic of data.base64Images) {
+                    s += `<div class="zoom-container">
+                          <img src="data:image/jpeg;base64,${pic}" class="d-block w-100 h-auto zoom-img" alt="error">
+                          </div>`;
+                }
+            }*/
+            productImage.innerHTML = s;
+
+            //顯示資料
+            s = data.productName;
+            productName.value = s;
+            s = '*' + data.productCategory;
+            category.textContent = s;
+            s = data.unitPrice;
+            thePrice.value = s;
+            s = data.productDetail;
+            detail.innerHTML = s;
+        }
+        loadProduct();
+
+        //儲存修改商品資料
+        const editProducts = async () => {
+            let response = await fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(putData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.text();
+            alert('商品修改成功');
+        }
+    </script>
+}
