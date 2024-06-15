@@ -7,6 +7,7 @@
         public string? Class { get; set; }
 
         public string? Coach { get; set; }
+        public int? CoachId { get; set; }
         public string? Introduction { get; set; }
         public int? ClassSort1Id { get; set; }
         public int? ClassSort2Id { get; set; }
