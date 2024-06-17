@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using projRESTfulApiFitConnect.DTO.Product;
 using projRESTfulApiFitConnect.Models;
@@ -200,25 +201,32 @@ namespace projRESTfulApiFitConnect.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTproduct(int id, AddProductDTO addProductDTO)
         {
-            byte[] imageBytes = Convert.FromBase64String(addProductDTO.ImageBase64);
-            // Save the image to the server
-            string filepath = Path.Combine(_env.ContentRootPath, "Images", "ProductImages", addProductDTO.ProductImage);
-            await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+            var product = await _context.Tproducts
+                .Where(x => x.ProductId == id )
+                .Include(x => x.TproductImages)
+                .FirstOrDefaultAsync();
+            if (product==null)
+                return Ok("none-query");
+            
+            if (!string.IsNullOrEmpty(addProductDTO.ImageBase64))
+            {
+                byte[] imageBytes = Convert.FromBase64String(addProductDTO.ImageBase64);
+                // Save the image to the server
+                string filepath = Path.Combine(_env.ContentRootPath, "Images", "ProductImages", addProductDTO.ProductImage);
+                await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+            }
 
-            Tproduct tproduct = new Tproduct();
-            tproduct.ProductId = id;
             if(!string.IsNullOrEmpty(addProductDTO.ProductName))
-                tproduct.ProductName = addProductDTO.ProductName;
+                product.ProductName = addProductDTO.ProductName;
             if(addProductDTO.CategoryId!=null|| addProductDTO.CategoryId!=0)
-                tproduct.CategoryId = addProductDTO.CategoryId;
+                product.CategoryId = addProductDTO.CategoryId;
             if (addProductDTO.ProductUnitprice != 0)
-                tproduct.ProductUnitprice = addProductDTO.ProductUnitprice;
+                product.ProductUnitprice = addProductDTO.ProductUnitprice;
             if(!string.IsNullOrEmpty(addProductDTO.ProductDetail))
-                tproduct.ProductDetail = addProductDTO.ProductDetail;
+                product.ProductDetail = addProductDTO.ProductDetail;
             if (!string.IsNullOrEmpty(addProductDTO.ProductImage))
-                tproduct.ProductImage = addProductDTO.ProductImage;
-            tproduct.ProductSupplied = true;
-            _context.Entry(tproduct).State = EntityState.Modified;
+                product.ProductImage = addProductDTO.ProductImage;
+            _context.Entry(product).State = EntityState.Modified;
 
             try
             {

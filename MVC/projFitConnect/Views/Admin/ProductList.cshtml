@@ -11,10 +11,11 @@
         }
         .create-btn{
             position: fixed;
-            top: 113px;
+            bottom: 73px;
             right: 0;
         }
-        .square-btn {
+
+        .round-btn {
             margin-right: 13px;
             width: 50px;
             height: 50px;
@@ -30,7 +31,7 @@
             border: 3px double #FF8000;
         }
 
-            .square-btn:hover {
+        .round-btn:hover {
                 border:none;
                 background-color: #4B0091;
                 color: whitesmoke;
@@ -39,6 +40,8 @@
         .vertical-text {
             writing-mode: vertical-rl; /* or vertical-lr */
             text-orientation: upright;
+            font-size:1.2em;
+            font-weight:700;
         }
 
         thead {
@@ -57,7 +60,7 @@
 }
 <h1 style="padding-left:64px;margin:15px 0;">商品清單</h1>
 <div class="create-btn">
-    <a href="ProductCreate/" class="btn square-btn">GO!</a>
+    <a href="ProductCreate/" class="btn round-btn">GO!</a>
     <p class="vertical-text">
         <img src="https://cdn4.iconfinder.com/data/icons/liny/24/hand-pointer-event-line-32.png" alt="|||">
         點擊新增商品</p>

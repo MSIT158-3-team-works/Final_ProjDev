@@ -298,10 +298,12 @@
         //botton---------------------------------------------------------------------------------------------------------
         //推薦商品
         const RecommendProducts = async () => {
-            let sortBy = ["", "popular", "unitPrice", "categoryId", "", ""];
-            let sortType = ["", "desc", "asc", "desc", "asc", "desc"];
-            let randomNumber = Math.ceil(Math.random() * 5);
-            //console.log(sortBy[randomNumber]);console.log(sortType[randomNumber]);
+            let sortBy = ["", "popular", "unitPrice", "categoryId"];
+            let sortType = ["asc", "desc"];
+            let randomNumber = Math.floor(Math.random() * 6);
+            let randomBy = Math.floor(Math.random() * 4);
+            let randomType = Math.floor(Math.random() * 2);
+            console.log(sortBy[randomBy]); console.log(sortType[randomType]);
             let url = 'https://localhost:7199/api/Products/search';
             let response = await fetch(url, {
                 method: 'POST',
@@ -310,8 +312,8 @@
                     "keyword": "",
                     "page": 1,
                     "pageSize": 5,
-                    "sortBy": sortBy[randomNumber],
-                    "sortType": sortType[randomNumber]
+                    "sortBy": sortBy[randomBy],
+                    "sortType": sortType[randomType]
                 }),
                 headers: {
                     'Content-Type': 'application/json'

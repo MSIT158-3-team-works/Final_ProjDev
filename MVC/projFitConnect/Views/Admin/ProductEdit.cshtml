@@ -114,17 +114,16 @@
         const thePrice = document.querySelector('#inpunitPrice');
         const detail = document.querySelector('#inpproductDetail');
         const revise = document.querySelector('#btnrevise');
-        let image = productID + '.jpg';
-        if (productID < 10) { image = '0' + image; }
         const putData = {
             "productName": "",
             "categoryId": 6,
             "productUnitprice": 20,
             "productDetail": "",
-            "productImage": image
+            "productImage": "",
+            "imageBase64": ""
         }
 
-        //預覽選擇影像
+        //預覽選擇影像&轉成base64
         document.getElementById('formFile').addEventListener('change', function (event) {
             const fileInput = event.target;
             const files = fileInput.files;
@@ -134,11 +133,24 @@
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     preview.src = e.target.result;
-                    preview.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
-            } else {
-                preview.style.display = 'none';
+
+                const byteReader = new FileReader();
+                byteReader.onload = function (e) {
+                    const arrayBuffer = e.target.result;
+                    const byteArray = new Uint8Array(arrayBuffer);
+                    const base64String = btoa(String.fromCharCode.apply(null, byteArray));
+                    putData.productImage = file.name;
+                    putData.imageBase64 = base64String;
+                    console.log('Image in base64:', base64String);
+                };
+                byteReader.readAsArrayBuffer(file);
+                if (putData.imageBase64 == "") {
+                    putData.productImage = ""; 
+                    alert('請更換商品圖片');
+                    return;
+                }
             }
         });
         //單價限制
@@ -160,9 +172,8 @@
                 putData.categoryId = parseInt(selectedcategory.value);
             putData.productUnitprice = parseInt(thePrice.value);
             putData.productDetail = detail.value;
-            //console.log(putData);
+            console.log(putData);
             editProducts();
-            window.location.assign('https://localhost:7168/Admin/ProductList');
         }
 
         //載入商品資料
@@ -213,6 +224,9 @@
             });
             let data = await response.text();
             alert('商品修改成功');
+            setTimeout(() => {
+                window.location.assign('https://localhost:7168/Admin/ProductList');
+            }, 100);
         }
     </script>
 }
