@@ -201,7 +201,7 @@ namespace projRESTfulApiFitConnect.Controllers
             List<ScheduleDatailDto> scheduleDatailDtos = new List<ScheduleDatailDto>();
             List<ExpertiseDto> expertiseDtos = new List<ExpertiseDto>();
 
-            var coach = await _context.TIdentities.Where(x => x.RoleId == 2 && x.Id == id).Include(x => x.Gender).Include(x => x.Role).Include(x => x.TcoachInfoIds).Include(x=>x.TcoachPhotos).FirstOrDefaultAsync();
+            var coach = await _context.TIdentities.Where(x => x.RoleId == 2 && x.Id == id).Include(x => x.Gender).Include(x => x.Role).Include(x => x.TcoachInfoIds).Include(x => x.TcoachPhotos).FirstOrDefaultAsync();
             if (coach == null)
             {
                 return NotFound();
@@ -213,7 +213,7 @@ namespace projRESTfulApiFitConnect.Controllers
             var coachInfo = coach.TcoachInfoIds.FirstOrDefault();
             var experts = await _context.TcoachExperts.Where(x => x.CoachId == id).Include(x => x.Class.ClassSort2).ToListAsync();
             var rates = await _context.TmemberRateClasses.Where(x => x.CoachId == id).Include(x => x.Reserve.Member).Include(x => x.Reserve.ClassSchedule.Class).ToListAsync();
-            var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseStartTime).Include(x => x.ClassStatus).Include(x=>x.Class).ToListAsync();
+            var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseStartTime).Include(x => x.ClassStatus).Include(x => x.Class).ToListAsync();
             var fields = await _context.TfieldReserves.Where(x => x.CoachId == id).Include(x => x.Field.Gym.Region.City).ToListAsync();
 
             if (!string.IsNullOrEmpty(coach.Photo))
@@ -223,7 +223,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 base64Image = Convert.ToBase64String(bytes);
             }
             foreach (var expert in experts)
-            { 
+            {
                 ExpertiseDto expertiseDto = new ExpertiseDto()
                 {
                     ClassName = expert.Class.ClassName,
@@ -332,7 +332,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     ClassStatus = schedule.ClassStatus.ClassStatusDiscribe,
                     ClassPayment = schedule.ClassPayment,
                     CoachPayment = schedule.CoachPayment,
-                    Photo= base64Image2
+                    Photo = base64Image2
                 };
                 scheduleDatailDtos.Add(scheduleDatailDto);
             }

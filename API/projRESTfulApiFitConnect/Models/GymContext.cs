@@ -113,7 +113,7 @@ public partial class GymContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=gym;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=gym;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -533,12 +533,12 @@ public partial class GymContext : DbContext
 
             entity.Property(e => e.CoachPhotoId).HasColumnName("coach_photo_id");
             entity.Property(e => e.CoachPhoto).HasColumnName("coach_photo");
-            entity.Property(e => e.ExpertId).HasColumnName("expert_id");
+            entity.Property(e => e.Id).HasColumnName("id");
 
-            entity.HasOne(d => d.Expert).WithMany(p => p.TcoachPhotos)
-                .HasForeignKey(d => d.ExpertId)
+            entity.HasOne(d => d.IdNavigation).WithMany(p => p.TcoachPhotos)
+                .HasForeignKey(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_tcoach_photo_tcoach_expert");
+                .HasConstraintName("FK_tcoach_photo_tIdentity");
         });
 
         modelBuilder.Entity<Tcompany>(entity =>
@@ -619,6 +619,7 @@ public partial class GymContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("floor");
             entity.Property(e => e.GymId).HasColumnName("Gym_id");
+            entity.Property(e => e.Status).HasColumnName("status");
 
             entity.HasOne(d => d.Gym).WithMany(p => p.Tfields)
                 .HasForeignKey(d => d.GymId)

@@ -17,6 +17,8 @@ public partial class Tfield
 
     public string? FieldDescribe { get; set; }
 
+    public bool Status { get; set; }
+
     public virtual TGym Gym { get; set; } = null!;
 
     public virtual ICollection<TclassSchedule> TclassSchedules { get; set; } = new List<TclassSchedule>();

@@ -7,9 +7,9 @@ public partial class TcoachPhoto
 {
     public int CoachPhotoId { get; set; }
 
-    public int ExpertId { get; set; }
+    public int Id { get; set; }
 
     public string? CoachPhoto { get; set; }
 
-    public virtual TcoachExpert Expert { get; set; } = null!;
+    public virtual TIdentity IdNavigation { get; set; } = null!;
 }
