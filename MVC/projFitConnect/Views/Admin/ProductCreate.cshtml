@@ -119,13 +119,14 @@
         const add = document.querySelector('#btnadd');
         const postData = {
             "productName": "",
-            "categoryId": 6,
+            "categoryId": 0,
             "productUnitprice": 20,
             "productDetail": "",
-            "productImage": ""
+            "productImage": "",
+            "imageBase64": ""
         }
 
-        //預覽選擇影像
+        //預覽選擇影像&轉成base64
         document.getElementById('formFile').addEventListener('change', function (event) {
             const fileInput = event.target;
             const files = fileInput.files;
@@ -137,6 +138,17 @@
                     preview.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
+
+                const byteReader = new FileReader();
+                byteReader.onload = function (e) {
+                    const arrayBuffer = e.target.result;
+                    const byteArray = new Uint8Array(arrayBuffer);
+                    const base64String = btoa(String.fromCharCode.apply(null, byteArray));
+                    postData.productImage = file.name;
+                    postData.imageBase64 = base64String;
+                    console.log('Image in base64:', base64String);
+                };
+                byteReader.readAsArrayBuffer(file);
             }
         });
         //檢查商品名稱
@@ -178,19 +190,14 @@
         function getall() {
             const fileInput = document.getElementById('formFile');
             const files = fileInput.files;
-            if (files.length > 0) {
-                const file = files[0];
-                console.log('Selected file:', file);
-                postData.productImage = file.name;
-            } else {
-                alert('請選擇商品預覽圖');
-                return;
-            }
+            if (files.length <= 0) {alert('請選擇商品預覽圖');return;}
             if (postData.productName == "") { alert('請填寫商品名稱'); return; }
+            if (postData.categoryId == 0) { alert('請選擇商品類別'); return; }
             if (postData.productDetail == "") { alert('請填寫商品詳細'); return; }
+            if (postData.imageBase64 == "") { alert('請更換商品圖片'); return; }
             console.log(postData);
             addProducts();
-            window.location.assign('https://localhost:7168/Admin/ProductList');
+            //window.location.assign('https://localhost:7168/Admin/ProductList');
         }
 
         //新增商品資料
@@ -205,6 +212,9 @@
             });
             let data = await response.text();
             alert('商品新增成功');
+            setTimeout(() => {
+                window.location.assign('https://localhost:7168/Admin/ProductList');
+            }, 100);
         }
 
     </script>
