@@ -1,0 +1,70 @@
+﻿.divlightgray {
+    color: white;
+    background-color: #D0CECE;
+    border-color: #D0CECE;
+    text-align: center;
+}
+
+.divblue {
+    color: white;
+    background-color: #517BC5;
+    border-color: #517BC5;
+    text-align: center;
+}
+
+.divlightblue {
+    color: black;
+    background-color: #A2C4E3;
+    border-color: #A2C4E3;
+    text-align: center;
+}
+
+.divwhite {
+    color: black;
+    background-color: #F6F5F5;
+    border-color: #F6F5F5;
+    text-align: center;
+}
+
+.divimg {
+    color: gray;
+    background-color: gray;
+    
+}
+
+.colored_a {
+    color: white;
+    text-decoration: none; /* 移除下划线 */
+}
+
+    .colored_a:hover {
+        color: lightblue;
+        text-decoration: none; 
+    }
+
+.footer_top li {
+    font-size: 20px;
+}
+
+#footer-text {
+    color: white;
+    font-weight: bold;
+}
+
+
+/*.masthead {
+    padding: 20px 0;
+}
+
+    .masthead .container {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .masthead .masthead-subheading {
+        margin-top: 10px;
+    }
+
+    .masthead .masthead-heading {
+        margin-bottom: 10px;
+    }*/

@@ -50,15 +50,27 @@
     <aside class="aside">
         <section class="section">
             <h3 class="subtital">商品顯示圖</h3>
-            <div id="divimage">
-                <img id="preview" src="" alt="Image Preview" style="max-width: 100%; height: auto; display: none;">
+            <div id="carouselAddProduct" class="carousel slide">
+                <div class="carousel-inner" id="divimage">
+                    <div class="carousel-item active">
+                        <img id="preview" src="" alt="Image Preview" style="max-width: 100%; height: auto; display: block;">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselAddProduct" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselAddProduct" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
             <div class="mb-3">
-                <label for="formFile" class="form-label">預覽商品圖</label>
+                <label for="formFile" class="form-label">更換預覽商品圖</label>
                 <input class="form-control" type="file" id="formFile">
             </div>
             <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">更多商品圖</label>
+                <label for="formFileMultiple" class="form-label">新增更多商品圖</label>
                 <input class="form-control" type="file" id="formFileMultiple" multiple>
             </div>
         </section>
@@ -102,6 +114,22 @@
             </div>
         </section>
     </article>
+
+    <p>
+        <button class="btn btn-outline-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUneditProductimg" aria-expanded="false" aria-controls="collapseUneditProductimg">
+            更改附件商品圖
+        </button>
+    </p>
+    <div style="min-height: 120px;">
+        <div class="collapse collapse-horizontal" id="collapseUneditProductimg">
+            <div class="card card-body w-100">
+                <div > 
+                    <img src="https://pbs.twimg.com/profile_images/1001436225402621952/bdez2BKN_400x400.jpg" alt="UneditProductimg" style="max-width: 100%; max-height:150px;">
+                </div>                
+            </div>
+        </div>
+    </div>
+
 </div>
 @section Scripts {
     <script>
@@ -116,11 +144,13 @@
         const revise = document.querySelector('#btnrevise');
         const putData = {
             "productName": "",
-            "categoryId": 6,
+            "categoryId": 0,
             "productUnitprice": 20,
             "productDetail": "",
             "productImage": "",
-            "imageBase64": ""
+            "imageBase64": "",
+            "images": [],
+            "moreBase64Images": []
         }
 
         //預覽選擇影像&轉成base64
@@ -152,6 +182,34 @@
                     return;
                 }
             }
+        });
+        // 多張影像
+        document.getElementById('formFileMultiple').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const files = fileInput.files;
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const newPreview = `<div class="carousel-item">
+                                                    <img src="${e.target.result}" class="d-block w-100" alt="Image Preview">
+                                                </div>`;
+                    productImage.insertAdjacentHTML('beforeend', newPreview);
+                };
+                reader.readAsDataURL(file);
+
+                const byteReader = new FileReader();
+                byteReader.onload = function (e) {
+                    const arrayBuffer = e.target.result;
+                    const byteArray = new Uint8Array(arrayBuffer);
+                    const base64String = btoa(String.fromCharCode.apply(null, byteArray));
+                    putData.images.push({ productImages: file.name });
+                    putData.moreBase64Images.push(base64String);
+                    console.log('file.name:', file.name);
+                    console.log('Image in base64:', base64String);
+                };
+                byteReader.readAsArrayBuffer(file);
+            });
         });
         //單價限制
         thePrice.addEventListener('blur', event => {
@@ -189,17 +247,15 @@
             putData.productDetail = data.productDetail;
 
             //顯示照片
-            s = ` <div class="zoom-container">
-                            <img src="data:image/jpeg;base64,${data.productImage}" class="d-block w-100 h-auto zoom-img" alt="notFound" id="preview">
-                           </div>`;
-            /*if (data.images) {
+            document.getElementById('preview').src = `data:image/jpeg;base64,${data.productImage}`;
+            if (data.images) {
                 for (var pic of data.base64Images) {
-                    s += `<div class="zoom-container">
-                          <img src="data:image/jpeg;base64,${pic}" class="d-block w-100 h-auto zoom-img" alt="error">
-                          </div>`;
+                    newPreview = `<div class="carousel-item">
+                                    <img src="data:image/jpeg;base64,${pic}" class="d-block w-100" alt="Image Preview">
+                                   </div>`;
+                    productImage.insertAdjacentHTML('beforeend', newPreview);
                 }
-            }*/
-            productImage.innerHTML = s;
+            }
 
             //顯示資料
             s = data.productName;
