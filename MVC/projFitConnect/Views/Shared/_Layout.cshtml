@@ -81,9 +81,13 @@
     </div>
 
     <script>
-        if (window.location.href == 'https://localhost:7168/Home') {
-            document.getElementById('main_carousel').style.display = 'none';
-        }
+        document.getElementById('main_carousel').style.display = 'none';
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const path = window.location.pathname;
+            if (path === '/' || path === '/Home') {
+                document.getElementById('main_carousel').style.display = 'block';
+            }
+        });
     </script>
 
     <div id="mainpg" style="background-color:#deebf7">
