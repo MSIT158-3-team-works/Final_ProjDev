@@ -14,6 +14,4 @@ public partial class TcoachExpert
     public virtual Tclass Class { get; set; } = null!;
 
     public virtual TIdentity Coach { get; set; } = null!;
-
-    public virtual ICollection<TcoachPhoto> TcoachPhotos { get; set; } = new List<TcoachPhoto>();
 }

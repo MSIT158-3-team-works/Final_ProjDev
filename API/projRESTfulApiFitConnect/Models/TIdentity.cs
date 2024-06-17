@@ -41,6 +41,8 @@ public partial class TIdentity
 
     public virtual ICollection<TcoachInfoId> TcoachInfoIds { get; set; } = new List<TcoachInfoId>();
 
+    public virtual ICollection<TcoachPhoto> TcoachPhotos { get; set; } = new List<TcoachPhoto>();
+
     public virtual ICollection<TfieldReserve> TfieldReserves { get; set; } = new List<TfieldReserve>();
 
     public virtual ICollection<TmemberFollow> TmemberFollowCoaches { get; set; } = new List<TmemberFollow>();

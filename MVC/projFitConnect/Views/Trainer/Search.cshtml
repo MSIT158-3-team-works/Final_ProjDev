@@ -10,7 +10,7 @@
             <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="citys">
                 <option>縣市</option>
             </select>
-            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="regions">
+            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="region" id="regions">
                 <option>地區</option>
             </select>
             <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort1Search">
@@ -163,10 +163,10 @@
                 //     averageRate = "尚無評價";
                 // }
                 //生成教練卡
-                return( `<a href="/Trainer/Coach?id=${item.id}" class="card mb-3" style="max-width: 540px; text-decoration: none;">
-                                <div class="row g-0">
-                                <div class="col-md-4 d-flex align-items-center justify-content-center" style="overflow: hidden;">
-                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
+                return( `<a href="/Trainer/Coach?id=${item.id}" class="card mb-3" style="max-width:540px; text-decoration:none;">
+                              <div class="row g-0" style="height: 100%;">
+                                <div class="col-md-4 d-flex align-items-center justify-content-center" style="overflow:hidden; height: 100%;">
+                                   <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit:cover; height:100%; width:auto;">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -276,7 +276,7 @@
             loadRegions();
         });
         // 事件監聽器，當城市選項發生變化時更新地區選項
-        citys.addEventListener('change', event => {
+        citys.addEventListener('change', (event) => {
             searchData.page = 1;
             if (event.target.value === '縣市') {
                 searchData.city = "";
@@ -288,7 +288,7 @@
             loadCoaches();
         });
         // 事件監聽器，當地區選項發生變化時過濾場館
-        regions.addEventListener('change', event => {
+        regions.addEventListener('change', (event) => {
             searchData.page = 1;
             if (event.target.value === '地區') {
                 searchData.city = "";
