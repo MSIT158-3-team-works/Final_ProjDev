@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using projRESTfulApiFitConnect.DTO;
 using projRESTfulApiFitConnect.DTO.Coach;
 using projRESTfulApiFitConnect.DTO.Gym;
+using projRESTfulApiFitConnect.DTO.Product;
 using projRESTfulApiFitConnect.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -64,9 +65,6 @@ namespace projRESTfulApiFitConnect.Controllers
                         .ToListAsync();
 
 
-            //List<TmemberRateClass> ratelist = new List<TmemberRateClass>();
-            //TmemberRateClass[] rlist = new TmemberRateClass[coaches.Count];
-            //ratelist = coaches.
             foreach (var item in coaches)
             {
                 var experts = item.TcoachExperts.Select(te => new ExpertiseDto
@@ -82,17 +80,6 @@ namespace projRESTfulApiFitConnect.Controllers
                     RegionId = fr.Field.Gym.Region.RegionId,
                     Region = fr.Field.Gym.Region.Region.ToString()
                 }).ToList();
-                //rlist.Append(item.TmemberRateClasses);
-
-                //var rates = item.TmemberRateClasses.Select(x => new List<decimal>
-                //[
-                //    RateCoach = x.RateCoach
-                //]).ToList();
-                //decimal avRate=0;
-                //foreach (var itemRate in rates)
-                //{
-                //    avRate = avRate + (decimal)itemRate;
-                //}
                 var rates = item.TmemberRateClasses.Select(x => new rateCoachDTO
                 {
                     RateCoach = x.RateCoach
@@ -191,7 +178,16 @@ namespace projRESTfulApiFitConnect.Controllers
 
 
 
-
+        private async Task<string> GetBase64Image(string coachImage)
+        {
+            string filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", coachImage);
+            if (System.IO.File.Exists(filepath))
+            {
+                byte[] bytes = await System.IO.File.ReadAllBytesAsync(filepath);
+                return Convert.ToBase64String(bytes);
+            }
+            return string.Empty;
+        }
 
 
         // GET: api/Coach/5
@@ -205,16 +201,19 @@ namespace projRESTfulApiFitConnect.Controllers
             List<ScheduleDatailDto> scheduleDatailDtos = new List<ScheduleDatailDto>();
             List<ExpertiseDto> expertiseDtos = new List<ExpertiseDto>();
 
-            var coach = await _context.TIdentities.Where(x => x.RoleId == 2 && x.Id == id).Include(x => x.Gender).Include(x => x.Role).Include(x => x.TcoachInfoIds).FirstOrDefaultAsync();
+            var coach = await _context.TIdentities.Where(x => x.RoleId == 2 && x.Id == id).Include(x => x.Gender).Include(x => x.Role).Include(x => x.TcoachInfoIds).Include(x=>x.TcoachPhotos).FirstOrDefaultAsync();
             if (coach == null)
             {
                 return NotFound();
             }
-
+            var images = coach.TcoachPhotos.Select(img => new CoachImagesDTO
+            {
+                coachImages = img.CoachPhoto
+            }).ToList();
             var coachInfo = coach.TcoachInfoIds.FirstOrDefault();
             var experts = await _context.TcoachExperts.Where(x => x.CoachId == id).Include(x => x.Class.ClassSort2).ToListAsync();
             var rates = await _context.TmemberRateClasses.Where(x => x.CoachId == id).Include(x => x.Reserve.Member).Include(x => x.Reserve.ClassSchedule.Class).ToListAsync();
-            var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseStartTime).Include(x => x.ClassStatus).ToListAsync();
+            var schedules = await _context.TclassSchedules.Where(x => x.CoachId == id).Include(x => x.CourseStartTime).Include(x => x.ClassStatus).Include(x=>x.Class).ToListAsync();
             var fields = await _context.TfieldReserves.Where(x => x.CoachId == id).Include(x => x.Field.Gym.Region.City).ToListAsync();
 
             if (!string.IsNullOrEmpty(coach.Photo))
@@ -251,8 +250,23 @@ namespace projRESTfulApiFitConnect.Controllers
                 Intro = coachInfo.CoachIntro,
                 Experties = expertiseDtos,
                 RoleDescription = coach.Role.RoleDescribe,
-                GenderDescription = coach.Gender.GenderText
+                GenderDescription = coach.Gender.GenderText,
+                Images = images,
+                Base64Images = new List<string>()
             };
+            if (images.Count > 0)
+            {
+                foreach (var image in images)
+                {
+                    if (!string.IsNullOrEmpty(image.coachImages))
+                    {
+                        string base64Img = await GetBase64Image(image.coachImages);
+                        coachDetailDto.Base64Images.Add(base64Img);
+                    }
+                }
+            }
+
+
             foreach (var rate in rates)
             {
                 RateDetailDto rateDetailDto = new RateDetailDto()
@@ -297,6 +311,15 @@ namespace projRESTfulApiFitConnect.Controllers
             }
             foreach (var schedule in schedules)
             {
+                string filepath = "";
+                string base64Image2 = "";
+                filepath = Path.Combine(_env.ContentRootPath, "Images", "ClassPic", schedule.Class.ClassPhoto);
+                if (System.IO.File.Exists(filepath))
+                {
+                    byte[] bytes = await System.IO.File.ReadAllBytesAsync(filepath);
+                    base64Image2 = Convert.ToBase64String(bytes);
+                }
+
                 ScheduleDatailDto scheduleDatailDto = new ScheduleDatailDto()
                 {
                     ClassScheduleId = schedule.ClassScheduleId,
@@ -308,7 +331,8 @@ namespace projRESTfulApiFitConnect.Controllers
                     MaxStudent = schedule.MaxStudent,
                     ClassStatus = schedule.ClassStatus.ClassStatusDiscribe,
                     ClassPayment = schedule.ClassPayment,
-                    CoachPayment = schedule.CoachPayment
+                    CoachPayment = schedule.CoachPayment,
+                    Photo= base64Image2
                 };
                 scheduleDatailDtos.Add(scheduleDatailDto);
             }

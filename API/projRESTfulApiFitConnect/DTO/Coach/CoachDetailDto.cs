@@ -1,4 +1,5 @@
 ﻿using projRESTfulApiFitConnect.DTO.Gym;
+using projRESTfulApiFitConnect.DTO.Product;
 using System;
 
 namespace projRESTfulApiFitConnect.DTO.Coach
@@ -19,5 +20,7 @@ namespace projRESTfulApiFitConnect.DTO.Coach
         public string? GenderDescription { get; set; } = null!;
         public List<CityDto>? Region { get; set; }
         public List<rateCoachDTO>? CoachRate { get; set; }
+        public List<CoachImagesDTO>? Images { get; set; }
+        public List<string>? Base64Images { get; set; }
     }
 }

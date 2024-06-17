@@ -21,5 +21,6 @@
         public decimal ClassPayment { get; set; }
 
         public bool CoachPayment { get; set; }
+        public string Photo { get; set; } = null!;
     }
 }
