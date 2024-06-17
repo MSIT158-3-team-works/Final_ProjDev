@@ -107,18 +107,20 @@
                 border-color: deepskyblue;
             }
 
-        .seemore {
+        .btn-seemore {
             color: #fff;
             background-color: #ffc107;
             border-color: #ffc107;
+            text-align:center;
             text-decoration: none;
             font-weight: 600;
         }
 
-            .seemore:hover {
+            .btn-seemore:hover {
                 color: #fff;
                 background-color: #0080FF;
                 border-color: darkcyan;
+                text-decoration: none;
             }
 
         .carousel-control-prev,
@@ -156,7 +158,7 @@
 
 <div id="content">
     <aside class="aside">
-        <section class="section" style="margin-top:100px">
+        <section class="section" style="margin-top:90px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
                 <h2 class="subtital">商品類別</h2>
                 <button class="btn btn-outline-success" type="button" id="checkAll" value="0">
@@ -425,7 +427,7 @@
                 return (`<a href="merchandise/${good.productId}" style="text-decoration:none;">
                            <div class="card mb-3 hover" style="max-width: 540px;">
                             <div class="row g-0">
-                             <div class="col-md-4" style="text-align:center; padding-top:10px">
+                             <div class="col-md-4" style="text-align:center; padding-top:10px;">
                                <img src="data:image/jpeg;base64,${good.productImage}" class="img-fluid rounded-start" alt="Top3">
                                  <h6 style="font-size:0.5em;color:white;text-shadow:-1px -1px 0 crimson, 1px -1px 0 red,-1px  1px 0 red,1px  1px 0 crimson;">已售出 ${good.productSold}</h6>
                              </div>
@@ -665,7 +667,7 @@
                         <p class="card-text">$${allData[position].unitPrice}NTD</p>
                        </div>
                        <div class="d-grid gap-2">
-                       <a href="merchandise/${allData[position].productId}" class="btn seemore">商品詳細</a>
+                       <a href="merchandise/${allData[position].productId}" class="btn-seemore">商品詳細</a>
                        </div></div></div>`
             }
             divMain.innerHTML = s;

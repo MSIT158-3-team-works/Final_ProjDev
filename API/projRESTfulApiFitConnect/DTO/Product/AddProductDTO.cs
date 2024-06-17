@@ -13,5 +13,7 @@
         public string? ProductImage { get; set; }
 
         public string? ImageBase64 { get; set; }
+        public List<ProductImagesDTO>? Images { get; set; }
+        public List<string>? moreBase64Images { get; set; }
     }
 }

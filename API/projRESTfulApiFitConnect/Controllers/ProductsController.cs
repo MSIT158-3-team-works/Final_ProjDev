@@ -123,7 +123,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 unitPrice = product.ProductUnitprice,
                 productDetail = product.ProductDetail,
                 productImage = base64Image,
-                productSold = sold, 
+                productSold = sold,
                 Images = images,
                 Base64Images = new List<string>()
             };
@@ -153,14 +153,14 @@ namespace projRESTfulApiFitConnect.Controllers
             //根據關鍵字搜尋資料(title、desc)
             if (!string.IsNullOrEmpty(productSearchDTO.keyword))
             {
-                products = products.Where(p => p.productName.Contains(productSearchDTO.keyword) || p.productCategory.Contains(productSearchDTO.keyword)|| p.productDetail.Contains(productSearchDTO.keyword));
+                products = products.Where(p => p.productName.Contains(productSearchDTO.keyword) || p.productCategory.Contains(productSearchDTO.keyword) || p.productDetail.Contains(productSearchDTO.keyword));
             }
 
             //排序
             switch (productSearchDTO.sortBy)
             {
                 case "popular":
-                    products = productSearchDTO.sortType == "asc" ?  products.OrderByDescending(p => p.productSold) :products.OrderBy(p => p.productSold);
+                    products = productSearchDTO.sortType == "asc" ? products.OrderByDescending(p => p.productSold) : products.OrderBy(p => p.productSold);
                     break;
                 case "unitPrice":
                     products = productSearchDTO.sortType == "asc" ? products.OrderBy(p => p.unitPrice) : products.OrderByDescending(p => p.unitPrice);
@@ -202,50 +202,65 @@ namespace projRESTfulApiFitConnect.Controllers
         public async Task<IActionResult> PutTproduct(int id, AddProductDTO addProductDTO)
         {
             var product = await _context.Tproducts
-                .Where(x => x.ProductId == id )
+                .Where(x => x.ProductId == id)
                 .Include(x => x.TproductImages)
                 .FirstOrDefaultAsync();
-            if (product==null)
-                return Ok("none-query");
-            
-            if (!string.IsNullOrEmpty(addProductDTO.ImageBase64))
+
+            if (product == null)
             {
-                byte[] imageBytes = Convert.FromBase64String(addProductDTO.ImageBase64);
-                // Save the image to the server
-                string filepath = Path.Combine(_env.ContentRootPath, "Images", "ProductImages", addProductDTO.ProductImage);
-                await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+                return NotFound("Product not found");
             }
 
-            if(!string.IsNullOrEmpty(addProductDTO.ProductName))
+            if (!string.IsNullOrEmpty(addProductDTO.ProductName))
                 product.ProductName = addProductDTO.ProductName;
-            if(addProductDTO.CategoryId!=null|| addProductDTO.CategoryId!=0)
-                product.CategoryId = addProductDTO.CategoryId;
+
+            if (addProductDTO.CategoryId.HasValue && addProductDTO.CategoryId != 0)
+                product.CategoryId = addProductDTO.CategoryId.Value;
+
             if (addProductDTO.ProductUnitprice != 0)
                 product.ProductUnitprice = addProductDTO.ProductUnitprice;
-            if(!string.IsNullOrEmpty(addProductDTO.ProductDetail))
-                product.ProductDetail = addProductDTO.ProductDetail;
-            if (!string.IsNullOrEmpty(addProductDTO.ProductImage))
-                product.ProductImage = addProductDTO.ProductImage;
-            _context.Entry(product).State = EntityState.Modified;
 
-            try
+            if (!string.IsNullOrEmpty(addProductDTO.ProductDetail))
+                product.ProductDetail = addProductDTO.ProductDetail;
+
+            if (!string.IsNullOrEmpty(addProductDTO.ProductImage) && !string.IsNullOrEmpty(addProductDTO.ImageBase64))
             {
-                await _context.SaveChangesAsync();
+                byte[] imageBytes = Convert.FromBase64String(addProductDTO.ImageBase64);
+                string filepath = Path.Combine(_env.ContentRootPath, "Images", "ProductImages", addProductDTO.ProductImage);
+                await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+
+                product.ProductImage = addProductDTO.ProductImage;
             }
-            catch (DbUpdateConcurrencyException)
+
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            // Save additional images if any
+            if (addProductDTO.Images != null && addProductDTO.moreBase64Images != null && addProductDTO.Images.Count == addProductDTO.moreBase64Images.Count)
             {
-                if (!TproductExists(id))
+                for (int i = 0; i < addProductDTO.Images.Count; i++)
                 {
-                    return Ok("找瞴~");
+                    byte[] additionalImageBytes = Convert.FromBase64String(addProductDTO.moreBase64Images[i]);
+                    string additionalFilePath = Path.Combine(_env.ContentRootPath, "Images", "ProductImages", addProductDTO.Images[i].productImages);
+                    await System.IO.File.WriteAllBytesAsync(additionalFilePath, additionalImageBytes);
+
+                    TproductImage tproductImage = new TproductImage
+                    {
+                        ProductId = product.ProductId,
+                        ProductImages = addProductDTO.Images[i].productImages
+                    };
+
+                    _context.TproductImages.Add(tproductImage);
                 }
-                else
-                {
-                    throw;
-                }
+
+                await _context.SaveChangesAsync();
             }
 
             return Ok("EditSuccess");
+
         }
+
+
 
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -264,11 +279,32 @@ namespace projRESTfulApiFitConnect.Controllers
                 CategoryId = addProductDTO.CategoryId,
                 ProductUnitprice = addProductDTO.ProductUnitprice,
                 ProductDetail = addProductDTO.ProductDetail,
-                ProductImage = addProductDTO.ProductImage, 
+                ProductImage = addProductDTO.ProductImage,
                 ProductSupplied = true
             };
             _context.Tproducts.Add(tproduct);
             await _context.SaveChangesAsync();
+
+            // Save additional images if any
+            if (addProductDTO.Images != null && addProductDTO.moreBase64Images != null && addProductDTO.Images.Count == addProductDTO.moreBase64Images.Count)
+            {
+                for (int i = 0; i < addProductDTO.Images.Count; i++)
+                {
+                    byte[] additionalImageBytes = Convert.FromBase64String(addProductDTO.moreBase64Images[i]);
+                    string additionalFilePath = Path.Combine(_env.ContentRootPath, "Images", "ProductImages", addProductDTO.Images[i].productImages);
+                    await System.IO.File.WriteAllBytesAsync(additionalFilePath, additionalImageBytes);
+
+                    TproductImage tproductImage = new TproductImage
+                    {
+                        ProductId = tproduct.ProductId,
+                        ProductImages = addProductDTO.Images[i].productImages
+                    };
+
+                    _context.TproductImages.Add(tproductImage);
+                }
+
+                await _context.SaveChangesAsync();
+            }
 
             return Ok("product add");
         }
