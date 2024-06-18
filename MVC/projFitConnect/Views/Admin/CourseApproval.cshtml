@@ -1,0 +1,319 @@
+﻿@{
+    ViewData["Title"] = "CourseList";
+}
+
+@section Styles {
+    <style>
+        .main {
+            width: 92%;
+            margin: auto;
+        }
+
+        .create-btn {
+            position: fixed;
+            top: 113px;
+            right: 0;
+        }
+
+        .square-btn {
+            margin-right: 13px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            text-align: center;
+            font-weight: 600;
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            border-radius: 100px;
+            background-color: #FFFF37;
+            border: 3px double #FF8000;
+        }
+
+            .square-btn:hover {
+                border: none;
+                background-color: #4B0091;
+                color: whitesmoke;
+            }
+
+        .vertical-text {
+            writing-mode: vertical-rl; /* or vertical-lr */
+            text-orientation: upright;
+        }
+
+        thead {
+            background-color: #101F41;
+        }
+
+        .head {
+            color: #D0D0D0 !important;
+        }
+
+        .row1 {
+            text-align: center;
+        }
+    </style>
+}
+<h1 style="padding-left:64px;margin:15px 0;">開課審核</h1>
+<div class="main">
+    <div class="row mb-3">
+        <div class="col-5">
+            <div class="dropdown">
+                <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton0" data-bs-toggle="dropdown" aria-expanded="false">
+                    --狀態篩選--
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton0">
+                    <li><a class="dropdown-item dropdown-category" data-value="0">所有狀態</a></li>
+                    <li><a class="dropdown-item dropdown-category" data-value="1">人數已達上限</a></li>
+                    <li><a class="dropdown-item dropdown-category" data-value="2">正常開課</a></li>
+                    <li><a class="dropdown-item dropdown-category" data-value="3">因故取消</a></li>
+                    <li><a class="dropdown-item dropdown-category" data-value="4">待審核</a></li>
+                </ul>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    --排序依據--
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item dropdown-sort" data-type="Date">日期</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="CoursePrice">價格</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="Sort">課程類別</a></li>
+                </ul>
+                <button class="btn btn-outline-secondary" style="margin-left:12px;" id="orderbtn">正序</button>
+            </div>
+        </div>
+        <div class="col-4" style="text-align:right;">
+            <input type="search" placeholder="輸入搜尋課程..." class="form-control" id="inputSearch" />
+        </div>
+        <div class="col-3" style="text-align:right;">
+            <label class="form-check-label">顯示筆數：</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="20" checked>
+                <label class="form-check-label" for="inlineRadio1">20</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="40">
+                <label class="form-check-label" for="inlineRadio2">40</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="60">
+                <label class="form-check-label" for="inlineRadio3">60</label>
+            </div>
+        </div>
+    </div>
+
+    <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="row1 head">ID</th>
+                <th class="head">Photo</th>
+                <th class="head">ClassName</th>
+                <th class="head">Sort</th>
+                <th class="head">Gym</th>
+                <th class="head">Price</th>
+                <th class="head">Date</th>
+                <th class="head">Status</th>
+                <th class="head">Detail</th>
+                <th class="head">審核</th>
+            </tr>
+        </thead>
+        <tbody id="tablebody">
+            <tr>
+                <td>1</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <p>
+                        <button class="btn btn-outline-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePhoto" aria-expanded="false" aria-controls="collapsePhoto">
+                            照片
+                        </button>
+                    </p>
+                    <div style="max-height: 120px;">
+                        <div class="collapse collapse-vertical" id="collapsePhoto">
+                            <img src="https://cdn3.iconfinder.com/data/icons/forall/1062/gym-225.png" alt="Coach">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="pagination-container w-25 m-auto">
+    <ul class="pagination" id="ulpaging">
+        <li><a href="#" style="margin-right:16px; border:none;"><</a></li>
+        <li><a href="#">1</a></li>
+        <li class="page-item active" onclick="pagingHandler(3)"><a class="page-link">2</a></li>
+        <li><a href="#" style="margin-left:16px; border:none;">></a></li>
+    </ul>
+</div>
+@section Scripts {
+    <script>
+        let MaxPage = 0;
+        const categorys = document.querySelectorAll('.dropdown-category');
+        const typeofsort = document.querySelectorAll('.dropdown-sort');
+        const orderby = document.getElementById('orderbtn');
+        const inpSearch = document.querySelector('#inputSearch');
+        const pagesize = document.querySelectorAll('[name="inlineRadioOptions"]');
+        const body = document.querySelector('#tablebody')
+        const ulPaging = document.getElementById('ulpaging');
+        const searchData = {
+            "sort1": 0,
+            "sort2": 0,
+            "field": "",
+            "courseDate": null,
+            "courseStartTime": null,
+            "classStatusId": 0,
+            "keyword": "",
+            "page": 1,
+            "pageSize": 10,
+            "sortBy": "",
+            "sortType": "asc"
+        };
+
+        //類別篩選
+        for (var category of categorys) {
+            category.addEventListener('click', function () {
+                //console.log(this.dataset.value);
+                searchData.classStatusId = this.dataset.value;
+                searchData.page = 1;
+                loadCourses();
+            })
+        }
+        //排序依據
+        for (var type of typeofsort) {
+            type.addEventListener('click', function () {
+                //console.log(this.dataset.type);
+                searchData.sortBy = this.dataset.type;
+                searchData.page = 1;
+                loadCourses();
+            })
+        }
+        //排序
+        var orderClicked = true;
+        orderby.addEventListener('click', (event) => {
+            console.log(event.target);
+            if (orderClicked) {
+                event.target.textContent = "倒序";
+                event.target.className = "btn btn-secondary";
+                orderClicked = false;
+                searchData.sortType = "desc";
+                loadCourses();
+            } else {
+                event.target.textContent = "正序";
+                event.target.className = "btn btn-outline-secondary";
+                orderClicked = true;
+                searchData.sortType = "asc";
+                loadCourses();
+            }
+        });
+        //搜尋關鍵字
+        inpSearch.addEventListener('keydown', event => {
+            if (event.keyCode === 13) {
+                if (event.target.value != null)
+                    searchData.keyword = event.target.value;
+                else
+                    searchData.keyword = "";
+                searchData.page = 1;
+                loadCourses();
+            }
+        })
+        //顯示筆數
+        for (var radio of pagesize) {
+            //console.log(radio.value);
+            radio.addEventListener('click', function () {
+                searchData.pageSize = this.value;
+                searchData.page = 1;
+                loadCourses();
+            })
+        }
+        //換頁
+        const pagingHandler = (page) => {
+            if (page === -1) { page = parseInt(searchData.page) - 1; if (page <= 0) return; }
+            if (page === 0) { page = parseInt(searchData.page) + 1; if (page > MaxPage) return; }
+            searchData.page = page;
+            console.log('toPage', searchData.page);
+            loadCourses();
+        }
+
+        //載入課程
+        const loadCourses = async () => {
+            let url = 'https://localhost:7199/api/Course/SEARCH';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(searchData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            console.log('Course', data);
+            //顯示資料
+            document.getElementById('datafound').innerHTML = `共${data.totalCount}筆資料`;
+            const courses = data.courseResult.map(course => {
+                //data:image/jpeg;base64,${good.productImage}
+                //base64Images,images,productCategory,productCategoryId,productName,unitPrice,productSold,productDetail
+                return (`<tr>
+                                                         <td class="row1">${course.classScheduleId}</td>
+                                         <td>
+                                                                 <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePhoto${course.classScheduleId}" aria-expanded="false" aria-controls="collapsePhoto${course.classScheduleId}">
+                                         照片
+                                         </button>
+                                         <div style="max-height:120px;">
+                                                         <div class="collapse collapse-vertical" id="collapsePhoto${course.classScheduleId}">
+                                                 <img src="data:image/jpeg;base64,${course.photo}" alt="Product" style="max-height:200px;margin-left:80px;border:solid 1.5px navy;">
+                                         </div>
+                                         </div>
+                                         </td>
+                                                         <td>${course.class}</td>
+                                                         <td>${course.sort2Name}</td>
+                                                         <td>${course.gym}</td>
+                                                         <td>${course.classPayment}</td>
+                                                         <td>${course.courseDate}</td>
+                                                         <td>${course.classStatus}</td>
+                                         <td>
+                                         <div class="accordion" id="accordionEx">
+                                         <div class="accordion-item">
+                                         <h2 class="accordion-header">
+                                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${course.classScheduleId}" aria-expanded="false" aria-controls="collapse${course.classScheduleId}">
+                                         詳細
+                                         </button>
+                                         </h2>
+                                                 <div id="collapse${course.classScheduleId}" class="accordion-collapse collapse" data-bs-parent="#accordionEx">
+                                         <div class="accordion-body">
+                                                     ${course.introduction}
+                                         </div>
+                                         </div>
+                                         </div>
+                                         </td>
+                                         <td>
+                                         <button class="btn btn-outline-success" type="button" onclick="offsale(${course.classScheduleId})">
+                                         同意
+                                         </button>
+                                         <button class="btn btn-outline-danger" type="button" onclick="offsale(${course.classScheduleId})">
+                                         不同意
+                                         </button>
+                                         </td>
+                                         </tr>`)
+            })
+            body.innerHTML = courses.join("");
+
+            //顯示分頁按鈕
+            let liPages = "", pageCount = 0;
+            MaxPage = data.totalPages;
+            var currentPage = searchData.page;//pickedPage;
+            for (let i = 1; i <= MaxPage; i++) {
+                pageCount++;
+                if (currentPage == i)
+                    liPages += `<li class="page-item active" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+                else
+                    liPages += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+            }
+            ulPaging.innerHTML = '<li class="page-item" onclick="pagingHandler(-1)"><a class="page-link" href="#" style = "margin-right:16px;"><</a></li>' + liPages + '<li class="page-item" onclick="pagingHandler(0)"><a class="page-link" href="#" style = "margin-left:16px;">></a></li>';
+
+        }
+        loadCourses();
+    </script>
+}

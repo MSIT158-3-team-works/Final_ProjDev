@@ -33,9 +33,9 @@ namespace projRESTfulApiFitConnect.Controllers
             string filepath = "";
             List<OpenCourseDto> openCourseDtos = new List<OpenCourseDto>();
             var openCourses = await _context.TclassSchedules
-                             .Where(x => x.ClassStatusId == 2)
                              .Include(x => x.ClassStatus)
                              .Include(x => x.Class)
+                             .ThenInclude(te=>te.ClassSort2)
                              .Include(x => x.Coach)
                              .Include(x => x.Field).ThenInclude(te => te.Gym)
                              .Include(x => x.CourseStartTime)
@@ -58,6 +58,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     CoachId= item.CoachId,
                     ClassSort2Id = item.Class.ClassSort2Id,
                     ClassSort1Id = item.Class.ClassSort1Id,
+                    Sort2Name = item.Class.ClassSort2.ClassSort2Detail,
                     Introduction = item.Class.ClassIntroduction,
                     Gym = item.Field.Gym.GymName,
                     GymId = item.Field.Gym.GymId,
@@ -66,6 +67,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     CourseStartTime = item.CourseStartTime.TimeName,
                     CourseEndTime = item.CourseEndTime.TimeName,
                     MaxStudent = item.MaxStudent,
+                    ClassStatusId=item.ClassStatusId,
                     ClassStatus = item.ClassStatus.ClassStatusDiscribe,
                     ClassPayment = item.ClassPayment,
                     CoachPayment = item.CoachPayment
@@ -87,7 +89,7 @@ namespace projRESTfulApiFitConnect.Controllers
                              .Where(x => x.ClassStatusId == 2)
                              .Where(x => x.ClassScheduleId == id)
                              .Include(x => x.ClassStatus)
-                             .Include(x => x.Class)
+                             .Include(x => x.Class).ThenInclude(te => te.ClassSort2)
                              .Include(x => x.Coach)
                              .Include(x => x.Field).ThenInclude(te => te.Gym)
                              .Include(x => x.CourseStartTime)
@@ -114,6 +116,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 Coach = openCourses.Coach.Name,
                 CoachId = openCourses.CoachId,
                 ClassSort2Id = openCourses.Class.ClassSort2Id,
+                Sort2Name = openCourses.Class.ClassSort2.ClassSort2Detail,
                 Introduction = openCourses.Class.ClassIntroduction,
                 Gym = openCourses.Field.Gym.GymName,
                 GymId = openCourses.Field.Gym.GymId,
@@ -123,6 +126,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 CourseStartTime = openCourses.CourseStartTime.TimeName,
                 CourseEndTime = openCourses.CourseEndTime.TimeName,
                 MaxStudent = openCourses.MaxStudent,
+                ClassStatusId = openCourses.ClassStatusId,
                 ClassStatus = openCourses.ClassStatus.ClassStatusDiscribe,
                 ClassPayment = openCourses.ClassPayment,
                 CoachPayment = openCourses.CoachPayment,
@@ -142,7 +146,8 @@ namespace projRESTfulApiFitConnect.Controllers
             //根據分類編號搜尋課程資料
             var everyCourse = courseSearchDTO.sort1 == 0 ? openCourseDtos : openCourseDtos.Where(s => s.ClassSort1Id == courseSearchDTO.sort1);
             everyCourse = courseSearchDTO.sort2 == 0 ? everyCourse : everyCourse.Where(s => s.ClassSort2Id == courseSearchDTO.sort2);
-
+            //根據課程狀態搜尋課程資料
+            everyCourse = courseSearchDTO.ClassStatusId == 0 ? everyCourse : everyCourse.Where(s => s.ClassStatusId == courseSearchDTO.ClassStatusId);
             //根據Time分類搜尋課程資料            
             everyCourse = courseSearchDTO.CourseDate == null ? everyCourse : everyCourse.Where(s => s.CourseDate == courseSearchDTO.CourseDate);
             everyCourse = courseSearchDTO.CourseStartTime == null ? everyCourse : everyCourse.Where(s => s.CourseStartTime == courseSearchDTO.CourseStartTime);
@@ -163,13 +168,21 @@ namespace projRESTfulApiFitConnect.Controllers
             //排序
             switch (courseSearchDTO.sortBy)
             {
-                //依性別
+                //依日期
                 case "Date":
                     everyCourse = courseSearchDTO.sortType == "asc" ? everyCourse.OrderBy(s => s.CourseDate) : everyCourse.OrderByDescending(s => s.CourseDate);
                     break;
-                //依性別
+                //依課程價格
+                case "CoursePrice":
+                    everyCourse = courseSearchDTO.sortType == "asc" ? everyCourse.OrderBy(s => s.ClassPayment) : everyCourse.OrderByDescending(s => s.ClassPayment);
+                    break;
+                //依場館
                 case "GymId":
                     everyCourse = courseSearchDTO.sortType == "asc" ? everyCourse.OrderBy(s => s.GymId) : everyCourse.OrderByDescending(s => s.GymId);
+                    break;
+                //依類別
+                case "Sort":
+                    everyCourse = courseSearchDTO.sortType == "asc" ? everyCourse.OrderBy(s => s.ClassSort2Id) : everyCourse.OrderByDescending(s => s.ClassSort2Id);
                     break;
                 //預設為id
                 default:
@@ -210,14 +223,24 @@ namespace projRESTfulApiFitConnect.Controllers
         // PUT: api/Course/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClassSchedule(PutCourseDTO putCourseDTO, IFormFile img)
+        public async Task<IActionResult> UpdateClassScheduleStatus(int id, int statusId)
         {
-            var course = await _context.TclassSchedules.FindAsync(putCourseDTO.ClassScheduleId);
+            var classSchedule = await _context.TclassSchedules
+                .FirstOrDefaultAsync(x => x.ClassScheduleId == id);
 
+            if (classSchedule == null)
+            {
+                return NotFound("Class schedule not found");
+            }
+
+            classSchedule.ClassStatusId = statusId;
+
+            _context.Entry(classSchedule).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return Ok("課程資訊已成功更新");
+            return Ok("Class schedule status has been successfully updated");
         }
+
 
         // DELETE: api/Course/5
         [HttpDelete("{id}")]
