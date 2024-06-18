@@ -12,7 +12,7 @@
     </div>
     <div class="container marketing mx-auto" style="width:75%;">
         <div class="mx-2">
-            <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel" style="height:75vh; background-color:DimGrey;">
+            <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel" style="height:75vh; background-color:dimgrey;">
                 @* <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -63,7 +63,7 @@
         <div id="section-coachdetail" class="section" tabindex="0">
             <div>
                 <h2><strong>教練資料</strong></h2>
-                <div id="coachDetail" class="d-flex" style=" background-color:white; border:solid 3px navy; border-radius:5px; padding:5px">
+                <div id="coachDetail" class="d-flex" style=" background-color:dimgray; border:solid 3px dimgray; border-radius:5px; padding:5px; ">
                     <div class="container marketing">
                         <h1 class="chakra-text">Eric 陳伯維</h1>
                         <div class="d-flex">
@@ -85,7 +85,7 @@
                                         #松山區健身教練 #小巨蛋自由教練 #教練培訓
                                     </div>
                                 </div>
-                                <div class="">
+                                <div class=" ">
                                     <button type="button" class="chakra-button css-1qmctmy" onclick="toggleReadMore()">Read More</button>
                                 </div>
                             </div>
@@ -163,6 +163,31 @@
         function goBack() {
             window.history.back();
         };
+        //追蹤事件
+        let isTracked = false;
+        async function track(event,coachId) {
+            const trackedImg = '<img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/heart-48.png"/>';
+
+            let url = 'https://localhost:7199/api/CoachTrack?memberId=' + 2 + '&coachId=' + coachID;
+            let response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            // 切换图片
+            if (!isTracked) {
+
+                event.innerHTML = trackedImg; // 设置为跟踪后的图标
+                isTracked = true; // 更新状态
+                //alert("追蹤成功！"); // 可选的追踪成功提示
+            } else {
+                event.innerHTML = '<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-48.png" />';
+                isTracked = false; // 恢复原始状态
+                //alert("取消追蹤！"); // 可选的取消追踪提示
+            }
+        }
+
         //載入教練資料
         const loadCoach = async () => {
             let url = 'https://localhost:7199/api/Coach/' + coachID;
@@ -209,11 +234,15 @@
                 }
             }
             console.log("img======",img);
-            
+            //<p class="track" >♥</p>
             //教練資訊
-            det = `<div class="container marketing" style="position: relative;">
+            det = `<div class="container marketing coachinfo" >
                       ${ratediv}
-                    <h1 class="chakra-text">${data.coachDetailDto.name}</h1>
+                      <button type="button" class="btn track rounded-circle" onclick="track(this)">
+                       <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-48.png" />
+                      </button>
+                    <h1 class="chakra-text">${data.coachDetailDto.name}         
+                    </h1>
                         <h5>${aa}</h5>
                         <h5>性別 : ${data.coachDetailDto.genderDescription}</h5>
                          <h5>聯絡電話 : ${data.coachDetailDto.phone}</h5>
@@ -296,9 +325,10 @@
 
         //載入推薦教練
         const recommandCoach = async () => {
-            let sortBy = ["", "RegionId", "Sort1ID", "GenderID"];
-            let sortType = [ "asc", "desc", "asc", "desc"];
-            let randomNumber = Math.ceil(Math.random() * 4);
+            let sortBy = ["","RegionId", "Sort1ID", "GenderID", "Sort2ID"];
+            let sortType = ["asc","desc"];
+            let randomNumber = Math.floor(Math.random() * 5);
+            let randomType = Math.floor(Math.random() * 2);
             console.log(randomNumber);
             const url = 'https://localhost:7199/api/Coach/SEARCH';
             const response = await fetch(url, {
@@ -314,7 +344,7 @@
                     "page": 1,
                     "pageSize": 4,
                     "sortBy": sortBy[randomNumber],
-                    "sortType": sortType[randomNumber]
+                    "sortType": sortType[randomType]
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -323,7 +353,7 @@
             });
             data = await response.json();
             console.log(sortBy[randomNumber]);
-            console.log(sortType[randomNumber]);
+            console.log(sortType[randomType]);
             //教練卡
             const coachCard = data.coachResult.map(item => {
                 //專長(不重複)
@@ -353,9 +383,6 @@
             })
             coachRecommand.innerHTML = coachCard.join("");
         }
-
-
-
         //
         // loadCoach();
         // recommandCoach();
@@ -364,8 +391,7 @@
             loadCoach();
             recommandCoach();
         });
-
-
+        
         //資料收折
         function toggleReadMore() {
             const textElement = document.querySelector('.coachDetail');
@@ -395,8 +421,7 @@
                 $(this).addClass('active').addClass('clicked');
             });
         });
-        //
-
+        //回頂部
         $(window).scroll(function () {
             if ($(window).scrollTop() > 200) {
                 if ($(".goTop").hasClass("hide")) {
@@ -430,28 +455,57 @@
 
         .section {
             padding-top: 130px;
-            /*margin-bottom: 50px; /* Add some space between sections */
         }
 
-        
+        .coachinfo{
+            position: relative; 
+            margin-left:75px; 
+            margin-right:75px; 
+            background-color:white;
+            padding-left:25px;
+            padding-right:25px;
+            border-radius:10px;
+        }
+        /*顯示評分*/
         .rate{
             position: absolute; 
-            top: 0; 
-            right: 0; 
+            top: 10px; 
+            right: 10px; 
             width: 75px; 
             height: 60px; 
-            background-color:navy;
+            background-color:dimgray;
             border-radius:10px;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
         }
+        /*追蹤按鈕*/
+        .track {
+            position: absolute;
+            top: 85px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: deeppink;
+            font-size:3em;
+            border:solid 2px black;
+            
+        }
+        .track:hover {
+            border-color: #dc3545;  
+        }
+
         /* 固定索引標籤 */
         #pills-tab {
             position: sticky;
             top: 85px;
-            border-bottom: solid 3px navy;
+            border-bottom: solid 3px dimgray;
             background-color: white;
             z-index: 1000; /* 确保元素位于其他内容之上 */
         }
@@ -474,7 +528,6 @@
             cursor: pointer;
 
         }
-
             .act:hover {
                 transform: scale(0.98);
             }
