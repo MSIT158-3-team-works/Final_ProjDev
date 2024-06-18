@@ -1,26 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\",
+  "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\test0618\\MVC\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev0615\\mvc\\projfitconnect\\views\\course\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\course\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev0615\\mvc\\projfitconnect\\views\\course\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\course\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev0615\\mvc\\projfitconnect\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev0615\\mvc\\projfitconnect\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\source\\repos\\final_projdev0615\\mvc\\projfitconnect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\test0618\\mvc\\projfitconnect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\test0618\\mvc\\projfitconnect\\views\\gymlist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\gymlist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\test0618\\mvc\\projfitconnect\\views\\admin\\gymupdate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\gymupdate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\test0618\\mvc\\projfitconnect\\views\\admin\\gymreviewlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\gymreviewlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\test0618\\mvc\\projfitconnect\\views\\admin\\fieldreviewlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\fieldreviewlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\test0618\\mvc\\projfitconnect\\views\\course\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\course\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,56 +34,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 390,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "projFitConnect\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAEYAAAA+AAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-06-04T03:12:46.021Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{e8b06f53-6d01-11d2-aa7d-00c04f990343}"
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -91,56 +60,112 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{c93a910a-0fa6-4307-93a4-f2bd61ec7828}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Search.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\Course\\Search.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\Course\\Search.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\Course\\Search.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\Course\\Search.cshtml",
-              "ViewState": "AQIAADUBAAAAAAAAAAAAADYBAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-15T02:59:50.553Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f53-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\Course\\Index.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\Course\\Index.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\Course\\Index.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\Course\\Index.cshtml",
-              "ViewState": "AQIAAIIBAAAAAAAAAAAAAJgBAACyAAAA",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\GymList\\Index.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\GymList\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\GymList\\Index.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\GymList\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-14T09:14:34.369Z"
+              "WhenOpened": "2024-06-18T09:52:56.061Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\_ViewStart.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\_ViewStart.cshtml",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "GymUpdate.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Admin\\GymUpdate.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\GymUpdate.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Admin\\GymUpdate.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Admin\\GymUpdate.cshtml",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAqwJIAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-14T08:44:18.756Z"
+              "WhenOpened": "2024-06-18T09:46:49.426Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\Final_ProjDev0615\\MVC\\projFitConnect\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\_ViewImports.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "GymReviewList.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Admin\\GymReviewList.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\GymReviewList.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Admin\\GymReviewList.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Admin\\GymReviewList.cshtml",
+              "ViewState": "AQIAAIQAAAAAAAAAAAAAAJYAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-14T08:44:16.05Z"
+              "WhenOpened": "2024-06-18T09:41:44.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FieldReviewList.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Admin\\FieldReviewList.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\FieldReviewList.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Admin\\FieldReviewList.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Admin\\FieldReviewList.cshtml",
+              "ViewState": "AQIAAHMAAAAAAAAAAAAkwIMAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-18T08:49:44.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Course\\Index.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Course\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\test0618\\MVC\\projFitConnect\\Views\\Course\\Index.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Course\\Index.cshtml",
+              "ViewState": "AQIAAHkBAAAAAAAAAAAAAH8BAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-14T09:14:34.369Z",
+              "EditorCaption": ""
             }
           ]
         },

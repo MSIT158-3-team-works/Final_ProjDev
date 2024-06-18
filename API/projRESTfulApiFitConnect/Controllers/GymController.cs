@@ -102,7 +102,7 @@ namespace projRESTfulApiFitConnect.Controllers
             _context.TfieldPhotos.Add(fieldPhoto);
             await _context.SaveChangesAsync();
 
-            return Ok("field create success");
+            return Ok(new {success = "field create success" });
         }
         // PUT api/<GymController>/5
         [HttpPut("{id}")]

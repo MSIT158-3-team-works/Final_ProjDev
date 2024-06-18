@@ -138,6 +138,14 @@
                         window.location.href = `https://localhost:7168/admin/gymupdate?id=${gymId}`;
                     }
                 });
+                //方法，刪除按鈕按下時，將gymId傳給confirmDeleteBtn的data-id屬性
+                document.querySelectorAll('.delete-btn').forEach(item => {
+                    item.addEventListener('click', function (event) {
+                        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+                        confirmDeleteBtn.setAttribute('data-id', item.getAttribute('data-id'));
+                    })
+
+                });
                 //刪除場館
                 document.getElementById('confirmDeleteBtn').addEventListener('click', async (event) => {
                     const gymId = event.target.getAttribute('data-id');

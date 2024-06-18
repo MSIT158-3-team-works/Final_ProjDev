@@ -124,11 +124,19 @@
                         window.location.href = `https://localhost:7168/admin/fieldupdate?id=${fieldId}`;
                     }
                 });
+                //方法，刪除按鈕按下時，將field-id傳給confirmDeleteBtn的data-id屬性
+                document.querySelectorAll('.delete-btn').forEach(item => {
+                    item.addEventListener('click', function (event) {
+                        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+                        confirmDeleteBtn.setAttribute('data-id', item.getAttribute('data-id'));
+                    })
+
+                });
                 //刪除場地
                 document.getElementById('confirmDeleteBtn').addEventListener('click', async (event) => {
                     const fieldId = event.target.getAttribute('data-id');
                     try {
-                        const deleteResponse = await fetch(`https://localhost:7199/api/AdminFieldlist/${fieldId}`, {
+                        const deleteResponse = await fetch(`https://localhost:7199/api/AdminFieldList/${fieldId}`, {
                             method: 'DELETE'
                         });
 
