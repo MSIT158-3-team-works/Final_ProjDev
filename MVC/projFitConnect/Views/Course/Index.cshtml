@@ -109,7 +109,11 @@
         }
 
         .card-body {
-            background-color: whitesmoke
+            background-color: whitesmoke;
+        }
+
+        .card-container {
+            height: 650px; /* Set the desired height */
         }
 
         .info {
@@ -129,6 +133,7 @@
         .price {
             text-align: right;
             color: red;
+            
         }
         /* 分頁控制元素的CSS */
         #pagination {
@@ -207,7 +212,7 @@
 
         <!-- 課程類別下拉式選單 -->
         <select id="sort1-select" class="form-select" aria-label="Default select example">
-            <option value="0">選擇課程類別</option>
+            <option value="0">類型</option>
             <option value="1">有氧</option>
             <option value="2">無氧</option>
             <option value="3">其他</option>
@@ -222,6 +227,7 @@
             <option value="6">身體雕塑</option>
         </select>
         <input type="date" id="date-select" name="name" value="" />
+        <button type="button" class="btn btn-info" id="resetButton" style="margin-left:10px">重新篩選</button>
     </div>
     
     <div id="course-count" class="course-count">
@@ -233,7 +239,7 @@
     <div class="row row-cols-1 row-cols-md-2 g-4" id="main_div">
         <div class="col">
             <div class="card">
-                <img src="~/Images/pilatis.jpg" class="card-img-top" alt="...">
+                <img src="~/Images/pilatis.jpg" class="card-img-top" width="200px" height="200px" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">[團體班] 超級小班 | 器械皮拉提斯</h5>
                     <p class="card-text">
@@ -296,6 +302,21 @@
             "sortBy": "",
             "sortType": "asc"
         };
+        //重設
+        resetButton.addEventListener('click', () => {
+            // 重設表單數據
+            searchData.field = "";
+            searchData.sort1 = 0;
+            searchData.sort2 = 0;
+            searchData.courseDate = null;
+            searchData.keyword = "";
+            searchData.page = 1;
+            selectGym.value = "選擇場館";
+            selectSort1.value = 0;
+            selectSort2.value = 0;
+            searchInput.value = "";
+            loadCourse();
+        });
 
         //選擇場館
         selectGym.addEventListener('change', (event) => {
@@ -336,6 +357,7 @@
                 loadCourse();
             }
         })
+        
         //換頁按鈕
         const pagingHandler = (page) => {
             if (page < 0) { console.log("-1"); page=searchData.page-1; if (page <= 0) page = 1; }
@@ -376,7 +398,6 @@
             }
             selectGym.innerHTML = '<option value="0">選擇場館</option>' + s;
         }
-        //載入
 
         //載入課程
         const loadCourse = async () => {
@@ -396,10 +417,10 @@
             const courses = data.courseResult.map(course => {
                 //data:image/jpeg;base64,${course.photo}
                 return (`<div class="col">
-                           <div class="card">
+                                   <div class="card card-container">
                            <input type="hidden" value="${course.classScheduleId}" id="course-select"/>
-                              <img src="data:image/jpeg;base64,${course.photo}" class="card-img-top" alt="...">
-                                <div class="card-body">
+                                                        <img src="data:image/jpeg;base64,${course.photo}" object-fit="cover" width="400px" height="300px" class="card-img-top" alt="...">
+                                                <div class="card-body" >
                                   <h5 class="card-title">${course.class}</h5>
                                   <p class="card-text">${course.introduction}</p>
                                   <div class="info">

@@ -11,6 +11,7 @@
         public string? Introduction { get; set; }
         public int? ClassSort1Id { get; set; }
         public int? ClassSort2Id { get; set; }
+        public string Sort2Name { get; set; } = "";
         public int? GymId { get; set; }
         public string? Gym { get; set; }
         public int? fieldId { get; set; }
@@ -21,7 +22,7 @@
         public TimeOnly CourseEndTime { get; set; }
 
         public int MaxStudent { get; set; }
-
+        public int? ClassStatusId { get; set; }
         public string? ClassStatus { get; set; }
 
         public decimal ClassPayment { get; set; }

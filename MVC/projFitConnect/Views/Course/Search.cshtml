@@ -6,7 +6,6 @@
         }
 
         .text-folded {
-
             max-height: 100px;
             overflow: hidden;
             transition: max-height 0.5s ease;
@@ -14,7 +13,7 @@
         }
 
         .text-expanded {
-            max-height: 1000px; /* 可以設置一個足夠大的值來展示全部內容 */
+            max-height: 1000px;
         }
 
         #toggleButton {
@@ -35,11 +34,12 @@
         .container {
             display: flex;
             align-items: flex-start;
+            flex-direction: row; /* Changed to row */
         }
 
         .carousel-container {
             flex: 1;
-            margin-right: 20px;
+            margin-right: 20px; /* Adjusted margin for right placement */
         }
 
         .text-content {
@@ -96,7 +96,7 @@
             flex-direction: column;
             gap: 10px;
             align-self: flex-start;
-            margin-top: 167px;
+            margin-top: 20px; /* Adjusted margin */
         }
 
         .button {
@@ -129,8 +129,8 @@
 
         #returnButton {
             background-color: transparent;
-            border: 1px solid transparent; /* 可以加上邊框，使按鈕可見 */
-            color: slategray; /* 按鈕文字顏色 */
+            border: 1px solid transparent;
+            color: slategray;
             cursor: pointer;
             padding: 0;
             font-size: 24px;
@@ -141,95 +141,134 @@
                 text-decoration: none;
             }
     </style>
-}
+    }
 
-<div style="padding-top:120px"></div>
-<div class="return-button">
-    <button id="returnButton" onclick="goBack()">＜返回</button>
-</div>
-<div class="container" id="main_div">
-    <div class="carousel-container">
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://img.shoplineapp.com/media/image_clips/663c6333a1cc270011604bc1/original.jpg?1715233587" class="d-block w-100" alt="...">
+    <div style="padding-top: 120px;"></div>
+    <div class="return-button">
+        <button id="returnButton" onclick="goBack()">＜返回</button>
+    </div>
+    <div class="container" id="main_div">
+        <div class="carousel-container">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner" id="divimage">
+                    <div class="carousel-item active">
+                        <img src="https://img.shoplineapp.com/media/image_clips/663c6333a1cc270011604bc1/original.jpg?1715233587" class="d-block w-100" alt="Tension Reset Technique Image 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://img.shoplineapp.com/media/image_clips/663c633b4e4ee000171971aa/original.jpg?1715233595" class="d-block w-100" alt="Tension Reset Technique Image 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://img.shoplineapp.com/media/image_clips/663c8aebb455500019558155/original.jpg?1715243755" class="d-block w-100" alt="Tension Reset Technique Image 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://img.shoplineapp.com/media/image_clips/663c634aefa4ea00118ae417/original.jpg?1715233609" class="d-block w-100" alt="Tension Reset Technique Image 4">
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://img.shoplineapp.com/media/image_clips/663c633b4e4ee000171971aa/original.jpg?1715233595" class="d-block w-100" alt="...">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="text-content">
+        <h1 id="courseTitle" style="width: 500px;"><strong>[教練研習]「張力重置技術」｜【整人專家】整合人體訓練的專家</strong></h1>
+            <div class="text-container">
+                <div class="text-folded" id="textContent">
+                    <span id="courseDescription">
+                        「張力重置技術」(Tension Reset Technique)帶你了解軟組織、弄懂肌肉、筋膜組織緊繃張力背後的原理，以及該如何透過正確的組織排列、動作擺位，去影響肌肉骨骼張力，鬆動每一個節點，並擴及全身，達到整體張力平衡的狀態。
+                    </span>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://img.shoplineapp.com/media/image_clips/663c8aebb455500019558155/original.jpg?1715243755" class="d-block w-100" alt="...">
+                <button id="toggleButton">顯示更多</button>
+            </div>
+            <div class="course-card-container">
+                <div class="course-card">
+                    <h2>關於課程</h2>
+                    <div class="detail">
+                        <img src="https://img.icons8.com/ios-glyphs/30/00796B/clock--v1.png" alt="Time">
+                        <div>
+                            <div>上課時間</div>
+                            <div id="courseDate">2024.1.07 (日)</div>
+                            <div id="courseTime">課程時間為 09:30 - 18:00</div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="detail">
+                        <img src="https://img.icons8.com/ios-glyphs/30/00796B/place-marker.png" alt="Location">
+                        <div>
+                            <div>上課地點</div>
+                            <div id="courseLocation">雙北地區近捷運站健身房</div>
+                            <div>課程前1周通知 (信件確認)</div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="detail">
+                        <img src="https://img.icons8.com/ios-glyphs/30/00796B/money.png" alt="Price">
+                        <div>
+                            <div>課程價格</div>
+                            <div class="price" id="coursePrice">7,990</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://img.shoplineapp.com/media/image_clips/663c634aefa4ea00118ae417/original.jpg?1715233609" class="d-block w-100" alt="...">
+                <div class="button-container">
+                    <a href="https://localhost:7168/gym/" class="button gym" id="gymButton">
+                        <img src="https://cdn0.iconfinder.com/data/icons/phosphor-fill-vol-3/256/house-fill-256.png" alt="Gym Icon" width="20">
+                        瞭解場館
+                    </a>
+                    <a href="#" class="button buyCourse">
+                        <img src="https://cdn0.iconfinder.com/data/icons/phosphor-regular-vol-4/256/shopping-cart-256.png" alt="Buy Course Icon" width="20">
+                        購買課程
+                    </a>
+                    <a href="https://localhost:7168/Trainer/Search" class="button coach" id="coachButton">
+                        <img src="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-256.png" alt="Coach Icon" width="20">
+                        課程講師
+                    </a>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
     </div>
-    <div class="text-content">
-        <h1 id="courseTitle" style="width: 500px;">[教練研習]「張力重置技術」｜【整人專家】整合人體訓練的專家</h1>
-        <div class="text-container">
-            <div class="text-folded" id="textContent">
-                <span id="courseDescription">
-                    「張力重置技術」(Tension Reset Technique)帶你了解軟組織、弄懂肌肉、筋膜組織緊繃張力背後的原理，以及該如何透過正確的組織排列、動作擺位，去影響肌肉骨骼張力，鬆動每一個節點，並擴及全身，達到整體張力平衡的狀態。
-                </span>
-            </div>
-            <button id="toggleButton">顯示更多</button>
-        </div>
-        <div class="course-card-container">
-            <div class="course-card">
-                <h2>關於課程</h2>
-                <div class="detail">
-                    <img src="https://img.icons8.com/ios-glyphs/30/00796B/clock--v1.png" alt="Time">
-                    <div>
-                        <div>上課時間</div>
-                        <div id="courseDate">2024.1.07 (日)</div>
-                        <div id="courseTime">課程時間為 09:30 - 18:00</div>
-                    </div>
-                </div>
-                <div class="divider"></div>
-                <div class="detail">
-                    <img src="https://img.icons8.com/ios-glyphs/30/00796B/place-marker.png" alt="Location">
-                    <div>
-                        <div>上課地點</div>
-                        <div id="courseLocation">雙北地區近捷運站健身房</div>
-                        <div>課程前1周通知 (信件確認)</div>
-                    </div>
-                </div>
-                <div class="divider"></div>
-                <div class="detail">
-                    <img src="https://img.icons8.com/ios-glyphs/30/00796B/money.png" alt="Price">
-                    <div>
-                        <div>課程價格</div>
-                        <div class="price" id="coursePrice">7,990</div>
+<div id="section-home" class="section" tabindex="0">
+    <div>
+        <h2><strong>更多課程</strong></h2>
+        <div id="courseRecommand" class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="~/assets/img/portfolio/4.jpg" class="card-img-top" alt="Recommended Coach Image">
+                    <div class="card-body">
+                        <h5 class="card-title">123</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                     </div>
                 </div>
             </div>
-            <div class="button-container" >
-                <a href="https://localhost:7168/gym/" class="button gym" id="gymButton">
-                    <img src="https://cdn0.iconfinder.com/data/icons/phosphor-fill-vol-3/256/house-fill-256.png" alt="..." width="20">
-                    瞭解場館
-                </a>
-                <a href="#" class="button buyCourse">
-                    <img src="https://cdn0.iconfinder.com/data/icons/phosphor-regular-vol-4/256/shopping-cart-256.png" alt="..." width="20">
-                    購買課程
-                </a>
-                <a href="https://localhost:7168/Trainer/Search" class="button coach" id="coachButton">
-                    <img src="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-256.png" alt="..." width="20">
-                    課程講師
-                </a>
-            </div>
+            <!-- Add more cards as needed -->
         </div>
     </div>
 </div>
+    <div id="section-recommand" class="section" tabindex="0">
+        <div>
+            <h2><strong>推薦教練</strong></h2>
+            <div id="coachRecommand" class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="~/assets/img/portfolio/4.jpg" class="card-img-top" alt="Recommended Coach Image">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more cards as needed -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 
 
 
@@ -271,10 +310,14 @@
             let URL = 'https://localhost:7199/api/Course/' + classScheduleId;
             let response = await fetch(URL)
             let data = await response.json();
-            console.log('data', data);
+            console.log('data-id', data);
+
+            
+
 
             let { class: _name, introduction, coachId, courseDate, gymId, gym, courseStartTime: t1, courseEndTime: t2, classPayment } = data[0]
 
+            const Image = document.getElementById('divimage');
             const title = document.getElementById('courseTitle')
             const p1 = document.getElementById('courseDescription')
             const date_span = document.getElementById('courseDate')
@@ -283,12 +326,31 @@
             const price = document.getElementById('coursePrice')
             const gymButton = document.getElementById('gymButton')
             const coachButton = document.getElementById('coachButton')
+            const coachRecommand = document.querySelector('#coachRecommand')//教練卡
+            const courseRecommand = document.getElementById('courseRecommand')//課程卡
 
+            // 顯示照片
+            s = `<div class="carousel-item active">
+                                    <div class="zoom-container">
+                                      <img src="data:image/jpeg;base64,${data[0].photo}" class="d-block w-100 h-auto zoom-img" alt="notFound">
+                                    </div>
+                                 </div>`;
+            // if (data.images) {
+            //     for (var pic of data.base64Images) {
+            //         s += `<div class="carousel-item">
+            //                                 <div class="zoom-container">
+            //                                   <img src="data:image/jpeg;base64,${pic}" class="d-block w-100 h-auto zoom-img" alt="error">
+            //                                 </div></div>`;
+            //     }
+            // }
+             Image.innerHTML = s;
             let dt = new Date(courseDate)
             let pay = classPayment
             let i = `${classPayment}`.length
             let gymid = gymId
             let coachid = coachId
+            console.log('coachId', coachId)
+            console.log('coachButton', coachButton)
 
             console.log('pay', pay)
           
@@ -302,16 +364,125 @@
             }
 
             title.textContent = _name
-            p1.textContent = introduction
+            p1.textContent = introduction +'健身能增強心肺功能，提升肌肉力量和耐力，有助於體重管理和維持健康體重。它還能改善心理健康，減少壓力、焦慮和抑鬱症狀，增強自信心和幸福感。規律運動有助於降低多種慢性病的風險，如心臟病、糖尿病和高血壓，促進整體健康。健身還能提高睡眠質量，使人精力充沛，增強免疫力，讓身體更有活力。'
             date_span.textContent = `${year}/${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}` + todate(dt.getDay())
             time_span.textContent = '課程時間為 ' + t1.toString().substring(0, 5) + ' - ' + t2.toString().substring(0, 5)
             place.textContent = gym
             price.textContent = '$' + pay
-            gymButton.href = `https://localhost:7168/gym?id= ${gymId}`;
-            coachButton.href = `https://localhost:7168/Trainer/Coach?id= ${coachId}`;
+            gymButton.href = `https://localhost:7168/gym?id=${gymId}`;
+            coachButton.href = `https://localhost:7168/Trainer/Coach?id=${coachId}`;
         };
         searchCourse();
+        //載入推薦課程
+        const recommandCourse = async () => {
+            let sortBy = ["", "Date", "GymId"];
+            let sortType = ["asc", "desc"];
+            let randomNumber = Math.floor(Math.random() * 3);
+            let randomNumber2 = Math.floor(Math.random() * 2);
+            console.log(randomNumber);
+            const url = 'https://localhost:7199/api/Course/SEARCH';
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "sort1": 0,
+                    "sort2": 0,
+                    "field": "",
+                    "courseDate": null,
+                    "courseStartTime": null,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 3,
+                    "sortBy": sortBy[randomNumber],
+                    "sortType": sortType[randomNumber2]
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
 
+            });
+            data = await response.json();
+            console.log('data',data);
+            console.log('sortby',sortBy[randomNumber]);
+            console.log('sorttype',sortType[randomNumber2]);
+
+            const courseCard = data.courseResult.map(item => {
+                return (`<a href="/course/search?id=${item.classScheduleId}" class="card mb-3 act"  style="text-decoration:none;">
+                                                        <div class="card h-100">
+                                                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
+                                                            <div class="card-body">
+                                                                                         <h5 class="card-title"><strong>${item.class}</strong></h5>
+                                                                          <p class="card-text">${item.introduction}</p>
+                                                            </div>
+                                                        </div>
+                                               </a>`)
+            })
+            courseRecommand.innerHTML = courseCard.join("");
+        }
+        recommandCourse();
+        //載入推薦教練
+        const recommandCoach = async () => {
+            let sortBy = ["", "RegionId", "Sort1ID", "GenderID"];
+            let sortType = ["asc", "desc"];
+            let randomNumber = Math.floor(Math.random() * 4);
+            let randomNumber2 = Math.floor(Math.random() * 2);
+            console.log(randomNumber);
+            const url = 'https://localhost:7199/api/Coach/SEARCH';
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "sort1": "",
+                    "sort2": "",
+                    "gender": "",
+                    "city": "",
+                    "region": "",
+                    "classId": 0,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 3,
+                    "sortBy": sortBy[randomNumber],
+                    "sortType": sortType[randomNumber2]
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            });
+            data = await response.json();
+            console.log('data', data);
+            console.log(sortBy[randomNumber]);
+            console.log(sortType[randomNumber2]);
+            //教練卡
+            const coachCard = data.coachResult.map(item => {
+                //專長(不重複)
+                const uniqueExp = {};
+                const exps = item.experties.map(exp => {
+                    const key = exp.classSort2;
+                    if (!uniqueExp[key]) {
+                        uniqueExp[key] = true;
+                        return '#'+exp.classSort2;
+                    }
+                    return null;
+                    console.log(exp.classSort2);
+                }).filter(exp => exp !== null).join(`<br>`);
+
+                console.log(exps);
+                //console.log(item.experties.classSort2)
+                return (`<a href="/Trainer/Coach?id=${item.id}" class="card mb-3 act"  style="text-decoration:none;">
+                                        <div class="card h-100">
+                                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
+                                            <div class="card-body">
+                                                 <h5 class="card-title">${item.name}</h5>
+                                                  <p class="card-text">${item.intro}</p>
+                                                  <p class="card-text">${exps}</p>
+                                            </div>
+                                        </div>
+
+                               </a>`)
+            })
+            coachRecommand.innerHTML = coachCard.join("");
+        }
+
+        recommandCoach();
         //星期正規化
         function todate(d) {
             if (d === 1) {
