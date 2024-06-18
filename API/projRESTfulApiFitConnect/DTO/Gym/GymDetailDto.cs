@@ -17,5 +17,6 @@
         public string? GymDescribe { get; set; }
         public string start_time { get; set; } = null!;
         public string end_time { get; set; } = null!;
+        public IFormFile? UploadedGymPhoto { get; set; }
     }
 }

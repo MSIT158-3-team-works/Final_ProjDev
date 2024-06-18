@@ -2,9 +2,9 @@
 
 namespace projFitConnect.Controllers
 {
-    public class FieldController : Controller
+    public class CommitController : Controller
     {
-        public IActionResult Index()
+        public IActionResult GymCreate()
         {
             return View();
         }

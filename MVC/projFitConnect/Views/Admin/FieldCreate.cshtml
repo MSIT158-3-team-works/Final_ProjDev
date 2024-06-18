@@ -1,44 +1,68 @@
 ﻿@{
     ViewData["Title"] = "FieldCreate";
 }
-
-<div style="padding-top:120px;"></div>
 <h1>新增場地</h1>
-<div>
-    <p>
-        <form method="post" action="~/" enctype="multipart/form-data">
-            <div class="col-md-6">
-                <p>
-                    <h3>請輸入場館名</h3><br />
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">場地名</span>
-                        <input type="text" class="form-control" placeholder="例:50米游泳池" aria-label="場地名" aria-describedby="basic-addon1">
+<div class="ps-3">
+    <div>
+        <form method="post" action="https://localhost:7199/api/Gym" enctype="multipart/form-data">
+            <input type="hidden" name="GymId" id="GymId" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <h3>請輸入場地名</h3><br />
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">場地名</span>
+                            <input type="text" class="form-control" placeholder="例:50米游泳池" aria-label="場地名" aria-describedby="basic-addon1" name="FieldName">
+                        </div>
                     </div>
-                </p>
-                <p>
+                    <div>
+                        <h3>請輸入場地樓層</h3><br />
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">樓層</span>
+                            <input type="text" class="form-control" placeholder="例:1F" aria-label="樓層" aria-describedby="basic-addon1" name="Floor">
+                        </div>
+                    </div>
+                    <div>
+                        <h3>請輸入場地費用</h3><br />
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">場地費用</span>
+                            <input type="text" class="form-control" placeholder="例:1000" aria-label="場地費用" aria-describedby="basic-addon1" name="FieldPayment">
+                        </div>
+                    </div>
+                    @* <div>
                     <h3>場館</h3><br />
                     <select class="form-select" aria-label="Default select example">
-                        <option>請選擇場館</option>
+                    <option>請選擇場館</option>
                     </select>
-                </p>
-                <p>
-                    <h3>請輸入場地簡介</h3><br />
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">場地簡介</span>
-                        <input type="text" class="form-control" placeholder="例:本館設有:游泳池" aria-label="場地" aria-describedby="basic-addon1">
-                    </div>
-                </p>
-                <p>
+                    </div> 
+                    <div>
+                        <h3>請輸入場地簡介</h3><br />
+                        <div class="input-group">
+                            <span class="input-group-text">場地簡介</span>
+                            <textarea class="form-control" id="FieldDescribe" placeholder="例:" aria-label="FieldDescribe" name="FieldDescribe"></textarea>
+                        </div>
+                    </div>*@
+                    <br />
+                    <button type="submit" class="btn btn-primary" id="btnsubmit">送出並新增</button>
+                </div>
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label for="formFileSm" class="form-label"><h3>上傳場地照片</h3></label>
-                        <input class="form-control form-control-sm" id="formFileSm" type="file">
+                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="UploadedFieldPhoto">
                     </div>
-                </p>
-                <p>
-                    <input type="submit" value="送出並新增" />
-                </p>
+                </div>
             </div>
         </form>
-    </p>
+    </div>
 </div>
 
+@section Scripts {
+    <script>
+        // 讀取gymId
+        const params = new URLSearchParams(window.location.search);
+        const gymId = params.get('id');
+         console.log("gymId",gymId)
+        // 設定隱藏輸入的值
+        document.getElementById('GymId').value = gymId;
+    </script>
+}

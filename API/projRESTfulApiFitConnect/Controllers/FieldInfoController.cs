@@ -30,6 +30,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 return NotFound();
             }
             var fieldinfos = await _context.Tfields
+                                .Where(x=>x.Status==true)
                                 .Include(x => x.TfieldPhotos)
                                 .ToListAsync();
             foreach (var item in fieldinfos)
@@ -51,7 +52,8 @@ namespace projRESTfulApiFitConnect.Controllers
                 {
                     GymId = item.GymId,
                     FieldName = item.FieldName,
-                    FieldPhoto = base64Image
+                    FieldPhoto = base64Image,
+                    Status = item.Status
                 };
                 fieldinfoDtos.Add(fieldinfoDto);
             }
