@@ -71,6 +71,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 {
                     ClassName = te.Class.ClassName,
                     ClassSort1ID = te.Class.ClassSort1.ClassSort1Id,
+                    ClassSort2ID = te.Class.ClassSort2.ClassSort2Id,
                     ClassSort1 = te.Class.ClassSort1.ClassSort1Detail.ToString(),
                     ClassSort2 = te.Class.ClassSort2.ClassSort2Detail.ToString()
                 }).ToList();
@@ -148,6 +149,10 @@ namespace projRESTfulApiFitConnect.Controllers
                 case "Sort1ID":
                     everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.Experties[0].ClassSort1ID) : everyCoach.OrderByDescending(s => s.Experties[0].ClassSort1ID);
                     break;
+                //依課程種類
+                case "Sort2ID":
+                    everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.Experties[0].ClassSort2ID) : everyCoach.OrderByDescending(s => s.Experties[0].ClassSort2ID);
+                    break;
                 //依性別
                 case "GenderID":
                     everyCoach = coachSearchDTO.sortType == "asc" ? everyCoach.OrderBy(s => s.GenderID) : everyCoach.OrderByDescending(s => s.GenderID);
@@ -177,7 +182,7 @@ namespace projRESTfulApiFitConnect.Controllers
         }
 
 
-
+        //教練多圖
         private async Task<string> GetBase64Image(string coachImage)
         {
             string filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", coachImage);
