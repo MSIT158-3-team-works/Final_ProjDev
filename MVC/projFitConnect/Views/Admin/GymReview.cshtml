@@ -1,9 +1,8 @@
 ﻿@{
     ViewData["Title"] = "GymReview";
 }
-<div style="padding-top:120px;"></div>
 <h1>審核場館</h1>
-<div>
+<div class="ps-3">
     <div class="row">
         <div class="col-md-6">
             <div class="mb-3">
@@ -32,11 +31,10 @@
 
             <div class="mb-3">
                 <h3>場館照片</h3>
-                <img src=" data:image /png;base64,${item.gymPhoto}" id="GymPhoto" class="img-fluid rounded-start">
+                <img src=" data:image /png;base64,${item.gymPhoto}" id="GymPhoto" class="img-fluid rounded">
             </div>
 
-            <a href="https://localhost:7168/admin/reviewlist" class="btn btn-primary" id="btnsubmit">返回列表</a>
-
+            <a href="https://localhost:7168/admin/gymreviewlist" class="btn btn-primary" id="btnsubmit">返回列表</a>
 
         </div>
 
@@ -99,8 +97,7 @@
                 <span class="input-group-text">場地簡介</span>
                 <textarea class="form-control" id="GymDescribe" aria-label="GymDescribe" name="GymDescribe"></textarea>
             </div>
-
-
+            @* <a id="addFieldLink" href=" " class="btn btn-primary mt-3">新增場地</a> *@
         </div>
     </div>
 </div>
@@ -145,6 +142,9 @@
                             img.src = `data:image/png;base64,${data.gymPhoto}`;
                             img.style.display = 'block';
                         }
+                        //回傳gymId
+                        //const addFieldLink = document.getElementById('addFieldLink');
+                        //addFieldLink.href = `https://localhost:7168/admin/fieldcreate?id=${data.gymId}`;
                     }
                 } catch (error) {
                     console.error('Error fetching gym data:', error);

@@ -43,11 +43,11 @@ namespace projFitConnect.Controllers
             return View();
         }
 
-        public IActionResult GymCreate()
-        {
-            return View();
-        }
-        public IActionResult ReviewList()
+        //public IActionResult GymCreate()
+        //{
+        //    return View();
+        //}
+        public IActionResult GymReviewList()
         {
             return View();
         }
@@ -56,6 +56,22 @@ namespace projFitConnect.Controllers
             return View();
         }
         public IActionResult FieldCreate()
+        {
+            return View();
+        }
+        public IActionResult FieldReview()
+        {
+            return View();
+        }
+        public IActionResult FieldReviewList()
+        {
+            return View();
+        }
+        public IActionResult GymUpdate()
+        {
+            return View();
+        }
+        public IActionResult FieldUpdate()
         {
             return View();
         }
