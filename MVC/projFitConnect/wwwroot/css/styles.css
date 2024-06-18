@@ -626,6 +626,7 @@ progress {
   color: #6c757d;
 }
 
+
 .container,
 .container-fluid,
 .container-xxl,
@@ -633,21 +634,22 @@ progress {
 .container-lg,
 .container-md,
 .container-sm {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.6);
-  padding-left: calc(var(--bs-gutter-x) * 0.6);
-  margin-right: auto;
-  margin-left: auto;
+    --bs-gutter-x: 1rem; 
+    --bs-gutter-y: 0; 
+    max-width: 100%; 
+    padding-right: calc(var(--bs-gutter-x) * 0.8); 
+    padding-left: calc(var(--bs-gutter-x) * 0.8); 
+    margin-right: auto; 
+    margin-left: auto; 
 }
 
-@media (min-width: 576px) {
+
+@media (min-width: 976px) {
   .container-sm, .container {
     max-width: 540px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 968px) {
   .container-md, .container-sm, .container {
     max-width: 720px;
   }
@@ -2846,8 +2848,8 @@ textarea.form-control-lg {
 
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #ffc800;
-    --bs-btn-border-color: #ffc800;
+    --bs-btn-bg: #84C1FF;
+    --bs-btn-border-color: #84C1FF;
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #517BC8; /*立即體驗*/
     --bs-btn-hover-border-color: #517BC8;
@@ -2981,20 +2983,20 @@ textarea.form-control-lg {
 }
 
 .btn-outline-primary {
-  --bs-btn-color: #ffc800;
-  --bs-btn-border-color: #ffc800;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #ffc800;
-  --bs-btn-hover-border-color: #ffc800;
-  --bs-btn-focus-shadow-rgb: 255, 200, 0;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #ffc800;
-  --bs-btn-active-border-color: #ffc800;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #ffc800;
-  --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #ffc800;
-  --bs-gradient: none;
+    --bs-btn-color: #84C1FF;
+    --bs-btn-border-color: #84C1FF;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #517BC8;
+    --bs-btn-hover-border-color: #517BC8;
+    --bs-btn-focus-shadow-rgb: 255, 200, 0;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #ffc800;
+    --bs-btn-active-border-color: #ffc800;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #ffc800;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #ffc800;
+    --bs-gradient: none;
 }
 
 .btn-outline-secondary {
@@ -5803,55 +5805,83 @@ textarea.form-control-lg {
   content: "";
 }
 
-.carousel-item {
-  position: relative;
-  display: none;
-  float: left;
-  width: 100%;
-  margin-right: -100%;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  transition: transform 0.6s ease-in-out;
-}
-@media (prefers-reduced-motion: reduce) {
-  .carousel-item {
-    transition: none;
-  }
+/*首頁hp輪播*/
+
+    .hpcarousel-item img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        filter: brightness(60%) blur(3px); /* 調整模糊度 */
+    }
+
+.carousel-item.active {
+    display: block;
+    opacity: 1;
 }
 
-.carousel-item.active,
-.carousel-item-next,
+/*.carousel-item-next,
 .carousel-item-prev {
-  display: block;
+    display: block;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+}*/
+
+/*.carousel-item-next {
+    transform: translateX(100%);
 }
 
-.carousel-item-next:not(.carousel-item-start),
-.active.carousel-item-end {
-  transform: translateX(100%);
+.carousel-item-prev {
+    transform: translateX(-100%);
 }
+*/
+    .carousel-item-next.carousel-item-left,
+    .carousel-item-prev.carousel-item-right {
+        transform: translateX(0);
+        opacity: 1;
+    }
 
-.carousel-item-prev:not(.carousel-item-end),
-.active.carousel-item-start {
-  transform: translateX(-100%);
+.hpcarousel-item.active.carousel-item-left,
+.hpcarousel-item.active.carousel-item-right {
+    opacity: 1;
+    transition: opacity 4.5s ease-in-out, transform 4.5s ease-in-out;
+}
+/*=====================================================================================================*/
+/*@media (prefers-reduced-motion: reduce) {
+    .carousel-item {
+        transition: none;
+    }
 }
 
 .carousel-fade .carousel-item {
-  opacity: 0;
-  transition-property: opacity;
-  transform: none;
+    opacity: 0;
+    transition-property: opacity;
+    transform: none;
 }
-.carousel-fade .carousel-item.active,
-.carousel-fade .carousel-item-next.carousel-item-start,
-.carousel-fade .carousel-item-prev.carousel-item-end {
-  z-index: 1;
-  opacity: 1;
-}
+
+    .carousel-fade .carousel-item.active,
+    .carousel-fade .carousel-item-next.carousel-item-start,
+    .carousel-fade .carousel-item-prev.carousel-item-end {
+        z-index: 1;
+        opacity: 1;
+    }
+
 .carousel-fade .active.carousel-item-start,
 .carousel-fade .active.carousel-item-end {
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0s 0.6s;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0s 0.6s;
 }
+
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-item {
+        transition: none;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .carousel-fade .active.carousel-item-start,
   .carousel-fade .active.carousel-item-end {
@@ -5908,17 +5938,9 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: 100% 100%;
-}
+}*/
 
-/* rtl:options: {
-  "autoRename": true,
-  "stringMap":[ {
-    "name"    : "prev-next",
-    "search"  : "prev",
-    "replace" : "next"
-  } ]
-} */
-.carousel-control-prev-icon {
+/*.carousel-control-prev-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
 }
 
@@ -5987,7 +6009,7 @@ textarea.form-control-lg {
 }
 .carousel-dark .carousel-caption {
   color: #000;
-}
+}*/
 
 .spinner-grow,
 .spinner-border {
@@ -10861,12 +10883,12 @@ p {
   font-weight: 400;
   font-style: italic;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 
 
-@media (min-width: 768px) {
+@media (min-width: 968px) {
   section {
     padding: 9rem 0;
   }
@@ -10975,7 +10997,7 @@ header.masthead .masthead-subheading {
 }
 header.masthead 
 .masthead-heading {
-  font-size: 3rem;
+  font-size: 2.65rem;
   font-weight: 700;
   line-height: 3rem;
   margin-bottom: 2rem;
@@ -11251,19 +11273,7 @@ header.masthead
     padding: 0 100px 20px 20px;
   }
 }
-.team-member {
-  margin-bottom: 3rem;
-  text-align: center;
-}
-.team-member img {
-  width: 14rem;
-  height: 14rem;
-  border: 0.5rem solid rgba(0, 0, 0, 0.1);
-}
-.team-member h4, .team-member .h4 {
-  margin-top: 1.5rem;
-  margin-bottom: 0;
-}
+
 
 .img-brand {
   height: 2.75rem;
@@ -11465,16 +11475,7 @@ body, html {
     overflow: hidden;
 }
 
-.carousel-item {
-    height: 100vh;
-}
 
-    .carousel-item img {
-        object-fit: cover;
-        height: 100%;
-        width: 100%;
-        filter: brightness(60%) blur(3px); /* 調整模糊度 */
-    }
 
 .masthead .container {
     position: absolute;
