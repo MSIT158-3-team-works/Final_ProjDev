@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projRESTfulApiFitConnect.DTO;
 using projRESTfulApiFitConnect.DTO.Gym;
 using projRESTfulApiFitConnect.Models;
+using System.IO;
 
 
 namespace projRESTfulApiFitConnect.Controllers
@@ -52,119 +54,122 @@ namespace projRESTfulApiFitConnect.Controllers
 
         // POST api/<GymController>
         [HttpPost]
-        public async Task<IActionResult> PostTGym([FromForm] GymDetailDto dto)
+        public async Task<IActionResult> PostTField([FromForm] FieldCreateDetailDto dto)
         {
-            int ownerId, companyId;
-
-            // 檢查負責人是否重複
-            Towner owner = _context.Towners.FirstOrDefault(x => x.Owner == dto.Owner);
-            if (owner == null)
+            // 檢查GymId是否存在
+            var gymExists = await _context.TGyms.AnyAsync(g => g.GymId == dto.GymId);
+            if (!gymExists)
             {
-                // 新增負責人
-                owner = new Towner
+                return BadRequest("Provided GymId does not exist.");
+            }
+            // 處理照片上傳
+            string fieldPhotoFileName = null;
+            if (dto.UploadedFieldPhoto != null && dto.UploadedFieldPhoto.Length > 0)
+            {
+                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "Images", "FieldImages");
+                if (!Directory.Exists(uploads))
                 {
-                    Owner = dto.Owner,
-                    Status = false
-                };
-                _context.Towners.Add(owner);
-                await _context.SaveChangesAsync();
-                ownerId = owner.OwnerId; // 讀取新負責人的 OwnerId
-            }
-            else
-            {
-                ownerId = owner.OwnerId; // 讀取原有負責人的 OwnerId
-            }
+                    Directory.CreateDirectory(uploads);
+                }
 
-            // 檢查公司是否重複
-            Tcompany company = _context.Tcompanies.FirstOrDefault(x => x.Name == dto.Name);
-            if (company == null)
-            {
-                // 新增公司
-                company = new Tcompany
+                fieldPhotoFileName = Path.GetFileName(dto.UploadedFieldPhoto.FileName);
+                var filePath = Path.Combine(uploads, fieldPhotoFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    OwnerId = ownerId,
-                    Name = dto.Name,
-                    Timelimit = new DateOnly(2050, 12, 31),
-                    Status = false
-                };
-                _context.Tcompanies.Add(company);
-                await _context.SaveChangesAsync();
-                companyId = company.CompanyId; // 讀取新公司的 CompanyId
+                    await dto.UploadedFieldPhoto.CopyToAsync(fileStream);
+                }
             }
-            else
-            {
-                companyId = company.CompanyId; // 讀取原有公司的 CompanyId
-            }
-
-            //讀取表單 場館地區
-            string GymRegion = dto.GymRegion;
-            int regionId = Convert.ToInt32(_context.TregionTables.FirstOrDefault(x => x.Region == GymRegion).RegionId);
-            //讀取表單 開始-結束時間
-            string start_time = dto.start_time, end_time = dto.end_time;
-            int time1 = Convert.ToInt32(start_time);
-            int time2 = Convert.ToInt32(end_time);
-            //時間ID轉成字串 "00:00-00:00"
-            string text = _context.TtimesDetails.FirstOrDefault(x => x.TimeId == time1).TimeName.ToString(@"hh\:mm")
-                + " - " + _context.TtimesDetails.FirstOrDefault(x => x.TimeId == time2).TimeName.ToString(@"hh\:mm");
             //新增場地
-            TGym newGym = new TGym
+            Tfield newField = new Tfield
             {
-                CompanyId = companyId,
-                RegionId = regionId,
-                GymName = dto.GymName,
-                GymAddress = dto.GymAddress,
-                GymPhone = dto.GymPhone,
-                ExpiryDate = new DateOnly(2050, 12, 31),
-                GymTime = text,
-                GymPhoto = dto.GymPhoto,
-                GymStatus = false,
-                GymPark = dto.GymPark,
-                GymTraffic = dto.GymTraffic,
-                GymDescribe = dto.GymDescribe,
+                GymId = dto.GymId,
+                FieldName = dto.FieldName,
+                Floor = dto.Floor,
+                FieldPayment = dto.FieldPayment,
+                FieldDescribe = dto.FieldDescribe,
+                Status = false
             };
-            _context.TGyms.Add(newGym);
-            _context.SaveChanges();
-            int gymId = newGym.GymId;
-            //新增場地時間
-            for (int i = time1; i <= time2; i++)
-            {
-                TGymTime gymTime = new TGymTime
-                {
-                    GymId = gymId,
-                    GymTime = i
-                };
-                _context.TGymTimes.Add(gymTime);
-            }
-            _context.SaveChanges();
-            return Ok("123");
-        }
+            _context.Tfields.Add(newField);
+            await _context.SaveChangesAsync();
 
+            int fieldId = newField.FieldId;
+            TfieldPhoto fieldPhoto = new TfieldPhoto
+            {
+                FieldId = fieldId,
+                FieldPhoto = fieldPhotoFileName 
+            };
+            _context.TfieldPhotos.Add(fieldPhoto);
+            await _context.SaveChangesAsync();
+
+            return Ok("field create success");
+        }
         // PUT api/<GymController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTfield(int id, Tfield field)
+        public async Task<IActionResult> PutTfield(int id, [FromForm] FieldCreateDetailDto dto)
         {
-            if (id != field.FieldId)
+            var existingField = await _context.Tfields
+                .Include(x => x.TfieldPhotos)
+                .FirstOrDefaultAsync(x => x.FieldId == id);
+
+            if (existingField == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(field).State = EntityState.Modified;
+            // 更新場地資料
+            existingField.GymId = dto.GymId;
+            existingField.FieldName = dto.FieldName;
+            existingField.Floor = dto.Floor;
+            existingField.FieldPayment = dto.FieldPayment;
+            existingField.FieldDescribe = dto.FieldDescribe;
+            existingField.Status = true;
 
-            try
+            // 照片更新
+            if (dto.UploadedFieldPhoto != null && dto.UploadedFieldPhoto.Length > 0)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TfieldExists(id))
+                var uploads = Path.Combine(Directory.GetCurrentDirectory(), "Images", "FieldImages");
+                if (!Directory.Exists(uploads))
                 {
-                    return NotFound();
+                    Directory.CreateDirectory(uploads);
+                }
+
+                var fieldPhotoFileName = Path.GetFileName(dto.UploadedFieldPhoto.FileName);
+                var filePath = Path.Combine(uploads, fieldPhotoFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await dto.UploadedFieldPhoto.CopyToAsync(fileStream);
+                }
+
+                if (existingField.TfieldPhotos != null && existingField.TfieldPhotos.Any())
+                {
+                    existingField.TfieldPhotos.First().FieldPhoto = fieldPhotoFileName;
                 }
                 else
                 {
-                    throw;
+                    TfieldPhoto fieldPhoto = new TfieldPhoto
+                    {
+                        FieldId = id,
+                        FieldPhoto = fieldPhotoFileName
+                    };
+                    _context.TfieldPhotos.Add(fieldPhoto);
                 }
             }
+            else
+            {
+                // 保持原來的照片資料不變
+                if (existingField.TfieldPhotos != null && existingField.TfieldPhotos.Any())
+                {
+                    var originalPhoto = existingField.TfieldPhotos.First().FieldPhoto;
+                    // 確保不改變照片資料
+                    _context.Entry(existingField.TfieldPhotos.First()).State = EntityState.Unchanged;
+                    // 確保回傳原來的照片資料
+                    existingField.TfieldPhotos.First().FieldPhoto = originalPhoto;
+                }
+            }
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }

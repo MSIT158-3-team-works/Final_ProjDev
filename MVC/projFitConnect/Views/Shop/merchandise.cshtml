@@ -243,8 +243,11 @@
         purchase.addEventListener('blur', event => {
             const value = parseFloat(event.target.value);
             const max = parseFloat(event.target.max);
-            if (value >= max) 
+            const min = parseFloat(event.target.min);
+            if (value >= max)
                 event.target.value = max.toString();
+            if (value <= min)
+                event.target.value = min.toString();
         });
         plus.addEventListener('click', () => { if ((+purchase.value + 1) > purchase.max) return; purchase.value = (+purchase.value + 1); })
         minus.addEventListener('click', () => { if ((+purchase.value - 1) < purchase.min) return; purchase.value = (+purchase.value - 1); })

@@ -327,6 +327,23 @@ namespace projRESTfulApiFitConnect.Controllers
             return Ok("已停售");
         }
 
+        [HttpPut("image")]
+        public async Task<IActionResult> DeleteTproductImage(int id, string productImage)
+        {
+            var productimgs = await _context.TproductImages
+                .Where(x => x.ProductId == id)
+                .Where(y=>y.ProductImages== productImage)
+                .FirstOrDefaultAsync();
+
+            if (productimgs == null)
+            {
+                return NotFound("Product not found");
+            };
+            _context.TproductImages.Remove(productimgs);
+            await _context.SaveChangesAsync();
+            return Ok("Removed");
+        }
+
         private bool TproductExists(int id)
         {
             return _context.Tproducts.Any(e => e.ProductId == id);

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using projRESTfulApiFitConnect.DTO;
 using projRESTfulApiFitConnect.DTO.Gym;
 using projRESTfulApiFitConnect.Models;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,6 +21,7 @@ namespace projRESTfulApiFitConnect.Controllers
             _context = context;
             _env = env;
         }
+        //GET api/<AdminGymListController>
         [HttpGet(Name = "GetGymList")]
         public async Task<ActionResult<IEnumerable<GymReviewDetailDto>>> GetGymsList()
         {
@@ -88,7 +90,7 @@ namespace projRESTfulApiFitConnect.Controllers
             }
             return Ok(gymDtos);
         }
-        // GET api/<AdminListController>/5
+        // GET api/<AdminGymListController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<GymReviewDetailDto>> GetGymReviewDetail(int id)
         {
@@ -153,7 +155,79 @@ namespace projRESTfulApiFitConnect.Controllers
 
             return Ok(gymDto);
         }
-        // DELETE api/<AdminListController>/5
+        // PUT api/<AdminGymListController>
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> UpdateGymStatus(int id, [FromBody] GymStatusUpdateDto dto)
+        {
+            if (dto == null)
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            //讀取表單並轉換 開始-結束時間
+            if (string.IsNullOrEmpty(dto.start_time) || string.IsNullOrEmpty(dto.end_time))
+            {
+                return BadRequest("Invalid data: Start time or end time is null or empty.");
+            }
+
+            if (!TimeOnly.TryParse(dto.start_time, out TimeOnly startTime) || !TimeOnly.TryParse(dto.end_time, out TimeOnly endTime))
+            {
+                return BadRequest("Invalid time format: Start time or end time is not a valid TimeOnly.");
+            }
+
+            if (startTime > endTime)
+            {
+                return BadRequest("Start time must be less than or equal to end time.");
+            }
+
+            using (var transaction = await _context.Database.BeginTransactionAsync())
+            {
+                try
+                {
+                    //更新場館審核狀態
+                    var gym = await _context.TGyms.FindAsync(id);
+                    if (gym == null)
+                    {
+                        return NotFound();
+                    }
+
+                    gym.GymStatus = dto.GymStatus;
+                    // 更新公司審核狀態
+                    var company = await _context.Tcompanies.FindAsync(gym.CompanyId);
+                    if (company != null)
+                    {
+                        company.Status = dto.GymStatus;
+                    }
+                    // 更新負責人審核狀態
+                    var owner = await _context.Towners.FindAsync(company?.OwnerId);
+                    if (owner != null)
+                    {
+                        owner.Status = dto.GymStatus;
+                    }
+
+                    //新增場地時間
+                    var gymTimes = _context.TtimesDetails
+               .Where(t => t.TimeName >= startTime && t.TimeName <= endTime)
+               .Select(t => new TGymTime
+               {
+                   GymId = id,
+                   GymTime = t.TimeId
+               });
+                    _context.TGymTimes.AddRange(gymTimes);
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    return NoContent();
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    // Log the exception (ex) as needed
+                    return StatusCode(500, "An error occurred while updating the gym status.");
+                }
+            }
+        }
+        // DELETE api/<AdminGymListController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGym(int id)
         {

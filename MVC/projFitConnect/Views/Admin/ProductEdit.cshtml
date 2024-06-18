@@ -19,9 +19,18 @@
             background-color: #FBFFFD;
             border: 3px solid #007979;
             border-radius: 15px;
-            margin: 50px 0;
+            margin: 30px 0;
             padding: 20px 26px;
             line-height: 2em;
+        }
+
+        #divUneditProductimg {
+            width: 70%;
+            background-color: #FBFFFD;
+            border: 3px solid #007979;
+            border-radius: 15px;
+            margin:0 auto;
+            display:none;
         }
 
         .aside {
@@ -41,6 +50,59 @@
         .zoom-container:hover .zoom-img {
             transform: scale(1.2);
         }
+
+        .btn-remove {
+            position: relative;
+            border-color: #E0E0E0;
+            text-align: center;
+            display: inline-block;
+        }
+
+            .btn-remove img {
+                display: block;
+                max-height: 150px;
+                transition: opacity 0.3s;
+            }
+
+            .btn-remove .remove-icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 24px;
+                color: red;
+                display: none; /* Initially hidden */
+            }
+
+            .btn-remove::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.5); /* Mist effect */
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .btn-remove:hover::before {
+                opacity: 1;
+            }
+
+            .btn-remove:hover img {
+                opacity: 0.3;
+            }
+
+            .btn-remove:hover .remove-icon {
+                display: block;
+            }
+
+            .btn-remove:hover {
+                background-color: #FFECF5;
+                border-color: #FF5151;
+            }
+
     </style>
 }
 
@@ -72,6 +134,11 @@
             <div class="mb-3">
                 <label for="formFileMultiple" class="form-label">新增更多商品圖</label>
                 <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+            <div class="mb-3" id="diveditimages">
+                <button class="btn btn-outline-success" type="button" id="btnUneditProductimg">
+                    更改附件商品圖
+                </button>
             </div>
         </section>
     </aside>
@@ -114,23 +181,13 @@
             </div>
         </section>
     </article>
-
-    <p>
-        <button class="btn btn-outline-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUneditProductimg" aria-expanded="false" aria-controls="collapseUneditProductimg">
-            更改附件商品圖
-        </button>
-    </p>
-    <div style="min-height: 120px;">
-        <div class="collapse collapse-horizontal" id="collapseUneditProductimg">
-            <div class="card card-body w-100">
-                <div > 
-                    <img src="https://pbs.twimg.com/profile_images/1001436225402621952/bdez2BKN_400x400.jpg" alt="UneditProductimg" style="max-width: 100%; max-height:150px;">
-                </div>                
-            </div>
-        </div>
-    </div>
-
 </div>
+    <div id="divUneditProductimg">
+        <button class="btn btn-remove" onclick="removeTheImage(this)" style="display:none;">
+            <img src="https://pbs.twimg.com/profile_images/1001436225402621952/bdez2BKN_400x400.jpg" alt="UneditProductimg" style="max-height:150px;">
+            <span class="remove-icon">X</span>
+        </button>
+    </div>
 @section Scripts {
     <script>
         let productID = @ViewBag.id;
@@ -142,6 +199,8 @@
         const thePrice = document.querySelector('#inpunitPrice');
         const detail = document.querySelector('#inpproductDetail');
         const revise = document.querySelector('#btnrevise');
+        const divUneditProductimg = document.getElementById('divUneditProductimg');
+        var folded = true;
         const putData = {
             "productName": "",
             "categoryId": 0,
@@ -151,7 +210,7 @@
             "imageBase64": "",
             "images": [],
             "moreBase64Images": []
-        }
+        }        
 
         //預覽選擇影像&轉成base64
         document.getElementById('formFile').addEventListener('change', function (event) {
@@ -176,11 +235,6 @@
                     console.log('Image in base64:', base64String);
                 };
                 byteReader.readAsArrayBuffer(file);
-                if (putData.imageBase64 == "") {
-                    putData.productImage = ""; 
-                    alert('請更換商品圖片');
-                    return;
-                }
             }
         });
         // 多張影像
@@ -192,8 +246,8 @@
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     const newPreview = `<div class="carousel-item">
-                                                    <img src="${e.target.result}" class="d-block w-100" alt="Image Preview">
-                                                </div>`;
+                                                            <img src="${e.target.result}" class="d-block w-100" alt="Image Preview">
+                                                        </div>`;
                     productImage.insertAdjacentHTML('beforeend', newPreview);
                 };
                 reader.readAsDataURL(file);
@@ -203,14 +257,49 @@
                     const arrayBuffer = e.target.result;
                     const byteArray = new Uint8Array(arrayBuffer);
                     const base64String = btoa(String.fromCharCode.apply(null, byteArray));
-                    putData.images.push({ productImages: file.name });
-                    putData.moreBase64Images.push(base64String);
                     console.log('file.name:', file.name);
                     console.log('Image in base64:', base64String);
+                    putData.images.push({ productImages: file.name });
+                    putData.moreBase64Images.push(base64String);
                 };
                 byteReader.readAsArrayBuffer(file);
             });
         });
+        //移除舊影像
+        document.querySelector('#btnUneditProductimg').addEventListener('click', () => {
+            if (folded) {
+                folded = !folded
+                divUneditProductimg.style.display = 'block';
+            }
+            else {
+                folded = !folded
+                divUneditProductimg.style.display = 'none';
+            }
+        })
+        async function removeTheImage(button) {
+            if (confirm('確定移除此影像?')) {
+                const img = button.querySelector('img');
+                const imgId = img ? img.id : null;
+                console.log(imgId);
+                if (!imgId) {
+                    console.error('Image ID not found');
+                    return;
+                }
+                //https://localhost:7199/api/Products/image?id=46&productImage=Dinosaur2Q.jpg
+                let deleteUrl = 'https://localhost:7199/api/Products/image?id=' + productID + '&productImage=' + imgId;
+                let response = await fetch(deleteUrl, {
+                    method: 'PUT',
+                    body: JSON.stringify(putData),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                let data = await response.text();
+                alert('已刪除');
+                divUneditProductimg.innerHTML = "";
+                loadProduct();
+            }
+        }
         //單價限制
         thePrice.addEventListener('blur', event => {
             const value = parseFloat(event.target.value);
@@ -233,7 +322,7 @@
             console.log(putData);
             editProducts();
         }
-
+        
         //載入商品資料
         const loadProduct = async () => {
             //console.log('url=', url);
@@ -245,15 +334,21 @@
             putData.categoryId = data.productCategoryId;
             putData.productUnitprice = data.unitPrice;
             putData.productDetail = data.productDetail;
-
             //顯示照片
             document.getElementById('preview').src = `data:image/jpeg;base64,${data.productImage}`;
             if (data.images) {
+                var i = 0;
                 for (var pic of data.base64Images) {
                     newPreview = `<div class="carousel-item">
                                     <img src="data:image/jpeg;base64,${pic}" class="d-block w-100" alt="Image Preview">
                                    </div>`;
                     productImage.insertAdjacentHTML('beforeend', newPreview);
+                    uneditProductimg = `<button class="btn btn-remove" onclick="removeTheImage(this)">
+                                            <img src="data:image/jpeg;base64,${pic}" id="${data.images[i].productImages}" alt="UneditProductimg" style="max-height:150px;">
+                                            <span class="remove-icon">X</span>
+                                        </button>`;
+                    divUneditProductimg.insertAdjacentHTML('beforeend', uneditProductimg);
+                    i++;
                 }
             }
 
