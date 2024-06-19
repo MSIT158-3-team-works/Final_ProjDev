@@ -5805,49 +5805,7 @@ textarea.form-control-lg {
   content: "";
 }
 
-/*首頁hp輪播*/
 
-    .hpcarousel-item img {
-        object-fit: cover;
-        height: 100%;
-        width: 100%;
-        filter: brightness(60%) blur(3px); /* 調整模糊度 */
-    }
-
-.carousel-item.active {
-    display: block;
-    opacity: 1;
-}
-
-/*.carousel-item-next,
-.carousel-item-prev {
-    display: block;
-    opacity: 1;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-}*/
-
-/*.carousel-item-next {
-    transform: translateX(100%);
-}
-
-.carousel-item-prev {
-    transform: translateX(-100%);
-}
-*/
-    .carousel-item-next.carousel-item-left,
-    .carousel-item-prev.carousel-item-right {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-.hpcarousel-item.active.carousel-item-left,
-.hpcarousel-item.active.carousel-item-right {
-    opacity: 1;
-    transition: opacity 4.5s ease-in-out, transform 4.5s ease-in-out;
-}
 /*=====================================================================================================*/
 /*@media (prefers-reduced-motion: reduce) {
     .carousel-item {
@@ -10934,7 +10892,7 @@ p {
 }
 #mainNav .navbar-nav .nav-item .nav-link {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: #fff;
   letter-spacing: 0.0625em;
 }
@@ -11455,18 +11413,8 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 
-
-
 #copyright {
     text-align: center;
-}
-
-
-
-/*=====================================圖片輪播樣式========================================*/
-body, html {
-    height: 100%;
-    margin: 0;
 }
 
 .masthead {
@@ -11474,8 +11422,6 @@ body, html {
     height: 100vh;
     overflow: hidden;
 }
-
-
 
 .masthead .container {
     position: absolute;
@@ -11506,5 +11452,43 @@ body, html {
     padding: 1.5rem 3rem; 
     font-size: 1.5rem; 
 }
+/*首頁的hp輪播*/
+
+.hpcarousel-item img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    filter: brightness(60%) blur(3px); /* 調整模糊度 */
+    object-fit: cover;
+    transition: transform 10s ease;
+}
+
+.carousel-item.active {
+    display: block;
+    opacity: 1;
+}
+ .hpcarousel-item.active img {
+   transform: scale(2.0); /* Zoom-in effect */
+}
+
+.carousel-item-next.carousel-item-left,
+.carousel-item-prev.carousel-item-right {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.hpcarousel-item.active.carousel-item-left,
+.hpcarousel-item.active.carousel-item-right {
+    opacity: 1;
+    transition: opacity 4.5s ease-in-out, transform 4.5s ease-in-out;
+}
+
+
+.hpcarousel-item {
+    position: relative;
+    overflow: hidden;
+}
+
+
 
  

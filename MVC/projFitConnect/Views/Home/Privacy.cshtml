@@ -1,40 +1,125 @@
 ﻿@{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #505458;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
 
-<p>Use this page to detail your site's privacy policy.</p>
-<div class="row" style="font-family:'Microsoft JhengHei'; background-color:white"> 
-    <div class="col-md-3 "> 
-        <aside id="aside_menu">
-            <div id="aside_title">
-                <span class="aside_title_text">條款與聲明</span>
-                </div> <div class="outer_border"> 
-                    <ul id="aside_menu_main_ul"> 
-                        <li class=""> 
-                            <div class="aside_title d-table"> 
-                                <a class="d-table-cell current_tag_15659" href="/service"><span>服務條款</span></a> 
-                                </div> </li></ul><ul id="aside_menu_main_ul"> <li class="">
-                                    <div class="aside_title d-table"> 
-                                    <a class="d-table-cell current" href="/privacy-policy">
-                                        <span>隱私權政策</span> </a> 
-                                        </div>
-                                        </li>
-                                        </ul>
-                                        <ul id="aside_menu_main_ul"> 
-                                            <li class=""> <div class="aside_title d-table">
-                                                <a class="d-table-cell current_tag_15657" href="/refund-policy">
-                                                    <span>退款政策</span></a> 
-                                                </div> </li></ul> </div> </aside> </div> <div class="col-md-9"> 
-                                                    <main id="message_show_page"> 
-                                                        <div class="container"> 
-                                                            <div class="message_content"> 
-                                                                <h1 id="main_title" class="content-title">隱私權政策</h1> 
-                                                                <div class="msg_description"> <h2 class="msg_name"></h2> 
-                                                                    <div><p>歡迎來到FitConnect運動服務平台(下稱FitConnect)，FitConnect是由創鐸股份有限公司(下稱本公司)所建置及提供服務。為了支持個人資料保護，維護個人隱私權，本公司謹以下列聲明，向您說明FitConnect蒐集個人資料之目的、類別、利用範圍及方式、以及您所得行使之權利等事項：</p>
-                                                                        <p>&nbsp;</p><h2><span style="font-size: 18px;">第一條&nbsp;適用範圍</span></h2
-                                                                        ><p>FitConnect隱私權政策及其所包含之告知事項，適用於本公司所擁有及經營的網站與行動應用程式。當您使用FitConnect相關網站與行動應用程式所提供之任一服務或與之互動時，代表您同意本隱私權政策所述內容，對您的個人資料進行蒐集、處理及利用。無論您所居住的國家/地區為何，您都同意授權本公司根據本隱私權政策在您所居住國家/地區以外之處蒐集、傳輸、處理、儲存和使用您的個人資料，以便向您提供服務。</p>
-                                                                        <p>&nbsp;</p><h2><span style="font-size: 18px;">第二條&nbsp;個人資料蒐集之方式</span></h2>
+        h1 {
+            text-align: center;
+        }
+
+        .inner {
+            text-align: center;
+        }
+
+        .desktop-category {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+            .desktop-category li {
+                margin-right: 10px;
+            }
+
+                .desktop-category li a {
+                    display: block;
+                    text-decoration: none;
+                    color: #84C1FF;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    transition: background-color 0.3s, color 0.3s;
+                }
+
+                    .desktop-category li a:hover {
+                        background-color: #007BFF;
+                        color: #fff;
+                    }
+
+                .desktop-category li.active a {
+                    background-color: #8E8E8E;
+                    color: #fff;
+                }
+
+        .terms-content-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            margin-bottom:40px;
+        }
+
+        h4 {
+            color: #333;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #eee;
+            margin: 20px 0;
+        }
+
+        a {
+            color: #84C1FF;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        .track{
+        font-size:20px;
+        font-weight:bold;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <br>
+    <br>
+    <div class="inner clearfix">
+        <br/><br/>
+        <ul class="desktop-category nav nav-tabs">
+            <li><a href="https://localhost:7168/home/policy" class="track">使用條款</a></li>
+            <li class="active"><a href="https://localhost:7168/home/privacy" class="track">隱私權政策</a></li>
+            <li><a href="https://localhost:7168/home/service" class="track">退款政策</a></li>
+        </ul>
+    </div>
+
+
+
+     <h1 id="main_title" class="content-title">隱私權政策</h1> 
+     <div class="terms-content-container">
+    <div class="msg_description"> <h2 class="msg_name"></h2> 
+        <div><p>歡迎來到FitConnect運動服務平台(下稱FitConnect)，FitConnect是由創鐸股份有限公司(下稱本公司)所建置及提供服務。為了支持個人資料保護，維護個人隱私權，本公司謹以下列聲明，向您說明FitConnect蒐集個人資料之目的、類別、利用範圍及方式、以及您所得行使之權利等事項：</p>
+            <p>&nbsp;</p><h2><span style="font-size: 18px;">第一條&nbsp;適用範圍</span></h2>
+            <p>FitConnect隱私權政策及其所包含之告知事項，適用於本公司所擁有及經營的網站與行動應用程式。當您使用FitConnect相關網站與行動應用程式所提供之任一服務或與之互動時，代表您同意本隱私權政策所述內容，對您的個人資料進行蒐集、處理及利用。無論您所居住的國家/地區為何，您都同意授權本公司根據本隱私權政策在您所居住國家/地區以外之處蒐集、傳輸、處理、儲存和使用您的個人資料，以便向您提供服務。</p>
+           <p>&nbsp;</p><h2><span style="font-size: 18px;">第二條&nbsp;個人資料蒐集之方式</span></h2>
     <p>FitConnect將透過下列方式蒐集您的個人資料：</p>
     <p>1.&nbsp;當您申請註冊成為FitConnect之會員時；</p><p>2.&nbsp;當您使用FitConnect網站與行動應用程式所提供的各項服務時；</p>
     <p>3.&nbsp;當您於FitConnect所經營之網站、APP進行購物時；</p>
@@ -73,7 +158,5 @@ p>19.&nbsp;為執行收付款所需之資料：當您透過FitConnect網站或�
         <i class="fas fa-chevron-left"></i>&nbsp;&nbsp;返回上一頁 </button> 
         </div>
         </div>
-        </div>
-        </main> 
-        </div> 
-        </div>
+    </body>
+</html>

@@ -37,7 +37,7 @@
                         <li class="nav-item"><a class="nav-link fs-5" href="~/healthboard/index">健康專欄</a></li>
 
                         <li></li>
-                        <li class="nav-item"><a class="navbar-brand fs-6 " href="https://localhost:7168/Home/Login"><img src="~/assets/img/icon_profile.png" /></a></li>
+                        <li class="nav-item"><a class="navbar-brand fs-6 " href="https://localhost:7168/Home/Login"><img src="~/assets/img/icon_profile.png" id="avatar-img" /></a></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_shopping_cart.png" /></a></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_customer_service.png" /></a></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_heart_like.png" /></a></li>
@@ -48,7 +48,6 @@
         </nav>
     </header>
     @* 圖片輪播 *@
- 
     <div class="masthead" id="main_carousel">
         <div class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner" id="pic_carousel">
@@ -56,22 +55,21 @@
                     <img src="~/assets/img/header-bg6.jpg" class="d-block w-100" alt="Slide 1">
                 </div>
                 <div class="carousel-item hpcarousel-item">
-                    <img src="~/assets/img/header-backgrd.jpg" class="d-block w-100" alt="Slide 3">
+                    <img src="~/assets/img/header-backgrd.jpg" class="d-block w-100" alt="Slide 2">
                 </div>
                 <div class="carousel-item hpcarousel-item">
-                    <img src="~/assets/img/header-background.jpg" class="d-block w-100" alt="Slide 2">
+                    <img src="~/assets/img/header-background.jpg" class="d-block w-100" alt="Slide 3">
                 </div>
                 <div class="carousel-item hpcarousel-item">
-                    <img src="~/assets/img/header-bg5.jpg" class="d-block w-100" alt="Slide 3">
+                    <img src="~/assets/img/header-bg5.jpg" class="d-block w-100" alt="Slide 4">
                 </div>
-                
                 
             </div>
         </div>
 
 
         <div class="container">
-            <div class="masthead-subheading">Welcome To <br> <span style="font-size: 1.9em; font-weight: bold;font-family:Cambria">FitConnect</span></div>
+            <div class="masthead-subheading">Welcome To <br> <span style="font-size: 1.6em; font-weight: bold;">FitConnect</span></div>
             <div class="masthead-heading text-uppercase">找到適合你的場館、教練、課程!</div>
             <a class="btn btn-primary btn-xl text-uppercase" href="#services">立即體驗</a>
         </div>
@@ -89,7 +87,7 @@
     </script>
 
     <div id="mainpg" style="background-color:#deebf7">
-        <div class="container m-auto" style="width:120%">
+        <div class="container m-auto" style="width:130%">
             <main role="main">
                 @RenderBody()
             </main>
@@ -103,7 +101,7 @@
                     <div class="col-md-3 footer_information_block">
                         <div class="footer_logo_summary">
                             <p>
-                                <img class="img-fluid" src="~/assets/img/fitlogo.png" alt="FitConnect Logo">
+                                <img src="~/assets/img/fitlogo.png" style="height:180px" alt="FitConnect Logo">
                             </p>
                         </div>
                     </div>
@@ -127,9 +125,9 @@
                     <div class="col-3 footer_list_block">
                         <div class="list_head fw-bold fs-5">條款與聲明</div>
                         <ul class="nav flex-column m-2">
-                            <li class="nav-item"><a href="~/home/privacy" target="_blank" style="color:white">服務條款</a></li>
-                            <li class="nav-item">隱私權政策</li>
-                            <li class="nav-item">退款政策</li>
+                            <li class="nav-item"><a href="~/home/policy" target="_blank" style="color:white">服務條款</a></li>
+                            <li class="nav-item"><a href="~/home/privacy" target="_blank" style="color:white">隱私權政策</a></li>
+                            <li class="nav-item"><a href="~/home/service" target="_blank" style="color:white">退款政策</a></li>
                         </ul>
                     </div>
                 </div>
@@ -143,14 +141,27 @@
 
     </footer>
 
-    <!-- 引入最新版的 Bootstrap 样式 -->
+    <!-- 引入最新版的 Bootstrap樣式 -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-
+    <script>
+        const memberID = 7;
+        const avatarimg = document.querySelector('#avatar-img');
+        const MemberLogin = async () => {
+            let url = 'https://localhost:7199/api/Products/' + memberID;
+            //console.log('url=', url);
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log('Login-member',data);
+            //data:image/jpeg;base64,${course.productImage}
+            avatarimg.src = 'data:image/jpeg;base64,' + data.productImage;
+        }
+        MemberLogin();
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,0 +1,167 @@
+﻿@{
+    ViewData["Title"] = "Policy";
+}
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #505458;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .inner {
+            text-align: center;
+        }
+
+        .desktop-category {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+            .desktop-category li {
+                margin-right: 10px;
+            }
+
+                .desktop-category li a {
+                    display: block;
+                    text-decoration: none;
+                    color: #84C1FF;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    transition: background-color 0.3s, color 0.3s;
+                }
+
+                    .desktop-category li a:hover {
+                        background-color: #007BFF;
+                        color: #fff;
+                    }
+
+                .desktop-category li.active a {
+                    background-color: #8E8E8E;
+                    color: #fff;
+                }
+
+        .terms-content-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            margin-bottom:40px;
+        }
+
+        h4 {
+            color: #333;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #eee;
+            margin: 20px 0;
+        }
+
+        a {
+            color: #84C1FF;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+    </style>
+
+
+</head>
+<body>
+
+    <br>
+    <br>
+    <div class="inner clearfix">
+        <br /><br />
+        <ul class="desktop-category nav nav-tabs">
+            <li class="active"><a href="https://localhost:7168/home/policy" class="track">使用條款</a></li>
+            <li><a href="https://localhost:7168/home/privacy" class="track">隱私權政策</a></li>
+            <li><a href="https://localhost:7168/home/service" class="track">退款政策</a></li>
+        </ul>
+    </div>
+    <h1 id="main_title" class="content-title">使用條款</h1>
+    <div class="terms-content-container">
+        <h4>前言</h4>
+        <hr>
+        <p>此「使用條款（即權利與義務宣告）」是 FitConnect 的服務條款，用以規範 FitConnect 與用戶及其他與 FitConnect 互動的人士之關係。透過使用或登入 FitConnect ，代表使用者同意本條款。本條款之內容包括條款本文、以及本文明確援引之其他協議，以及未來本公司可能發佈的各項規則。</p>
+        <p>歡迎來到FitConnect運動平台(下稱FitConnect)，在使用本服務前，請您仔細閱讀以下條款。所有使用本服務的使用者，都應詳細閱讀下列約定條款，以下服務條款構成使用者與本公司間之合約，當您完成註冊或開始使用本服務時，表示您已經合理審閱期間（建議5日以上）充分閱讀、瞭解、同意遵守以下約定條款(包括隱私權政策、退款政策)的所有內容（以下簡稱「本服務條款」）。</p>
+        
+        <h4>一般規範</h4>
+        <hr>
+        <p> 1. 本服務包含提供一個線上的平台服務，提供金流、物流與資訊流之結合之平台，以為使用者提供課程、場租、商品等內容之交易。</p>
+        <p> 2. 使用者非透過本服務平台所進行交易、付款，不得適用本服務條款第四條至第七條規定，FitConnect對該交易、付款均不負任何違約、瑕疵擔保、保證內容、品質、退款、損害賠償等責任，使用者應同意並擔保不會對此類交易有關任何爭議，對FitConnect或其相關企業提起訴訟或以其他方式主張索賠。</p>
+        
+       
+        <h4>註冊義務聲明</h4>
+        <hr>
+        <p>為了能使用本服務，使用者需同意以下事項：</p>
+        <p>1. 依本服務註冊表之提示提供使用者本人正確、最新及完整的資料，</p>
+        <p>2. 維持並更新使用者之個人資料，確保其為正確、最新及完整。若使用者提供任何錯誤、不實或不完整的資料，FitConnect 有權暫停或終止使用者帳號，並拒絕使用者使用全部或部分服務。</p>
+        
+        <h4>使用者的守法義務及承諾</h4>
+        <hr>
+        <p>使用者承諾絕不為任何非法目的或以任何非法方式使用本服務，並承諾遵守中華民國相關法規及一切使用網際網路之國際慣例。您若係中華民國以外之使用者，並同意遵守所屬國家或地域之法令。您同意並保證不得利用本服務從事侵害他人權益或違法之行為，包括但不限於：</p>
+        <p>1. 上載、張貼、公布或傳送任何誹謗、侮辱、具威脅性、攻擊性、猥褻、不實、違反公共秩序或善良風俗或其他不法之文字、圖片或任何形式的檔案於本服務上</p>
+        <p>2. 侵害他人名譽、隱私權、營業秘密、商標權、著作權、專利權、其他智慧財產權及其他權利。</p>
+        <p>3. 違反依法律或契約所應負之保密義務</p>
+        <p>4. 冒用他人名義使用本服務。</p>
+        <p>5. 從事不法交易行為或張貼虛假不實、引人犯罪之訊息。</p>
+        <p>6. 販賣槍枝、毒品、禁藥或其他違禁物</p>
+        <p>7. 提供賭博資訊或以任何方式引誘他人參與賭博。</p>
+        <p>8. 濫發廣告訊息、垃圾訊息、連鎖信、違法之多層次傳銷訊息等。</p>
+        <p>9. 以任何方法傷害未成年人。</p>
+        <p>10. 偽造訊息來源或以任何方式干擾傳輸來源之認定。</p>
+        <p>11. 追蹤他人或其他干擾他人或為前述目前蒐集或儲存他人之個人資訊。</p>
+        <p>12. 其他 FitConnect 有正當理由認為不適當之行為。</p>
+        
+        <h4>平台及內容之所有權及智慧財產權聲明</h4>
+        <hr>
+        <p>本平台所提供之軟體或內容，無任何智慧財產權之取得。此等軟體或內容包括但不限於：任何網站、圖片、影像、檔案、資訊、資料、網站架構、網站畫面安排、網頁設計，均由本公司或其他權利人依法擁有其智慧財產權，包括但不限於著作權、專利權、商標權、營業秘密及專有技術等。</p>
+        <p>2. 非經本公司或權利人之合法授權，會員不得擅自使用、修改、重製、公開播送、改作、散布、發行、公開發表、逆向工程、解編或反向組譯。</p>
+        
+        <h4>違約責任及通知處理</h4>
+        <hr>
+        <p>若會員違反本服務條款而造成本公司或他人損害時，會員應負所有賠償責任。本公司若發現會員違反本服務條款或有任何懷疑時，得不經事先通知隨時中斷或終止會員之帳號、密碼或本服務之使用 (或任何其內之部分)，並移除會員於本服務中所儲存之任何內容。</p>
+        
+        <h4>免責聲明</h4>
+        <hr>
+        <p>1. 會員明確了解並同意：會員使用本服務涉及網際網路服務，可能會受到不穩定因素的影響。因網際網路之連線不穩、故障、無法使用、網路壅塞、資訊安全等不可歸責於本公司的事由而影響本服務之正常營運，本公司不承擔賠償責任。</p>
+        <p>2. 本公司對於會員使用本服務或下載資料而致的資料流失，或損害，或遺失，或其他任何損害，不負任何賠償責任。會員應自行瞭解並配合防範使用本服務的風險，包括但不限於自行配置防毒軟體。</p>
+        
+        <h4>其他條款</h4>
+        <hr>
+        <p>1. 本服務條款之任一部份無效，不影響其他部分之效力。</p>
+        <p>2. 本服務條款之標題僅供方便參閱，不影響條款之解釋或內涵。</p>
+        <p>3. 本服務條款以中文為主要解釋語言。</p>
+        <p>4. 本條款與細則以中華民國法律為準據法。</p>
+    </div>
+</body>
+</html>
