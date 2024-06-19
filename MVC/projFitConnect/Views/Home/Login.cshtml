@@ -1,4 +1,5 @@
-﻿@{
+﻿Updates to keyboard shortcuts … On Thursday, August 1, 2024, Drive keyboard shortcuts will be updated to give you first-letters navigation.Learn more
+@{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -40,7 +41,15 @@
                 <br>
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='https://localhost:7168/home/register'" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">點我註冊</button>
             </div>
-            <br><br>
+        </form>
+        <div>
+           @*  <hr />
+            <partial name="_particalGoogle"></partial>
+            <hr /> *@
+        </div>
+        <form action="Session" method="post" id="fetch_data" hidden>
+            <input type="text" id="id" name="id" />
+            <input type="text" id="role_id" name="role_id" />
         </form>
     </div>
 </div>
@@ -157,24 +166,25 @@
                     //console.log(count)
                     if (count === 3) {
                         window.alert('密碼錯誤達三次，即將跳轉頁面')
-                        window.location.href = '@Url.Content("~/home/index")'
+                        //  TODO account banner
+                        window.location.href = '@Url.Content("~/home/")'
                     }
                     sp.innerHTML = `<img src=\"/assets/img/error.png\" /> 密碼錯誤，已錯誤${count}次`
                     sp.classList.add('text-danger');
                     return;
                 }
 
-                //setsession
-                setSession(data)
-                //window.location.href = '@Url.Content("~/home/session")'
-                //assign? replace?
-                window.location.href = 'https://localhost:7168/member/Profile'
+                getInfo(data)
             };
 
-            function setSession({ id, roleId }) {
-                sessionStorage.setItem('ID', id)
-                sessionStorage.setItem('role_ID', roleId)
-                //console.log('sessionStorage', sessionStorage)
+            function getInfo({ id, role_id }) {
+                const form = document.getElementById('fetch_data')
+                const info_1 = document.getElementById('id')
+                const info_2 = document.getElementById('role_id')
+
+                info_1.value = `${id}`
+                info_2.value = `${role_id}`
+                form.submit()
             };
 
         })();

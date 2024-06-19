@@ -9,7 +9,10 @@ namespace projFitConnect.Controllers
         {
             base.OnActionExecuted(context);
             if (HttpContext.Session.GetInt32("role_ID") != 3)
-                context.Result = new RedirectToRouteResult("Redirect", new { controller = "jumppages", action = "Redirect3" });
+            {
+                context.Result = new RedirectToRouteResult("Redirect", new { controller = "home", action = "" });
+            }
+            //context.Result = new RedirectToRouteResult("Redirect", new { controller = "jumppages", action = "Redirect3" });
         }
     }
 }

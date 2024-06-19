@@ -23,6 +23,42 @@
             padding:50px 50px 50px 30px;
         }
 
+        .btn-track {
+            border-radius: 15px;
+            padding: 10px;
+            border: 2px solid #4F4F4F;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            font-weight:700;
+        }
+
+            .btn-track:hover {
+                border-color: #dc3545;
+                font-style:italic;
+                color: #930000;
+                text-shadow: 2px 1px 0.8px #FFD0FF;
+            }
+
+        .btn-cart {
+            border-radius: 15px;
+            padding: 10px;
+            border: 2px solid #4F4F4F;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            font-weight: 700;
+        }
+
+            .btn-cart:hover {
+                border-color: deepskyblue;
+                font-style: italic;
+                color: #003060;
+                text-shadow: 2px 1px 0.8px #D2E9FF;
+            }
+
         .article {
             width: 73%;
             float: right;
@@ -155,12 +191,12 @@
             <input type="text" name="inppurchase" min="1" max="20" step="1" class="form-control" value="1" style="text-align:center;" />
             <button class="btn btn-primary" id="btnplus">+</button>
         </div> <br />
-        <button type="button" class="btn btn-outline-danger">
-            <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/heart-outline-32.png" />
+            <button type="button" class="btn btn-track">
+                <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/heart-outline-32.png" style="margin-right:8px;" />
             追蹤
         </button>
-        <button type="button" class="btn btn-outline-success">
-            <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png" />
+            <button type="button" class="btn btn-cart">
+            <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png" style="margin-right:8px;"/>
             加入購物車
         </button></div>
         <div style="float:right;">
@@ -240,6 +276,7 @@
         const recommend = document.querySelector('#divrecommend');
 
         //top---------------------------------------------------------------------------------------------------------
+        //數量
         purchase.addEventListener('blur', event => {
             const value = parseFloat(event.target.value);
             const max = parseFloat(event.target.max);
@@ -251,7 +288,57 @@
         });
         plus.addEventListener('click', () => { if ((+purchase.value + 1) > purchase.max) return; purchase.value = (+purchase.value + 1); })
         minus.addEventListener('click', () => { if ((+purchase.value - 1) < purchase.min) return; purchase.value = (+purchase.value - 1); })
-        
+        // 追蹤按鈕
+        const trackButton = document.querySelector('.btn-track');
+        if (trackButton) {
+            const trackImg = trackButton.querySelector('img');
+            let isTracked = false;
+
+            trackButton.addEventListener('mouseover', () => {
+                if (!isTracked) {
+                    trackImg.src = 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-32.png';
+                }
+            });
+            trackButton.addEventListener('mouseout', () => {
+                if (!isTracked) {
+                    trackImg.src = 'https://cdn0.iconfinder.com/data/icons/typicons-2/24/heart-outline-32.png';
+                }
+            });
+            trackButton.addEventListener('click', async () => {
+                trackImg.src = 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-32.png';
+                isTracked = true; 
+
+                let url = 'https://localhost:7199/api/ProductTrack?memberId=' + 2 + '&productId=' + productID;
+                let response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                let data = await response.text();
+
+                if (response.ok) {
+                    if (data === 'Tracked') {
+                        alert("加入追蹤成功!");
+                    } else {
+                        alert("已追蹤該商品");
+                    }
+                }
+            });
+        }
+        // 購物車按鈕
+        const cartButton = document.querySelector('.btn-cart');
+        if (cartButton) {
+            const cartImg = cartButton.querySelector('img');
+            cartButton.addEventListener('mouseover', () => {
+                cartImg.src = 'https://cdn3.iconfinder.com/data/icons/ui-61/32/cart6-32.png';
+            });
+            cartButton.addEventListener('mouseout', () => {
+                cartImg.src = 'https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png';
+            });
+        }
+
+
         //left---------------------------------------------------------------------------------------------------------
         //熱門商品
         const PopularProducts = async () => {

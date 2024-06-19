@@ -2,7 +2,7 @@
 
 namespace projFitConnect.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : adminRouteController
     {
         public IActionResult Index()
         {
