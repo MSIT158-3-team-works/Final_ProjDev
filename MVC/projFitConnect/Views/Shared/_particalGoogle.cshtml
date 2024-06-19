@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-4">
+            <p>
+                您好, @User.Identity.Name
+            </p>
+        </div>
+        <div class="col-8 flex-fill">
+            <form asp-controller="Home" asp-action="googleSignout" method="post">
+                <button type="submit" class="btn btn-outline-danger">登出</button>
+            </form>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(ViewBag.PhotoUrl))
+    {
+        <img src="@ViewBag.PhotoUrl" alt="No User Photo Available" style="width: 100px; height: 100px;">
+    }
+}
+else
+{
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <a asp-controller="Home" asp-action="googleLogin">
+        <div id="g_id_onload"></div>
+        <div class="g_id_signin" data-type="standard"></div>
+    </a>
+}
