@@ -116,12 +116,31 @@
                 border-width: 3px;
             }
 
+        .btn-track {
+            border-radius: 50%; 
+            padding: 10px; 
+            border: 2px solid transparent; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            background-color: white;
+        }
+
             .btn-track:hover {
                 border-color: #dc3545;
             }
 
+        .btn-cart {
+            border-radius: 50%;
+            padding: 10px;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+
             .btn-cart:hover {
-                background-color:paleturquoise;
                 border-color: deepskyblue;
             }
 
@@ -337,44 +356,6 @@
         </div>
     </div>
 </div>
-<div style="text-align:center">
-    <h2>Fitconnect 商城</h2>
-    <div style="text-decoration:none;text-align:right;margin-right:30px;">
-        <a href="https://localhost:7168/shop/index" class="btn btn-outline-primary">前往商城>></a>
-    </div>
-    <div id="carouselAutoplayingMerchandise" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop">
-                    <div class="card m-3 hover" style="min-width:150px;padding-top:8px">
-                        <img class="card-img-top" src="~/assets/img/header-backgrd.jpg" alt=".C" style="width:97%;max-height:150px;">
-                        <div class="card-body">
-                            <h4 class="card-title">Joy</h4>
-                            <span class="" style="font-style:italic;color:lightblue;">#category</span>
-                            <p class="card-text">$1.99 USD</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop2">
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop3">
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutoplayingMerchandise" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselAutoplayingMerchandise" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</div>
 
 
 @section Scripts {
@@ -550,8 +531,8 @@
         }
         //加入追蹤
         async function track(event, productId) {
-            const trackedImg = '<img src="https://cdn3.iconfinder.com/data/icons/emoji-1-4/64/_love_heart_smiley-32.png" />';
-            event.innerHTML = trackedImg;
+            const trackingImg = '<img src="https://cdn3.iconfinder.com/data/icons/emoji-1-4/64/_love_heart_smiley-32.png" />';
+            const trackedImg = '<img src="https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-32.png" />';
 
             let url = 'https://localhost:7199/api/ProductTrack?memberId=' + 2 + '&productId=' + productId;
             let response = await fetch(url, {
@@ -561,53 +542,35 @@
                 }
             });
             let data = await response.text();
-            console.log(data);
 
             if (response.ok) {
                 if (data === 'Tracked') {
+                    event.innerHTML = trackingImg;
                     alert("加入追蹤成功!");
                 } else {
-                    alert("加入追蹤失敗: " + data);
+                    event.innerHTML = trackedImg;
+                    alert("已追蹤該商品");
                 }
-            } else {
-                alert("請求失敗: " + response.statusText);
             }
         }
         //加入購物車
-        function addtocart(productId) {
+        function addtocart(event, productId) {
             console.log(productId);
-           /* var username = window.localStorage.getItem("username");
-            var token = window.localStorage.getItem("token");
-            if (username != null && token != null) {
-                var data = {
-                    "pid": 123, // Replace with actual product ID
-                    "amount": 1, // Replace with actual amount
-                    "username": username
-                };
+            const CartAddedImg = '<img src="https://cdn3.iconfinder.com/data/icons/ui-61/32/cart6-32.png" />';
+            event.innerHTML = CartAddedImg;
 
-                try {
-                    let response = await fetch('https://your-api-endpoint', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + token
-                        },
-                        body: JSON.stringify(data)
-                    });
+            // let url = 'https://localhost:7199/api/ProductTrack?memberId=' + 2 + '&productId=' + productId;
+            // let response = await fetch(url, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // });
+            // let data = await response.text();
 
-                    let result = await response.json();
-                    if (response.ok && result.code == STATUS_OK) {
-                        alert("加入購物車成功!");
-                    } else {
-                        alert("加入購物車失敗: " + result.data);
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert("請求失敗: " + error.message);
-                }
-            } else {
-                alert("請先登入");
-            }*/
+            // if (response.ok) {
+            //         alert("加入購物車成功!");
+            // }
         }
         //換頁按鈕
         const CategorypagingHandler = (event,page) => {
@@ -712,10 +675,10 @@
                           <h5 class="card-title">${allData[position].productName}</h5>
                          <div style="text-align:right;float:right;">
                          <button type="button" class="btn btn-track" onclick="track(this,${allData[position].productId})">
-                          <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/heart-outline-32.png" />
+                          <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/heart-outline-32.png"  title="加入追蹤"/>
                          </button>
-                         <button type="button" class="btn btn-cart" onclick="addtocart(${allData[position].productId})">
-                          <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png" title="加入追蹤"/>
+                         <button type="button" class="btn btn-cart" onclick="addtocart(this,${allData[position].productId})">
+                          <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png" title="加入購物車"/>
                          </button>
                         </div>
                         <label class="tag" data-Id="${allData[position].productCategoryId}">#${allData[position].productCategory}</label>
@@ -726,7 +689,7 @@
                        </div></div></div>`
             }
             divMain.innerHTML = s;
-
+            //category,Tag
             const categoryTag = document.querySelectorAll('.tag');
             for (var card of categoryTag) {
                 card.addEventListener('click', function () {
@@ -740,6 +703,26 @@
                     CategoryloadProducts();
                 });
             }
+            //Track-hover
+            document.querySelectorAll('.btn-track').forEach(button => {
+                const img = button.querySelector('img');
+                button.addEventListener('mouseover', () => {
+                    img.src = 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-32.png';
+                });
+                button.addEventListener('mouseout', () => {
+                    img.src = 'https://cdn0.iconfinder.com/data/icons/typicons-2/24/heart-outline-32.png';
+                });
+            });
+            //Cart-hover
+            document.querySelectorAll('.btn-cart').forEach(button => {
+                const img = button.querySelector('img');
+                button.addEventListener('mouseover', () => {
+                    img.src = 'https://cdn3.iconfinder.com/data/icons/ui-61/32/cart6-32.png';
+                });
+                button.addEventListener('mouseout', () => {
+                    img.src = 'https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png';
+                });
+            });
             //顯示分頁按鈕
             let liPages = "", pageCount = 0;
             MaxPage = Math.ceil(allCount / searchData.pageSize);
@@ -763,73 +746,30 @@
 
 
         //♥
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', async ()=> {
+            var w = '';
             const wish = document.querySelector('.wish');
             const collapseWishlist = document.getElementById('collapseWishlist');
-
+            let url = 'https://localhost:7199/api/ProductTrack?id=' + 2;
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data);
+            //data=[{productId,productImage,productName,productName,unitPrice,quantity},]
+            data.forEach(wish => {
+                w += `<div class="card mb-3 hover" style="max-width: 540px;">
+                        <div class="row g-0">
+                        <div class="col-md-4" style="text-align:center; padding-top:10px;">
+                        <img src="data:image/jpeg;base64,${wish.productImage}" class="img-fluid rounded-start" alt="WishItem">
+                        </div><div class="col-md-8"><div class="card-body">
+                        <h6 class="card-title">${wish.productName}</h6>
+                        <p class="card-text" style="font-weight:400;font-style:italic;">$${wish.unitPrice}NTD</p>
+                        </div></div></div></div>`;
+            });
+            collapseWishlist.innerHTML=`<div class="card card-body">${w}<div class="gap-1 btn-group">
+                <a href="https://localhost:7168/" class="btn btn-danger">我的收藏</a>
+                <a href="https://localhost:7168/shop/index" class="btn btn-warning">前往商城</a>
+            </div></div>`
         });
 
-        //首頁(fitconnect商城)
-        const HomepageProducts = async () => {
-            var x = '', y = '', z = '';
-            let already = 0
-            let sortBy = ["","popular", "unitPrice", "categoryId"];
-            let sortType = [ "asc", "desc"];
-            let randomBy = Math.floor(Math.random() * 4);
-            let randomType = Math.floor(Math.random() * 2);
-            //console.log(sortBy[randomBy]); console.log(sortType[randomType]);
-            let url = 'https://localhost:7199/api/Products/search';
-            let response = await fetch(url, {
-                method: 'POST',
-                body: JSON.stringify({
-                    "categoryId": 0,
-                    "keyword": "",
-                    "page": 3,
-                    "pageSize": 12,
-                    "sortBy": sortBy[randomBy],
-                    "sortType": sortType[randomType]
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            let data = await response.json();
-            //顯示資料
-            for (var good of data.productsResult) {
-                //data:image/jpeg;base64,${good.productImage}
-                already++;
-                if(already<5)
-                    x += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
-                        <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
-                         <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
-                          <div class="card-body">
-                             <h6 class="card-title">${good.productName}</h6>
-                             <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
-                             <p class="card-text">$${good.unitPrice}NTD</p>
-                          </div> </div></a>`;
-                else if (already < 9)
-                    y += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
-                             <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
-                               <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
-                                 <div class="card-body">
-                                   <h6 class="card-title">${good.productName}</h6>
-                                   <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
-                                   <p class="card-text">$${good.unitPrice}NTD</p>
-                                 </div> </div></a>`;
-                else
-                    z += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
-                             <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
-                                <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
-                                   <div class="card-body">
-                                      <h6 class="card-title">${good.productName}</h6>
-                                      <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
-                                      <p class="card-text">$${good.unitPrice}NTD</p>
-                                    </div> </div></a>`;
-            }
-            document.getElementById('homepageShop').innerHTML = x;
-            document.getElementById('homepageShop2').innerHTML = y;
-            document.getElementById('homepageShop3').innerHTML = z;
-        }
-        HomepageProducts();
     </script>
 }

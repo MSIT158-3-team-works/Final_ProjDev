@@ -98,13 +98,18 @@ namespace projRESTfulApiFitConnect.Controllers
         [HttpPost]
         public async Task<ActionResult<TproductTrack>> PostTproductTrack(int memberId,int productId)
         {
-            TproductTrack tproductTrack=new TproductTrack();
-            tproductTrack.MemberId = memberId;
-            tproductTrack.ProductId = productId;
-            _context.TproductTracks.Add(tproductTrack);
-            await _context.SaveChangesAsync();
+            var tracked = _context.TproductTracks.Any(t=>t.MemberId==memberId&&t.ProductId==productId);
+            if (!tracked)
+            {
+                TproductTrack tproductTrack = new TproductTrack();
+                tproductTrack.MemberId = memberId;
+                tproductTrack.ProductId = productId;
+                _context.TproductTracks.Add(tproductTrack);
+                await _context.SaveChangesAsync();
 
-            return Ok("Tracked");
+                return Ok("Tracked");
+            }
+            else return Ok("Failed");
         }
 
         // DELETE: api/ProductTrack/5
@@ -120,7 +125,7 @@ namespace projRESTfulApiFitConnect.Controllers
             _context.TproductTracks.Remove(tproductTrack);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Deleted");
         }
 
         private bool TproductTrackExists(int id)
