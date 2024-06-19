@@ -32,6 +32,24 @@
             color: #342081;
         }
 
+        #autodiv {
+            position: absolute;
+            width:85%;
+            margin-left:15px;
+            top: 100%; /* Positions it directly below the input field */
+            left: 0;
+            right: 0;
+            z-index: 1000; /* Ensures it appears above other elements */
+            background-color: #FDFFFF;
+            border: 1px solid #ccc; 
+            border-top: none; 
+        }
+
+            #autodiv button {
+                width: 100%;
+                text-align: left;
+            }
+
         .pagination-container {
             display: flex;
             justify-content: center;
@@ -224,17 +242,10 @@
                     <button class="btn btn-outline-secondary" style="margin-left:12px;" id="orderbtn">正序</button>
                 </div>
             </div>
-            <div class="col-4" style="text-align:right;">
+            <div class="col-4" style="text-align:right; position:relative;">
                 <input type="search" placeholder="輸入搜尋商品..." class="form-control" id="inputSearch" />
-                <div class="list-group" id="autodiv">
-                    <button type="button" class="list-group-item list-group-item-action" style="display:none;" onclick="" value="0">
-                        ALL
-                    </button>
-                </div>
-                <div class="list-group" id="autodiv">
-                    <button type="button" class="list-group-item list-group-item-action" style="display:none;" onclick="autobtnClicked(event)" value="Humm">
-                        蛋白棒棒!!
-                    </button>
+                <div class="list-group" id="autodiv" style="position:absolute; top:100%; left:0; right:0; z-index:1000;">
+                    <!-- Autocomplete suggestions will be appended here -->
                 </div>
             </div>
             <div class="col-4" style="text-align:right;">
@@ -326,8 +337,6 @@
         </div>
     </div>
 </div>
-
-
 <div style="text-align:center">
     <h2>Fitconnect 商城</h2>
     <div style="text-decoration:none;text-align:right;margin-right:30px;">
@@ -484,6 +493,52 @@
                 CategoryloadProducts();
             }
         })
+        //autocomplete
+        inpSearch.addEventListener('input', async (event) => {
+            if (inpSearch.value === "") { document.getElementById('autodiv').innerHTML = ""; return; }
+            if (event.target.matches('#inputSearch, #inputSearch *')) {
+                let url = 'https://localhost:7199/api/Products/search';
+                let response = await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        "categoryId": 0,
+                        "keyword": "",
+                        "page": 1,
+                        "pageSize": 999,
+                        "sortBy": "",
+                        "sortType": "asc"
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                let data = await response.json();
+                var s = "",count=0;
+                for (let i of data.productsResult) {
+                    if (i.productName.includes(inpSearch.value)) {
+                        count++;
+                        //console.log(i.productName);
+                        if (count <= 3) { 
+                             s += `<button type="button" 
+                                         class="list-group-item list-group-item-action"
+                                         onclick="autobtnClicked(event)"
+                                         value="${i.productName}">${i.productName}</button>`
+                        }
+                    }
+                };
+                document.getElementById('autodiv').innerHTML = s;
+            }
+        });
+        function autobtnClicked(event) {
+            //console.log(event.target.value);
+            inpSearch.value = event.target.value;
+            //console.log(inpSearch.value);
+            searchData.keyword = event.target.value;
+            searchData.categoryId = 0;
+            searchData.page = 1;
+            document.getElementById('autodiv').innerHTML = "";
+            CategoryloadProducts();
+        }
         //顯示筆數
         for (var radio of pagesize) {
             //console.log(radio.value);
