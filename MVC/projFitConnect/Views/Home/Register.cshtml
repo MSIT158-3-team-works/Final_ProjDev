@@ -13,7 +13,7 @@
         <div class="logo-container">
             <img src="~/assets/img/fitlogo.png" alt="Logo" style="height:120px" />
         </div>
-        <form action="@Url.Action("Register")" method="post" class="form-horizontal">
+        <form action="https://localhost:7199/api/Member" method="post" class="form-horizontal" id="registerform">
             <div class="form-group">
                 <label for="name" class="control-label col-md-2" style="font-size:23px;">姓名:</label>
                 <div class="col-md-10">
@@ -41,9 +41,9 @@
                 <div class="col-md-10">
                     <select id="idGender" name="gender" required="required" class="form-control" style="width: 400px;">
                         <option value="" disabled selected>請選擇</option>
-                        <option value="male">男</option>
-                        <option value="female">女</option>
-                        <option value="other">其他</option>
+                        <option value=1>男</option>
+                        <option value=2>女</option>
+                        <option value=3>其他</option>
                     </select>
                     <span id="spGender"></span>
                 </div>
@@ -263,6 +263,17 @@
             }
 
         });
+        //registerform
+        const btn = document.getElementById('buttonSubmit')
+        // btn.addEventListener('click', (evt) => {
+        //     evt.preventDefault()
+        //     console.log('idName', document.getElementById('idName').value)
+        //     console.log('idPhone', document.getElementById('idPhone').value)
+        //     console.log('idEmail', document.getElementById('idEmail').value)
+        //     console.log('idBirthday', document.getElementById('idBirthday').value)
+        //     console.log('idPwd', document.getElementById('idPwd').value)
+        //     console.log('idGender', document.getElementById('idGender').value)
+        // });
     </script>
 }
 
