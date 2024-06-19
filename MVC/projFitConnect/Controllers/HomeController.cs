@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using projFitConnect.Models;
+using projFitConnect.ViewModels;
 using System.Diagnostics;
 
 namespace projFitConnect.Controllers
@@ -28,12 +29,26 @@ namespace projFitConnect.Controllers
             return View();
         }
 
-        public IActionResult Session()
+        public IActionResult Session([FromForm] C_user user)
         {
-            string id = HttpContext.Session.GetString("ID");
-            string role_id = HttpContext.Session.GetString("role_ID");
+            if (user != null)
+            {
+                int id = 0;
+                int r_id = 0;
+                bool a = int.TryParse(user.id, out id);
+                bool b = int.TryParse(user.role_id, out r_id);
 
-            return RedirectToAction("Index");
+                if (a && b)
+                {
+                    HttpContext.Session.Clear();
+                    HttpContext.Session.SetInt32("ID", id);
+                    HttpContext.Session.SetInt32("role_ID", r_id);
+                }
+                //  TODO error msg
+                else
+                    return RedirectToAction("login", "Home");
+            }
+            return RedirectToAction("", "Home");
         }
 
         public IActionResult Policy()
