@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+}
+<div class="container-fluid">
+    <div class="row">
+        <!-- 會員專區垂直導覽列 -->
+        <div class="col-lg-3 col-md-4 sidebar">
+            <div class="sidebar__item">
+                <h5>會員專區</h5>
+                <ul>
+                    <li class="active"><a href="#">個人資料</a></li>
+                    <li><a href="#">訂單查詢</a></li>
+                    <li><a href="#">候選教練</a></li>
+                    <li><a href="#">已報名課程</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-secondary">教練專區</a>
+        </div>
+
+        <!-- 會員資料顯示和修改區 -->
+        <div class="col-lg-9 col-md-8">
+            <div class="profile-container">
+                <div class="profile-box">
+                    <h1 style="font-weight:700">會員資料編輯</h1>
+                    <div style="margin:auto;text-align:center;">
+                        <img src="~/img/member/defaultImage.jpg" class="profile-pic" id="imgShow" />
+                        <label id="lblPicture" class="profile-pic-label">
+                            <input id="imgLoad" type="file" name="photo" class="form-control" style="display:none;" />
+                            更換頭像
+                        </label>
+                    </div>
+                    <form id="profileForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="username" class="control-label col-md-2 fw-bold" style="font-size:23px;">用戶名:</label>
+                            <div class="col-md-10">
+                                <input type="text" id="idUserName" name="username" class="form-control" size="16" style="width: 100%;" value="John Doe" />
+                                <span id="spUserName"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label col-md-2 fw-bold" style="font-size:23px;">電子郵件:</label>
+                            <div class="col-md-10">
+                                <input type="email" id="idEmail" name="email" class="form-control" size="16" style="width: 100%;" value="john@example.com" />
+                                <span id="spEmail"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="control-label col-md-2 fw-bold" style="font-size:23px;">電話:</label>
+                            <div class="col-md-10">
+                                <input type="tel" id="idPhone" name="phone" class="form-control" size="16" style="width: 100%;" value="123-456-7890" />
+                                <span id="spPhone"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="control-label col-md-2 fw-bold" style="font-size:23px;">地址:</label>
+                            <div class="col-md-10">
+                                <input type="text" id="idAddress" name="address" class="form-control" size="16" style="width: 100%;" value="123 Main St" />
+                                <span id="spAddress"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday" class="control-label col-md-2 fw-bold" style="font-size:23px;">生日:</label>
+                            <div class="col-md-10">
+                                <input type="date" id="idBirthday" name="birthday" class="form-control" size="16" style="width: 100%;" value="1990-01-01" />
+                                <span id="spBirthday"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remarks" class="control-label col-md-2 fw-bold" style="font-size:23px;">備註:</label>
+                            <div class="col-md-10">
+                                <textarea id="idRemarks" name="remarks" class="form-control" rows="3" style="width: 100%;">No remarks</textarea>
+                                <span id="spRemarks"></span>
+                            </div>
+                        </div>
+                        <div class="button-group">
+                            <button type="button" class="btn btn-primary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">保存</button>
+                            <br>
+                            <button type="button" class="btn btn-secondary" id="buttonCancel" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">取消</button>
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        document.querySelector('#imgLoad').addEventListener("change", function () {
+            document.getElementById('imgShow').src = window.URL.createObjectURL(this.files[0]);
+        });
+
+        document.getElementById('buttonSubmit').addEventListener('click', function () {
+            // 取得表單數據
+            var username = document.getElementById('idUserName').value;
+            var email = document.getElementById('idEmail').value;
+            var phone = document.getElementById('idPhone').value;
+            var address = document.getElementById('idAddress').value;
+            var birthday = document.getElementById('idBirthday').value;
+            var remarks = document.getElementById('idRemarks').value;
+
+            // 顯示更新後的內容
+            alert('會員資料已更新: \n' +
+                '用戶名: ' + username + '\n' +
+                '電子郵件: ' + email + '\n' +
+                '電話: ' + phone + '\n' +
+                '地址: ' + address + '\n' +
+                '生日: ' + birthday + '\n' +
+                '備註: ' + remarks);
+        });
+
+        document.getElementById('buttonCancel').addEventListener('click', function () {
+            // 重置表單或取消编輯邏輯
+            window.location.href = '/member/profile';
+        });
+    </script>
+
+
+}
+
+@section Styles{
+<style>
+        .container-fluid {
+            padding: 0;
+        }
+
+        .sidebar {
+            background-color: #f8f9fa;
+            padding: 20px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .sidebar__item h5 {
+            margin-bottom: 15px;
+        }
+
+        .sidebar__item ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            .sidebar__item ul li {
+                margin-bottom: 10px;
+            }
+
+                .sidebar__item ul li a {
+                    color: #333;
+                    text-decoration: none;
+                }
+
+                    .sidebar__item ul li.active a,
+                    .sidebar__item ul li a:hover {
+                        color: #007bff;
+                    }
+
+        .profile-container {
+            padding: 20px;
+        }
+
+        .profile-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+            .profile-box h1 {
+                text-align: center;
+                vertical-align: middle;
+                margin-bottom: 20px;
+            }
+
+        .profile-pic {
+            height: 90px;
+            border-radius: 50%;
+        }
+
+        .profile-pic-label {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            color: #0072E3;
+            font-weight: bold;
+        }
+
+        .form-horizontal .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-horizontal .control-label {
+            font-weight: bold;
+        }
+
+        .form-horizontal .form-control {
+            border-radius: 10px;
+        }
+
+        .button-group {
+            margin-top: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .button-group button {
+                margin-bottom: 10px;
+            }
+</style>
+}
+

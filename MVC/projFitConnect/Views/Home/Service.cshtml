@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewData["Title"] = "Service";
+}
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #505458;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .inner {
+            text-align: center;
+        }
+
+        .desktop-category {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0;
+            list-style-type: none;
+        }
+
+            .desktop-category li {
+                margin-right: 10px;
+            }
+
+                .desktop-category li a {
+                    display: block;
+                    text-decoration: none;
+                    color: #84C1FF;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    transition: background-color 0.3s, color 0.3s;
+                }
+
+                    .desktop-category li a:hover {
+                        background-color: #007BFF;
+                        color: #fff;
+                    }
+
+                .desktop-category li.active a {
+                    background-color: #8E8E8E;
+                    color: #fff;
+                }
+
+        .terms-content-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        h4 {
+            color: #333;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #eee;
+            margin: 20px 0;
+        }
+
+        a {
+            color: #84C1FF;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+    </style>
+
+
+</head>
+<body>
+
+    <br>
+    <br>
+    <div class="inner clearfix">
+        <br /><br />
+        <ul class="desktop-category nav nav-tabs">
+            <li><a href="https://localhost:7168/home/policy" class="track">使用條款</a></li>
+            <li><a href="https://localhost:7168/home/privacy" class="track">隱私權政策</a></li>
+            <li class ="active"><a href="https://localhost:7168/home/service" class="track">退款政策</a></li>
+        </ul>
+    </div>
+    <h1 id="main_title" class="content-title">退款政策</h1>
+    <div class="terms-content-container">
+            <h4>退款政策</h4>
+            <p>
+                <strong>第一條 申請取消課程（場地租借）及/或退款</strong><br>
+                根據本「退款政策」之條款與條件構成「服務條款」之一部份，買方可在課程資訊中所載之「取消政策」到期前申請取消課程及/或退款。
+            </p>
+            <p>
+                <strong>第二條 退款條件</strong><br>
+                使用者茲同意只有在下列情況下才能依據「取消政策」或本退款政策申請退款：
+            </p>
+            <ol>
+                <li>無可歸責於買方而未能於雙方確認之指定時間與地點完成課程；</li>
+                <li>課程在執行中有嚴重安全瑕疵；</li>
+                <li>買方執行的課程、商品、服務實質上與所刊登的課程描述不符；</li>
+                <li>您可以依消費者保護法第19條第1項規定行使相關權利；</li>
+                <li>關於退貨退款方式及條件，依各該商品銷售網頁及訂購流程中之相關網頁之記載。</li>
+            </ol>
+            <p>買方之申請退款必須經由 FitConnect 平台提交。FitConnect 將逐案審核買方的各項申請，並根據上述條件及本服務條款，全權酌情決定是否通過買方的申請。</p>
+
+            <p>您瞭解並同意，若因您要求退貨或換貨、或因 FitConnect 無法接受您全部或部分之訂單、或契約因故解除或失其效力，而需為您辦理退款事宜時，FitConnect 得代您處理發票或折讓單等相關法令所要求之單據。</p>
+            <hr>
+            <p>
+                <strong>第三條 退回課程（場地）之退款</strong><br>
+                買方必須等到 FitConnect 確認已收到退回課程（場地）符合退貨條件後才能獲得退款，相關衍生之手續費、服務費依【通訊交易解除權合理例外情事適用準則】第2條第5款規定不在退費之範圍。
+            </p>
+        </div>
+</body>
+</html>
+
