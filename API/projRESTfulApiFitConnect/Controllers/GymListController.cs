@@ -170,12 +170,10 @@ namespace projRESTfulApiFitConnect.Controllers
             string GymRegion = dto.GymRegion;
             int regionId = Convert.ToInt32(_context.TregionTables.FirstOrDefault(x => x.Region == GymRegion).RegionId);
             //讀取表單 開始-結束時間
-            string start_time = dto.start_time, end_time = dto.end_time;
-            int time1 = Convert.ToInt32(start_time);
-            int time2 = Convert.ToInt32(end_time);
+            string start_time = dto.start_time;
+            string end_time = dto.end_time;
             //時間ID轉成字串 "00:00-00:00"
-            string text = _context.TtimesDetails.FirstOrDefault(x => x.TimeId == time1).TimeName.ToString(@"hh\:mm")
-                + " - " + _context.TtimesDetails.FirstOrDefault(x => x.TimeId == time2).TimeName.ToString(@"hh\:mm");
+            string text = start_time + "-" + end_time;
 
             // 處理照片上傳
             string gymPhotoFileName = null;
@@ -216,7 +214,7 @@ namespace projRESTfulApiFitConnect.Controllers
             _context.SaveChanges();
             int gymId = newGym.GymId;
             _context.SaveChanges();
-            return Ok("gym create success");
+            return Ok(new { success = "gym create success" });
         }
 
         // PUT api/<GymListController>/5

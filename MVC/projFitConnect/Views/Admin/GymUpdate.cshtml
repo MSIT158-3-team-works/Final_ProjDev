@@ -29,13 +29,13 @@
                         <input type="text" class="form-control" id="GymPhone" aria-describedby="basic-addon1" name="GymPhone">
                     </div>
                 </div>
-                @* <div class="mb-3">
+                <div class="mb-3">
                     <h3>上傳場館照片</h3>
                     <input class="form-control form-control-sm" id="GymPhoto" type="file" name="UploadedGymPhoto">
-                </div> *@
+                </div>
                 <div class="mb-3">
                     <h3>場館照片</h3>
-                    <img src=" data:image /png;base64,${item.gymPhoto}" id="GymPhoto" class="img-fluid rounded">
+                    <img src=" data:image /png;base64,${item.gymPhoto}" id="GymPhoto2" class="img-fluid rounded">
                 </div>
             </div>
 
@@ -144,7 +144,7 @@
                         //gymDescribeElement.setAttribute('readonly', true);
                         //如果有圖片則顯示
                         if (data.gymPhoto) {
-                            const img = document.getElementById('GymPhoto');
+                            const img = document.getElementById('GymPhoto2');
                             img.src = `data:image/png;base64,${data.gymPhoto}`;
                             img.style.display = 'block';
                         }
