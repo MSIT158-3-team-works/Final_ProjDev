@@ -1,8 +1,16 @@
 ﻿@{
     ViewData["Title"] = "GymUpdate";
 }
-<h1>修改場館</h1>
-<div>
+@section Styles {
+    <style>
+        .main {
+            width: 92%;
+            margin: auto;
+        }
+    </style>
+}
+<h1 style="padding-left:64px;margin:15px 0;">修改場館</h1>
+<div class="ps-3 main">
     <form method="put" action="https://localhost:7199/api/GymList" enctype="multipart/form-data" id="gymForm">
         <div class="row">
             <div class="col-md-6">
