@@ -3,7 +3,7 @@
 <div style="padding-top:85px;">
     <link href="~/css/coachsearch.css" rel="stylesheet" />
     <div class="mt-4" style="margin-top:30px;">
-        <div class="d-flex float-start" role="search" style="width:30%">
+        <div class="d-flex float-start" role="search" style="width:25%">
             <input type="search" class="form-control me-2" aria-label="Search" placeholder="找教練" id="inputSearch" />
         </div>
         <form class="d-flex">
@@ -11,7 +11,7 @@
                 <option>縣市</option>
             </select>
             <select class="w-100 mx-3 px-3 rounded-3 form-select" name="region" id="regions">
-                <option>地區</option>
+                <option>請選擇地區</option>
             </select>
             <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort1Search">
                 <option>有氧、無氧</option>
@@ -25,14 +25,20 @@
                 <option value="女性">女性</option>
                 <option value="其他">多元性別</option>
             </select>
+            <button type="button" class="w-50 px-3 rounded-3 btn btn-secondary" id="resetButton" style="width:50px;">重設</button>
         </form>
     </div>
     <div style="display: flex; justify-content: space-between;">
-        <div style="width:50%">
-            <h2 class="fw-bold my-4 " id="totalcoaches">共有 -- 位教練</h2>
+        <div style="width:75%">
+            <h1 class="fw-bold my-4 " id="totalcoaches">共有 -- 位教練</h1>
         </div>
         <form class="d-flex">
-            <button type="button" class="w-100 mx-3 my-4 px-3 rounded-3 btn btn-info" id="resetButton" style="width:50px;">重新篩選</button>
+            <div class="w-100 " style="width:50%;">
+                <button type="button" class="w-100 mx-auto my-3 px-3 rounded-3 btn btn-light" id="#" style="width:100px; font-size:25px;">
+                    <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/location-arrow-48.png"/>
+                    <strong>成為教練</strong>
+                </button>
+            </div>
         </form>
     </div>
     <div class="d-flex flex-row flex-wrap justify-content-between" id="div">
@@ -148,20 +154,6 @@
                 const coachRates = item.coachRate.map(rate => parseFloat(rate.rateCoach));
                 const sum = coachRates.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
                 const averageRate = coachRates.length > 0 ? sum / coachRates.length : "尚無評價";
-                // coachRates = item.coachRate.map(rate => {
-                //     return `${rate.rateCoach}`
-                // })
-                // let sum = parseFloat('0')
-                // for (let i = 0; i < coachRates.length; i++) {
-                //     sum += parseFloat(coachRates[i])
-                // }
-                // let averageRate;
-                // if (coachRates.length > 0) {
-                //     averageRate = sum / coachRates.length;
-                //     console.log(averageRate);
-                // } else {
-                //     averageRate = "尚無評價";
-                // }
                 //生成教練卡
                 return( `<a href="/Trainer/Coach?id=${item.id}" class="card mb-3" style="max-width:540px; text-decoration:none;">
                               <div class="row g-0" style="height: 100%;">
@@ -180,8 +172,6 @@
                                 </div>
                         </a>`)
             })
-            // const imageUrl = `data:image/jpeg;base64,${data[0].photo}`;
-            // document.getElementById('image').src = imageUrl;
             div.innerHTML = card.join("");
             totalcoaches.textContent = `共有${data.totalCount}位教練`;
 

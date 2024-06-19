@@ -51,7 +51,7 @@ namespace projRESTfulApiFitConnect.Controllers
             _context.TmemberFollows.Add(tmemberFollow);
             await _context.SaveChangesAsync();
 
-            return Ok("Tracked");
+            return Ok();
         }
 
         // PUT api/<CoachTrackController>/5
@@ -61,9 +61,32 @@ namespace projRESTfulApiFitConnect.Controllers
         }
 
         // DELETE api/<CoachTrackController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{memberId}/{coachId}")]
+        public async Task<IActionResult> DeleteTcoachTrack(int memberId, int coachId)
         {
+            var tcoachTrack = await _context.TmemberFollows.FirstOrDefaultAsync(f => f.MemberId == memberId && f.CoachId == coachId);
+            if (tcoachTrack == null)
+            {
+                return NotFound();
+            }
+
+            _context.TmemberFollows.Remove(tcoachTrack);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+        ///
+        [HttpGet("check")]
+        public async Task<IActionResult> CheckTmemberFollow(int memberId, int coachId)
+        {
+            var follow = await _context.TmemberFollows.FirstOrDefaultAsync(f => f.MemberId == memberId && f.CoachId == coachId);
+
+            if (follow != null)
+            {
+                return Ok(new { exists = true });
+            }
+
+            return Ok(new { exists = false });
         }
     }
 }
