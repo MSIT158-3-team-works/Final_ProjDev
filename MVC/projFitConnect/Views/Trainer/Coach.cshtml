@@ -13,11 +13,6 @@
     <div class="container marketing mx-auto" style="width:75%;">
         <div class="mx-2">
             <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel" style="height:75vh; background-color:dimgrey;">
-                @* <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div> *@
                 <div class="carousel-inner" id="divImage">
                     <div class="carousel-item active" data-bs-interval="3000">
                         <img src="@Url.Content("~/assets/img/portfolio/1.jpg")" class="d-block mx-auto w-100" alt="...">
@@ -164,27 +159,81 @@
             window.history.back();
         };
         //追蹤事件
-        let isTracked = false;
-        async function track(event,coachId) {
-            const trackedImg = '<img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/heart-48.png"/>';
+        const trackedImg = '<img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/heart-48.png"/>';
+        const untrackedImg = '<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-48.png" />';
+        let memberId = 2; // 抓會員ID
+        //載入時檢查是否有追蹤
+        async function initializeTrackingOnLoad(eventElement, coachId) {
+            try {
+                let urlCheck = `https://localhost:7199/api/CoachTrack/check?memberId=${memberId}&coachId=${coachID}`;
 
-            let url = 'https://localhost:7199/api/CoachTrack?memberId=' + 2 + '&coachId=' + coachID;
-            let response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
+                let response = await fetch(urlCheck);
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
                 }
-            });
-            // 切换图片
-            if (!isTracked) {
 
-                event.innerHTML = trackedImg; // 设置为跟踪后的图标
-                isTracked = true; // 更新状态
-                //alert("追蹤成功！"); // 可选的追踪成功提示
-            } else {
-                event.innerHTML = '<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-48.png" />';
-                isTracked = false; // 恢复原始状态
-                //alert("取消追蹤！"); // 可选的取消追踪提示
+                let data = await response.json();
+
+                if (data.exists) {
+                    eventElement.innerHTML = trackedImg;
+                } else {
+                    eventElement.innerHTML = untrackedImg;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        //點擊時判斷是否已追蹤，根據狀態顯示相應圖片
+        async function track(eventElement, coachId) {
+            let isTracked;
+            let urlCheck = `https://localhost:7199/api/CoachTrack/check?memberId=${memberId}&coachId=${coachID}`;
+
+            try {
+                let response = await fetch(urlCheck);
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                let data = await response.json();
+                //console.log(data);
+                if (data.exists) {
+                    eventElement.innerHTML = trackedImg;
+                    //console.log(isTracked);
+                    isTracked = true;
+                } else {
+                    eventElement.innerHTML = untrackedImg;
+                    // console.log(isTracked);
+                    isTracked = false;
+                }
+                //無資料即新增一筆，有資料則刪除一筆
+                if (!isTracked) {
+                    let urlAdd = `https://localhost:7199/api/CoachTrack?memberId=${memberId}&coachId=${coachID}`;
+                    let addResponse = await fetch(urlAdd, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (!addResponse.ok) {
+                        throw new Error('Failed to add track.');
+                    }
+                    eventElement.innerHTML = trackedImg;
+                    isTracked = true;
+                } else {
+                    let urlDelete = `https://localhost:7199/api/CoachTrack/${memberId}/${coachID}`;
+                    let deleteResponse = await fetch(urlDelete, {
+                        method: 'DELETE'
+                    });
+                    if (!deleteResponse.ok) {
+                        throw new Error('Failed to delete track.');
+                    }
+                    eventElement.innerHTML = untrackedImg;
+                    isTracked = false;
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
         }
 
@@ -238,7 +287,7 @@
             //教練資訊
             det = `<div class="container marketing coachinfo" >
                       ${ratediv}
-                      <button type="button" class="btn track rounded-circle" onclick="track(this)">
+                      <button id="trackbtn" type="button" class="btn track rounded-circle" onclick="track(this)">
                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-48.png" />
                       </button>
                     <h1 class="chakra-text">${data.coachDetailDto.name}         
@@ -383,13 +432,20 @@
             })
             coachRecommand.innerHTML = coachCard.join("");
         }
-        //
-        // loadCoach();
-        // recommandCoach();
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // 所有DOM都已經加載完成後執行
+
+        // 所有DOM都已經加載完成後執行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 等待按鈕生成後再初始化
+            setTimeout(() => {
+                const eventElement = document.getElementById('trackbtn');
+                if (eventElement) {
+                    initializeTrackingOnLoad(eventElement, coachID);
+                } else {
+                    console.error('Element with ID "trackbtn" not found.');
+                }
+            }, 100);
             loadCoach();
-            recommandCoach();
+            recommandCoach(); 
         });
         
         //資料收折
