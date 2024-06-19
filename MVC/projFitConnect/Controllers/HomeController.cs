@@ -35,19 +35,21 @@ namespace projFitConnect.Controllers
             int R_ID = 0;
             if (user == null)
                 return RedirectToAction("Index", "home");
-
+            Console.WriteLine(user.id);
             bool a = int.TryParse(user.id, out ID);
             bool b = int.TryParse(user.role_id, out R_ID);
             if (a && b)
             {
-                HttpContext.Session.Clear();
                 HttpContext.Session.SetInt32("ID", ID);
                 HttpContext.Session.SetInt32("role_ID", R_ID);
             }
             else
                 return RedirectToAction("Index", "home");
 
-            return RedirectToAction("", "admin");
+            if (R_ID == 3)
+                return RedirectToAction("Index", "admin");
+
+            return RedirectToAction("", "home");
         }
 
         public IActionResult Policy()

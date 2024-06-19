@@ -1,8 +1,16 @@
 ﻿@{
     ViewData["Title"] = "FieldReview";
 }
-<h1>審核場地</h1>
-<div class="ps-3">
+@section Styles {
+    <style>
+        .main {
+            width: 92%;
+            margin: auto;
+        }
+    </style>
+}
+<h1 style="padding-left:64px;margin:15px 0;">審核場地</h1>
+<div class="ps-3 main">
     <div>
         <form method="post" action="https://localhost:7199/api/Gym" enctype="multipart/form-data">
             <div class="row">
