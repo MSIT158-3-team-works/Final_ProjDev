@@ -13,6 +13,8 @@ public partial class TclassSchedule
 
     public int FieldId { get; set; }
 
+    public int FieldReservedId { get; set; }
+
     public DateOnly CourseDate { get; set; }
 
     public int CourseTimeId { get; set; }
@@ -40,6 +42,8 @@ public partial class TclassSchedule
     public virtual TtimesDetail? CourseStartTime { get; set; }
 
     public virtual Tfield Field { get; set; } = null!;
+
+    public virtual TfieldReserve FieldReserved { get; set; } = null!;
 
     public virtual ICollection<TclassReserve> TclassReserves { get; set; } = new List<TclassReserve>();
 

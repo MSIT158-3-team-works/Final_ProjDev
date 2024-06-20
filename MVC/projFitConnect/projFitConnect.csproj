@@ -14,15 +14,11 @@
   <ItemGroup>
     <None Include="compilerconfig.json" />
     <None Include="Views\Admin\CoachList.cshtml" />
-    <None Include="Views\Admin\FieldCreate.cshtml" />
-    <None Include="Views\Admin\GymCreate.cshtml" />
-    <None Include="Views\Admin\GymReview.cshtml" />
     <None Include="Views\Admin\Index.cshtml" />
     <None Include="Views\Admin\MemberList.cshtml" />
     <None Include="Views\Admin\ProductCreate.cshtml" />
     <None Include="Views\Admin\ProductEdit.cshtml" />
     <None Include="Views\Admin\ProductList.cshtml" />
-    <None Include="Views\Admin\ReviewList.cshtml" />
     <None Include="Views\Admin\_Layout.cshtml" />
     <None Include="Views\Course\Index.cshtml" />
     <None Include="Views\Course\Search.cshtml" />

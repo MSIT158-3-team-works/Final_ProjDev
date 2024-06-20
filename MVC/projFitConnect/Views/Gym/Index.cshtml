@@ -48,6 +48,13 @@
             height: 250px;
             object-fit: cover; /* 保持比例充滿整個容器 */
         }
+
+        #main_div {
+            width: 1100px;
+            height: 300px;
+            overflow: auto;
+            
+        }
     </style>
 }
 <body>
@@ -80,7 +87,7 @@
             </article>
         </div>
     </main>
-    <h2>課程</h2>
+    <h2>本場館開設課程</h2>
     <div>
     <div class="row" id="main_div">
             <!-- 課程卡片 -->
@@ -105,7 +112,7 @@
             "courseStartTime": null,
             "keyword": "",
             "page": 1,
-            "pageSize": 10,
+            "pageSize": 100,
             "sortBy": "",
             "sortType": "asc"
         };
@@ -114,9 +121,6 @@
         const loadCourse = async () => {
             const params = new URLSearchParams(window.location.search);
             const gymId = params.get('id');
-
-            // Update searchData with gymId
-            searchData.gymId = gymId;
 
             let url = 'https://localhost:7199/api/Course/SEARCH';
             let response = await fetch(url, {
@@ -128,9 +132,10 @@
             });
             let data = await response.json();
             console.log('allCourse', data);
+            console.log('123', gymId)
             Maxpage = data.totalPages;
             //顯示資料
-            const courses = data.courseResult.map(course => {
+            const courses = data.courseResult.filter(courses=>courses.gymId==gymId).map(course => {
                 return (`<div class="col-md-3 mb-2">
                            <a href="https://localhost:7168/course/search/${course.classScheduleId}" class="text-decoration-none text-dark">
                            <div class="card">
@@ -172,7 +177,6 @@
                             <h3>停車場</h3>
                             <p>${item.gymPark}</p>
                         `;
-                        console.log('item', item);
                         document.getElementById("art").innerHTML = artContent;
                     } else {
                         console.error("No data found for the given ID.");
@@ -198,7 +202,6 @@
                                         </div>
                                         </a>
                                         </div>`;
-                        console.log(item)
                     }
                 });
                 gymContainer.innerHTML = str;

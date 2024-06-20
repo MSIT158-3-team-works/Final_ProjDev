@@ -1,16 +1,8 @@
 ﻿@{
     ViewData["Title"] = "FieldCreate";
 }
-@section Styles {
-    <style>
-        .main {
-            width: 92%;
-            margin: auto;
-        }
-    </style>
-}
-<h1 style="padding-left:64px;margin:15px 0;">新增場地</h1>
-<div class="ps-3 main">
+<h1>新增場地</h1>
+<div class="ps-3">
     <div>
         <form method="post" action="https://localhost:7199/api/Gym" enctype="multipart/form-data" id="fieldform">
             <input type="hidden" name="GymId" id="GymId" />
@@ -37,21 +29,9 @@
                             <input type="text" class="form-control" placeholder="例:1000" aria-label="場地費用" aria-describedby="basic-addon1" name="FieldPayment">
                         </div>
                     </div>
-                    @* <div>
-                    <h3>場館</h3><br />
-                    <select class="form-select" aria-label="Default select example">
-                    <option>請選擇場館</option>
-                    </select>
-                    </div> 
-                    <div>
-                        <h3>請輸入場地簡介</h3><br />
-                        <div class="input-group">
-                            <span class="input-group-text">場地簡介</span>
-                            <textarea class="form-control" id="FieldDescribe" placeholder="例:" aria-label="FieldDescribe" name="FieldDescribe"></textarea>
-                        </div>
-                    </div>*@
                     <br />
                     <button type="submit" class="btn btn-primary" id="btnsubmit">送出並新增</button>
+                    <a href="https://localhost:7168/Admin/GymReviewList" class="btn btn-outline-secondary">取消</a>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
