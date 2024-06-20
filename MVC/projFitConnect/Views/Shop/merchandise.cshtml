@@ -263,8 +263,13 @@
 <div style="padding-bottom:256px;">
     &emsp;
 </div>
+@{
+    var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
+}
 @section Scripts {
     <script>
+        const LoginMemberID = "@loginMemberID";
+        console.log('LoginMemberID', LoginMemberID);
         const productID = @ViewBag.productid;
         const productDetail = document.querySelector('#divdetail');
         const productImage = document.querySelector('#divimage');
@@ -305,10 +310,14 @@
                 }
             });
             trackButton.addEventListener('click', async () => {
+                if (LoginMemberID === '0') {
+                    alert('請登入會員');
+                    return;
+                }
                 trackImg.src = 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-32.png';
-                isTracked = true; 
+                isTracked = true;
 
-                let url = 'https://localhost:7199/api/ProductTrack?memberId=' + 2 + '&productId=' + productID;
+                let url = 'https://localhost:7199/api/ProductTrack?memberId=' + LoginMemberID + '&productId=' + productID;
                 let response = await fetch(url, {
                     method: 'POST',
                     headers: {
@@ -336,6 +345,29 @@
             cartButton.addEventListener('mouseout', () => {
                 cartImg.src = 'https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-32.png';
             });
+            cartButton.addEventListener('click', async () => {
+                if (LoginMemberID === '0') {
+                    alert('請登入會員');
+                    return;
+                }
+                //console.log(purchase.value);
+                let url = 'https://localhost:7199/api/Shoppingcarts?memberId=' + LoginMemberID + '&productId=' + productID + '&quantity=' + purchase.value;
+                let response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                let data = await response.text();
+
+                if (response.ok) {
+                    if (data === 'AddToCart') {
+                        alert("加入購物車成功!");
+                    } else {
+                        alert("加入失敗");
+                    }
+                }
+            });
         }
 
 
@@ -358,7 +390,7 @@
                 }
             });
             let data = await response.json();
-            console.log('PopularProducts', data.productsResult);
+            //console.log('PopularProducts', data.productsResult);
             //顯示資料
             const goods = data.productsResult.map(good => {
                 //data:image/jpeg;base64,${good.productImage}
@@ -393,7 +425,7 @@
             let randomNumber = Math.floor(Math.random() * 6);
             let randomBy = Math.floor(Math.random() * 4);
             let randomType = Math.floor(Math.random() * 2);
-            console.log(sortBy[randomBy]); console.log(sortType[randomType]);
+            //console.log(sortBy[randomBy]); console.log(sortType[randomType]);
             let url = 'https://localhost:7199/api/Products/search';
             let response = await fetch(url, {
                 method: 'POST',
