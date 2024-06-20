@@ -228,29 +228,57 @@ namespace projRESTfulApiFitConnect.Controllers
                 }
             }
         }
-        // DELETE api/<AdminGymListController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGym(int id)
         {
-            var gym = await _context.TGyms.FindAsync(id);
+            // Retrieve the gym including its related fields
+            var gym = await _context.TGyms
+                .Include(x => x.Tfields)
+                .FirstOrDefaultAsync(x => x.GymId == id);
 
             if (gym == null)
             {
                 return NotFound();
             }
 
-            // 刪除關聯的場館時間
-            var gymTimes = _context.TGymTimes.Where(gt => gt.GymId == id);
-            _context.TGymTimes.RemoveRange(gymTimes);
+            // Start a transaction
+            using (var transaction = await _context.Database.BeginTransactionAsync())
+            {
+                try
+                {
+                    // Delete related gym times
+                    var gymTimes = _context.TGymTimes.Where(gt => gt.GymId == id);
+                    _context.TGymTimes.RemoveRange(gymTimes);
 
-            // 刪除關聯的場館
-            var fields = _context.Tfields.Where(f => f.GymId == id);
-            _context.Tfields.RemoveRange(fields);
-            // 刪除場館
-            _context.TGyms.Remove(gym);
-            await _context.SaveChangesAsync();
+                    // Get related fields
+                    var fields = _context.Tfields.Where(f => f.GymId == id).ToList();
 
-            return NoContent();
+                    // Delete related field photos
+                    foreach (var field in fields)
+                    {
+                        var fieldPhotos = _context.TfieldPhotos.Where(fp => fp.FieldId == field.FieldId);
+                        _context.TfieldPhotos.RemoveRange(fieldPhotos);
+                    }
+
+                    // Delete related fields
+                    _context.Tfields.RemoveRange(fields);
+
+                    // Delete the gym
+                    _context.TGyms.Remove(gym);
+
+                    // Save changes and commit the transaction
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    return NoContent();
+                }
+                catch (Exception)
+                {
+                    // Rollback the transaction in case of an error
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            }
         }
     }
 }
