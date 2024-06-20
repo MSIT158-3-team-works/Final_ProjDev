@@ -50,10 +50,8 @@
         }
 
         #main_div {
-            width: 1100px;
-            height: 300px;
-            overflow: auto;
-            
+            width: 1140px;
+            height: 320px;
         }
     </style>
 }
@@ -131,20 +129,24 @@
                 }
             });
             let data = await response.json();
-            console.log('allCourse', data);
-            console.log('123', gymId)
             Maxpage = data.totalPages;
             //顯示資料
-            const courses = data.courseResult.filter(courses=>courses.gymId==gymId).map(course => {
-                return (`<div class="col-md-3 mb-2">
-                           <a href="https://localhost:7168/course/search/${course.classScheduleId}" class="text-decoration-none text-dark">
-                           <div class="card">
-                              <img src="data:image/jpeg;base64,${course.photo}" class="card-img-top" alt="...">
-                                  <h5 class="tc">${course.class}</h5>
-                                </div>
-                                </a>
-                             </div>`)
-            })
+            const uniqueCourses = new Set();
+            const courses = data.courseResult
+                .filter(course => course.gymId == gymId && !uniqueCourses.has(course.classScheduleId))
+                .slice(0, 8)
+                .map(course => {
+                    uniqueCourses.add(course.classScheduleId);
+                    return (`<div class="col-md-3 mb-2">
+                               <a href="https://localhost:7168/course/search/${course.classScheduleId}" class="text-decoration-none text-dark">
+                               <div class="card">
+                                  <img src="data:image/jpeg;base64,${course.photo}" class="card-img-top" alt="...">
+                                      <h5 class="tc">${course.class}</h5>
+                                    </div>
+                                    </a>
+                                 </div>`);
+                });
+
             main.innerHTML = courses.join("");
         };
         loadCourse();
