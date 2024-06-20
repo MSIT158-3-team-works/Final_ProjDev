@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using projRESTfulApiFitConnect.Models;
 using projRESTfulApiFitConnect.DTO.Member.status;
 using projRESTfulApiFitConnect.DTO.Member;
+using projRESTfulApiFitConnect.DTO.Product;
 
 namespace projRESTfulApiFitConnect.Controllers
 {
@@ -122,6 +123,80 @@ namespace projRESTfulApiFitConnect.Controllers
             return NotFound();
         }
 
+        [HttpPut("{id}/become-coach")]
+        public async Task<IActionResult> BecomeCoach(int id, BecomeCoachDTO becomeCoachDTO)
+        {
+            var newcoach = await _context.TIdentities
+                .Where(x => x.Id == id && x.RoleId == 1)
+                .FirstOrDefaultAsync();
+
+            if (newcoach == null)
+            {
+                return Ok("Not found");
+            }
+            newcoach.RoleId = 4;
+
+            if (!string.IsNullOrEmpty(becomeCoachDTO.coachName))
+                newcoach.Name = becomeCoachDTO.coachName;
+
+            if (becomeCoachDTO.expert != null)
+            {
+                for (int i = 0; i < becomeCoachDTO.expert.Count; i++)
+                {
+                    TcoachExpert expert = new TcoachExpert
+                    {
+                        CoachId = newcoach.Id,
+                        ClassId = becomeCoachDTO.expert[i]
+                    };
+                    _context.TcoachExperts.Add(expert);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(becomeCoachDTO.intro))
+            {
+                TcoachInfoId intro = new TcoachInfoId
+                {
+                    CoachId = newcoach.Id,
+                    CoachIntro = becomeCoachDTO.intro
+                };
+                _context.TcoachInfoIds.Add(intro);
+            }
+
+            if (!string.IsNullOrEmpty(becomeCoachDTO.photo) && !string.IsNullOrEmpty(becomeCoachDTO.ImageBase64))
+            {
+                byte[] imageBytes = Convert.FromBase64String(becomeCoachDTO.ImageBase64);
+                string filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", becomeCoachDTO.photo);
+                await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+
+                newcoach.Photo = becomeCoachDTO.photo;
+            }
+
+            _context.Entry(newcoach).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            // Save additional images if any
+            if (becomeCoachDTO.Images != null && becomeCoachDTO.moreBase64Images != null && becomeCoachDTO.Images.Count == becomeCoachDTO.moreBase64Images.Count)
+            {
+                for (int i = 0; i < becomeCoachDTO.Images.Count; i++)
+                {
+                    byte[] additionalImageBytes = Convert.FromBase64String(becomeCoachDTO.moreBase64Images[i]);
+                    string additionalFilePath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", becomeCoachDTO.Images[i].coachImages);
+                    await System.IO.File.WriteAllBytesAsync(additionalFilePath, additionalImageBytes);
+
+                    TcoachPhoto coachPhoto = new TcoachPhoto
+                    {
+                        Id = newcoach.Id,
+                        CoachPhoto = becomeCoachDTO.Images[i].coachImages
+                    };
+
+                    _context.TcoachPhotos.Add(coachPhoto);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok("requesting...");
+        }
         /*
         // POST: Member/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
