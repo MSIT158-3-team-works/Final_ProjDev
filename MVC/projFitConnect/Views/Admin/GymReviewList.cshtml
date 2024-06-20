@@ -11,19 +11,23 @@
         .head {
             color: #D0D0D0 !important;
         }
-    
-        .main {
-            width: 92%;
-            margin: auto;
+
+        .custom-select-short {
+            width: 150px;
         }
     </style>
 }
-<h1 style="padding-left:64px;margin:15px 0;">場館清單</h1>
-<div class="ps-3 main">
+<div>
+    <h2>場館清單</h2>
+    <select class="form-select custom-select-short" id="review">
+        <option value="all">審核狀態</option>
+        <option value="open">開放</option>
+        <option value="pending">待審核</option>
+    </select>
     <table class="table table-striped table-hover m-2 text-center">
         <thead>
             <tr>
-                <th class="head" scope="col">No.</th>
+                <th class="head" scope="col">ID</th>
                 <th class="head" scope="col">場館狀態</th>
                 <th class="head" scope="col">負責人</th>
                 <th class="head" scope="col">公司</th>
@@ -53,7 +57,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                確定要刪除這個場館嗎？
+                確定要刪除這個場館？
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -71,7 +75,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                確定要更改這個場館的審核狀態嗎？
+                確定要更改這個場館的審核狀態？
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -84,41 +88,40 @@
 @section Scripts {
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
-            try {
-                const response = await fetch(`https://localhost:7199/api/AdminGymlist/`);
-                const data = await response.json();
-                // 場館清單
+            let data = [];
+
+            const renderTable = (data) => {
                 const tableBody = document.querySelector('table tbody');
                 tableBody.innerHTML = data.map((item, index) => `
-                                            <tr>
-                                                <td>${index + 1}</td>
-                                                <td>${item.gymStatus ? '開放' : '審核中'}</td>
-                                                <td>${item.owner}</td>
-                                                <td>${item.name}</td>
-                                                <td>${item.gymName}</td>
-                                                <td>${item.gymPhone}</td>
-                                                <td>${item.start_time}-${item.end_time}</td>
-                                                <td>${item.gymAddress}</td>
-                                                <td>
-                                                    <button class="btn btn-outline-success create-btn" data-id="${item.gymId}">新增</button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-outline-success update-btn" data-id="${item.gymId}">修改</button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-outline-primary view-btn" data-id="${item.gymId}">檢視</button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-outline-warning confirm-btn" data-id="${item.gymId}" 
-                                                     data-status="${item.gymStatus}" data-start-time="${item.start_time}" data-end-time="${item.end_time}" 
-                                                     data-bs-toggle="modal" data-bs-target="#statusModal">更改</button></td>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-outline-danger delete-btn" data-id="${item.gymId}" data-bs-toggle="modal" data-bs-target="#deleteModal">刪除</button>
-                                                </td>
-                                            </tr>
-                                        `).join('');
-                console.log(data);
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${item.gymStatus ? '開放' : '待審核'}</td>
+                                <td>${item.owner}</td>
+                                <td>${item.name}</td>
+                                <td>${item.gymName}</td>
+                                <td>${item.gymPhone}</td>
+                                <td>${item.start_time}-${item.end_time}</td>
+                                <td>${item.gymAddress}</td>
+                                <td>
+                                    <button class="btn btn-outline-success create-btn" data-id="${item.gymId}">新增</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-success update-btn" data-id="${item.gymId}">修改</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-primary view-btn" data-id="${item.gymId}">檢視</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-warning confirm-btn" data-id="${item.gymId}"
+                                     data-status="${item.gymStatus}" data-start-time="${item.start_time}" data-end-time="${item.end_time}"
+                                     data-bs-toggle="modal" data-bs-target="#statusModal">更改</button></td>
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-danger delete-btn" data-id="${item.gymId}" data-bs-toggle="modal" data-bs-target="#deleteModal">刪除</button>
+                                </td>
+                            </tr>
+                        `).join('');
+
                 //表單按鈕事件
                 tableBody.addEventListener('click', async (event) => {
                     const target = event.target;
@@ -142,13 +145,15 @@
                         window.location.href = `https://localhost:7168/admin/gymupdate?id=${gymId}`;
                     }
                 });
+
                 //方法，刪除按鈕按下時，將gymId傳給confirmDeleteBtn的data-id屬性
                 document.querySelectorAll('.delete-btn').forEach(item => {
                     item.addEventListener('click', function (event) {
                         const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
                         confirmDeleteBtn.setAttribute('data-id', item.getAttribute('data-id'));
-                    })
+                    });
                 });
+
                 //刪除場館
                 document.getElementById('confirmDeleteBtn').addEventListener('click', async (event) => {
                     const gymId = event.target.getAttribute('data-id');
@@ -167,6 +172,7 @@
                         $('#deleteModal').modal('hide');
                     }
                 });
+
                 //更新場館審核狀態
                 document.getElementById('confirmStatusBtn').addEventListener('click', async (event) => {
                     const gymId = event.target.getAttribute('data-id');
@@ -195,6 +201,23 @@
                     } finally {
                         $('#statusModal').modal('hide');
                     }
+                });
+            };
+
+            try {
+                const response = await fetch(`https://localhost:7199/api/AdminGymlist/`);
+                data = await response.json();
+                renderTable(data);
+
+                document.getElementById('review').addEventListener('change', (event) => {
+                    const filter = event.target.value;
+                    let filteredData = data;
+                    if (filter === 'open') {
+                        filteredData = data.filter(item => item.gymStatus);
+                    } else if (filter === 'pending') {
+                        filteredData = data.filter(item => !item.gymStatus);
+                    }
+                    renderTable(filteredData);
                 });
             } catch (error) {
                 console.error("讀取場館資料失敗:", error);

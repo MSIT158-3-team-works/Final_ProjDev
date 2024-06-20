@@ -28,4 +28,6 @@ public partial class TfieldReserve
     public virtual TGymTime? FieldReserveEndTimeNavigation { get; set; }
 
     public virtual TGymTime? FieldReserveStartTimeNavigation { get; set; }
+
+    public virtual ICollection<TclassSchedule> TclassSchedules { get; set; } = new List<TclassSchedule>();
 }

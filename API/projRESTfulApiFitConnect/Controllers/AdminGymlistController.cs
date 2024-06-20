@@ -155,7 +155,8 @@ namespace projRESTfulApiFitConnect.Controllers
 
             return Ok(gymDto);
         }
-        // PUT api/<AdminGymListController>
+        
+        //PUT api/<AdminGymListController>
         [HttpPut("{id}/status")]
         public async Task<IActionResult> UpdateGymStatus(int id, [FromBody] GymStatusUpdateDto dto)
         {
@@ -238,6 +239,14 @@ namespace projRESTfulApiFitConnect.Controllers
                 return NotFound();
             }
 
+            // 刪除關聯的場館時間
+            var gymTimes = _context.TGymTimes.Where(gt => gt.GymId == id);
+            _context.TGymTimes.RemoveRange(gymTimes);
+
+            // 刪除關聯的場館
+            var fields = _context.Tfields.Where(f => f.GymId == id);
+            _context.Tfields.RemoveRange(fields);
+            // 刪除場館
             _context.TGyms.Remove(gym);
             await _context.SaveChangesAsync();
 

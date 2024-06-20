@@ -102,7 +102,7 @@ namespace projRESTfulApiFitConnect.Controllers
             _context.TfieldPhotos.Add(fieldPhoto);
             await _context.SaveChangesAsync();
 
-            return Ok("field create success");
+            return Ok(new { success = "field create success" });
         }
         // PUT api/<GymController>/5
         [HttpPut("{id}")]
@@ -123,7 +123,7 @@ namespace projRESTfulApiFitConnect.Controllers
             existingField.Floor = dto.Floor;
             existingField.FieldPayment = dto.FieldPayment;
             existingField.FieldDescribe = dto.FieldDescribe;
-            existingField.Status = true;
+            existingField.Status = dto.Status;
 
             // 照片更新
             if (dto.UploadedFieldPhoto != null && dto.UploadedFieldPhoto.Length > 0)
@@ -171,7 +171,7 @@ namespace projRESTfulApiFitConnect.Controllers
 
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(new { success = "field create success" });
         }
         private bool TfieldExists(int id)
         {

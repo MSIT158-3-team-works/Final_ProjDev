@@ -21,7 +21,7 @@ public partial class TIdentity
 
     public DateOnly Birthday { get; set; }
 
-    public string Address { get; set; } = null!;
+    public string? Address { get; set; }
 
     public int GenderId { get; set; }
 
