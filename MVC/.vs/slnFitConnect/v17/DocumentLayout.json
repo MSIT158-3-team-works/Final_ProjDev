@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\06201530\\MVC\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\06201530\\mvc\\projfitconnect\\views\\admin\\fieldcreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\fieldcreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\06201530\\mvc\\projfitconnect\\views\\commit\\gymcreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\commit\\gymcreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\06201530\\mvc\\projfitconnect\\views\\admin\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\06201530\\mvc\\projfitconnect\\views\\gymlist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\gymlist\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
@@ -14,21 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 306,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 15,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\GymList\\Index.cshtml",
-              "RelativeDocumentMoniker": "projFitConnect\\Views\\GymList\\Index.cshtml",
-              "ToolTip": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\GymList\\Index.cshtml",
-              "RelativeToolTip": "projFitConnect\\Views\\GymList\\Index.cshtml",
-              "ViewState": "AQIAADkAAAAAAAAAAAAAAE0AAAA4AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-20T08:11:40.078Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -80,6 +79,56 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\Admin\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\Admin\\_Layout.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Admin\\_Layout.cshtml",
+              "ViewState": "AQIAAJ8AAAAAAAAAAAAAAKwAAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-20T08:54:19.26Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GymCreate.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\Commit\\GymCreate.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Commit\\GymCreate.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\Commit\\GymCreate.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Commit\\GymCreate.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAACEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-20T08:45:24.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FieldCreate.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\Admin\\FieldCreate.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\FieldCreate.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\Admin\\FieldCreate.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Admin\\FieldCreate.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAACUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-20T08:36:41.732Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\GymList\\Index.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\GymList\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\06201530\\MVC\\projFitConnect\\Views\\GymList\\Index.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\GymList\\Index.cshtml",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAAAE0AAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-20T08:11:40.078Z"
             }
           ]
         },
