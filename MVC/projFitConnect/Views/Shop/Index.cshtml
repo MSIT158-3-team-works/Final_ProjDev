@@ -357,9 +357,13 @@
     </div>
 </div>
 
-
+@{
+    var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
+}
 @section Scripts {
     <script>
+        const LoginMemberID = "@loginMemberID";
+        console.log('LoginMemberID', LoginMemberID);
         let MaxPage = 0;
         const divMain = document.getElementById('divmain');
         const ulPaging = document.getElementById('ulpaging');
@@ -531,10 +535,14 @@
         }
         //加入追蹤
         async function track(event, productId) {
+            if (LoginMemberID === '0') {
+                alert('請登入會員');
+                return;
+            }
             const trackingImg = '<img src="https://cdn3.iconfinder.com/data/icons/emoji-1-4/64/_love_heart_smiley-32.png" />';
             const trackedImg = '<img src="https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-32.png" />';
 
-            let url = 'https://localhost:7199/api/ProductTrack?memberId=' + 2 + '&productId=' + productId;
+            let url = 'https://localhost:7199/api/ProductTrack?memberId=' + LoginMemberID + '&productId=' + productId;
             let response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -555,22 +563,30 @@
         }
         //加入購物車
         function addtocart(event, productId) {
+            if (LoginMemberID === '0') {
+                alert('請登入會員');
+                return;
+            }
             console.log(productId);
+
             const CartAddedImg = '<img src="https://cdn3.iconfinder.com/data/icons/ui-61/32/cart6-32.png" />';
             event.innerHTML = CartAddedImg;
+            let url = 'https://localhost:7199/api/Shoppingcarts?memberId=' + LoginMemberID + '&productId=' + productId + '&quantity=' + 1;
+            let response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.text();
 
-            // let url = 'https://localhost:7199/api/ProductTrack?memberId=' + 2 + '&productId=' + productId;
-            // let response = await fetch(url, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     }
-            // });
-            // let data = await response.text();
-
-            // if (response.ok) {
-            //         alert("加入購物車成功!");
-            // }
+            if (response.ok) {
+                if (data === 'AddToCart') {
+                    alert("加入購物車成功!");
+                } else {
+                    alert("加入失敗");
+                }
+            }
         }
         //換頁按鈕
         const CategorypagingHandler = (event,page) => {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using projRESTfulApiFitConnect.DTO.Product;
 using projRESTfulApiFitConnect.Models;
@@ -109,12 +110,37 @@ namespace projRESTfulApiFitConnect.Controllers
         // POST: api/Shoppingcarts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TproductShoppingcart>> PostTproductShoppingcart(TproductShoppingcart tproductShoppingcart)
+        public async Task<ActionResult<TproductShoppingcart>> PostTproductShoppingcart(int memberId, int productId,int quantity)
         {
-            _context.TproductShoppingcarts.Add(tproductShoppingcart);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var added = _context.TproductShoppingcarts.Any(c => c.MemberId == memberId && c.ProductId == productId);
+                if (!added)
+                {
+                    var theProduct=_context.Tproducts.Where(p=>p.ProductId==productId).FirstOrDefault();
+                    TproductShoppingcart tproductShoppingcart = new TproductShoppingcart();
+                    tproductShoppingcart.MemberId = memberId;
+                    tproductShoppingcart.ProductId = productId;
+                    tproductShoppingcart.ProductQuantity = quantity;
+                    tproductShoppingcart.ProductUnitprice = theProduct.ProductUnitprice;
+                    _context.TproductShoppingcarts.Add(tproductShoppingcart);
+                    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTproductShoppingcart", new { id = tproductShoppingcart.ProductShoppingcartId }, tproductShoppingcart);
+                    return Ok("AddToCart");
+                }
+                else
+                {
+                    var alreadyAdd = _context.TproductShoppingcarts.Where(c => c.MemberId == memberId && c.ProductId == productId).FirstOrDefault();
+                    alreadyAdd.ProductQuantity = alreadyAdd.ProductQuantity + quantity;
+                    _context.Entry(alreadyAdd).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return Ok("AddToCart");
+                }
+            }
+            catch
+            {
+                return Ok("Failed");
+            }
         }
 
         // DELETE: api/Shoppingcarts/5
