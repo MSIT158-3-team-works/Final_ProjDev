@@ -71,7 +71,11 @@
                 const center = { lat: 25.05479615296504, lng: 121.48801693439103 };
                 map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 12,
-                    center: center
+                    center: center,
+                    gestureHandling: 'greedy', // 允許滾輪縮放
+                    mapTypeControl: false,     // 隱藏地圖類型控件
+                    streetViewControl: false,  // 隱藏街景控件
+                    zoomControl: false         // 隱藏縮放控件
                 });
                 geocoder = new google.maps.Geocoder();
                 try {
