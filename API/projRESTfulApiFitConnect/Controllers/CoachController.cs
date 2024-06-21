@@ -330,9 +330,11 @@ namespace projRESTfulApiFitConnect.Controllers
                     ClassScheduleId = schedule.ClassScheduleId,
                     Class = schedule.Class.ClassName,
                     Coach = schedule.Coach.Name,
+                    GymName = schedule.Field.Gym.GymName,
                     Field = schedule.Field.FieldName,
                     CourseDate = schedule.CourseDate,
                     CourseTime = schedule.CourseTimeId,
+                    CourseStartTime = schedule.CourseStartTime.TimeName,
                     MaxStudent = schedule.MaxStudent,
                     ClassStatus = schedule.ClassStatus.ClassStatusDiscribe,
                     ClassPayment = schedule.ClassPayment,
@@ -341,8 +343,6 @@ namespace projRESTfulApiFitConnect.Controllers
                 };
                 scheduleDatailDtos.Add(scheduleDatailDto);
             }
-
-
             var result = new
             {
                 coachDetailDto,
@@ -441,6 +441,7 @@ namespace projRESTfulApiFitConnect.Controllers
             return Ok(maa);
         }
 
+
         // GET: api/Coach
         //取得所有教練資料(個人資料、自我介紹)
         [HttpGet("verify")]
@@ -502,4 +503,5 @@ namespace projRESTfulApiFitConnect.Controllers
             return Ok(coachDetailDtos);
         }
     }
+
 }

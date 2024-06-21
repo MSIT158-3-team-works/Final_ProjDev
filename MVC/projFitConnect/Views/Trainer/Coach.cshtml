@@ -1,6 +1,7 @@
 ﻿@{
     // ViewData["Title"] = "Coach";
 }
+<link href="~/css/arrowdown.css" rel="stylesheet" />
 <main style="padding-top:85px;">
     <div class="return-button">
         <button id="returnButton" onclick="goBack()">＜返回</button>
@@ -15,7 +16,7 @@
             <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel" style="height:75vh; background-color:dimgrey;">
                 <div class="carousel-inner" id="divImage">
                     <div class="carousel-item active" data-bs-interval="3000">
-                        <img src="@Url.Content("~/assets/img/portfolio/1.jpg")" class="d-block mx-auto w-100" alt="...">
+                        <img src="https://media.tenor.com/vNB3iUXsxnQAAAAC/loading-gif.gif" class="d-block mx-auto img-fluid " alt="..." style="height:75vh; ">
                     </div>
                     <div class="carousel-item" data-bs-interval="3000">
                         <img src="@Url.Content("~/assets/img/portfolio/2.jpg")" class="d-block mx-auto w-100" alt="...">
@@ -141,11 +142,16 @@
     <hr class="featurette-divider">
 
 </main>
-
+@{
+    var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
+}
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">jquery設定</script>
     <script>
-        let coachID = @ViewBag.id;
+        const LoginMemberID = "@loginMemberID";
+        console.log('LoginMemberID', LoginMemberID);
+        let coachID = @ViewBag.coachid;
+        console.log('coachID', coachID);
         const coachDetail = document.querySelector('#coachDetail');//教練資訊
         const divImage = document.querySelector('#divImage');//照片瀏覽
         const gymDetail = document.querySelector('#gymDetail');//場館資訊
@@ -161,7 +167,7 @@
         //追蹤事件
         const trackedImg = '<img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/heart-48.png"/>';
         const untrackedImg = '<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-48.png" />';
-        let memberId = 2; // 抓會員ID
+        let memberId = LoginMemberID; // 抓會員ID
         //載入時檢查是否有追蹤
         async function initializeTrackingOnLoad(eventElement, coachId) {
             try {
@@ -217,6 +223,14 @@
                     });
 
                     if (!addResponse.ok) {
+                        //todo:alert需先登入後，跳轉至登入頁面
+                        if (confirm('請先登入/註冊會員')) {
+                            setTimeout(() => {
+                                window.location.assign('https://localhost:7168/Home/Login');
+                            }, 100);
+                        }
+                        // alert('請先登入/註冊會員')
+                        
                         throw new Error('Failed to add track.');
                     }
                     eventElement.innerHTML = trackedImg;
@@ -242,11 +256,11 @@
             let url = 'https://localhost:7199/api/Coach/' + coachID;
             let response = await fetch(url);
             let data = await response.json();
-            console.log(data);
+            //console.log(data);
             //取出教練專長
             var aa = ''
             var bb = data.coachDetailDto.experties.map(ex => ex.classSort2);
-            console.log('bb', bb);
+            //console.log('bb', bb);
             var cc = [];
             for (let i of bb) {
                 if (!cc.includes(i)) {
@@ -269,116 +283,119 @@
             } else {
                 ratediv = "";
             }
-            console.log(sum / data.rateDetailDtos.length);
+            //console.log(sum / data.rateDetailDtos.length);
             //瀏覽圖片
             img = '';
             img = `<div class="carousel-item active" data-bs-interval="5000" >
-                    <img src="data:image/jpeg;base64,${data.coachDetailDto.photo}" class="d-block mx-auto img-fluid " alt="..." style="height:75vh; ">
-                    </div>`; 
+                            <img src="data:image/jpeg;base64,${data.coachDetailDto.photo}" class="d-block mx-auto img-fluid " alt="..." style="height:75vh; ">
+                            </div>`;
             if (data.coachDetailDto.images) {
                 for (let pic of data.coachDetailDto.base64Images) {
-                    img += `<div class="carousel-item" data-bs-interval="5000" >
-                       <img src="data:image/jpeg;base64,${pic}" class="d-block mx-auto img-fluid " alt="..." style="height:75vh; ">
-                    </div>`;
+                    img += `<div class="carousel-item" data-bs-interval="3000" >
+                               <img src="data:image/jpeg;base64,${pic}" class="d-block mx-auto img-fluid " alt="..." style="height:75vh; ">
+                            </div>`;
                 }
             }
-            console.log("img======",img);
+            //console.log("img======",img);
             //<p class="track" >♥</p>
             //教練資訊
             det = `<div class="container marketing coachinfo" >
-                      ${ratediv}
-                      <button id="trackbtn" type="button" class="btn track rounded-circle" onclick="track(this)">
-                       <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-48.png" />
-                      </button>
-                    <h1 class="chakra-text">${data.coachDetailDto.name}         
-                    </h1>
-                        <h5>${aa}</h5>
-                        <h5>性別 : ${data.coachDetailDto.genderDescription}</h5>
-                         <h5>聯絡電話 : ${data.coachDetailDto.phone}</h5>
-                         <h5>電子郵件 : ${data.coachDetailDto.eMail}</h5>
-                         <h3 class="chakra-text"> 教練簡介 </h3>
-                         <div class="container marketing">
-                           <div class="coachDetail">
-                                  ${data.coachDetailDto.intro}</br></br>
-                                  <p>我有什麼優點與價值 ?</p>
-                                  我是一名喜歡訓練與了解人體奧秘的訓練者/教練。</br>
-                                  喜歡簡易的邏輯與實務的內容，不喜歡繁鎖無序與繞遠路的訓練過程，喜歡探討追求訓練的本質與身體進步的重點。</br>
-                                  無痛訓練」與「運動狀況排除」是我的強項，「強化人體機能」與協助您「運動目標達成」，更是我的渴望。</br>
-                                  若有我未竟、未解之處，我會為您尋求解方與轉介比我厲害的人。</br>
-                                  我可以理解您運動上的障礙與苦惱，具備同理心的陪伴您進步。</br>
-                                  我追求能讓客戶與生活共融的訓練生活，讓「運動」走入您的生命，進而成為您的習慣。</br>
-                                  <p>而我是這樣的傳道人~盼能與您同行~~~</p>
-                            </div>
-                            <div>
-                               <button type="button" class="chakra-button css-1qmctmy" onclick = "toggleReadMore()"> Read More </button>
-                             </div>
-                     </div>`;
-            console.log(data.fieldDetailDtos);
+                              ${ratediv}
+                              <button id="trackbtn" type="button" class="btn track rounded-circle" onclick="track(this)">
+                               <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-48.png" />
+                              </button>
+                            <h1 class="chakra-text">${data.coachDetailDto.name}
+                            </h1>
+                                <h5>${aa}</h5>
+                                <h5>性別 : ${data.coachDetailDto.genderDescription}</h5>
+                                 <h5>聯絡電話 : ${data.coachDetailDto.phone}</h5>
+                                 <h5>電子郵件 : ${data.coachDetailDto.eMail}</h5>
+                                 <h3 class="chakra-text"> 教練簡介 </h3>
+                                 <div class="container marketing">
+                                   <div class="coachDetail">
+                                          ${data.coachDetailDto.intro}</br></br>
+                                          <p>我有什麼優點與價值 ?</p>
+                                          我是一名喜歡訓練與了解人體奧秘的訓練者/教練。</br>
+                                          喜歡簡易的邏輯與實務的內容，不喜歡繁鎖無序與繞遠路的訓練過程，喜歡探討追求訓練的本質與身體進步的重點。</br>
+                                          無痛訓練」與「運動狀況排除」是我的強項，「強化人體機能」與協助您「運動目標達成」，更是我的渴望。</br>
+                                          若有我未竟、未解之處，我會為您尋求解方與轉介比我厲害的人。</br>
+                                          我可以理解您運動上的障礙與苦惱，具備同理心的陪伴您進步。</br>
+                                          我追求能讓客戶與生活共融的訓練生活，讓「運動」走入您的生命，進而成為您的習慣。</br>
+                                          <p>而我是這樣的傳道人~盼能與您同行~~~</p>
+                                    </div>
+                                    <div class="read-more-container">
+                                       <button type="button" class="chakra-button css-1qmctmy" onclick = "toggleReadMore()"> Read More</button>
+                                               <div id="arrowIcon" class="arrow-down"></div>
+                                     </div>
+                             </div>`;
+
+            //console.log(data.fieldDetailDtos);
             //場館資訊卡
             const gymCard = data.fieldDetailDtos.map(item => {
                 return (`<a href="/Gym/Index?id=${item.gymId}" class="card mb-3 act"  style="max-width: 800px; text-decoration:none;">
-                                      <div class="row g-0">
-                                         <div class="col-md-5 d-flex align-items-center justify-content-center" style="overflow: hidden;">
-                                           <img src="data:image/png;base64,${item.gymPhoto}" class="img-fluid rounded-start imgsize">
-                                         </div>
-                                              <div class="col-md-7">
-                                                   <div class="card-body">
-                                                      <h2 class="card-title">${item.gymName}</h2>
-                                                      <p class="card-text"><b>營業時間 :</b> ${item.gymTime}</p>
-                                                      <p class="card-text"><b>聯絡電話 :</b> ${item.gymPhone}</p>
-                                                      <p class="card-text"><b>地址 :</b> ${item.gymAddress}</p>
-                                                  </div>
-                                             </div>
-                                        </div>
-                                </a>`)    
+                                              <div class="row g-0">
+                                                 <div class="col-md-5 d-flex align-items-center justify-content-center" style="overflow: hidden;">
+                                                   <img src="data:image/png;base64,${item.gymPhoto}" class="img-fluid rounded-start imgsize">
+                                                 </div>
+                                                      <div class="col-md-7">
+                                                           <div class="card-body">
+                                                              <h2 class="card-title">${item.gymName}</h2>
+                                                              <p class="card-text"><b>營業時間 :</b> ${item.gymTime}</p>
+                                                              <p class="card-text"><b>聯絡電話 :</b> ${item.gymPhone}</p>
+                                                              <p class="card-text"><b>地址 :</b> ${item.gymAddress}</p>
+                                                          </div>
+                                                     </div>
+                                                </div>
+                                        </a>`)
             })
             //評價資訊卡
             let rating = '';
             data.rateDetailDtos.map(item => {
                 rating += `<div class="card mb-3" style="max-width: 540px;">
-                              <div class="row g-0">
-                                     <div class="card-body">
-                                           <h4 class="card-title">${item.member}</h4>
-                                             <h6 class="card-text"><img src="/assets/img/star1.png">${item.rateCoach}</h6>
-                                            <p class="card-text"><b>評語 :</b> ${item.coachDescribe}</p>
-                                       </div>
-                                     </div>
-                                 </div>`;
-                console.log(rating);
+                                      <div class="row g-0">
+                                             <div class="card-body">
+                                                   <h4 class="card-title">${item.member}</h4>
+                                                     <h6 class="card-text"><img src="/assets/img/star1.png">${item.rateCoach}</h6>
+                                                    <p class="card-text"><b>評語 :</b> ${item.coachDescribe}</p>
+                                               </div>
+                                             </div>
+                                         </div>`;
+                //console.log(rating);
             })
             if (rating === '') rating = `</br><h3>還沒有人評價喔~~</h3>`
             //todo:課程卡
             const classCard = data.scheduleDatailDtos.map(item => {
                 return (`<a href="/Course/Search/${item.classScheduleId}" class="card mb-3 act"  style="text-decoration:none; background-color:DimGrey;">
-                        <div class="col">
-                                        <div class="card h-100">
-                                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><strong>${item.class}</strong></h5>
-                                                <p class="card-text">教室 : ${item.field}</p>
-                                               <p class="card-text">日期 : ${item.courseDate}</p>
-                                              <p class="card-text">價格 : ${item.classPayment}元/堂</p>
-                                            </div>
-                                        </div>
-                                        </div>
-                               </a>`)
+                                <div class="col">
+                                                <div class="card h-100">
+                                                            <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><strong>${item.class}</strong></h5>
+                                                        <p class="card-text">場館 : ${item.gymName}</p>
+                                                        <p class="card-text">教室 : ${item.field}</p>
+                                                       <p class="card-text">日期 : ${item.courseDate}</p>
+                                                      <p class="card-text">時間 : ${item.courseStartTime.toString().substring(0, 5)}</p>
+                                                      <p class="card-text">價格 : ${item.classPayment}元/堂</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                       </a>`)
             })
-            
+
             gymDetail.innerHTML = gymCard.join("");
             coachDetail.innerHTML = det;
             rateDetail.innerHTML = rating;
             classDetail.innerHTML = classCard.join("");
             divImage.innerHTML = img;
         }
-//--------------------------------------
-
+        //-------------------------------------
         //載入推薦教練
         const recommandCoach = async () => {
-            let sortBy = ["","RegionId", "Sort1ID", "GenderID", "Sort2ID"];
-            let sortType = ["asc","desc"];
+            let sortBy = ["", "RegionId", "Sort1ID", "GenderID", "Sort2ID"];
+            let sortType = ["asc", "desc"];
             let randomNumber = Math.floor(Math.random() * 5);
             let randomType = Math.floor(Math.random() * 2);
-            console.log(randomNumber);
+            //console.log(randomNumber);
             const url = 'https://localhost:7199/api/Coach/SEARCH';
             const response = await fetch(url, {
                 method: 'POST',
@@ -398,11 +415,10 @@
                 headers: {
                     'Content-Type': 'application/json'
                 }
-                 
             });
             data = await response.json();
-            console.log(sortBy[randomNumber]);
-            console.log(sortType[randomType]);
+            //console.log(sortBy[randomNumber]);
+            //console.log(sortType[randomType]);
             //教練卡
             const coachCard = data.coachResult.map(item => {
                 //專長(不重複)
@@ -414,25 +430,24 @@
                         return `#${exp.classSort2}`;
                     }
                     return null;
-                    console.log(exp.classSort2);
+                    //console.log(exp.classSort2);
                 }).filter(exp => exp !== null).join(`<br>`);
-                
-                console.log(exps);
+
+                //console.log(exps);
                 //console.log(item.experties.classSort2)
                 return (`<a href="/Trainer/Coach?id=${item.id}" class="card mb-3 act"  style="text-decoration:none; background-color:DimGrey;">
-                                <div class="card h-100">
-                                            <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
-                                    <div class="card-body">
-                                         <h5 class="card-title">${item.name}</h5>
-                                          <p class="card-text">${item.intro}</p>
-                                          <p class="card-text">${exps}</p>
-                                    </div>
-                                </div>
-                       </a>`)
+                                        <div class="card h-100">
+                                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
+                                            <div class="card-body">
+                                                 <h5 class="card-title">${item.name}</h5>
+                                                  <p class="card-text">${item.intro}</p>
+                                                  <p class="card-text">${exps}</p>
+                                            </div>
+                                        </div>
+                               </a>`)
             })
             coachRecommand.innerHTML = coachCard.join("");
         }
-
         // 所有DOM都已經加載完成後執行
         document.addEventListener('DOMContentLoaded', () => {
             // 等待按鈕生成後再初始化
@@ -445,21 +460,27 @@
                 }
             }, 100);
             loadCoach();
-            recommandCoach(); 
+            recommandCoach();
         });
-        
         //資料收折
         function toggleReadMore() {
             const textElement = document.querySelector('.coachDetail');
             const buttonElement = document.querySelector('.chakra-button');
+            const arrowIcon = document.getElementById('arrowIcon');
+
             if (textElement.classList.contains('expanded')) {
                 textElement.classList.remove('expanded');
                 buttonElement.textContent = 'Read More';
+                arrowIcon.classList.remove('arrow-up'); // Remove the arrow-up class if previously added
+                arrowIcon.classList.add('arrow-down'); // Add the arrow-down class
             } else {
                 textElement.classList.add('expanded');
-                buttonElement.textContent = 'Read Less';
+                buttonElement.textContent = 'Hide';
+                arrowIcon.classList.remove('arrow-down'); // Remove the arrow-down class
+                arrowIcon.classList.add('arrow-up'); // Add the arrow-up class
             }
         }
+
         //觸發索引標籤事件(使用jquery)
         $(document).ready(function () {
             $('.nav-link').hover(
@@ -477,7 +498,7 @@
                 $(this).addClass('active').addClass('clicked');
             });
         });
-        //回頂部
+        //回頂部按鈕
         $(window).scroll(function () {
             if ($(window).scrollTop() > 200) {
                 if ($(".goTop").hasClass("hide")) {
@@ -505,6 +526,7 @@
             font-size: 24px;
             margin-top: 10px;
         }
+
             #returnButton:hover {
                 text-decoration: none;
             }
@@ -513,24 +535,24 @@
             padding-top: 130px;
         }
 
-        .coachinfo{
-            position: relative; 
-            margin-left:75px; 
-            margin-right:75px; 
-            background-color:white;
-            padding-left:25px;
-            padding-right:25px;
-            border-radius:10px;
+        .coachinfo {
+            position: relative;
+            margin-left: 75px;
+            margin-right: 75px;
+            background-color: white;
+            padding-left: 25px;
+            padding-right: 25px;
+            border-radius: 10px;
         }
         /*顯示評分*/
-        .rate{
-            position: absolute; 
-            top: 10px; 
-            right: 10px; 
-            width: 75px; 
-            height: 60px; 
-            background-color:dimgray;
-            border-radius:10px;
+        .rate {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 75px;
+            height: 60px;
+            background-color: dimgray;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -549,13 +571,12 @@
             justify-content: center;
             align-items: center;
             color: deeppink;
-            font-size:3em;
-            border:solid 2px black;
-            
+            font-size: 3em;
+            border: solid 2px black;
         }
-        .track:hover {
-            border-color: #dc3545;  
-        }
+            .track:hover {
+                border-color: #dc3545;
+            }
 
         /* 固定索引標籤 */
         #pills-tab {
@@ -575,31 +596,77 @@
             overflow: hidden; /* 隐藏超出部分 */
             transition: max-height 0.3s ease; /* 添加过渡效果 */
         }
+
             .coachDetail.expanded {
                 max-height: 800px; /* 设定展开后的高度 */
             }
+        /* 移除按鈕的邊框 */
+        .chakra-button {
+            border: none;
+            background-color: transparent; /* 背景設為透明 */
+            cursor: pointer;
+            width: 100%; /* 按鈕寬度100%填滿父容器 */
+            padding: 10px; /* 按鈕內邊距，根據需要調整 */
+        }
+
+        .read-more-container {
+            position: relative; /* 設置相對定位 */
+            width: 150px; /* 固定容器寬度，根據需要調整 */
+            margin: 0 auto; /* 水平居中 */
+            text-align: center; /* 按鈕文字居中 */
+        }
+        /* 箭頭圖示的樣式 */
+        .arrow-down {
+            position: absolute; /* 絕對定位 */
+            top: calc(100% + 5px); /* 與按鈕底部的距離，根據需要調整 */
+            left: 45%; /* 箭頭置中 */
+            transform: translateX(-50%); /* 水平置中 */
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 10px solid black;
+            margin: 5px auto 0; /* 上邊距、左右自動、下邊距 */
+            animation: arrowAnimation 1s infinite alternate; /* 箭頭的動畫 */
+        }
+        .arrow-up {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 45%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 10px solid black; /* Change border-top to border-bottom */
+            margin: 5px auto 0;
+            animation: arrowAnimation 1s infinite alternate;
+        }
+
         /*滑鼠覆蓋卡片效果*/
         .act {
             transition: transform 0.3s ease;
             cursor: pointer;
-
         }
+
             .act:hover {
                 transform: scale(0.98);
             }
-         /*回頂端*/
+        /*回頂端*/
         .goTop {
             position: fixed;
             right: 10px;
             bottom: 10px;
         }
-         .goTopBtn{
+
+        .goTopBtn {
             background-color: transparent;
             border: none;
             outline: none;
             cursor: pointer;
-            }
-        .fa-arrow-alt-circle-up{
+        }
+
+        .fa-arrow-alt-circle-up {
             color: $primary;
         }
 

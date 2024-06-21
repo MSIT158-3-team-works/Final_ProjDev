@@ -1,0 +1,10 @@
+/* 箭頭的動畫關鍵幀 */
+@keyframes arrowAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(5px);
+    }
+}

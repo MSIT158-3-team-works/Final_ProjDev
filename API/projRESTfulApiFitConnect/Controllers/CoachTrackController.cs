@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using projRESTfulApiFitConnect.DTO.Member;
 using projRESTfulApiFitConnect.DTO.Product;
 using projRESTfulApiFitConnect.Models;
 
@@ -27,11 +29,45 @@ namespace projRESTfulApiFitConnect.Controllers
 
 
         // GET: api/<CoachTrackController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<CommentDetailDTO>>> GetCommentDetail(int id)
+        //{
+        //    List<CommentDetailDTO> CommentDetailDTOs = new List<CommentDetailDTO>();
+
+        //    var Comments = await _context.TclassReserves
+        //                .Where(x => x.MemberId == id)
+        //                .Include(x => x.TmemberRateClasses)
+        //                .Include(x=>x.Member)
+        //                .Include(x => x.ClassSchedule.Class)
+        //                .Include(x=> x.ClassSchedule.Field.Gym)
+        //                .Include(x=>x.ClassSchedule.CourseStartTime)
+        //                .ToListAsync();
+
+        //    foreach (var item in Comments)
+        //    {
+        //        var rates = item.TmemberRateClasses.Select(rc=>new RatesDTO
+        //        {
+        //            RateClass = rc.RateClass,
+        //            RateClassDescribe =rc.ClassDescribe,
+        //            RateCoach =rc.RateCoach,
+        //            RateCoachDescribe = rc.CoachDescribe
+        //        }).ToList();
+
+
+        //        CommentDetailDTO commentDetailDTO = new CommentDetailDTO
+        //        {
+        //            ClassName = item.ClassSchedule.Class.ClassName,
+        //            Coach = item.ClassSchedule.CoachId,
+        //            GymName = item.ClassSchedule.Field.Gym.GymName,
+        //            CourseDate = item.ClassSchedule.CourseDate,
+        //            CourseStartTime = item.ClassSchedule.CourseStartTime.TimeName,
+        //            Rates = rates,
+        //        };
+        //    }
+
+
+        //    return Ok(Comments);
+        //}
 
         // GET api/<CoachTrackController>/5
         [HttpGet("{id}")]

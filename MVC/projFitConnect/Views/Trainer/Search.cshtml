@@ -64,8 +64,13 @@
     </nav>
 </div>
 
+@{
+    var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
+}
 @section Scripts {
     <script>
+        const LoginMemberID = "@loginMemberID";
+        console.log('LoginMemberID', LoginMemberID);
         const div = document.getElementById("div");//教練卡
         const rateData = document.getElementById("rateData");//評分資料
         const totalcoaches = document.getElementById("totalcoaches");
