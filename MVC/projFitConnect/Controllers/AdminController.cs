@@ -20,6 +20,10 @@ namespace projFitConnect.Controllers
         {
             return View();
         }
+        public IActionResult CoachVerify()
+        {
+            return View();
+        }
         public IActionResult CourseList()
         {
             return View();
