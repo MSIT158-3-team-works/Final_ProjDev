@@ -37,7 +37,11 @@
                         <li class="nav-item"><a class="nav-link fs-5" href="~/healthboard/index">健康專欄</a></li>
 
                         <li></li>
-                        <li class="nav-item"><a class="navbar-brand fs-6 " href="https://localhost:7168/Home/Login"><img src="~/assets/img/icon_profile.png" /></a></li>
+                        <li class="nav-item">
+                            <button class="navbar-brand fs-6 profile-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                                <img src="~/assets/img/icon_profile.png" alt="Profile Icon" />
+                            </button>
+                        </li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_shopping_cart.png" /></a></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_customer_service.png" /></a></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_heart_like.png" /></a></li>
@@ -47,6 +51,30 @@
             </div>
         </nav>
     </header>
+
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">FitConnect 會員</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a href="https://localhost:7168/member/profile" >
+                我的檔案
+            </a><br />
+            <a href="https://localhost:7168/member/profile" >
+                我的課程
+            </a><br />
+            <a href="https://localhost:7168/member/profile" >
+                我的訂單
+            </a><br />
+            <a href="https://localhost:7168/member/profile" >
+                常見問題
+            </a><br />
+            <a href="https://localhost:7168/member/profile" >
+                登出
+            </a><br />
+        </div>
+    </div>
 
     <div id="mainpg" style="background-color:#deebf7">
         <div class="container w-75 m-auto">

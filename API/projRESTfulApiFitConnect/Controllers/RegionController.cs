@@ -39,6 +39,8 @@ namespace projRESTfulApiFitConnect.Controllers
                 .ToListAsync();
             foreach (var item in citys)
             {
+                // 只查找 Gym_status 為 false 的場館
+                var inactiveGym = item.TGyms.FirstOrDefault(g => g.GymStatus == true);
                 int gymId = item.TGyms.FirstOrDefault()?.GymId ?? 0; // 查找第一個場館的 GymId，如果沒有，則設置為0
                 CityDto cityDto = new CityDto()
                 {
@@ -71,22 +73,5 @@ namespace projRESTfulApiFitConnect.Controllers
             return tRegion;
         }
 
-        // POST api/<RegionController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<RegionController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<RegionController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
