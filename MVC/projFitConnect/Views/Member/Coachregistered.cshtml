@@ -147,10 +147,10 @@
                         <label for="exptertise" class="control-label col-md-2 fw-bold" style="font-size:23px;">專長:</label>
                         <div class="row g-3" id="exptertise" style="width:85%;">
                             <div class="col-md">
-                                <input type="text" class="form-control" id="floatingInputGrid" placeholder="請選擇..." value="">
+                                <input type="text" class="form-control" id="expertInput" placeholder="請選擇(至少一項)" value="" disabled>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                                <select class="form-select" id="floatingSelectGrid" aria-label="label select">
                                     <option selected>--選擇專長--</option>
                                 </select>
                             </div>
@@ -159,7 +159,7 @@
                     <div class="form-group" style="padding-left:123px;">
                         <label for="remarks" class="control-label col-md-2 fw-bold" style="font-size:23px;">教練介紹:</label>
                         <div class="col-md-10">
-                            <textarea id="idRemarks" name="remarks" class="form-control" rows="3" placeholder=" 專長 / 證照 / 教授經歷 ..." style="width: 100%;"></textarea>
+                            <textarea id="idRemarks" name="remarks" class="form-control" rows="3" placeholder=" 其他專長 / 證照 / 教學經歷 ..." style="width: 100%;"></textarea>
                             <span id="spRemarks"></span>
                         </div>
                     </div>
@@ -183,10 +183,12 @@
     <script>
         const LoginMemberID = "@loginMemberID";
         console.log('LoginMemberID', LoginMemberID);
+        let txtExpert = '';
         const avatarImage = document.querySelector('#divimage');
         const preview = document.getElementById('imgShow');
         const username = document.getElementById('idUserName');
         const exptertise = document.getElementById('exptertise');
+        const chooseexpert = document.querySelector('#floatingSelectGrid');
         const remarks = document.getElementById('idRemarks');
         const putData = {
             "coachName": "",
@@ -232,41 +234,74 @@
 
             Array.from(files).forEach(file => {
                 const reader = new FileReader();
+
                 reader.onload = function (e) {
                     const newPreview = `<div class="carousel-item">
-                                                           <img src="${e.target.result}" class="profile-pic" alt="Image Preview">
-                                                             </div>`;
+                        <img src="${e.target.result}" class="profile-pic" alt="Image Preview">
+                        </div>`;
                     avatarImage.insertAdjacentHTML('beforeend', newPreview);
                 };
+
                 reader.readAsDataURL(file);
 
                 const byteReader = new FileReader();
+
                 byteReader.onload = function (e) {
                     const arrayBuffer = e.target.result;
                     const byteArray = new Uint8Array(arrayBuffer);
                     const base64String = btoa(String.fromCharCode.apply(null, byteArray));
+
                     console.log('file.name:', file.name);
                     console.log('Image in base64:', base64String);
-                    putData.images.push({ productImages: file.name });
+
+                    putData.images.push({ coachImages: file.name });
                     putData.moreBase64Images.push(base64String);
                 };
+
                 byteReader.readAsArrayBuffer(file);
             });
         });
 
+        //新增專長
+        chooseexpert.addEventListener('change', (event) => {
+            var selectedOption = event.target.options[event.target.selectedIndex];
+            if (putData.expert.includes(event.target.value)) return;
+            putData.expert.push(event.target.value);
+            if(txtExpert!='')txtExpert +=' ,'
+            txtExpert += selectedOption.textContent;
+            document.querySelector('#expertInput').value = txtExpert;
+        })
         // 取得表單數據
         document.getElementById('buttonSubmit').addEventListener('click', function () {
+            if (username.value == '') { alert('請填寫教練名稱'); return; }
+            if (remarks.value == '') { alert('請填寫教練介紹'); return; }
+            if (putData.expert.length <= 0) { alert('請填選擇專長'); return; }
+            if (putData.images.length != putData.moreBase64Images.length) { putData.images = []; putData.moreBase64Images = []; }
+            putData.coachName = username.value;
+            putData.intro=remarks.value;
             console.log(putData);
-
-            alert('會員資料已更新:');
+            submission();
         });
         // 重置表單或取消编輯邏輯
         document.getElementById('buttonCancel').addEventListener('click', function () {
             window.location.href = '/member/Coachregistered';
         });
 
+        //載入專長
+        (async () => {
+            let url = 'https://localhost:7199/api/Classes';
+            let response = await fetch(url);
+            let data = await response.json();
+            //className,classId
+            for (var oneclass of data) {
+                let option = document.createElement('option');
+                option.value = oneclass.classId;
+                option.textContent = oneclass.className;
+                chooseexpert.appendChild(option);
+            }
+        })();
         //載入會員資料
-        const loadProfile = async () => {
+        (async () => {
             if (LoginMemberID === '0') {
                 window.location.assign('https://localhost:7168/Home/login');
             }
@@ -274,13 +309,12 @@
             //console.log('url=', url);
             let response = await fetch(url);
             let data = await response.json();
-            console.log(data);
+            //console.log(data);
             //photo,address,birthday,eMail,name,phone
             putData.coachName = data.name;
             username.value = data.name;
             preview.src = 'data:image/jpeg;base64,' + data.photo;
-        }
-        loadProfile();
+        })();
 
         //提交申請
         const submission = async () => {
@@ -293,6 +327,7 @@
                 }
             });
             let data = await response.text();
+            console.log(data);
             alert('申請資料已送出');
             setTimeout(() => {
                 window.location.assign('https://localhost:7168/member/profile');
