@@ -1,0 +1,304 @@
+﻿@{
+    ViewData["Title"] = "Coachregistered";
+}
+
+@section Styles {
+    <style>
+        .container-fluid {
+            padding: 0;
+        }
+
+        .sidebar {
+            margin-top: 60px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            height: 50vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .sidebar__item h5 {
+            margin-bottom: 15px;
+        }
+
+        .sidebar__item ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            .sidebar__item ul li {
+                margin-bottom: 10px;
+            }
+
+                .sidebar__item ul li a {
+                    color: #333;
+                    text-decoration: none;
+                }
+
+                    .sidebar__item ul li.active a,
+                    .sidebar__item ul li a:hover {
+                        color: #007bff;
+                    }
+
+        .profile-container {
+            padding: 20px;
+        }
+
+        .profile-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+            .profile-box h1 {
+                text-align: center;
+                vertical-align: middle;
+                margin-bottom: 20px;
+            }
+
+        .profile-pic {
+            height: 390px;
+            border-radius: 20%;
+        }
+
+        .profile-pic-label {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            color: #0072E3;
+            font-weight: bold;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: darkgray;
+            border-radius: 50%;
+        }
+
+        .button-group {
+            margin-top: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .button-group button {
+                margin-bottom: 10px;
+            }
+    </style>
+}
+
+<h1 style="margin-top:100px; text-align:center; font-size:4.5em;color:aliceblue;">Coachregistered</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 sidebar">
+            <div class="sidebar__item">
+                <h5>會員專區</h5>
+                <ul>
+                    <li class="active"><a href="#">個人資料</a></li>
+                    <li><a href="#">訂單查詢</a></li>
+                    <li><a href="#">候選教練</a></li>
+                    <li><a href="#">已報名課程</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-secondary">教練專區</a>
+        </div>
+
+
+        <div class="col-lg-9 col-md-8">
+            <div class="profile-container">
+                <div class="profile-box">
+                    <h2 style="font-weight:700;text-align:center;color:darkblue;text-shadow: 2px 1px 0.8px lightblue;margin-bottom:65px;">申請成為教練</h2>
+                    <div style="margin:auto;text-align:center;">
+                        <div id="carouselcoachregister" class="carousel slide">
+                            <div class="carousel-inner" id="divimage">
+                                <div class="carousel-item active">
+                                    <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-outline-2/512/UI_Basic_outline-47-256.png" class="profile-pic" id="imgShow" onclick="triggerFileInput()" />
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselcoachregister" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselcoachregister" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <label id="lblPicture" style="display:none;">
+                            <input id="imgLoad" type="file" name="photo" class="form-control" style="display:none;" />
+                            更換頭像
+                        </label>
+                        <label for="formFileMultiple" class="profile-pic-label">◢新增更多圖</label>
+                        <input class="form-control" type="file" id="formFileMultiple" style="display:none;" multiple>
+                    </div>
+
+                    <div class="form-group" style="padding-left:123px;">
+                        <label for="username" class="control-label col-md-2 fw-bold" style="font-size:23px;">教練名稱:</label>
+                        <div class="col-md-10">
+                            <input type="text" id="idUserName" name="username" class="form-control" size="16" style="width: 100%;" />
+                            <span id="spUserName"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left:123px;">
+                        <label for="exptertise" class="control-label col-md-2 fw-bold" style="font-size:23px;">專長:</label>
+                        <div class="row g-3" id="exptertise" style="width:85%;">
+                            <div class="col-md">
+                                <input type="text" class="form-control" id="floatingInputGrid" placeholder="請選擇..." value="">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+                                    <option selected>--選擇專長--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left:123px;">
+                        <label for="remarks" class="control-label col-md-2 fw-bold" style="font-size:23px;">教練介紹:</label>
+                        <div class="col-md-10">
+                            <textarea id="idRemarks" name="remarks" class="form-control" rows="3" placeholder=" 專長 / 證照 / 教授經歷 ..." style="width: 100%;"></textarea>
+                            <span id="spRemarks"></span>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="btn btn-primary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">保存</button>
+                        <br>
+                        <button type="button" class="btn btn-secondary" id="buttonCancel" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">取消</button>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@{
+    var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
+}
+@section Scripts {
+    <script>
+        const LoginMemberID = "@loginMemberID";
+        console.log('LoginMemberID', LoginMemberID);
+        const avatarImage = document.querySelector('#divimage');
+        const preview = document.getElementById('imgShow');
+        const username = document.getElementById('idUserName');
+        const exptertise = document.getElementById('exptertise');
+        const remarks = document.getElementById('idRemarks');
+        const putData = {
+            "coachName": "",
+            "photo": "",
+            "imageBase64": "",
+            "expert": [],
+            "intro": "",
+            "images": [],
+            "moreBase64Images": []
+        }
+
+        // 預覽選擇影像&轉成base64
+        function triggerFileInput() {
+            document.getElementById('imgLoad').click();
+        }
+        document.getElementById('imgLoad').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const files = fileInput.files;
+            if (files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+
+                const byteReader = new FileReader();
+                byteReader.onload = function (e) {
+                    const arrayBuffer = e.target.result;
+                    const byteArray = new Uint8Array(arrayBuffer);
+                    const base64String = btoa(String.fromCharCode.apply(null, byteArray));
+                    console.log('Image in base64:', base64String);
+                    putData.photo = file.name;
+                    putData.imageBase64 = base64String;
+                };
+                byteReader.readAsArrayBuffer(file);
+            }
+        });
+        // 多張影像
+        document.getElementById('formFileMultiple').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const files = fileInput.files;
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const newPreview = `<div class="carousel-item">
+                                                           <img src="${e.target.result}" class="profile-pic" alt="Image Preview">
+                                                             </div>`;
+                    avatarImage.insertAdjacentHTML('beforeend', newPreview);
+                };
+                reader.readAsDataURL(file);
+
+                const byteReader = new FileReader();
+                byteReader.onload = function (e) {
+                    const arrayBuffer = e.target.result;
+                    const byteArray = new Uint8Array(arrayBuffer);
+                    const base64String = btoa(String.fromCharCode.apply(null, byteArray));
+                    console.log('file.name:', file.name);
+                    console.log('Image in base64:', base64String);
+                    putData.images.push({ productImages: file.name });
+                    putData.moreBase64Images.push(base64String);
+                };
+                byteReader.readAsArrayBuffer(file);
+            });
+        });
+
+        // 取得表單數據
+        document.getElementById('buttonSubmit').addEventListener('click', function () {
+            console.log(putData);
+
+            alert('會員資料已更新:');
+        });
+        // 重置表單或取消编輯邏輯
+        document.getElementById('buttonCancel').addEventListener('click', function () {
+            window.location.href = '/member/Coachregistered';
+        });
+
+        //載入會員資料
+        const loadProfile = async () => {
+            if (LoginMemberID === '0') {
+                window.location.assign('https://localhost:7168/Home/login');
+            }
+            let url = 'https://localhost:7199/api/Member/users/' + LoginMemberID;
+            //console.log('url=', url);
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data);
+            //photo,address,birthday,eMail,name,phone
+            putData.coachName = data.name;
+            username.value = data.name;
+            preview.src = 'data:image/jpeg;base64,' + data.photo;
+        }
+        loadProfile();
+
+        //提交申請
+        const submission = async () => {
+            let url = 'https://localhost:7199/api/Member/' + LoginMemberID + '/become-coach';
+            let response = await fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(putData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.text();
+            alert('申請資料已送出');
+            setTimeout(() => {
+                window.location.assign('https://localhost:7168/member/profile');
+            }, 100);
+        }
+    </script>
+
+
+}

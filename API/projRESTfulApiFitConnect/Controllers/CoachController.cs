@@ -440,5 +440,66 @@ namespace projRESTfulApiFitConnect.Controllers
 
             return Ok(maa);
         }
+
+        // GET: api/Coach
+        //取得所有教練資料(個人資料、自我介紹)
+        [HttpGet("verify")]
+        public async Task<ActionResult<IEnumerable<CoachDetailDto>>> verifyCoaches()
+        {
+            string filepath = "";
+
+            List<CoachDetailDto> coachDetailDtos = new List<CoachDetailDto>();
+
+            var coaches = await _context.TIdentities
+                        .Where(x => x.RoleId == 4)
+                        .Include(x => x.Gender)
+                        .Include(x => x.TcoachInfoIds)
+                        .Include(x => x.TcoachExperts)
+                        .ThenInclude(te => te.Class)
+                        .Include(x => x.TcoachExperts)
+                        .ThenInclude(te => te.Class.ClassSort1)//有氧、無氧、其他
+                        .Include(x => x.TcoachExperts)
+                        .ThenInclude(te => te.Class.ClassSort2)//課程種類
+                        .ToListAsync();
+
+
+            foreach (var item in coaches)
+            {
+                var experts = item.TcoachExperts.Select(te => new ExpertiseDto
+                {
+                    ClassName = te.Class.ClassName,
+                    ClassSort1ID = te.Class.ClassSort1.ClassSort1Id,
+                    ClassSort2ID = te.Class.ClassSort2.ClassSort2Id,
+                    ClassSort1 = te.Class.ClassSort1.ClassSort1Detail.ToString(),
+                    ClassSort2 = te.Class.ClassSort2.ClassSort2Detail.ToString()
+                }).ToList();
+                string base64Image = "";
+                filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", item.Photo);
+                if (System.IO.File.Exists(filepath))
+                {
+                    byte[] bytes = await System.IO.File.ReadAllBytesAsync(filepath);
+                    base64Image = Convert.ToBase64String(bytes);
+                }
+                string intro = string.Join(", ", item.TcoachInfoIds.Select(i => i.CoachIntro));
+
+                CoachDetailDto coachDetailDto = new CoachDetailDto()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Phone = item.Phone,
+                    EMail = item.EMail,
+                    Photo = base64Image,
+                    Intro = intro,
+                    Birthday = item.Birthday,
+                    Address = item.Address,
+                    Experties = experts,
+                    GenderID = item.Gender.GenderId,
+                    GenderDescription = item.Gender.GenderText,
+                };
+                coachDetailDtos.Add(coachDetailDto);
+            }
+
+            return Ok(coachDetailDtos);
+        }
     }
 }
