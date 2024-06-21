@@ -42,6 +42,7 @@
             margin-right: 20px; /* Adjusted margin for right placement */
         }
 
+
         .text-content {
             flex: 2;
         }
@@ -149,7 +150,7 @@
     </div>
     <div class="container" id="main_div">
         <div class="carousel-container">
-            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height:50vh; ">
             <div class="carousel-inner" id="divimage">
                     <div class="carousel-item active">
                         <img src="https://img.shoplineapp.com/media/image_clips/663c6333a1cc270011604bc1/original.jpg?1715233587" class="d-block w-100" alt="Tension Reset Technique Image 1">
@@ -188,13 +189,21 @@
                 <div class="course-card">
                     <h2>關於課程</h2>
                     <div class="detail">
-                        <img src="https://img.icons8.com/ios-glyphs/30/00796B/clock--v1.png" alt="Time">
+                    <img src="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-256.png" alt="Time">
                         <div>
-                            <div>上課時間</div>
-                            <div id="courseDate">2024.1.07 (日)</div>
-                            <div id="courseTime">課程時間為 09:30 - 18:00</div>
+                            <div>課程教練</div>
+                            <div id="courseCoach"></div>
                         </div>
                     </div>
+                <div class="divider"></div>
+                <div class="detail">
+                    <img src="https://img.icons8.com/ios-glyphs/30/00796B/clock--v1.png" alt="Time">
+                    <div>
+                        <div>上課時間</div>
+                        <div id="courseDate">2024.1.07 (日)</div>
+                        <div id="courseTime">課程時間為 09:30 - 18:00</div>
+                    </div>
+                </div>
                     <div class="divider"></div>
                     <div class="detail">
                         <img src="https://img.icons8.com/ios-glyphs/30/00796B/place-marker.png" alt="Location">
@@ -224,7 +233,7 @@
                     </a>
                     <a href="https://localhost:7168/Trainer/Search" class="button coach" id="coachButton">
                         <img src="https://cdn0.iconfinder.com/data/icons/users-android-l-lollipop-icon-pack/24/user-256.png" alt="Coach Icon" width="20">
-                        課程講師
+                        課程教練
                     </a>
                 </div>
             </div>
@@ -312,14 +321,15 @@
             let data = await response.json();
             console.log('data-id', data);
 
-            
 
 
-            let { class: _name, introduction, coachId, courseDate, gymId, gym, courseStartTime: t1, courseEndTime: t2, classPayment } = data[0]
+
+            let { class: _name, introduction, coach:courseCoach, coachId, courseDate, gymId, gym, courseStartTime: t1, courseEndTime: t2, classPayment } = data[0]
 
             const Image = document.getElementById('divimage');
             const title = document.getElementById('courseTitle')
             const p1 = document.getElementById('courseDescription')
+            const coach = document.getElementById('courseCoach')
             const date_span = document.getElementById('courseDate')
             const time_span = document.getElementById('courseTime')
             const place = document.getElementById('courseLocation')
@@ -331,19 +341,24 @@
 
             // 顯示照片
             s = `<div class="carousel-item active">
-                                    <div class="zoom-container">
-                                      <img src="data:image/jpeg;base64,${data[0].photo}" class="d-block w-100 h-auto zoom-img" alt="notFound">
-                                    </div>
-                                 </div>`;
-            // if (data.images) {
-            //     for (var pic of data.base64Images) {
-            //         s += `<div class="carousel-item">
-            //                                 <div class="zoom-container">
-            //                                   <img src="data:image/jpeg;base64,${pic}" class="d-block w-100 h-auto zoom-img" alt="error">
-            //                                 </div></div>`;
-            //     }
-            // }
-             Image.innerHTML = s;
+               <div class="zoom-container">
+                       <img src="data:image/jpeg;base64,${data[0].photo}" class="d-block w-500 h-400 zoom-img" alt="notFound" style="max-width: 700px; max-height: 500px; background-color: dimgrey;">
+               </div>
+           </div>
+        `;
+
+            if (data[0].images) {
+                for (var pic of data[0].base64Images) {
+                    s += `<div class="carousel-item">
+                            <div class="zoom-container">
+                                     <img src="data:image/jpeg;base64,${pic}" class="d-block w-500 h-400 zoom-img" alt="notFound" style="max-width: 700px; max-height: 500px; background-color: dimgrey;">
+                            </div>
+                     </div>`;
+                }
+            }
+
+            Image.innerHTML = s;
+
             let dt = new Date(courseDate)
             let pay = classPayment
             let i = `${classPayment}`.length
@@ -365,6 +380,7 @@
 
             title.textContent = _name
             p1.textContent = introduction +'健身能增強心肺功能，提升肌肉力量和耐力，有助於體重管理和維持健康體重。它還能改善心理健康，減少壓力、焦慮和抑鬱症狀，增強自信心和幸福感。規律運動有助於降低多種慢性病的風險，如心臟病、糖尿病和高血壓，促進整體健康。健身還能提高睡眠質量，使人精力充沛，增強免疫力，讓身體更有活力。'
+            coach.textContent = courseCoach
             date_span.textContent = `${year}/${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}` + todate(dt.getDay())
             time_span.textContent = '課程時間為 ' + t1.toString().substring(0, 5) + ' - ' + t2.toString().substring(0, 5)
             place.textContent = gym
@@ -406,15 +422,16 @@
             console.log('sorttype',sortType[randomNumber2]);
 
             const courseCard = data.courseResult.map(item => {
-                return (`<a href="/course/search?id=${item.classScheduleId}" class="card mb-3 act"  style="text-decoration:none;">
-                                                        <div class="card h-100">
-                                                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
-                                                            <div class="card-body">
-                                                                                         <h5 class="card-title"><strong>${item.class}</strong></h5>
-                                                                          <p class="card-text">${item.introduction}</p>
-                                                            </div>
-                                                        </div>
-                                               </a>`)
+                return (`<a href="/course/search?id=${item.classScheduleId}" class="card mb-3 act" style="text-decoration:none; background-color:DimGrey; max-width: 400px;">
+            <div class="card h-100" style="height: 320px;">
+                <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 200px; width: 100%;">
+                <div class="card-body" style="padding: 15px;">
+                    <h5 class="card-title" style="font-size: 1.2rem;"><strong>${item.class}</strong></h5>
+                    <p class="card-text" style="font-size: 1rem;">${item.introduction}</p>
+                </div>
+            </div>
+        </a>
+        `)
             })
             courseRecommand.innerHTML = courseCard.join("");
         }
@@ -467,17 +484,18 @@
 
                 console.log(exps);
                 //console.log(item.experties.classSort2)
-                return (`<a href="/Trainer/Coach?id=${item.id}" class="card mb-3 act"  style="text-decoration:none;">
-                                        <div class="card h-100">
-                                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
-                                            <div class="card-body">
-                                                 <h5 class="card-title">${item.name}</h5>
-                                                  <p class="card-text">${item.intro}</p>
-                                                  <p class="card-text">${exps}</p>
-                                            </div>
-                                        </div>
+                return (`<a href="/Trainer/Coach?id=${item.id}" class="card mb-3 act" style="text-decoration:none; background-color:DimGrey; max-width: 400px;">
+            <div class="card h-100" style="height: 320px;">
+                <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 200px; width: 100%; object-position: top;">
+                <div class="card-body" style="padding: 15px;">
+                    <h5 class="card-title" style="font-size: 1.2rem;">${item.name}</h5>
+                    <p class="card-text" style="font-size: 1rem;">${item.intro}</p>
+                    <p class="card-text" style="font-size: 1rem;">${exps}</p>
+                </div>
+            </div>
+        </a>
 
-                               </a>`)
+        `)
             })
             coachRecommand.innerHTML = coachCard.join("");
         }

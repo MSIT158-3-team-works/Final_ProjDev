@@ -60,23 +60,14 @@
     <div class="row mb-3">
         <div class="col-5">
             <div class="dropdown">
-                <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton0" data-bs-toggle="dropdown" aria-expanded="false">
-                    --狀態篩選--
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton0">
-                    <li><a class="dropdown-item dropdown-category" data-value="0">所有狀態</a></li>
-                    <li><a class="dropdown-item dropdown-category" data-value="1">人數已達上限</a></li>
-                    <li><a class="dropdown-item dropdown-category" data-value="2">正常開課</a></li>
-                    <li><a class="dropdown-item dropdown-category" data-value="3">因故取消</a></li>
-                    <li><a class="dropdown-item dropdown-category" data-value="4">待審核</a></li>
-                </ul>
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     --排序依據--
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item dropdown-sort" data-type="Date">日期</a></li>
-                    <li><a class="dropdown-item dropdown-sort" data-type="CoursePrice">價格</a></li>
                     <li><a class="dropdown-item dropdown-sort" data-type="Sort">課程類別</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="GymId">場館</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="CoursePrice">價格</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="Date">日期</a></li>
                 </ul>
                 <button class="btn btn-outline-secondary" style="margin-left:12px;" id="orderbtn">正序</button>
             </div>
@@ -173,15 +164,6 @@
             "sortType": "asc"
         };
 
-        //類別篩選
-        for (var category of categorys) {
-            category.addEventListener('click', function () {
-                //console.log(this.dataset.value);
-                searchData.classStatusId = this.dataset.value;
-                searchData.page = 1;
-                loadCourses();
-            })
-        }
         //排序依據
         for (var type of typeofsort) {
             type.addEventListener('click', function () {
@@ -220,6 +202,41 @@
                 loadCourses();
             }
         })
+        //同意按鈕
+        async function agree(id) {
+            if (confirm('確定要同意嗎?')) {
+                if (confirm('已通過')) {
+                    let url = 'https://localhost:7199/api/Course/'+id+'?statusId=' + 2;
+                    let response = await fetch(url, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify()
+                    });
+                    let data = await response.text();
+                    console.log('Updated', data);
+                    loadCourses(); 
+                }
+            }
+        }
+
+        //不同意按鈕
+        async function disagree(id) {
+            if (confirm('確定要駁回嗎?')) {
+                if (confirm('已駁回')) {
+                    let url = 'https://localhost:7199/api/Course/' + id;
+                    let response = await fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    let data = await response.text();
+                    loadCourses();
+                }
+            }
+        }
         //顯示筆數
         for (var radio of pagesize) {
             //console.log(radio.value);
@@ -240,7 +257,7 @@
 
         //載入課程
         const loadCourses = async () => {
-            let url = 'https://localhost:7199/api/Course/SEARCH';
+            let url = 'https://localhost:7199/api/Course/APPROVAL';
             let response = await fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(searchData),
@@ -289,10 +306,10 @@
                                          </div>
                                          </td>
                                          <td>
-                                         <button class="btn btn-outline-success" type="button" onclick="offsale(${course.classScheduleId})">
+                                         <button class="btn btn-outline-success" type="button" onclick="agree(${course.classScheduleId})">
                                          同意
                                          </button>
-                                         <button class="btn btn-outline-danger" type="button" onclick="offsale(${course.classScheduleId})">
+                                         <button class="btn btn-outline-danger" type="button" onclick="disagree(${course.classScheduleId})">
                                          不同意
                                          </button>
                                          </td>
