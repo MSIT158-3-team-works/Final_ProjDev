@@ -51,3 +51,20 @@
     font-weight: bold;
 }
 
+.profile-button {
+    background: none;
+    border: none;
+    padding: 0; /* Remove any padding to make sure only the image is visible */
+    outline: none; /* Remove the outline for better appearance */
+}
+
+.offcanvas-end {
+    width: 100px;
+    height: 220px;
+}
+a {
+    text-decoration: none;
+}
+.offcanvas-body a {
+    color: black;
+}
