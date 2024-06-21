@@ -1,0 +1,221 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:disabled {
+                background-color: #6c757d;
+            }
+
+        .actions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="padding:150PX;">
+        <h1>Rate Management</h1>
+        <div class="form-group">
+            <label for="reserveId">Reserve ID:</label>
+            <input type="number" id="reserveId" placeholder="Enter Reserve ID">
+            <button id="fetchRate">Fetch Rate Details</button>
+        </div>
+        <form id="rateForm" style="display: none;">
+            <div class="form-group">
+                <label for="rateClass">Rate Class:</label>
+                <input type="number" id="rateClass" name="rateClass" step="0.1">
+            </div>
+            <div class="form-group">
+                <label for="rateClassDescribe">Class Description:</label>
+                <textarea id="rateClassDescribe" name="rateClassDescribe"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="rateCoach">Rate Coach:</label>
+                <input type="number" id="rateCoach" name="rateCoach" step="0.1">
+            </div>
+            <div class="form-group">
+                <label for="rateCoachDescribe">Coach Description:</label>
+                <textarea id="rateCoachDescribe" name="rateCoachDescribe"></textarea>
+            </div>
+            <button type="submit">Update Rate</button>
+        </form>
+        <div class="actions">
+            <button id="createRate">Create Rate</button>
+            <button id="deleteRate">Delete Rate</button>
+        </div>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('fetchRate').addEventListener('click', async () => {
+            const reserveId = document.getElementById('reserveId').value;
+            if (!reserveId) {
+                alert('Please enter a Reserve ID.');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/Comment/Rate/${reserveId}`);
+                if (!response.ok) {
+                    throw new Error('Rate not found');
+                }
+                const rate = await response.json();
+
+                document.getElementById('rateClass').value = rate.rateClass;
+                document.getElementById('rateClassDescribe').value = rate.rateClassDescribe;
+                document.getElementById('rateCoach').value = rate.rateCoach;
+                document.getElementById('rateCoachDescribe').value = rate.rateCoachDescribe;
+
+                document.getElementById('rateForm').style.display = 'block';
+                document.getElementById('message').innerHTML = '';
+            } catch (error) {
+                document.getElementById('message').innerHTML = `<p style="color: red;">${error.message}</p>`;
+            }
+        });
+
+        document.getElementById('rateForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const reserveId = document.getElementById('reserveId').value;
+            const rateClass = document.getElementById('rateClass').value;
+            const rateClassDescribe = document.getElementById('rateClassDescribe').value;
+            const rateCoach = document.getElementById('rateCoach').value;
+            const rateCoachDescribe = document.getElementById('rateCoachDescribe').value;
+
+            const dto = {
+                rateClass: parseFloat(rateClass),
+                rateClassDescribe,
+                rateCoach: parseFloat(rateCoach),
+                rateCoachDescribe
+            };
+
+            try {
+                const response = await fetch(`/api/Comment/Rate/${reserveId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dto)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update rate');
+                }
+
+                document.getElementById('message').innerHTML = '<p style="color: green;">Rate updated successfully!</p>';
+            } catch (error) {
+                document.getElementById('message').innerHTML = `<p style="color: red;">${error.message}</p>`;
+            }
+        });
+
+        document.getElementById('createRate').addEventListener('click', async () => {
+            const reserveId = document.getElementById('reserveId').value;
+            const rateClass = document.getElementById('rateClass').value;
+            const rateClassDescribe = document.getElementById('rateClassDescribe').value;
+            const rateCoach = document.getElementById('rateCoach').value;
+            const rateCoachDescribe = document.getElementById('rateCoachDescribe').value;
+            const memberId = prompt('Enter Member ID');
+            if (!memberId) {
+                alert('Member ID is required to create a rate.');
+                return;
+            }
+
+            const dto = {
+                reserveId: parseInt(reserveId),
+                memberId: parseInt(memberId),
+                rateClass: parseFloat(rateClass),
+                rateClassDescribe,
+                rateCoach: parseFloat(rateCoach),
+                rateCoachDescribe
+            };
+
+            try {
+                const response = await fetch('/api/Comment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dto)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to create rate');
+                }
+
+                document.getElementById('message').innerHTML = '<p style="color: green;">Rate created successfully!</p>';
+            } catch (error) {
+                document.getElementById('message').innerHTML = `<p style="color: red;">${error.message}</p>`;
+            }
+        });
+
+        document.getElementById('deleteRate').addEventListener('click', async () => {
+            const reserveId = document.getElementById('reserveId').value;
+            if (!reserveId) {
+                alert('Please enter a Reserve ID.');
+                return;
+            }
+
+            if (!confirm('Are you sure you want to delete this rate?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/Comment/${reserveId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to delete rate');
+                }
+
+                document.getElementById('message').innerHTML = '<p style="color: green;">Rate deleted successfully!</p>';
+                document.getElementById('rateForm').reset();
+                document.getElementById('rateForm').style.display = 'none';
+            } catch (error) {
+                document.getElementById('message').innerHTML = `<p style="color: red;">${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
+
+@{
+}

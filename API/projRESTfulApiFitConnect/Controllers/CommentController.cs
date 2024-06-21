@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projRESTfulApiFitConnect.DTO.Member;
+using projRESTfulApiFitConnect.DTO.Member.status;
 using projRESTfulApiFitConnect.Models;
 
 namespace projRESTfulApiFitConnect.Controllers
@@ -41,6 +42,10 @@ namespace projRESTfulApiFitConnect.Controllers
             {
                 var rates = item.TmemberRateClasses.Select(rc => new RatesDTO
                 {
+                    ReserveId = rc.ReserveId,
+                    MemberId = id,
+                    ClassId = rc.ClassId,
+                    CoachId = rc.CoachId,
                     RateClass = rc.RateClass,
                     RateClassDescribe = rc.ClassDescribe,
                     RateCoach = rc.RateCoach,
@@ -134,40 +139,36 @@ namespace projRESTfulApiFitConnect.Controllers
         // POST: api/Comment
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RatesDTO>> PostRates([FromForm] RatesDTO ratesDTO)
+        public async Task<ActionResult<RatesDTO>> PostRates(/*[FromForm]*/ CommentDTO commentDTO)
         {
-            // Fetch the tclass_reserve entry based on ReserveId
             var classReserve = await _context.TclassReserves
-                                .Include(cr => cr.ClassSchedule)
-                                .FirstOrDefaultAsync(cr => cr.ReserveId == ratesDTO.ReserveId);
+                                 .Where(x => x.ReserveId == commentDTO.ReserveId)
+                                 .Include(cr => cr.ClassSchedule)
+                                 .FirstOrDefaultAsync();
 
             if (classReserve == null)
             {
                 return NotFound("Class reserve not found.");
             }
 
-            // Fetch ClassId and CoachId based on the fetched classReserve
-            var classId = classReserve.ClassSchedule.ClassId;
-            var coachId = classReserve.ClassSchedule.CoachId;
-
             var rate = new TmemberRateClass
             {
-                //如何自動帶入資料?
-                ReserveId = ratesDTO.ReserveId,
-                MemberId = ratesDTO.MemberId,
-                ClassId = classId,
-                CoachId = coachId,
+                ReserveId = classReserve.ReserveId,
+                MemberId = commentDTO.MemberId,
+                ClassId = classReserve.ClassSchedule.ClassId,
+                CoachId = classReserve.ClassSchedule.CoachId,
 
-                RateClass = ratesDTO.RateClass ?? 0,
-                ClassDescribe = ratesDTO.RateClassDescribe,
-                RateCoach = ratesDTO.RateCoach ?? 0,
-                CoachDescribe = ratesDTO.RateCoachDescribe
+                RateClass = commentDTO.RateClass ?? 0,
+                ClassDescribe = commentDTO.RateClassDescribe,
+                RateCoach = commentDTO.RateCoach ?? 0,
+                CoachDescribe = commentDTO.RateCoachDescribe
             };
 
             _context.TmemberRateClasses.Add(rate);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetTclassReserve), new { id = rate.ReserveId }, ratesDTO);
+            // Return the newly created rate object
+            return Ok(rate);
 
             //List<TclassReserve> crs = new List<TclassReserve>();
             //var Comments = await _context.TclassReserves
