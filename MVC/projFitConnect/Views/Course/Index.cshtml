@@ -417,25 +417,26 @@
             const courses = data.courseResult.map(course => {
                 //data:image/jpeg;base64,${course.photo}
                 return (`<div class="col">
-                                   <div class="card card-container">
-                           <input type="hidden" value="${course.classScheduleId}" id="course-select"/>
-                                                        <img src="data:image/jpeg;base64,${course.photo}" object-fit="cover" width="400px" height="300px" class="card-img-top" alt="...">
-                                                <div class="card-body" >
-                                  <h5 class="card-title">${course.class}</h5>
-                                  <p class="card-text">${course.introduction}</p>
-                                  <div class="info">
-                                            <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/clock-time-ticker-times-hour-16.png" /><p>${course.courseDate}</p>
-                                   </div>
-                                   <div class="info">
-                                            <img src="https://cdn1.iconfinder.com/data/icons/ui-essential-17/32/UI_Essential_Outline_2_essential-app-ui-location-map-pin-22-16.png" /><p>${course.gym}</p>
-                                   </div>
-                                    <div>
-                                      <p class="price">每堂${course.classPayment}元</p>
-                                    </div>
-                                    <a href="https://localhost:7168/course/search/${course.classScheduleId}" class="button">了解更多</a>
-                                  </div>
-                                </div>
-                             </div>`)
+                                           <div class="card card-container">
+                                   <input type="hidden" value="${course.classScheduleId}" id="course-select"/>
+                                                                <img src="data:image/jpeg;base64,${course.photo}" object-fit="cover" width="400px" height="300px" class="card-img-top" alt="...">
+                                                        <div class="card-body" >
+                                          <h5 class="card-title">${course.class}</h5>
+                                          <p class="card-text">${course.introduction}</p>
+                                          <div class="info">
+                                                    <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/clock-time-ticker-times-hour-16.png" /><p>${course.courseDate}</p>
+                                           </div>
+                                           <div class="info">
+                                                    <img src="https://cdn1.iconfinder.com/data/icons/ui-essential-17/32/UI_Essential_Outline_2_essential-app-ui-location-map-pin-22-16.png" /><p>${course.gym}</p>
+                                           </div>
+                                            <div>
+                                              <p class="price">每堂${course.classPayment}元</p>
+                                            </div>
+                                            <a href="https://localhost:7168/course/search/${course.classScheduleId}" class="button">了解更多</a>
+                                          </div>
+                                        </div>
+                                     </div>
+        `)
             })
              main.innerHTML = courses.join("");
 
