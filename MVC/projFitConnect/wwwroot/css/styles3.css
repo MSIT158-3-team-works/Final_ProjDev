@@ -54,13 +54,12 @@
 .profile-button {
     background: none;
     border: none;
-    padding: 0; /* Remove any padding to make sure only the image is visible */
-    outline: none; /* Remove the outline for better appearance */
+    padding: 0;
+    outline: none;
 }
 
-.offcanvas-end {
-    width: 100px;
-    height: 220px;
+.offcanvas-backdrop {
+    background-color: transparent !important;
 }
 a {
     text-decoration: none;
