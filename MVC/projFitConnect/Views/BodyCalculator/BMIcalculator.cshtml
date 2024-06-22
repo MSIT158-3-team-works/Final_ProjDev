@@ -1,0 +1,466 @@
+﻿@{
+    ViewData["Title"] = "BMIcalculator";
+}
+
+<div style="padding-bottom: 100px"></div>
+<div class="contact-form spad BMIcontainer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 bmi1">
+                <h1 class="bmi-title">BMI計算器</h1>
+                <p style="text-align: center; font-size: 16px; font-family: 'Georgia', serif, cursive;">By FitConnect</p><br />
+                <div class="contact__form__title">
+                    <div class="centered" style="font-size: 19px;">
+                        BMI的中文名稱為「身體質量指數」（Body Mass Index, BMI），是世界衛生組織建議衡量肥胖程度的指標。<br>
+                        根據國民健康署的建議，台灣成人BMI標準的正常理想範圍落在18.5~24之間。
+                    </div>
+                    <br />
+                    <div class="centered" style="font-size: 25px; padding-bottom: 15px;">
+                        來算算看自己的 BMI 是否標準吧！
+                    </div>
+                </div>
+            </div>
+            <!-- 圖片 -->
+            <div class="col-lg-6 bmi2">
+                <div style="width: 100%; text-align: center; margin-top: 55px;">
+                    <img src="~/assets/img/body/ai17.jpg" style="border-radius: 10%; max-width: 80%; height: auto;" />
+                </div>
+            </div>
+            <!-- BMI計算器 -->
+            <div class="col-lg-6 bmi3">
+                <br />
+                <div class="form-group">
+                    <label class="control-label">身高(cm)</label>
+                    <input class="form-control inpBmi" id="FHeight" type="number" pattern="^[0-9]+(.[0-9])?$" placeholder="請輸入身高(cm)" required />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">體重(kg)</label>
+                    <input class="form-control inpBmi" id="FWeight" type="number" pattern="^[0-9]+(.[0-9])?$" placeholder="請輸入體重(kg)" required />
+                </div>
+                <br />
+                <div class="text-center">
+                    <button class="site-btn" id="btnGetBMI">開始計算!</button><br /><br />
+                    <button type="button" class="btn btn-outline-success" id="btnDemo">Demo</button>
+                </div>
+                <div>
+                    <div class="section-title product__discount__title hidden" style="margin-bottom: 2vw;">
+                        <h2 style="font-size: 30px;" id="hResult" class="Blue-text">您的BMI值為：</h2>
+                    </div>
+                    <!-- BMI計算結果 -->
+                    <div class="divResult" id="resultMessage">
+                        請輸入身高和體重計算BMI。
+                    </div>
+                    <div class="divResult" id="resultUnderweight">
+                        <strong>BMI < 18.5</strong><br />
+                        「體重過輕」需要多運動，均衡飲食，以增加體能，維持健康！
+                    </div>
+                    <div class="divResult" id="resultNormalWeight">
+                        <strong>18.5 ≤ BMI < 24</strong><br />
+                        「健康體重」很棒！請繼續保持！
+                    </div>
+                    <div class="divResult" id="resultOverweight">
+                        <strong>24 ≤ BMI < 27</strong><br />
+                        「體重過重」要注意囉，趕快來FitConnect報名課程！
+                    </div>
+                    <div class="divResult" id="resultObese">
+                        <strong>BMI ≥ 27</strong><br />
+                        「肥胖」需要立刻力行健康體重管理囉！
+                    </div>
+                </div>
+                <div class="text-center hidden">
+                    想知道自己的每日總消耗熱量嗎？
+                    <a href="../BodyCalculator/TDEEcalculator" class="blog__btn" style="margin-left: 1vw; margin-top: 1vh;">
+                        <span class="arrow_right"></span>TDEE計算器
+                    </a>
+                </div>
+            </div>
+            <!-- 課程推銷區域 -->
+            <section class="page-section bg-light hidden" id="portfolio">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">推薦課程</h2>
+                        <h3 class="section-subheading text-muted">Courses</h3>
+                    </div>
+                    <div class="row" id="courses"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div style="padding-bottom: 100px"></div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // BMI計算器部分
+            document.getElementById("btnGetBMI").addEventListener("click", function () {
+                let FHeight = parseFloat(document.getElementById("FHeight").value);
+                let FWeight = parseFloat(document.getElementById("FWeight").value);
+
+                if (!isNaN(FHeight) && !isNaN(FWeight)) {
+                    let numBMI = (FWeight / ((FHeight / 100) * (FHeight / 100))).toFixed(2);
+
+                    document.getElementById("hResult").textContent = "您的BMI值為：" + numBMI;
+
+                    document.querySelectorAll('.hidden').forEach(element => {
+                        element.style.display = 'block';
+                    });
+
+                    // 根據BMI值顯示相應的結果
+                    document.querySelectorAll(".divResult").forEach(div => div.style.display = "none");
+                    if (numBMI < 18.5) {
+                        document.getElementById("resultUnderweight").style.display = "block";
+                    } else if (numBMI >= 18.5 && numBMI < 24) {
+                        document.getElementById("resultNormalWeight").style.display = "block";
+                    } else if (numBMI >= 24 && numBMI < 27) {
+                        document.getElementById("resultOverweight").style.display = "block";
+                    } else if (numBMI >= 27) {
+                        document.getElementById("resultObese").style.display = "block";
+                    }
+
+                    // 顯示課程推薦
+                    HomepageCourses();
+                } else {
+                    document.getElementById("resultMessage").style.display = "block";
+                }
+            });
+
+            // Demo按鈕
+            document.getElementById("btnDemo").addEventListener("click", function () {
+                document.getElementById("FHeight").value = "167";
+                document.getElementById("FWeight").value = "75";
+                document.getElementById("hResult").textContent = ""; // Clear previous BMI result
+                document.querySelectorAll(".divResult").forEach(div => div.style.display = "none");
+                document.querySelectorAll('.hidden').forEach(element => {
+                    element.style.display = 'none'; // Hide elements again on demo click
+                });
+            });
+
+            // 課程推薦部分
+            const HomepageCourses = async () => {
+                let sortBy = ["", "Date", "GymId"];
+                let sortType = ["asc", "desc"];
+                let randomBy = Math.floor(Math.random() * 3);
+                let randomType = Math.floor(Math.random() * 2);
+
+                let url = 'https://localhost:7199/api/Course/SEARCH';
+                let response = await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        "sort1": 0,
+                        "sort2": 0,
+                        "field": "",
+                        "courseDate": null,
+                        "courseStartTime": null,
+                        "keyword": "",
+                        "page": 1,
+                        "pageSize": 45,
+                        "sortBy": sortBy[randomBy],
+                        "sortType": sortType[randomType]
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                let data = await response.json();
+                console.log(data);
+
+                let coursesContainer = document.getElementById('courses');
+                let courses = data.courseResult;
+                let totalCourses = courses.length;
+
+                // 創建課程項目HTML
+                const createCourseHTML = (course) => {
+                    return `
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="portfolio-item polaroid-card">
+                                <a class="portfolio-link" href="https://localhost:7168/course/search/${course.classScheduleId}">
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                    </div>
+                                    <img class="img-fluid card-image" style="width: 100%; height: 300px; object-fit: cover;" src="data:image/jpeg;base64,${course.photo}" alt="${course.class}" />
+                                </a>
+                                <div class="portfolio-caption">
+                                    <div class="portfolio-caption-heading">${course.class}</div>
+                                    <div class="portfolio-caption-subheading text-muted">${course.introduction.substring(0, 35)}...</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                };
+
+
+                // 顯示課程
+                const displayCourses = () => {
+                    let courseItems = '';
+                    for (let i = 0; i < 3; i++) { // 只顯示前三堂課程
+                        if (i < totalCourses) {
+                            courseItems += createCourseHTML(courses[i]);
+                        }
+                    }
+                    coursesContainer.innerHTML = `<div class="row">${courseItems}</div>`;
+                };
+
+                // 初始化課程顯示
+                displayCourses();
+            };
+
+            // 初始化滑動按鈕
+            createSliderNav();
+        });
+
+        // 將HomepageCourses函數暴露給全局範圍，以便BMI計算器按鈕點擊時調用
+        window.HomepageCourses = HomepageCourses;
+    </script>
+}
+
+
+
+
+@section Styles {
+    <style>
+        .contact-form {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding-top: 50px;
+            padding-bottom: 100px;
+        }
+
+        .bmi-title {
+            text-align: center;
+            color: #6C6C6C;
+            font-size: 53px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 3px double #84C1FF;
+            border-radius: 4px;
+        }
+
+        .site-btn {
+            background-color: #84C1FF;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+            .site-btn:hover {
+                background-color: #6498e9;
+            }
+
+        .text-center {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .centered {
+            text-align: center;
+        }
+
+        .bmi1 .contact__form__title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .bmi1 .centered {
+            text-align: center;
+        }
+
+        .bmi3 .form-group {
+            margin-bottom: 20px;
+        }
+
+        .bmi3 .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .bmi3 .site-btn {
+            background-color: #84C1FF;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+            .bmi3 .site-btn:hover {
+                background-color: #6498e9;
+            }
+
+        .bmi3 .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 25px;
+        }
+
+        .bmi3 .divResult {
+            background-color: transparent;
+            padding: 10px;
+            border: 4px solid #a7c4dd;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            display: none;
+        }
+
+            .bmi3 .divResult h2 {
+                font-size: 30px;
+            }
+
+        /* BMI結果的顏色 */
+        #resultUnderweight {
+            background-color: #b5daa7;
+            border-color: mediumseagreen;
+        }
+
+        #resultNormalWeight {
+            background-color: #a7c4dd;
+        }
+
+        #resultOverweight {
+            background-color: #f8e473;
+            border-color: yellow;
+        }
+
+        #resultObese {
+            background-color: #FFB5B5;
+            border-color: red;
+        }
+
+        .BMIcontainer {
+            font-weight: 600;
+        }
+
+        .Blue-text {
+            color: #005AB5;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* 課程項目 */
+        .portfolio-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+            .portfolio-item:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .portfolio-item img {
+                width: 100%;
+                height: auto;
+                border-bottom: 1px solid #ddd; /* 可選的邊框下線效果 */
+            }
+
+        .portfolio-caption-heading {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-caption-subheading {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .row {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        .col-lg-4,
+        .col-sm-6 {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .polaroid-card {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .polaroid-card:hover {
+                transform: translateY(-10px);
+            }
+
+        .portfolio-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .portfolio-item:hover .portfolio-hover {
+            opacity: 1;
+        }
+
+        .portfolio-hover-content {
+            color: #333;
+            font-size: 24px;
+        }
+
+        .card-image:hover {
+            transform: scale(1.1);
+        }
+
+        .portfolio-caption {
+            padding: 1rem;
+        }
+
+        .portfolio-caption-heading {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .portfolio-caption-subheading {
+            font-size: 0.875rem;
+        }
+
+    </style>
+
+
+}
+
+

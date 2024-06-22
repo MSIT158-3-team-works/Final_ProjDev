@@ -1,0 +1,184 @@
+﻿@{
+    ViewData["Title"] = "TDEEcalculator";
+}
+
+<div style="padding-bottom:100px"></div>
+<div class="contact-form spad TDEEcontainer">
+    <div class="container">
+        <div class="row">
+            <!-- TDEE說明 -->
+            <div class="col-lg-12 tdee1">
+                <p style="text-align:center;font-size:46px;">TDEE計算器</p><br />
+                <p style="text-align:center;font-size:16px;font-family: 'Dancing Script', cursive;">By FitConnect</p><br />
+                <div class="contact__form__title">
+                    <div class="centered" style="font-size:16px;">
+                        TDEE的中文名稱為「每日消耗熱量」（Total Daily Energy Expenditure, TDEE），是指一個人在一天內所消耗的總能量。<br />
+                        這包括基礎代謝率（BMR）、運動消耗的能量以及其他日常活動的能量消耗，TDEE是用來計算維持體重、減重或增重所需能量的基礎數據。
+                    </div>
+                    <br />
+                    <div class="centered" style="font-size:22px;">
+                        了解自己的TDEE可以幫助您制定適合個人需求的營養計劃喔！一起來看看您的TDEE是多少吧！
+                    </div>
+                </div>
+            </div>
+
+            <!-- TDEE計算器 -->
+            <div class="col-lg-6 leftdiv tdee2">
+                <form method="post" id="frmTDEE">
+                    <br />
+                    <div style="width:50%;float:left;">
+                        <label class="control-label" style="margin-left:1vw">生理性別:</label><span class="text-danger"></span>
+                        <br />
+                        <input style="width:auto;height:auto" id="inpGenderMale" name="Gender" type="radio" value="1" checked />男
+                        <input style="width:auto;height:auto" id="inpGenderFemale" name="Gender" type="radio" value="0" />女
+                    </div>
+                    <div class="form-group" id="divWorkload" style="width:50%;float:left;">
+                        <label class="control-label">活動量</label><span class="text-danger"></span>
+                        <br />
+                        <select id="selWorkload" class="form-control" required>
+                            <option value="">請選擇</option>
+                            <option value="1.2">趨於靜態</option>
+                            <option value="1.375">每周運動1~3天</option>
+                            <option value="1.55">每周運動3~5天</option>
+                            <option value="1.725">每周運動6~7天</option>
+                            <option value="1.9">長時間運動或體力勞動工作者</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">年齡</label><span class="text-danger"></span>
+                        <input class="form-control inputTdee" name="Age" id="inpAge" type="number" placeholder="請輸入年齡" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">身高(cm)</label><span class="text-danger"></span>
+                        <input class="form-control inputTdee" name="Height" id="inpHeight" type="number" pattern="^[0-9]+(.[0-9])?$" placeholder="請輸入身高(cm)" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">體重(kg)</label><span class="text-danger"></span>
+                        <input class="form-control inputTdee" name="Weight" id="inpWeight" type="number" pattern="^[0-9]+(.[0-9])?$" placeholder="請輸入體重(kg)" required />
+                    </div>
+
+                    <div class="section-title product__discount__title" style="margin-bottom:2vh">
+                        <button type="button" class="site-btn" id="btnCalculateTDEE" style="margin:0px 0px 0px 30px">開始計算!</button><br />
+                        <button type="button" class="btn btn-outline-success" id="btnDemo">Demo</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TDEE計算結果 -->
+            <div class="col-lg-6 tdee3 ">
+                <div class="section-title product__discount__title" style="margin-bottom:2vw">
+                    <div id="divTDEEResult">
+                        <p id="pTDEEResult">請輸入以上數據計算TDEE。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="padding-bottom:100px"></div>
+
+@section Styles {
+    <style>
+        .contact-form {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 13px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding-top: 50px;
+            padding-bottom: 100px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .site-btn {
+            background-color: #84C1FF;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+            .site-btn:hover {
+                background-color: #005AB5;
+            }
+
+        .text-center {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .centered {
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        #pTDEEResult {
+            color: #005AB5;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .tdee-result {
+            background-color: #84C1FF;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.getElementById('btnCalculateTDEE').addEventListener('click', function () {
+            const gender = document.querySelector('input[name="Gender"]:checked').value;
+            const age = document.getElementById('inpAge').value;
+            const height = document.getElementById('inpHeight').value;
+            const weight = document.getElementById('inpWeight').value;
+            const workload = document.getElementById('selWorkload').value;
+
+            if (!age || !height || !weight || !workload) {
+                alert('請完整填寫所有字段');
+                return;
+            }
+
+            const BMR = gender == 1
+                ? 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
+                : 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+
+            const TDEE = BMR * workload;
+
+            document.getElementById('pTDEEResult').innerText = `您的TDEE值為：${Math.round(TDEE)} 卡路里`;
+        });
+
+        document.getElementById('btnDemo').addEventListener('click', function () {
+            document.getElementById('inpGenderMale').checked = true;
+            document.getElementById('selWorkload').value = '1.55';
+            document.getElementById('inpAge').value = 25;
+            document.getElementById('inpHeight').value = 175;
+            document.getElementById('inpWeight').value = 70;
+
+            document.getElementById('btnCalculateTDEE').click();
+        });
+    </script>
+}
