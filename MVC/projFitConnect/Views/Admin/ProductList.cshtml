@@ -158,6 +158,24 @@
         <li><a href="#" style="margin-left:16px; border:none;">></a></li>
     </ul>
 </div>
+
+<div class="modal" id="denialModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#804040;color:whitesmoke;">
+                <h5 class="modal-title">商品停售</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:#FFF7FB;color:#000000">
+                <p>確定停止販售該商品?</p>
+            </div>
+            <div class="modal-footer" style="background-color:#FFF7FB;color:#000000">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" id="exedeny">停售</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     <script>
         let MaxPage = 0;
@@ -168,6 +186,7 @@
         const pagesize = document.querySelectorAll('[name="inlineRadioOptions"]');
         const body = document.querySelector('#tablebody')
         const ulPaging = document.getElementById('ulpaging');
+        var denialModal = new bootstrap.Modal(document.getElementById('denialModal'));
         const searchData = {
             "categoryId": 0,
             "keyword": "",
@@ -235,19 +254,17 @@
         }
         //停售按鈕
         async function offsale(id) {
-            if (confirm('確定要停售嗎?')) {
-                if (confirm('該商品即將停售')) {
-                    let url = 'https://localhost:7199/api/Products/' + id;
-                    let response = await fetch(url, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    let data = await response.text();
-                    loadProducts();
-                }
-            }
+            denialModal.show();
+            document.querySelector('#exedeny').addEventListener('click', async () => {
+                let url = 'https://localhost:7199/api/Products/' + id;
+                let response = await fetch(url, {
+                    method: 'DELETE'
+                });
+                let data = await response.text();
+                console.log('denial', data);
+                denialModal.hide();
+                loadProducts();
+            })
         }
         //換頁
         const pagingHandler = (page) => {

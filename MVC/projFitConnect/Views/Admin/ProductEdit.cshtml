@@ -182,12 +182,64 @@
         </section>
     </article>
 </div>
-    <div id="divUneditProductimg">
-        <button class="btn btn-remove" onclick="removeTheImage(this)" style="display:none;">
-            <img src="https://pbs.twimg.com/profile_images/1001436225402621952/bdez2BKN_400x400.jpg" alt="UneditProductimg" style="max-height:150px;">
-            <span class="remove-icon">X</span>
-        </button>
+<div id="divUneditProductimg">
+    <button class="btn btn-remove" onclick="removeTheImage(this)" style="display:none;">
+        <img src="https://pbs.twimg.com/profile_images/1001436225402621952/bdez2BKN_400x400.jpg" alt="UneditProductimg" style="max-height:150px;">
+        <span class="remove-icon">X</span>
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="deleteModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#804040;color:whitesmoke;">
+                <h5 class="modal-title">影像刪除</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:#FFF7FB;color:#000000">
+                <p>確定刪除該影像?</p>
+            </div>
+            <div class="modal-footer" style="background-color:#FFF7FB;color:#000000">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" id="exedelete">刪除</button>
+            </div>
+        </div>
     </div>
+</div>
+<div class="modal" id="deletesuccessModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered m-auto" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#5B5B5B;">
+            <div class="modal-body" style="background-color:#5B5B5B; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#600000; text-shadow: 1px 1px 2px #FFD0FF; font-weight:700;">已刪除</h5>
+                <img src="https://cdn.dribbble.com/users/616823/screenshots/2362844/checkbox.gif" alt="success" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#5B5B5B;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="successModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#CECEFF;">
+            <div class="modal-body" style="background-color:#ECFFFF; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#003D79; text-shadow: 1px 1px 2px #D9FFFF; font-weight:700;">修改成功!</h5>
+                <img src="https://cdn.dribbble.com/users/1154535/screenshots/3288650/dribbble-success-2.gif" alt="success" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#CECEFF;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="failedModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#FFECEC;">
+            <div class="modal-body" style="background-color:#FBFFFD; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h3 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#600000; text-shadow: 1px 1px 2px #FFD9EC; font-weight:700;">修改失敗</h3>
+                <img src="https://i.giphy.com/pjFF8YLW996aXqFHAu.webp" alt="Failed" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#FFECEC;">
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     <script>
         let productID = @ViewBag.id;
@@ -200,6 +252,7 @@
         const detail = document.querySelector('#inpproductDetail');
         const revise = document.querySelector('#btnrevise');
         const divUneditProductimg = document.getElementById('divUneditProductimg');
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
         var folded = true;
         const putData = {
             "productName": "",
@@ -210,7 +263,28 @@
             "imageBase64": "",
             "images": [],
             "moreBase64Images": []
-        }        
+        }
+        function showSuccessModal() {
+            const modal = new bootstrap.Modal(document.getElementById('successModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 2468);
+        }
+        function showFailedModal() {
+            const modal = new bootstrap.Modal(document.getElementById('failedModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 1357);
+        }
+        function showDeletedModal() {
+            const modal = new bootstrap.Modal(document.getElementById('deletesuccessModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 1357);
+        }
 
         //預覽選擇影像&轉成base64
         document.getElementById('formFile').addEventListener('change', function (event) {
@@ -276,13 +350,15 @@
                 divUneditProductimg.style.display = 'none';
             }
         })
-        async function removeTheImage(button) {
-            if (confirm('確定移除此影像?')) {
+        function removeTheImage(button) {
+            deleteModal.show();
+            document.querySelector('#exedelete').addEventListener('click', async () => {
                 const img = button.querySelector('img');
                 const imgId = img ? img.id : null;
                 console.log(imgId);
                 if (!imgId) {
                     console.error('Image ID not found');
+                    showFailedModal();
                     return;
                 }
                 //https://localhost:7199/api/Products/image?id=46&productImage=Dinosaur2Q.jpg
@@ -295,11 +371,20 @@
                     }
                 });
                 let data = await response.text();
-                alert('已刪除');
+                deleteModal.hide()
+                showDeletedModal();
                 divUneditProductimg.innerHTML = "";
                 loadProduct();
-            }
+            })
         }
+        //檢查商品名稱
+        productName.addEventListener('blur', (event) => {
+            putData.productName = event.target.value;
+        })
+        //檢查商品介紹
+        detail.addEventListener('blur', (event) => {
+            putData.productDetail = event.target.value;
+        })
         //單價限制
         thePrice.addEventListener('blur', event => {
             const value = parseFloat(event.target.value);
@@ -312,9 +397,7 @@
         });
         //獲取所有資料
         function getall() {
-            if (putData.productName == "") { alert('請填寫商品名稱'); return; }
-            if (putData.productDetail == "") { alert('請填寫商品詳細'); return; }
-            putData.productName = productName.value;
+            if (putData.productName == "" || putData.productDetail == "") { showFailedModal(); return; }
             if (selectedcategory.value != "")
                 putData.categoryId = parseInt(selectedcategory.value);
             putData.productUnitprice = parseInt(thePrice.value);
@@ -374,10 +457,12 @@
                 }
             });
             let data = await response.text();
-            alert('商品修改成功');
-            setTimeout(() => {
-                window.location.assign('https://localhost:7168/Admin/ProductList');
-            }, 100);
+            if (response.ok) {
+                showSuccessModal();
+                setTimeout(() => {
+                    window.location.assign('https://localhost:7168/Admin/ProductList');
+                }, 2800);
+            } else { showFailedModal(); }
         }
     </script>
 }

@@ -121,6 +121,30 @@
         </section>
     </article>
 </div>
+
+<!-- Modal -->
+<div class="modal" id="successModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#CECEFF;">
+            <div class="modal-body" style="background-color:#ECFFFF; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#003D79; text-shadow: 1px 1px 2px #D9FFFF; font-weight:700;">新增成功!</h5>
+                <img src="https://cdn.dribbble.com/users/1154535/screenshots/3288650/dribbble-success-2.gif" alt="success" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#CECEFF;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="failedModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#FFECEC;">
+            <div class="modal-body" style="background-color:#FBFFFD; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h3 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#600000; text-shadow: 1px 1px 2px #FFD9EC; font-weight:700;">新增失敗</h3>
+                <img src="https://i.giphy.com/pjFF8YLW996aXqFHAu.webp" alt="Failed" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#FFECEC;">
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     <script>
         const productImage = document.querySelector('#divimage');
@@ -138,6 +162,20 @@
             "imageBase64": "",
             "images": [],
             "moreBase64Images": []
+        }
+        function showSuccessModal() {
+            const modal = new bootstrap.Modal(document.getElementById('successModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 2468);
+        }
+        function showFailedModal() {
+            const modal = new bootstrap.Modal(document.getElementById('failedModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 1357);
         }
 
         //預覽選擇影像&轉成base64
@@ -233,11 +271,9 @@
         function getall() {
             const fileInput = document.getElementById('formFile');
             const files = fileInput.files;
-            if (files.length <= 0) {alert('請選擇商品預覽圖');return;}
-            if (postData.productName == "") { alert('請填寫商品名稱'); return; }
-            if (postData.categoryId == 0) { alert('請選擇商品類別'); return; }
-            if (postData.productDetail == "") { alert('請填寫商品詳細'); return; }
-            if (postData.imageBase64 == "") { alert('請更換商品圖片'); return; }
+            if (files.length <= 0||postData.productName == ""||postData.categoryId == 0
+            ||postData.productDetail == ""||postData.imageBase64 == "") 
+            { showFailedModal(); return; }
             console.log(postData);
             addProducts();
         }
@@ -253,10 +289,12 @@
                 }
             });
             let data = await response.text();
-            alert('商品新增成功');
-            setTimeout(() => {
-                window.location.assign('https://localhost:7168/Admin/ProductList');
-            }, 100);
+            if (response.ok) {
+                showSuccessModal();
+                setTimeout(() => {
+                    window.location.assign('https://localhost:7168/Admin/ProductList');
+                }, 2800);
+            } else { showFailedModal(); }
         }
 
     </script>
