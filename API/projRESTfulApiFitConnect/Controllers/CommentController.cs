@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projRESTfulApiFitConnect.DTO.Member.comment;
 using projRESTfulApiFitConnect.Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace projRESTfulApiFitConnect.Controllers
 {
@@ -53,15 +54,15 @@ namespace projRESTfulApiFitConnect.Controllers
                     RateCoach = rc.RateCoach,
                     RateCoachDescribe = rc.CoachDescribe
                 }).ToList();
-
-                var theCoach = _context.TIdentities.FindAsync(item.ClassSchedule.CoachId);
-
+                var coach = await _context.TIdentities.FindAsync(item.ClassSchedule.CoachId);
+                //var theCoach = _context.TIdentities.FindAsync(item.ClassSchedule.CoachId);
+                //var coach = _context.TIdentities.Where(x => x.Id == rates[0].CoachId).FirstOrDefault();
                 CommentDetailDTO commentDetailDTO = new CommentDetailDTO
                 {
                     ClassName = item.ClassSchedule.Class.ClassName,
                     Coach = item.ClassSchedule.CoachId,
                     ClassReserveId = item.ReserveId,
-                    //CoachName = theCoach.Name,
+                    CoachName = coach.Name,
                     GymName = item.ClassSchedule.Field.Gym.GymName,
                     CourseDate = item.ClassSchedule.CourseDate,
                     CourseStartTime = item.ClassSchedule.CourseStartTime.TimeName,
@@ -117,6 +118,7 @@ namespace projRESTfulApiFitConnect.Controllers
 
             var rateDto = new RateDetailDTO
             {
+                RateId = rate.RateId,
                 ReserveId = rate.ReserveId,
                 MemberId = rate.MemberId,
                 ClassId = rate.ClassId,
@@ -172,9 +174,9 @@ namespace projRESTfulApiFitConnect.Controllers
         public async Task<ActionResult<RatesDTO>> PostRates(/*[FromForm]*/ CommentDTO commentDTO)
         {
             var classReserve = await _context.TclassReserves
-                                 .Where(x => x.ReserveId == commentDTO.ReserveId)
+                                 //.Where(x => x.ReserveId == commentDTO.ReserveId)
                                  .Include(cr => cr.ClassSchedule)
-                                 .FirstOrDefaultAsync();
+                                 .FirstOrDefaultAsync(x => x.ReserveId == commentDTO.ReserveId);
 
             if (classReserve == null)
             {
