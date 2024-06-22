@@ -1,6 +1,6 @@
 ﻿using projRESTfulApiFitConnect.DTO.Coach;
 
-namespace projRESTfulApiFitConnect.DTO.Member
+namespace projRESTfulApiFitConnect.DTO.Member.comment
 {
     public class CommentDetailDTO
     {

@@ -6,8 +6,7 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using projRESTfulApiFitConnect.DTO.Member;
-using projRESTfulApiFitConnect.DTO.Member.status;
+using projRESTfulApiFitConnect.DTO.Member.comment;
 using projRESTfulApiFitConnect.Models;
 
 namespace projRESTfulApiFitConnect.Controllers
@@ -110,30 +109,34 @@ namespace projRESTfulApiFitConnect.Controllers
 
         // PUT: api/Comment/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("Rate/{reserveId}")]
-        public async Task<IActionResult> PutRate(int reserveId, [FromForm] RatesDTO dto)
+        [HttpPut("Rate/{id}")]
+        public async Task<ActionResult<RatesDTO>> PostRates(int id, RateDTO rateDTO)
         {
-            //TmemberRateClass rate = _context.TmemberRateClasses.Where(x => x.ReserveId == dto.ReserveId).FirstOrDefault();
-            var rate =await _context.TmemberRateClasses.FirstOrDefaultAsync(x => x.ReserveId == dto.ReserveId);
-            if (rate == null)
+            var classRate = await _context.TmemberRateClasses
+                                 .Where(x => x.RateId == id)
+                                 //.Include(cr => cr.ClassSchedule)
+                                 .FirstOrDefaultAsync();
+
+            if (classRate == null)
             {
-                return NotFound();
+                return NotFound("Class reserve not found.");
             }
-            rate.ClassDescribe = dto.RateClassDescribe;
-            //rate.RateClass = (decimal)dto.RateClass;
-            rate.RateClass = dto.RateClass ?? 0;
-            rate.CoachDescribe = dto.RateCoachDescribe;
-            //rate.RateCoach = (decimal)dto.RateCoach;
-            rate.RateCoach = dto.RateCoach ?? 0;
-            //_context.SaveChanges();
-            _context.TmemberRateClasses.Update(rate);
-            await _context.SaveChangesAsync();
 
-            return Ok("goodjob!!!");
+            classRate.RateClass = rateDTO.RateClass ?? 0;
+            classRate.ClassDescribe = rateDTO.RateClassDescribe;
+            classRate.RateCoach = rateDTO.RateCoach ?? 0;
+            classRate.CoachDescribe = rateDTO.RateCoachDescribe;
+
+            // Set the state of the existing object to Modified
+            _context.Entry(classRate).State = EntityState.Modified;
+
+            //_context.Entry(rate).OriginalValues.SetValues(rate);
+           // _context.Entry(rate).State = EntityState.Modified;
+             await _context.SaveChangesAsync();
+
+            return Ok("rate Edit success");
+
         }
-
-
-
 
 
         // POST: api/Comment
@@ -187,25 +190,6 @@ namespace projRESTfulApiFitConnect.Controllers
             //            .ToListAsync();
             //    crs.Add(bag);
             //}
-
-
-            /*TmemberRateClass rate = new TmemberRateClass();
-            //todo:自動帶入資料
-            rate.ReserveId = ratesDTO.ReserveId;
-            rate.MemberId = ratesDTO.MemberId;
-            rate.ClassId = ratesDTO.ClassId;
-            rate.CoachId = ratesDTO.CoachId;
-            //可自定義
-            rate.RateClass= (decimal)ratesDTO.RateClass;
-            rate.ClassDescribe = ratesDTO.RateClassDescribe;
-            rate.RateCoach = (decimal)ratesDTO.RateCoach;
-            rate.CoachDescribe = ratesDTO.RateCoachDescribe;
-
-
-            _context.TmemberRateClasses.Add(rate);
-            await _context.SaveChangesAsync();*/
-            //return Ok(Comments);
-            //return CreatedAtAction("GetTRates", new { id = rate.ReserveId }, ratesDTO);
         }
 
         //DELETE: api/Comment/5

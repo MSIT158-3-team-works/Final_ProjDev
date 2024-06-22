@@ -203,7 +203,7 @@
 
     <!-- 搜索框 -->
     <div id="search-container" class="search-and-select">
-        <input type="text" id="search-input" placeholder="搜索...">
+        <input type="text" id="search-input" placeholder="搜索..." class="form-control me-2">
 
         <!-- 地區下拉式選單 -->
         <select id="gym-select" class="form-select" aria-label="Default select example">
@@ -226,7 +226,7 @@
             <option value="5">重量訓練</option>
             <option value="6">身體雕塑</option>
         </select>
-        <input type="date" id="date-select" name="name" value="" />
+        <input type="date" id="date-select" name="name" value=""  />
         <button type="button" class="btn btn-info" id="resetButton" style="margin-left:10px">重新篩選</button>
     </div>
     
@@ -430,7 +430,7 @@
                                                     <img src="https://cdn1.iconfinder.com/data/icons/ui-essential-17/32/UI_Essential_Outline_2_essential-app-ui-location-map-pin-22-16.png" /><p>${course.gym}</p>
                                            </div>
                                             <div>
-                                              <p class="price">每堂${course.classPayment}元</p>
+                                                  <h5 class="price">每堂${course.classPayment}元</h5>
                                             </div>
                                             <a href="https://localhost:7168/course/search/${course.classScheduleId}" class="button">了解更多</a>
                                           </div>
@@ -456,4 +456,5 @@
         
 
     </script>
+  
 }
