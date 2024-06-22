@@ -35,7 +35,7 @@
                         <li class="nav-item"><a class="nav-link fs-5" href="~/gymlist/index">找場地</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/shop/index">商城</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/healthboard/index">健康專欄</a></li>
-
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/BodyCalculator/index">身體計算器</a></li>
                         <li></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href="https://localhost:7168/Home/Login"><img src="~/assets/img/icon_profile.png" id="avatar-img" /></a></li>
                         <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_shopping_cart.png" /></a></li>
@@ -84,6 +84,17 @@
                 document.getElementById('main_carousel').style.display = 'block';
             }
         });
+    </script>
+    <script>
+        window.embeddedChatbotConfig = {
+            chatbotId: "5358InDMvZPUAlPDWgdir",
+            domain: "www.chatbase.co"
+        }
+    </script>
+    <script src="https://www.chatbase.co/embed.min.js"
+            chatbotId="5358InDMvZPUAlPDWgdir"
+            domain="www.chatbase.co"
+            defer>
     </script>
 
     <div id="mainpg" style="background-color:#deebf7">
@@ -160,7 +171,7 @@
             defer>
     </script>
     <script>
-        const memberID = 7;
+        const memberID = 9;
         const avatarimg = document.querySelector('#avatar-img');
         const MemberLogin = async () => {
             let url = 'https://localhost:7199/api/Mmember/users/'+ memberID;
@@ -169,7 +180,7 @@
             let data = await response.json();
             console.log('Login-member',data);
             //data:image/jpeg;base64,${course.productImage}
-            avatarimg.src = 'data:image/jpeg;base64,' + data.productImage;
+            avatarimg.src = 'data:image/jpeg;base64,' + data.photo;
         }
         MemberLogin();
     </script>

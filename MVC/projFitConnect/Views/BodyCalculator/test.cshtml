@@ -1,0 +1,519 @@
+﻿@{
+    ViewData["Title"] = "TDEEcalculator";
+}
+
+<div style="padding-bottom:100px"></div>
+<div class="contact-form spad TDEEcontainer">
+    <div class="container">
+        <div class="row">
+            <!-- TDEE說明 -->
+            <div class="col-lg-12 tdee1">
+                <h1 class="tdee-title">TDEE計算器</h1>
+                <p style="text-align: center; font-size: 16px; font-family: 'Georgia', serif, cursive;">By FitConnect</p><br />
+                <div class="description">
+                    <div class="centered" style="font-size: 18px;">
+                        TDEE的中文名稱為「每日消耗熱量」（Total Daily Energy Expenditure, TDEE），是指一個人在一天內所消耗的總能量。<br />
+                        這包括基礎代謝率（BMR）、運動消耗的能量以及其他日常活動的能量消耗，TDEE是用來計算維持體重、減重或增重所需能量的基礎數據。
+                    </div>
+                    <br />
+                    <div class="centered" style="font-size: 20px; padding-bottom: 15px;font-weight:bold;">
+                        了解自己的TDEE可以幫助您制定適合個人需求的營養計劃喔！一起來看看您的TDEE是多少吧！
+                    </div>
+                </div>
+            </div>
+            <!-- TDEE計算器 -->
+            <div class="col-lg-6 tdee-container">
+                <form method="post" id="frmTDEE">
+                    <br />
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1;">
+                            <label class="control-label" style="font-weight:bold;margin-bottom:30px;">生理性別</label><span class="text-danger"></span>
+                        </div>
+                        <div style="flex: 1; display: flex; justify-content: space-between;">
+                            <button type="button" id="btnMale" class="gender-btn active">男</button>
+                            <button type="button" id="btnFemale" class="gender-btn">女</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divWorkload">
+                        <label class="control-label">活動量</label><span class="text-danger"></span>
+                        <br />
+                        <select id="selWorkload" class="form-control" required>
+                            <option value="">請選擇</option>
+                            <option value="1.2">趨於靜態</option>
+                            <option value="1.375">每周運動1~3天</option>
+                            <option value="1.55">每周運動3~5天</option>
+                            <option value="1.725">每周運動6~7天</option>
+                            <option value="1.9">長時間運動或體力勞動工作者</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">年齡</label><span class="text-danger"></span>
+                        <input class="form-control inputTdee" name="Age" id="inpAge" type="number" placeholder="請輸入年齡" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">身高(cm)</label><span class="text-danger"></span>
+                        <input class="form-control inputTdee" name="Height" id="inpHeight" type="number" pattern="^[0-9]+(.[0-9])?$" placeholder="請輸入身高(cm)" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">體重(kg)</label><span class="text-danger"></span>
+                        <input class="form-control inputTdee" name="Weight" id="inpWeight" type="number" pattern="^[0-9]+(.[0-9])?$" placeholder="請輸入體重(kg)" required />
+                    </div>
+                    <div class="section-title product__discount__title">
+                        <div style="text-align: center;">
+                            <button type="button" class="site-btn" id="btnCalculateTDEE">開始計算!</button><br />
+                            <button type="button" class="btn btn-outline-success" id="btnDemo">Demo</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TDEE計算結果 -->
+            <div class="col-lg-6 tdee3">
+                <div id="imgTdee" style="text-align: center;">
+                    <img src="~/assets/img/body/ai16.jpg" style="border-radius: 10%; max-width: 80%; height: auto;" />
+                </div>
+
+                <div id="divLoading" class="centered" style="display: none;">
+                    <img src="~/assets/img/lolololo.gif" style="width: 90px;" />
+                </div>
+
+                <div class="section-title div-result centered">
+                    <div id="divTDEEResult" style="display: none;">
+                        <h2 class="title" id="hResult">您的TDEE值為：</h2>
+                        <p id="pTDEEResult">請輸入以上數據計算TDEE。</p>
+                    </div>
+                    <div id="divGuidance" style="display: none; text-align: center;">
+                        <table class="guidance-table">
+                            <tr>
+                                <td class="guidance" style="background-color: #fff;">
+                                    <p id="pMaintenance" style="font-size: 18px; color: #005AB5; font-weight: bold;">維持體重：</p>
+                                    <p style="font-size: 16px;">為了維持目前的體重，建議每天攝取 <span id="maintenanceCalories" style="font-size: 20px; font-weight: bold;">0</span> 卡路里。</p>
+                                    <p style="font-size: 16px;color: #005AB5;">建議均衡攝取碳水化合物、蛋白質和健康脂肪，並保持適量的運動。</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="guidance" style="background-color: #fff;">
+                                    <p id="pWeightLoss" style="font-size: 18px; color: ; font-weight: bold;">減重：</p>
+                                    <p style="font-size: 16px;">如果您希望減重，建議每天攝取 <span id="weightLossCalories" style="font-size: 20px; font-weight: bold;">0</span> 卡路里。</p>
+                                    <p style="font-size: 16px;color:#E74C3C">推薦控制總熱量攝入，增加蔬菜和瘦肉等低熱量食物，並進行有氧運動和重量訓練以促進脂肪燃燒。</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="guidance" style="background-color: #fff;">
+                                    <p id="pWeightGain" style="font-size: 18px; color: #27AE60; font-weight: bold;">增重：</p>
+                                    <p style="font-size: 16px;">如果您希望增加體重，建議每天攝取 <span id="weightGainCalories" style="font-size: 20px; font-weight: bold;">0</span> 卡路里。</p>
+                                    <p style="font-size: 16px;color: #27AE60">推薦增加高熱量和高蛋白質的食物，如全穀物、堅果、牛奶和肉類，並進行重量訓練以增加肌肉質量。</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- 推薦商品 -->
+            <section class="page-section bg-light" id="recommendedProductsSection">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">推薦商品</h2>
+                    <h3 class="section-subheading text-muted">Products</h3>
+                </div>
+                <div style="text-decoration:none;text-align:right;margin-right:30px;">
+                    <a href="https://localhost:7168/shop/index" class="btn btn-outline-primary">前往商城>></a>
+                </div>
+                <div id="carouselAutoplayingMerchandise" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active carousel-shopgoods">
+                            <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop">
+                                <div class="card m-3 hover" style="min-width:150px;padding-top:8px">
+                                    <img class="card-img-top" src="~/assets/img/header-backgrd.jpg" alt=".C" style="width:97%;max-height:150px;">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Joy</h4>
+                                        <span class="" style="font-style:italic;color:lightblue;">#category</span>
+                                        <p class="card-text">$1.99 USD</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item carousel-shopgoods">
+                            <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop2">
+                            </div>
+                        </div>
+                        <div class="carousel-item carousel-shopgoods">
+                            <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop3">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutoplayingMerchandise" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselAutoplayingMerchandise" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            </section>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div style="padding-bottom: 100px"></div>
+@section Scripts {
+    <script>
+        let gender = "male";
+
+        document.getElementById("btnMale").addEventListener("click", function () {
+            gender = "male";
+            this.classList.add("active");
+            document.getElementById("btnFemale").classList.remove("active");
+        });
+
+        document.getElementById("btnFemale").addEventListener("click", function () {
+            gender = "female";
+            this.classList.add("active");
+            document.getElementById("btnMale").classList.remove("active");
+        });
+
+        document.getElementById("btnCalculateTDEE").addEventListener("click", function () {
+            const age = document.getElementById("inpAge").value;
+            const height = document.getElementById("inpHeight").value;
+            const weight = document.getElementById("inpWeight").value;
+            const workload = document.getElementById("selWorkload").value;
+
+            if (!age || !height || !weight || !workload) {
+                alert("請完整填寫所有欄位！");
+                return;
+            }
+
+            let BMR;
+            if (gender === "male") {
+                BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+            } else {
+                BMR = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+            }
+
+            const TDEE = BMR * workload;
+
+            // 隱藏初始顯示的圖片
+            document.getElementById("imgTdee").style.display = "none";
+            // 隱藏推薦商品部分
+            document.getElementById("recommendedProductsSection").style.display = "none";
+
+            // 顯示加載動畫
+            document.getElementById("divLoading").style.display = "block";
+            document.getElementById("divTDEEResult").style.display = "none";
+            document.getElementById("divGuidance").style.display = "none";
+            setTimeout(function () {
+                // 隱藏加載動畫，顯示計算結果
+                document.getElementById("divLoading").style.display = "none";
+                document.getElementById("divTDEEResult").style.display = "block";
+                document.getElementById("hResult").innerText = `您的TDEE值為：${TDEE.toFixed(0)} 卡路里。`;
+                document.getElementById("pTDEEResult").innerHTML = `<span style="font-size: 16px;">根據您的TDEE，以下是您的營養建議：</span>`;
+                document.getElementById("maintenanceCalories").innerText = TDEE.toFixed(0);
+                document.getElementById("weightLossCalories").innerText = (TDEE - 500).toFixed(0);
+                document.getElementById("weightGainCalories").innerText = (TDEE + 500).toFixed(0);
+                document.getElementById("divGuidance").style.display = "block";
+
+                // 顯示推薦商品部分
+                document.getElementById("recommendedProductsSection").style.display = "block";
+            }, 900);
+        });
+
+        document.getElementById("btnDemo").addEventListener("click", function () {
+            document.getElementById("inpAge").value = 25;
+            document.getElementById("inpHeight").value = 175;
+            document.getElementById("inpWeight").value = 70;
+            document.getElementById("selWorkload").value = 1.55;
+            document.getElementById("btnCalculateTDEE").click();
+        });
+        // 在頁面加載時隱藏推薦商品部分
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("recommendedProductsSection").style.display = "none";
+        });
+
+
+        //====================================================商城============================================================================
+        const HomepageProducts = async () => {
+            var x = '', y = '', z = '';
+            let already = 0
+            let sortBy = ["", "popular", "unitPrice", "categoryId"];
+            let sortType = ["asc", "desc"];
+            let randomBy = Math.floor(Math.random() * 4);
+            let randomType = Math.floor(Math.random() * 2);
+            //console.log(sortBy[randomBy]); console.log(sortType[randomType]);
+            let url = 'https://localhost:7199/api/Products/search';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "categoryId": 0,
+                    "keyword": "",
+                    "page": 3,
+                    "pageSize": 36,
+                    "sortBy": sortBy[randomBy],
+                    "sortType": sortType[randomType]
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            //顯示資料
+            for (var good of data.productsResult) {
+                //data:image/jpeg;base64,${good.productImage}
+                already++;
+                if (already < 5)
+                    x += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
+                                                        <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
+                                                         <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
+                                                          <div class="card-body">
+                                                             <h6 class="card-title">${good.productName}</h6>
+                                                             <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
+                                                             <p class="card-text">$${good.unitPrice}NTD</p>
+                                                          </div> </div></a>`;
+                else if (already < 9)
+                    y += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
+                                                             <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
+                                                               <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
+                                                                 <div class="card-body">
+                                                                   <h6 class="card-title">${good.productName}</h6>
+                                                                   <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
+                                                                   <p class="card-text">$${good.unitPrice}NTD</p>
+                                                                 </div> </div></a>`;
+                else
+                    z += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
+                                                             <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
+                                                                <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
+                                                                   <div class="card-body">
+                                                                      <h6 class="card-title">${good.productName}</h6>
+                                                                      <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
+                                                                      <p class="card-text">$${good.unitPrice}NTD</p>
+                                                                    </div> </div></a>`;
+            }
+            document.getElementById('homepageShop').innerHTML = x;
+            document.getElementById('homepageShop2').innerHTML = y;
+            document.getElementById('homepageShop3').innerHTML = z;
+        };
+        HomepageProducts();
+
+    </script>
+}
+
+
+@section Styles {
+    <style>
+
+        .contact-form {
+            background-color: #f9f9f9;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding-top: 50px;
+            padding-bottom: 100px;
+        }
+
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .site-btn {
+            background-color: #84C1FF;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+            .site-btn:hover {
+                background-color: #005AB5;
+            }
+
+        .centered {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .tdee-title {
+            text-align: center;
+            color: #6C6C6C;
+            font-size: 53px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .gender-btn {
+            width: 48%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: white;
+            transition: background-color 0.3s;
+        }
+
+            .gender-btn.active, .gender-btn:hover {
+                background-color: #84C1FF;
+                color: white;
+            }
+
+        .guidance {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #divGuidance p {
+            margin-bottom: 5px;
+        }
+
+        #divLoading {
+            font-size: 24px;
+            margin-top: 250px;
+        }
+
+        .divGuidance {
+            margin-top: 150px;
+        }
+
+        #hResult {
+            color: #005AB5;
+            margin-top: 100px;
+        }
+
+        .guidance-table {
+            width: 90%;
+            border-collapse: collapse;
+            border-radius: 13px;
+            margin-left: 30px;
+        }
+
+            .guidance-table td {
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+
+            .guidance-table tr:hover {
+                background-color: #f2f2f2;
+            }
+
+        /*=============================================tdee計算器================================================*/
+
+        .tdee-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+
+        .gender-btn {
+            background-color: transparent;
+            border: 1px solid #2894FF;
+            color: #2894FF;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .gender-btn.active {
+                background-color: #84C1FF;
+                border: 2px solid #84C1FF;
+                color: #ffffff;
+            }
+
+            .gender-btn:not(:last-child) {
+                margin-right: 10px;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .inputTdee {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .site-btn {
+            background-color: #2894FF;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .site-btn:hover {
+                background-color: #003A75;
+            }
+
+        .btn-outline-success {
+            background-color: transparent;
+            border: 1px solid #28a745;
+            color: #28a745;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-top: 10px;
+        }
+
+            .btn-outline-success:hover {
+                background-color: #28a745;
+                color: #ffffff;
+            }
+
+        .section-title {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        #imgTdee {
+            margin-top: 175px; /* 可根據需要調整上下間距 */
+        }
+    </style>
+}
+
