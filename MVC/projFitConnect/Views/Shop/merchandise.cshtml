@@ -200,7 +200,7 @@
             加入購物車
         </button></div>
         <div style="float:right;">
-            <a href="~/shop/index" class="btn square-btn">立即購買</a>
+            <button type="button" class="btn square-btn" id="purchase-now">立即購買</button>
         </div>
     </div>
 </div>
@@ -263,6 +263,65 @@
 <div style="padding-bottom:256px;">
     &emsp;
 </div>
+
+<!-- Modal -->
+<div class="modal" id="producttrackModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#CECEFF;">
+            <div class="modal-body" style="background-color:#ECFFFF; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#003D79; text-shadow: 1px 1px 2px #D9FFFF; font-weight:700;">加入追蹤成功!</h5>
+                <img src="https://cdn.dribbble.com/users/1154535/screenshots/3288650/dribbble-success-2.gif" alt="success" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#CECEFF;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="alreadytrackModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:20px;border-color:#CECEFF;">
+            <div class="modal-body" style="background-color:#FFED97; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#272727; text-shadow: 1px 1px 2px #FFFFDF; font-weight:700;">已追蹤商品~</h5>
+                <img src="https://cdn.dribbble.com/users/5669337/screenshots/13958426/light_bulb.gif" alt="Already" style="height:100%; width:100%; object-fit:cover; border-radius:20px;border-color:#CECEFF;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="shoppingcartModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#DFFFDF;">
+            <div class="modal-body" style="background-color:#FBFFFD; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#01814A; text-shadow: 1px 1px 2px #DEFFAC; font-weight:700;">加入購物車!</h5>
+                <img src="https://cdn.dribbble.com/users/39201/screenshots/3694057/nutmeg.gif" alt="success" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#DFFFDF;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="failedModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#FFECEC;">
+            <div class="modal-body" style="background-color:#FBFFFD; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#600000; text-shadow: 1px 1px 2px #FFD9EC; font-weight:700;">加入失敗</h5>
+                <img src="https://i.giphy.com/pjFF8YLW996aXqFHAu.webp" alt="Failed" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#FFECEC;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="unloginlModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered m-auto">
+        <div class="modal-content" style="position:relative;border-radius:15px;border-color:#FFECEC;">
+            <div class="modal-body" style="background-color:#ECFFFF; padding:0; position:relative; border-radius:15px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <p style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#003D79; text-shadow: 1px 1px 2px #D7FFEE; font-weight:900;font-size:2.5em;">尚未登入</p>
+                <img src="https://cdn.pixabay.com/animation/2022/12/01/17/03/17-03-11-60_512.gif" alt="Failed" style="height:100%; width:100%; object-fit:cover; border-radius:15px;border-color:#ECFFFF;">
+                <a href="https://localhost:7168/Home/Login" class="btn btn-primary" id="headtologin" style="position:absolute; top:90%; left:50%; transform:translate(-50%, -50%);">前往登入--></a>
+            </div>
+        </div>
+    </div>
+</div>
 @{
     var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
 }
@@ -279,6 +338,7 @@
         const purchase = document.getElementsByName("inppurchase")[0];
         const popular = document.querySelector('#divpopular');
         const recommend = document.querySelector('#divrecommend');
+        const unloginlModal = new bootstrap.Modal(document.getElementById('unloginlModal'));
 
         //top---------------------------------------------------------------------------------------------------------
         //數量
@@ -294,6 +354,20 @@
         plus.addEventListener('click', () => { if ((+purchase.value + 1) > purchase.max) return; purchase.value = (+purchase.value + 1); })
         minus.addEventListener('click', () => { if ((+purchase.value - 1) < purchase.min) return; purchase.value = (+purchase.value - 1); })
         // 追蹤按鈕
+        function showProductTrackModal() {
+            const modal = new bootstrap.Modal(document.getElementById('producttrackModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 2468);
+        }
+        function showAlreadyTrackModal() {
+            const modal = new bootstrap.Modal(document.getElementById('alreadytrackModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 999);
+        }
         const trackButton = document.querySelector('.btn-track');
         if (trackButton) {
             const trackImg = trackButton.querySelector('img');
@@ -311,7 +385,7 @@
             });
             trackButton.addEventListener('click', async () => {
                 if (LoginMemberID === '0') {
-                    alert('請登入會員');
+                    unloginlModal.show();
                     return;
                 }
                 trackImg.src = 'https://cdn4.iconfinder.com/data/icons/twitter-29/512/166_Heart_Love_Like_Twitter-32.png';
@@ -328,14 +402,28 @@
 
                 if (response.ok) {
                     if (data === 'Tracked') {
-                        alert("加入追蹤成功!");
+                        showProductTrackModal();
                     } else {
-                        alert("已追蹤該商品");
+                        showAlreadyTrackModal();
                     }
                 }
             });
         }
         // 購物車按鈕
+        function showShoppingcartModal() {
+            const modal = new bootstrap.Modal(document.getElementById('shoppingcartModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 2468);
+        }
+        function showFailedModal() {
+            const modal = new bootstrap.Modal(document.getElementById('failedModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 1357);
+        }
         const cartButton = document.querySelector('.btn-cart');
         if (cartButton) {
             const cartImg = cartButton.querySelector('img');
@@ -347,7 +435,7 @@
             });
             cartButton.addEventListener('click', async () => {
                 if (LoginMemberID === '0') {
-                    alert('請登入會員');
+                    unloginlModal.show();
                     return;
                 }
                 //console.log(purchase.value);
@@ -362,14 +450,36 @@
 
                 if (response.ok) {
                     if (data === 'AddToCart') {
-                        alert("加入購物車成功!");
+                        showShoppingcartModal();
                     } else {
-                        alert("加入失敗");
+                        showFailedModal();
                     }
                 }
             });
         }
-
+        //立即購買
+        document.querySelector('#purchase-now').addEventListener('click', async() => {
+            if (LoginMemberID === '0') {
+                unloginlModal.show();
+                return;
+            }
+            //console.log(purchase.value);
+            let url = 'https://localhost:7199/api/Shoppingcarts?memberId=' + LoginMemberID + '&productId=' + productID + '&quantity=' + purchase.value;
+            let response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.text();
+            if (response.ok) {
+                setTimeout(() => {
+                    window.location.assign('https://localhost:7168/shop');
+                }, 100);
+            } else {
+                showFailedModal();
+            }
+        })
 
         //left---------------------------------------------------------------------------------------------------------
         //熱門商品
