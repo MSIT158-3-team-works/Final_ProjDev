@@ -1,0 +1,135 @@
+﻿@{
+    ViewData["Title"] = "index";
+}
+<div style="padding-bottom: 100px"></div>
+<h1 class="main-title">身體計算器</h1>
+<div style="padding-bottom:30px">
+    <h3 class="sub-title">bodyCalculator By FitConnect</h3>
+    <p style="text-align:center;font-size:19px;font-weight:bold;color:#004B97">輸入您的身高、體重、年紀、性別、活動程度，點擊「計算」按鈕，就能算出您的身體質量指數（BMI）與每日總消耗熱量（TDEE）。</p>
+</div>
+<section class="row">
+    <div class="col-lg-6 reveal_b1">
+        <a href="../BodyCalculator/BMIcalculator">
+            <div class="divOption">
+                <img src="~/assets/img/body/BMI.jpg" />
+                <div class="divBackground"></div>
+                <div><h1>BMI<br />計算器</h1></div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-6 reveal_b2">
+        <a href="../BodyCalculator/TDEEcalculator">
+            <div class="divOption">
+                <img src="~/assets/img/body/BMII.jpg" />
+                <div class="divBackground"></div>
+                <div><h1>TDEE<br />計算器</h1></div>
+            </div>
+        </a>
+    </div>
+</section>
+<div style="padding-bottom: 140px"></div>
+
+@section Scripts {
+    <script>
+        $(".divOption").hover(function () {
+            $(this).children("img").css("border-radius", "50%").css("opacity", "0.2").end().find("h1").css("color", "black").end().children(".divBackground").css("visibility", "hidden");
+        }, function () {
+            $(this).children("img").css("border-radius", "15%").css("opacity", "0.8").end().find("h1").css("color", "#ffffff").end().children(".divBackground").css("visibility", "visible");
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        .main-title {
+            margin-top: 100px; /* 調整標題的上邊距 */
+            text-align: center;
+        }
+
+        .sub-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .divOption {
+            position: relative;
+            width: 100%;
+            transition: background .2s linear, opacity .2s linear;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 200px; /* 固定高度，保持長方形 */
+        }
+
+            .divOption > img {
+                transition: transform 0.3s ease-out; /* 添加縮放效果 */
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                opacity: 0.8;
+                border-radius: 15px;
+                transform: scale(1);
+            }
+
+            .divOption:hover > img {
+                transform: scale(0.95); /* 縮小圖片 */
+            }
+
+            .divOption:hover {
+                background-color: rgba(190, 190, 190, 0.3); /* hover時的背景顏色或者透明度 */
+            }
+
+            .divOption > div {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-align: center;
+                transition: 0.5s;
+            }
+
+            .divOption:hover > div {
+                opacity: 1;
+            }
+
+            .divOption > div > h1 {
+                transition: 0.5s;
+                font-family: "Cairo", sans-serif;
+                color: #ffffff;
+                font-weight: 700;
+                margin: 0;
+            }
+
+        .divBackground {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: dimgrey;
+            opacity: 0.3;
+            border-radius: 15px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .col-lg-6 {
+            flex: 0 0 48%;
+            max-width: 48%;
+            box-sizing: border-box;
+        }
+    </style>
+}
