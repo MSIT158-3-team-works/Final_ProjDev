@@ -443,7 +443,7 @@ namespace projRESTfulApiFitConnect.Controllers
 
 
         // GET: api/Coach
-        //取得所有教練資料(個人資料、自我介紹)
+        //取得所有審核教練資料(個人資料、自我介紹)
         [HttpGet("verify")]
         public async Task<ActionResult<IEnumerable<CoachDetailDto>>> verifyCoaches()
         {
@@ -501,6 +501,111 @@ namespace projRESTfulApiFitConnect.Controllers
             }
 
             return Ok(coachDetailDtos);
+        }
+
+        // GET: api/Coach/5/verify
+        //取得特定審核教練資料
+        [HttpGet("{id}/verify")]
+        public async Task<ActionResult> verifyCoache(int id)
+        {
+            string base64Image = "";
+            List<ExpertiseDto> expertiseDtos = new List<ExpertiseDto>();
+
+            var coach = await _context.TIdentities.Where(x => x.RoleId == 4 && x.Id == id).Include(x => x.Gender).Include(x => x.Role).Include(x => x.TcoachInfoIds).Include(x => x.TcoachPhotos).FirstOrDefaultAsync();
+            if (coach == null)
+            {
+                return NotFound();
+            }
+            var images = coach.TcoachPhotos.Select(img => new CoachImagesDTO
+            {
+                coachImages = img.CoachPhoto
+            }).ToList();
+            var coachInfo = coach.TcoachInfoIds.FirstOrDefault();
+            var experts = await _context.TcoachExperts.Where(x => x.CoachId == id).Include(x => x.Class.ClassSort2).ToListAsync();
+
+            if (!string.IsNullOrEmpty(coach.Photo))
+            {
+                string path = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", coach.Photo);
+                byte[] bytes = System.IO.File.ReadAllBytes(path);
+                base64Image = Convert.ToBase64String(bytes);
+            }
+            foreach (var expert in experts)
+            {
+                ExpertiseDto expertiseDto = new ExpertiseDto()
+                {
+                    ClassName = expert.Class.ClassName,
+                    ClassSort2 = expert.Class.ClassSort2.ClassSort2Detail
+                };
+                expertiseDtos.Add(expertiseDto);
+            }
+            CoachDetailDto coachDetailDto = new CoachDetailDto()
+            {
+                Id = coach.Id,
+                Name = coach.Name,
+                Phone = coach.Phone,
+                EMail = coach.EMail,
+                Photo = base64Image,
+                Birthday = coach.Birthday,
+                Address = coach.Address,
+                Intro = coachInfo.CoachIntro,
+                Experties = expertiseDtos,
+                RoleDescription = coach.Role.RoleDescribe,
+                GenderDescription = coach.Gender.GenderText,
+                Images = images,
+                Base64Images = new List<string>()
+            };
+            if (images.Count > 0)
+            {
+                foreach (var image in images)
+                {
+                    if (!string.IsNullOrEmpty(image.coachImages))
+                    {
+                        string base64Img = await GetBase64Image(image.coachImages);
+                        coachDetailDto.Base64Images.Add(base64Img);
+                    }
+                }
+            }
+
+            return Ok(coachDetailDto);
+        }
+
+        // DELETE: api/Coach/5/verify
+        [HttpDelete("{id}/verify")]
+        public async Task<IActionResult> apprvalCoache(int id)
+        {
+            var tIdentity = await _context.TIdentities.FindAsync(id);
+            if (tIdentity == null)
+            {
+                return NotFound();
+            }
+
+            tIdentity.RoleId = 2;
+            await _context.SaveChangesAsync();
+
+            return Ok("Coache apprval");
+        }
+
+        // DELETE: api/Coach/5/verify
+        [HttpDelete("{id}/denial")]
+        public async Task<IActionResult> denialCoache(int id)
+        {
+            var tIdentity = await _context.TIdentities.FindAsync(id);
+            if (tIdentity == null)
+            {
+                return NotFound();
+            }
+
+            var info = await _context.TcoachInfoIds.Where(x => x.CoachId == id).ToListAsync();
+            _context.TcoachInfoIds.RemoveRange(info);
+            var expert = await _context.TcoachExperts.Where(x => x.CoachId == id).ToListAsync();
+            _context.TcoachExperts.RemoveRange(expert);
+            var photo = await _context.TcoachPhotos.Where(x => x.Id == id).ToListAsync();
+            _context.TcoachPhotos.RemoveRange(photo);
+
+            tIdentity.RoleId = 1;
+            await _context.SaveChangesAsync();
+
+            return Ok("rejected");
         }
     }
 

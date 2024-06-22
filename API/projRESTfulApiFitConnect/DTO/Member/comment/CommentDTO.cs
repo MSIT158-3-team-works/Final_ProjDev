@@ -1,4 +1,4 @@
-﻿namespace projRESTfulApiFitConnect.DTO.Member.status
+﻿namespace projRESTfulApiFitConnect.DTO.Member.comment
 {
     public class CommentDTO
     {
