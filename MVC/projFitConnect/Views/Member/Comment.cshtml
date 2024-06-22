@@ -3,7 +3,7 @@
     ViewData["Title"] = "Comment";
 }
 
-<h1>評論</h1>
+@* <h1>評論</h1> *@
 
 @section Styles {
     <style>
@@ -36,7 +36,7 @@
         }
     </style>
 }
-<h1 style="padding-left:64px;">所選課程清單</h1>
+<h1 style="padding-left:64px; padding-top:85px;">所選課程清單</h1>
 <div class="main">
     <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
     <table class="table table-striped table-hover">
@@ -86,7 +86,7 @@
                 <div style="max-width: 80%; width: 80%; margin:auto;">
                     <div class="mb-3">
                         <label for="classname" class="col-form-label"><h3>課程:</h3></label>
-                        @* <input type="text" class="form-control" id="classname" disabled> *@
+                        <input type="text" class="form-control" id="classname" disabled>
                     </div>
                     <div class="row g-3">
                         <div class="col-md">
@@ -101,7 +101,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="coachname" class="col-form-label"><h3>教練:</h3></label>
-                        @* <input type="text" class="form-control" id="coachname" disabled> *@
+                        <input type="text" class="form-control" id="coachname" disabled>
                     </div>
                     <div class="row g-3">
                         <div class="col-md">
@@ -117,6 +117,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveComment" onclick="saveComment(selectedRateID, selectedReserveID)">Save</button>
                 </div>
             </div>
         </div>
@@ -167,57 +168,142 @@
         const personalImage = document.querySelector('#divimage');
         var approvalModal = new bootstrap.Modal(document.getElementById('approvalModal'));
         var denialModal = new bootstrap.Modal(document.getElementById('denialModal'));
+        var commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+        let selectedRateID = null;
+        let selectedReserveID = null;
 
         //確認新增/修改
-        function approval(rateID) {
-            approvalModal.show();
-            document.querySelector('#exeapprove').addEventListener('click', async () => {
-                let url = 'https://localhost:7199/api/Coach/' + id + '/verify';
-                let response = await fetch(url, {
-                    method: 'DELETE'
-                });
-                let data = await response.text();
-                console.log('approval', data);
-                approvalModal.hide();
-                loadSelectClass();
-            })
+        async function saveComment(selectedRateID, selectedReserveID) {
+            const rateClass = document.querySelector('#rateclass').value;
+            const commentClass = document.querySelector('#commentclass').value;
+            const rateCoach = document.querySelector('#ratecoach').value;
+            const commentCoach = document.querySelector('#commentcoach').value;
+
+            const rateData = {
+                rateClass: rateClass,
+                rateClassDescribe: commentClass,
+                rateCoach: rateCoach,
+                rateCoachDescribe: commentCoach
+            };
+
+            let url;
+            let method;
+
+            if (selectedRateID) {
+                url = `https://localhost:7199/api/Comment/Rate/${selectedRateID}`;
+                method = 'PUT';
+            } else {
+                url = 'https://localhost:7199/api/Comment';
+                method = 'POST';
+                rateData.reserveId = selectedReserveID;
+                rateData.memberId = LoginMemberID;
+            }
+
+            let response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(rateData)
+            });
+
+            let data = await response.text();
+            console.log('saveComment', data);
+            commentModal.hide();
+            loadSelectClass();
         }
+        // function approval(rateID) {
+        //     approvalModal.show();
+        //     document.querySelector('#exeapprove').addEventListener('click', async () => {
+        //         let url = 'https://localhost:7199/api/Coach/' + id + '/verify';
+        //         let response = await fetch(url, {
+        //             method: 'DELETE'
+        //         });
+        //         let data = await response.text();
+        //         console.log('approval', data);
+        //         approvalModal.hide();
+        //         loadSelectClass();
+        //     })
+        // }
+
         //刪除
-        function denial(id) {
-            denialModal.show();
-            document.querySelector('#exedeny').addEventListener('click', async () => {
-                let url = 'https://localhost:7199/api/Coach/' + id + '/denial';
-                let response = await fetch(url, {
-                    method: 'DELETE'
-                });
-                let data = await response.text();
-                console.log('denial', data);
-                denialModal.hide();
-                loadSelectClass();
-            })
-        }
+        // async function denial(id) {
+        //     denialModal.show();
+        //     document.querySelector('#exedeny').addEventListener('click', async () => {
+        //         let url = `https://localhost:7199/api/Comment/${id}`;
+        //         let response = await fetch(url, {
+        //             method: 'DELETE'
+        //         });
+        //         let data = await response.text();
+        //         console.log('denial', data);
+        //         denialModal.hide();
+        //         loadSelectClass();
+        //     });
+        // }
+        // function denial(id) {
+        //     denialModal.show();
+        //     document.querySelector('#exedeny').addEventListener('click', async () => {
+        //         let url = 'https://localhost:7199/api/Coach/' + id + '/denial';
+        //         let response = await fetch(url, {
+        //             method: 'DELETE'
+        //         });
+        //         let data = await response.text();
+        //         console.log('denial', data);
+        //         denialModal.hide();
+        //         loadSelectClass();
+        //     })
+        // }
+
         //載入其一課程
         async function chosenOne(reservedID) {
-            var s = '', i = 0;
+            selectedReserveID = reservedID;
             let url = `https://localhost:7199/api/Comment/Rate/${reservedID}`;
             let response = await fetch(url);
             let data = await response.json();
             console.log('commentdetail', data);
-            //顯示資訊
-            // 檢查data是否為空值或者無效
-            if (data && Object.keys(data).length !== 0) {
-                // 如果data有有效資料，才進行賦值操作
+
+            if (data) {
+                selectedRateID = data.rateId || null;
+                document.querySelector('#classname').value = data.className || '';
                 document.querySelector('#rateclass').value = data.rateClass || '';
                 document.querySelector('#commentclass').value = data.rateClassDescribe || '';
+                document.querySelector('#coachname').value = data.coachName || '';
                 document.querySelector('#ratecoach').value = data.rateCoach || '';
                 document.querySelector('#commentcoach').value = data.rateCoachDescribe || '';
             } else {
-                // 如果data為空或無效，可以採取一些適當的處理方式，例如清空表單值或者其他操作
-                console.log('No data available for the given reservedID');
-                // 可以根據需要進行其他處理
+                selectedRateID = null;
+                document.querySelector('#classname').value = data.className || '';
+                document.querySelector('#rateclass').value = '';
+                document.querySelector('#commentclass').value = '';
+                document.querySelector('#coachname').value = data.coachName || '';
+                document.querySelector('#ratecoach').value = '';
+                document.querySelector('#commentcoach').value = '';
             }
-
+            console.log(selectedRateID);
+            commentModal.show();
         }
+        // async function chosenOne(reservedID) {
+        //     var s = '', i = 0;
+        //     let url = `https://localhost:7199/api/Comment/Rate/${reservedID}`;
+        //     let response = await fetch(url);
+        //     let data = await response.json();
+        //     console.log('commentdetail', data);
+        //     //顯示資訊
+        //     // 檢查data是否為空值或者無效
+        //     if (data && Object.keys(data).length !== 0) {
+        //         // 如果data有有效資料，才進行賦值操作
+        //         document.querySelector('#classname').value = data.className || '';
+        //         document.querySelector('#rateclass').value = data.rateClass || '';
+        //         document.querySelector('#commentclass').value = data.rateClassDescribe || '';
+        //         document.querySelector('#coachname').value = data.coachName || '';
+        //         document.querySelector('#ratecoach').value = data.rateCoach || '';
+        //         document.querySelector('#commentcoach').value = data.rateCoachDescribe || '';
+        //     } else {
+        //         // 如果data為空或無效，可以採取一些適當的處理方式，例如清空表單值或者其他操作
+        //         console.log('No data available for the given reservedID');
+        //     }
+
+        // }
         //載入所有選取課程清單
         const loadSelectClass = async () => {
             let memberid = LoginMemberID;
@@ -236,7 +322,7 @@
                 console.log(rateID);
                 return (`<tr>
                            <td class="row1">${comment.className}</td>
-                           <td>${comment.coach}</td>
+                            <td>${comment.coachName}</td>
                            <td>${comment.gymName}</td>
                            <td>${comment.courseDate}</td>
                             <td>${comment.courseStartTime}</td>
