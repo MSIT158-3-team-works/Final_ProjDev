@@ -1,0 +1,264 @@
+﻿
+@{
+    ViewData["Title"] = "Comment";
+}
+
+<h1>評論</h1>
+
+@section Styles {
+    <style>
+        .main {
+            width: 92%;
+            margin: auto;
+        }
+
+        thead {
+            background-color: #101F41;
+        }
+
+        .head {
+            color: #D0D0D0 !important;
+        }
+
+        .row1 {
+            text-align: center;
+        }
+
+        .profile-pic {
+            height: 300px;
+            border-radius: 15%;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: darkgray;
+            border-radius: 50%;
+        }
+    </style>
+}
+<h1 style="padding-left:64px;">所選課程清單</h1>
+<div class="main">
+    <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="row1 head">課程名稱</th>
+                @* <th class="head">Photo</th> *@
+                <th class="head">教練</th>
+                <th class="head">上課地點</th>
+                <th class="head">上課日期</th>
+                <th class="head">上課時間</th>
+                <th class="head">評論</th>
+                <th class="head">確認</th>
+                <th class="head">刪除</th>
+            </tr>
+        </thead>
+        <tbody id="tablebody">
+        </tbody>
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 42%; width: 42%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="commentModalLabel">詳細資訊</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @* 圖片輪播 *@
+                @* <div id="carouselcoachregister" class="carousel slide" style="margin:20px auto;">
+                    <div class="carousel-inner" id="divimage">
+                        <div class="carousel-item active" style="text-align:center;">
+                            <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-outline-2/512/UI_Basic_outline-47-256.png" class="profile-pic" />
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselcoachregister" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselcoachregister" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div> *@
+
+                <div style="max-width: 80%; width: 80%; margin:auto;">
+                    <div class="mb-3">
+                        <label for="classname" class="col-form-label"><h3>課程:</h3></label>
+                        @* <input type="text" class="form-control" id="classname" disabled> *@
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md">
+                            <label for="rateclass" class="col-form-label">課程評分:</label>
+                            <input type="text" class="form-control" id="rateclass" >
+                        </div>
+                        <div class="col-md"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="commentclass" class="col-form-label">課程評論:</label>
+                        <textarea class="form-control" id="commentclass" ></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="coachname" class="col-form-label"><h3>教練:</h3></label>
+                        @* <input type="text" class="form-control" id="coachname" disabled> *@
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md">
+                            <label for="ratecoach" class="col-form-label">教練評分:</label>
+                            <input type="text" class="form-control" id="ratecoach" >
+                        </div>
+                        <div class="col-md"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="commentcoach" class="col-form-label">教練評論:</label>
+                        <textarea class="form-control" id="commentcoach" ></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="approvalModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#004B97;color:whitesmoke;">
+                <h5 class="modal-title">送出評論</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:#FBFFFD;color:#000000">
+                <p>確認新增/修改評分及評論?</p>
+            </div>
+            <div class="modal-footer" style="background-color:#FBFFFD;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-outline-primary" id="exeapprove">確定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="denialModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#804040;color:whitesmoke;">
+                <h5 class="modal-title">刪除評分/評論</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:#FFF7FB;color:#000000">
+                <p>確定刪除評分/評論?</p>
+            </div>
+            <div class="modal-footer" style="background-color:#FFF7FB;color:#000000">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" id="exedeny">刪除</button>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
+}
+@section Scripts {
+    <script>
+        const LoginMemberID = "@loginMemberID";
+        const body = document.querySelector('#tablebody')
+        const personalImage = document.querySelector('#divimage');
+        var approvalModal = new bootstrap.Modal(document.getElementById('approvalModal'));
+        var denialModal = new bootstrap.Modal(document.getElementById('denialModal'));
+
+        //確認新增/修改
+        function approval(rateID) {
+            approvalModal.show();
+            document.querySelector('#exeapprove').addEventListener('click', async () => {
+                let url = 'https://localhost:7199/api/Coach/' + id + '/verify';
+                let response = await fetch(url, {
+                    method: 'DELETE'
+                });
+                let data = await response.text();
+                console.log('approval', data);
+                approvalModal.hide();
+                loadSelectClass();
+            })
+        }
+        //刪除
+        function denial(id) {
+            denialModal.show();
+            document.querySelector('#exedeny').addEventListener('click', async () => {
+                let url = 'https://localhost:7199/api/Coach/' + id + '/denial';
+                let response = await fetch(url, {
+                    method: 'DELETE'
+                });
+                let data = await response.text();
+                console.log('denial', data);
+                denialModal.hide();
+                loadSelectClass();
+            })
+        }
+        //載入其一課程
+        async function chosenOne(reservedID) {
+            var s = '', i = 0;
+            let url = `https://localhost:7199/api/Comment/Rate/${reservedID}`;
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log('commentdetail', data);
+            //顯示資訊
+            // 檢查data是否為空值或者無效
+            if (data && Object.keys(data).length !== 0) {
+                // 如果data有有效資料，才進行賦值操作
+                document.querySelector('#rateclass').value = data.rateClass || '';
+                document.querySelector('#commentclass').value = data.rateClassDescribe || '';
+                document.querySelector('#ratecoach').value = data.rateCoach || '';
+                document.querySelector('#commentcoach').value = data.rateCoachDescribe || '';
+            } else {
+                // 如果data為空或無效，可以採取一些適當的處理方式，例如清空表單值或者其他操作
+                console.log('No data available for the given reservedID');
+                // 可以根據需要進行其他處理
+            }
+
+        }
+        //載入所有選取課程清單
+        const loadSelectClass = async () => {
+            let memberid = LoginMemberID;
+            let url = `https://localhost:7199/api/Comment?id=${memberid}`;
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(memberid);
+            console.log('comment', data);
+            //顯示資料
+            document.getElementById('datafound').innerHTML = `共${data.length}筆資料`;
+            // ReservedID = data[0].rates[0].reserveId;
+            // console.log(ReservedID);
+            const comments = data.map(comment => {
+                const reservedID = comment.classReserveId;
+                const rateID = comment.rates.length > 0 ? comment.rates[0].rateId : '0';
+                console.log(rateID);
+                return (`<tr>
+                           <td class="row1">${comment.className}</td>
+                           <td>${comment.coach}</td>
+                           <td>${comment.gymName}</td>
+                           <td>${comment.courseDate}</td>
+                            <td>${comment.courseStartTime}</td>
+                                 <td>
+                                 <button class="btn btn-outline-warning" type="button" data-bs-toggle="modal" data-bs-target="#commentModal" onclick="chosenOne(${reservedID})">
+                                 評分/評論
+                                 </button></td>
+                                 <td>
+                                 <button class="btn btn-outline-primary" type="button"  style="margin-right: 20px;" onclick="approval(${rateID})">
+                                 確認
+                                 </button></td>
+                                <td>
+                                 <button class="btn btn-outline-danger" type="button" >
+                                 刪除
+                                 </button></td>
+                                 </tr>`)
+            })
+            body.innerHTML = comments.join("");
+        }
+        loadSelectClass();
+    </script>
+}
+
+
+

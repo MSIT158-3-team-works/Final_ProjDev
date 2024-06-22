@@ -16,10 +16,12 @@ namespace projRESTfulApiFitConnect.Controllers
     public class CommentController : ControllerBase
     {
         private readonly GymContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public CommentController(GymContext context)
+        public CommentController(GymContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: api/Comment
@@ -41,6 +43,7 @@ namespace projRESTfulApiFitConnect.Controllers
             {
                 var rates = item.TmemberRateClasses.Select(rc => new RatesDTO
                 {
+                    RateId = rc.RateId,
                     ReserveId = rc.ReserveId,
                     MemberId = id,
                     ClassId = rc.ClassId,
@@ -51,11 +54,14 @@ namespace projRESTfulApiFitConnect.Controllers
                     RateCoachDescribe = rc.CoachDescribe
                 }).ToList();
 
+                var theCoach = _context.TIdentities.FindAsync(item.ClassSchedule.CoachId);
 
                 CommentDetailDTO commentDetailDTO = new CommentDetailDTO
                 {
                     ClassName = item.ClassSchedule.Class.ClassName,
                     Coach = item.ClassSchedule.CoachId,
+                    ClassReserveId = item.ReserveId,
+                    //CoachName = theCoach.Name,
                     GymName = item.ClassSchedule.Field.Gym.GymName,
                     CourseDate = item.ClassSchedule.CourseDate,
                     CourseStartTime = item.ClassSchedule.CourseStartTime.TimeName,
@@ -63,7 +69,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 };
                 CommentDetailDTOs.Add(commentDetailDTO);
             }
-
+            
             return CommentDetailDTOs;
         }
 
@@ -83,21 +89,42 @@ namespace projRESTfulApiFitConnect.Controllers
 
         // GET: api/Comment/Rate/{reserveId}
         [HttpGet("Rate/{reserveId}")]
-        public async Task<ActionResult<RatesDTO>> GetRate(int reserveId)
+        public async Task<ActionResult<RateDetailDTO>> GetRate(int reserveId)
         {
+            string base64Image0 = "";
+            string base64Image = "";
             var rate = await _context.TmemberRateClasses
+                                       .Include(x=>x.Reserve.ClassSchedule.Class)
                                      .FirstOrDefaultAsync(x => x.ReserveId == reserveId);
             if (rate == null)
             {
                 return NotFound();
             }
+            var theClass = _context.Tclasses.Where(x => x.ClassId == rate.ClassId).FirstOrDefault();
+            if (!string.IsNullOrEmpty(theClass.ClassPhoto))
+            {
+                string path = Path.Combine(_env.ContentRootPath, "Images", "ClassPic", theClass.ClassPhoto);
+                byte[] bytes = System.IO.File.ReadAllBytes(path);
+                base64Image0 = Convert.ToBase64String(bytes);
+            }
+            var coach = _context.TIdentities.Where(x => x.Id == rate.CoachId).FirstOrDefault();
+            if (!string.IsNullOrEmpty(coach.Photo))
+            {
+                string path = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", coach.Photo);
+                byte[] bytes = System.IO.File.ReadAllBytes(path);
+                base64Image = Convert.ToBase64String(bytes);
+            }
 
-            var rateDto = new RatesDTO
+            var rateDto = new RateDetailDTO
             {
                 ReserveId = rate.ReserveId,
                 MemberId = rate.MemberId,
                 ClassId = rate.ClassId,
+                ClassName = rate.Reserve.ClassSchedule.Class.ClassName,
+                Classpic=base64Image0,
                 CoachId = rate.CoachId,
+                CoachName = coach.Name,
+                Coachphoto=base64Image,
                 RateClass = rate.RateClass,
                 RateClassDescribe = rate.ClassDescribe,
                 RateCoach = rate.RateCoach,
