@@ -4,10 +4,6 @@ namespace projFitConnect.Controllers
 {
     public class TrainerController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
         public IActionResult Search()
         {
             int? ID = HttpContext.Session.GetInt32("ID");

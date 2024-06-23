@@ -9,7 +9,7 @@ namespace projFitConnect.Controllers
         {
             base.OnActionExecuted(context);
             if (!(HttpContext.Session.Keys.Contains("ID") && HttpContext.Session.Keys.Contains("role_ID")))
-                context.Result = new RedirectToRouteResult("Home Page", new { controller = "Home", action = "Index" });
+                context.Result = new RedirectToRouteResult("Home Page", new { controller = "Home", action = "" });
         }
     }
 }

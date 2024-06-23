@@ -139,7 +139,7 @@ namespace projRESTfulApiFitConnect.Controllers
         // PUT: api/Comment/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("Rate/{id}")]
-        public async Task<ActionResult<RatesDTO>> PostRates(int id, RateDTO rateDTO)
+        public async Task<ActionResult<RatesDTO>> PutRates(int id, RateDTO rateDTO)
         {
             var classRate = await _context.TmemberRateClasses
                                  .Where(x => x.RateId == id)
