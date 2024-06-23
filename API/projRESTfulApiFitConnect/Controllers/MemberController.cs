@@ -27,9 +27,80 @@ namespace projRESTfulApiFitConnect.Controllers
         }
 
         [HttpGet]
-        public IActionResult noreturn()
+        public async Task<ActionResult<IEnumerable<MemberDetailDto>>> GetMembers()
         {
-            return NotFound();
+            List<MemberDetailDto> memberDetailDtos = await AllCoach();
+            return Ok(memberDetailDtos);
+        }
+
+        [HttpGet("unactivated")]
+        public async Task<ActionResult<IEnumerable<MemberDetailDto>>> GetunactivatedMembers()
+        {
+            List<MemberDetailDto> memberDetailDtos = new List<MemberDetailDto>();
+
+            var members = await _context.TIdentities
+                        .Where(x => x.RoleId == 1 && x.Activated == false)
+                        .Include(x => x.Gender)
+                        .ToListAsync();
+
+
+            foreach (var item in members)
+            {
+                MemberDetailDto memberDetailDto = new MemberDetailDto()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Phone = item.Phone,
+                    EMail = item.EMail,
+                    Birthday = item.Birthday,
+                    Address = item.Address,
+                    GenderDescription = item.Gender.GenderText,
+                    GenderID = item.GenderId
+                };
+                memberDetailDtos.Add(memberDetailDto);
+            }
+            return Ok(memberDetailDtos);
+        }
+
+        private async Task<List<MemberDetailDto>> AllCoach()
+        {
+            //string filepath = "";
+
+            List<MemberDetailDto> memberDetailDtos = new List<MemberDetailDto>();
+
+            var members = await _context.TIdentities
+                        .Where(x => x.RoleId == 1 && x.Activated == true)
+                        .Include(x => x.Gender)
+                        .ToListAsync();
+
+
+            foreach (var item in members)
+            {
+
+                /*string base64Image = "";
+                filepath = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", item.Photo);
+                if (System.IO.File.Exists(filepath))
+                {
+                    byte[] bytes = await System.IO.File.ReadAllBytesAsync(filepath);
+                    base64Image = Convert.ToBase64String(bytes);
+                }*/
+
+                MemberDetailDto memberDetailDto = new MemberDetailDto()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Phone = item.Phone,
+                    EMail = item.EMail,
+                    //Photo = base64Image,
+                    Birthday = item.Birthday,
+                    Address = item.Address,
+                    GenderDescription = item.Gender.GenderText,
+                    GenderID = item.GenderId
+                };
+                memberDetailDtos.Add(memberDetailDto);
+            }
+
+            return memberDetailDtos;
         }
 
         [HttpGet("users/{id}")]
@@ -122,92 +193,6 @@ namespace projRESTfulApiFitConnect.Controllers
                     return NotFound();
             }
             return NotFound();
-        }
-
-        [HttpPut("{id}/become-coach")]
-        public async Task<IActionResult> BecomeCoach(int id, BecomeCoachDTO becomeCoachDTO)
-        {
-            using (var transaction = await _context.Database.BeginTransactionAsync())
-            {
-                var newcoach = await _context.TIdentities
-                    .Where(x => x.Id == id && x.RoleId == 1)
-                    .FirstOrDefaultAsync();
-
-                if (newcoach == null)
-                {
-                    return NotFound("User not found or not eligible to become a coach");
-                }
-
-                newcoach.RoleId = 4;
-
-                if (!string.IsNullOrEmpty(becomeCoachDTO.coachName))
-                    newcoach.Name = becomeCoachDTO.coachName;
-
-                if (becomeCoachDTO.expert != null)
-                {
-                    foreach (var expertId in becomeCoachDTO.expert)
-                    {
-                        TcoachExpert expert = new TcoachExpert
-                        {
-                            CoachId = newcoach.Id,
-                            ClassId = expertId
-                        };
-                        _context.TcoachExperts.Add(expert);
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(becomeCoachDTO.intro))
-                {
-                    bool isProcess = _context.TcoachInfoIds.Any(x => x.CoachId == newcoach.Id);
-                    if (isProcess) { return Ok("RegisterisProcessing."); }
-                    TcoachInfoId intro = new TcoachInfoId
-                    {
-                        CoachId = newcoach.Id,
-                        CoachIntro = becomeCoachDTO.intro
-                    };
-                    _context.TcoachInfoIds.Add(intro);
-                }
-
-                if (!string.IsNullOrEmpty(becomeCoachDTO.photo) && !string.IsNullOrEmpty(becomeCoachDTO.ImageBase64))
-                {
-                    byte[] imageBytes = Convert.FromBase64String(becomeCoachDTO.ImageBase64);
-                    string filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", becomeCoachDTO.photo);
-
-                    Directory.CreateDirectory(Path.GetDirectoryName(filepath));
-                    await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
-                    newcoach.Photo = becomeCoachDTO.photo;
-                }
-                _context.Entry(newcoach).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-                // Save additional images if any
-                if (becomeCoachDTO.Images != null && becomeCoachDTO.moreBase64Images != null && becomeCoachDTO.Images.Count == becomeCoachDTO.moreBase64Images.Count)
-                {
-                    for (int i = 0; i < becomeCoachDTO.Images.Count; i++)
-                    {
-                        byte[] additionalImageBytes = Convert.FromBase64String(becomeCoachDTO.moreBase64Images[i]);
-
-                        string contentRootPath = _env.ContentRootPath;
-                        string imageFolder = "Images";
-                        string coachImageFolder = "CoachImages";
-                        string coachImageName = becomeCoachDTO.Images[i].coachImages;
-
-                        string additionalFilePath = Path.Combine(contentRootPath, imageFolder, coachImageFolder, coachImageName);
-                        Directory.CreateDirectory(Path.GetDirectoryName(additionalFilePath));
-
-                        await System.IO.File.WriteAllBytesAsync(additionalFilePath, additionalImageBytes);
-
-                        TcoachPhoto coachPhoto = new TcoachPhoto
-                        {
-                            Id = newcoach.Id,
-                            CoachPhoto = coachImageName
-                        };
-                        _context.TcoachPhotos.Add(coachPhoto);
-                    }
-                    await _context.SaveChangesAsync();
-                }
-                await transaction.CommitAsync();
-                return Ok("requesting...");
-            }
         }
 
         [HttpGet("{id}")]
@@ -318,7 +303,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 Phone = member.Phone,
                 EMail = member.EMail,
                 Photo = base64Image,
-                Birthday = member.Birthday.ToDateTime(TimeOnly.MinValue),
+                Birthday = member.Birthday,
                 Address = member.Address,
                 GenderDescription = member.Gender.GenderText,
                 RoleDescription = member.Role.RoleDescribe
@@ -396,6 +381,174 @@ namespace projRESTfulApiFitConnect.Controllers
             await _context.SaveChangesAsync();
 
             return Ok("會員資訊已成功更新");
+        }
+
+        [HttpPost]
+        [Route("SEARCH")]
+        public async Task<ActionResult<MemberPagingDTO>> GetCoachesSearch(/*[FromQuery]*/ MemberSearchDTO memberSearchDTO)
+        {
+            List<MemberDetailDto> memberDetailDtos = await AllCoach();
+            //根據分類搜尋教練資料
+            var everyMember = memberSearchDTO.gender == 0 ? memberDetailDtos : memberDetailDtos.Where(s => s.GenderID == memberSearchDTO.gender);
+            //根據關鍵字搜尋會員資料(姓名、性別、教練資訊、專長名稱)
+            if (!string.IsNullOrEmpty(memberSearchDTO.keyword))
+            {
+                everyMember = everyMember.Where(s => s.Name.Contains(memberSearchDTO.keyword) ||
+                 s.GenderDescription.Contains(memberSearchDTO.keyword));
+            }
+
+            //排序
+            switch (memberSearchDTO.sortBy)
+            {
+                //依年齡
+                case "Ages":
+                    everyMember = memberSearchDTO.sortType == "asc" ? everyMember.OrderBy(s => s.Birthday) : everyMember.OrderByDescending(s => s.Birthday);
+                    break;
+                //依性別
+                case "GenderID":
+                    everyMember = memberSearchDTO.sortType == "asc" ? everyMember.OrderBy(s => s.GenderID) : everyMember.OrderByDescending(s => s.GenderID);
+                    break;
+                //預設為id
+                default:
+                    everyMember = memberSearchDTO.sortType == "asc" ? everyMember.OrderBy(s => s.Id) : everyMember.OrderByDescending(s => s.Id);
+                    break;
+            }
+            //int totalrate = everyCoach.
+            //總共有多少筆資料
+            int totalCount = everyMember.Count();
+            //每頁要顯示幾筆資料
+            int pageSize = (int)memberSearchDTO.pageSize;
+            //目前第幾頁
+            int page = (int)memberSearchDTO.page;
+            //計算總共有幾頁
+            int totalPages = (int)Math.Ceiling((decimal)totalCount / pageSize);
+            //分頁
+            everyMember = everyMember.Skip((page - 1) * pageSize).Take(pageSize);
+            //包裝要傳給client端的資料
+            MemberPagingDTO memberPaging = new MemberPagingDTO();
+            memberPaging.TotalCount = totalCount;
+            memberPaging.TotalPages = totalPages;
+            memberPaging.MemberResult = everyMember.ToList();
+            return Ok(memberPaging);
+        }
+
+        [HttpPut("{id}/become-coach")]
+        public async Task<IActionResult> BecomeCoach(int id, BecomeCoachDTO becomeCoachDTO)
+        {
+            using (var transaction = await _context.Database.BeginTransactionAsync())
+            {
+                var newcoach = await _context.TIdentities
+                    .Where(x => x.Id == id && x.RoleId == 1)
+                    .FirstOrDefaultAsync();
+
+                if (newcoach == null)
+                {
+                    return NotFound("User not found or not eligible to become a coach");
+                }
+
+                newcoach.RoleId = 4;
+
+                if (!string.IsNullOrEmpty(becomeCoachDTO.coachName))
+                    newcoach.Name = becomeCoachDTO.coachName;
+
+                if (becomeCoachDTO.expert != null)
+                {
+                    foreach (var expertId in becomeCoachDTO.expert)
+                    {
+                        TcoachExpert expert = new TcoachExpert
+                        {
+                            CoachId = newcoach.Id,
+                            ClassId = expertId
+                        };
+                        _context.TcoachExperts.Add(expert);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(becomeCoachDTO.intro))
+                {
+                    bool isProcess = _context.TcoachInfoIds.Any(x => x.CoachId == newcoach.Id);
+                    if (isProcess) { return Ok("RegisterisProcessing."); }
+                    TcoachInfoId intro = new TcoachInfoId
+                    {
+                        CoachId = newcoach.Id,
+                        CoachIntro = becomeCoachDTO.intro
+                    };
+                    _context.TcoachInfoIds.Add(intro);
+                }
+
+                if (!string.IsNullOrEmpty(becomeCoachDTO.photo) && !string.IsNullOrEmpty(becomeCoachDTO.ImageBase64))
+                {
+                    byte[] imageBytes = Convert.FromBase64String(becomeCoachDTO.ImageBase64);
+                    string filepath = Path.Combine(_env.ContentRootPath, "Images", "CoachImages", becomeCoachDTO.photo);
+
+                    Directory.CreateDirectory(Path.GetDirectoryName(filepath));
+                    await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+                    newcoach.Photo = becomeCoachDTO.photo;
+                }
+                _context.Entry(newcoach).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                // Save additional images if any
+                if (becomeCoachDTO.Images != null && becomeCoachDTO.moreBase64Images != null && becomeCoachDTO.Images.Count == becomeCoachDTO.moreBase64Images.Count)
+                {
+                    for (int i = 0; i < becomeCoachDTO.Images.Count; i++)
+                    {
+                        byte[] additionalImageBytes = Convert.FromBase64String(becomeCoachDTO.moreBase64Images[i]);
+
+                        string contentRootPath = _env.ContentRootPath;
+                        string imageFolder = "Images";
+                        string coachImageFolder = "CoachImages";
+                        string coachImageName = becomeCoachDTO.Images[i].coachImages;
+
+                        string additionalFilePath = Path.Combine(contentRootPath, imageFolder, coachImageFolder, coachImageName);
+                        Directory.CreateDirectory(Path.GetDirectoryName(additionalFilePath));
+
+                        await System.IO.File.WriteAllBytesAsync(additionalFilePath, additionalImageBytes);
+
+                        TcoachPhoto coachPhoto = new TcoachPhoto
+                        {
+                            Id = newcoach.Id,
+                            CoachPhoto = coachImageName
+                        };
+                        _context.TcoachPhotos.Add(coachPhoto);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+                await transaction.CommitAsync();
+                return Ok("requesting...");
+
+
+            }
+        }
+
+        // DELETE:
+        [HttpDelete("{id}/suspend")]
+        public async Task<IActionResult> inactiveteMember(int id)
+        {
+            var tIdentity = await _context.TIdentities.FindAsync(id);
+            if (tIdentity == null)
+            {
+                return NotFound();
+            }
+
+            tIdentity.Activated = false;
+            await _context.SaveChangesAsync();
+
+            return Ok("suspend");
+        }
+        // DELETE:
+        [HttpDelete("{id}/activate")]
+        public async Task<IActionResult> activeteMember(int id)
+        {
+            var tIdentity = await _context.TIdentities.FindAsync(id);
+            if (tIdentity == null)
+            {
+                return NotFound();
+            }
+
+            tIdentity.Activated = true;
+            await _context.SaveChangesAsync();
+
+            return Ok("Activated");
         }
     }
 }

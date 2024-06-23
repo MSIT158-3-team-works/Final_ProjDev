@@ -1,46 +1,253 @@
 ﻿@{
     ViewData["Title"] = "MemberList";
 }
+
 @section Styles {
     <style>
         .main {
             width: 92%;
             margin: auto;
         }
+
+        thead {
+            background-color: #101F41;
+        }
+
+        .head {
+            color: #D0D0D0 !important;
+        }
+
+        .row1 {
+            text-align: center;
+        }
+
     </style>
 }
-<h1 style="padding-left:64px;margin:15px 0;">MemberList</h1>
-<div class="ps-3 main">
-
-    <p></p>
-    <table class="table table-striped table-dark table-hover">
+<h1 style="padding-left:64px;">會員清單</h1>
+<div class="main">
+    <div class="row mb-3">
+        <div class="col-5">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    --排序依據--
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item dropdown-sort" data-type="">加入日期</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="Ages">年齡</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="GenderID">性別</a></li>
+                </ul>
+                <button class="btn btn-outline-secondary" style="margin-left:12px;" id="orderbtn">正序</button>
+            </div>
+        </div>
+        <div class="col-4" style="text-align:right;">
+            <input type="search" placeholder="輸入搜尋..." class="form-control" id="inputSearch" />
+        </div>
+        <div class="col-3" style="text-align:right;">
+            <label class="form-check-label">顯示筆數：</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="20" checked>
+                <label class="form-check-label" for="inlineRadio1">20</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="40">
+                <label class="form-check-label" for="inlineRadio2">40</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="60">
+                <label class="form-check-label" for="inlineRadio3">60</label>
+            </div>
+        </div>
+    </div>
+    <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>No.</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
+                <th class="row1 head">ID</th>
+                <th class="head">Name</th>
+                <th class="head">Age</th>
+                <th class="head">Gender</th>
+                <th class="head">City</th>
+                <th class="head">E-mail</th>
+                <th class="head">Suspension</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <button class="btn btn-success">Edit</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
-            </tr>
+        <tbody id="tablebody">
         </tbody>
     </table>
 </div>
+<div class="pagination-container w-50 m-auto">
+    <ul class="pagination" id="ulpaging">
+    </ul>
+</div>
+<!-- Modal -->
+<div class="modal" id="suspendModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#804040;color:whitesmoke;">
+                <h5 class="modal-title">會員停權</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:#FFF7FB;color:#000000">
+                <p>確定將該會員帳號停權?</p>
+            </div>
+            <div class="modal-footer" style="background-color:#FFF7FB;color:#000000">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" id="exedeny">停權</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        const typeofsort = document.querySelectorAll('.dropdown-sort');
+        const orderby = document.getElementById('orderbtn');
+        const inpSearch = document.querySelector('#inputSearch');
+        const pagesize = document.querySelectorAll('[name="inlineRadioOptions"]');
+        const body = document.querySelector('#tablebody')
+        const ulPaging = document.getElementById('ulpaging');
+        var suspendModal = new bootstrap.Modal(document.getElementById('suspendModal'));
+        const searchData = {
+            "gender": 0,
+            "keyword": "",
+            "page": 1,
+            "pageSize": 20,
+            "sortBy": "",
+            "sortType": "asc"
+        };
+        //計算年紀
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const currentDate = `${year}/${month}/${day}`;
+        console.log('currentDate', currentDate);
+        let birthday = '1988/06/08';
+        function calculateAges(currentDate, birthday) {
+            const d1 = new Date(currentDate);
+            const d2 = new Date(birthday);
+            let yearDiff = d1.getFullYear() - d2.getFullYear();
+            if (d1.getMonth() < d2.getMonth() ||
+                (d1.getMonth() === d2.getMonth() && d1.getDate() < d2.getDate()))
+                yearDiff--;
+            return yearDiff;
+        }
+        let Ages = calculateAges(currentDate, birthday);
+
+        //排序依據
+        for (var type of typeofsort) {
+            type.addEventListener('click', function () {
+                //console.log(this.dataset.type);
+                searchData.sortBy = this.dataset.type;
+                searchData.page = 1;
+                loadMembers();
+            })
+        }
+        //排序
+        var orderClicked = true;
+        orderby.addEventListener('click', (event) => {
+            console.log(event.target);
+            if (orderClicked) {
+                event.target.textContent = "倒序";
+                event.target.className = "btn btn-secondary";
+                orderClicked = false;
+                searchData.sortType = "desc";
+                loadMembers();
+            } else {
+                event.target.textContent = "正序";
+                event.target.className = "btn btn-outline-secondary";
+                orderClicked = true;
+                searchData.sortType = "asc";
+                loadMembers();
+            }
+        });
+        //搜尋關鍵字
+        inpSearch.addEventListener('keydown', event => {
+            if (event.keyCode === 13) {
+                if (event.target.value != null)
+                    searchData.keyword = event.target.value;
+                else
+                    searchData.keyword = "";
+                searchData.page = 1;
+                loadMembers();
+            }
+        })
+        //顯示筆數
+        for (var radio of pagesize) {
+            //console.log(radio.value);
+            radio.addEventListener('click', function () {
+                searchData.pageSize = this.value;
+                searchData.page = 1;
+                loadMembers();
+            })
+        }
+        //換頁
+        const pagingHandler = (page) => {
+            if (page === -1) { page = parseInt(searchData.page) - 1; if (page <= 0) return; }
+            if (page === 0) { page = parseInt(searchData.page) + 1; if (page > MaxPage) return; }
+            searchData.page = page;
+            console.log('toPage', searchData.page);
+            loadMembers();
+        }
+        //停權
+        function suspend(id) {
+            suspendModal.show();
+            document.querySelector('#exedeny').addEventListener('click', async () => {
+                let url = 'https://localhost:7199/api/Member/' + id + '/suspend';
+                let response = await fetch(url, {
+                    method: 'DELETE'
+                });
+                let data = await response.text();
+                console.log('denial', data);
+                suspendModal.hide();
+                loadMembers();
+            })
+        }
+        //載入所有會員
+        const loadMembers = async () => {
+            let url = 'https://localhost:7199/api/Member/SEARCH';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(searchData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            console.log('members', data);
+            //顯示資料
+            document.getElementById('datafound').innerHTML = `共${data.totalCount}筆資料`;
+            const members = data.memberResult.map(member => {
+                //address,birthday,eMail,genderDescription,id,name,phone,photo
+                Ages = calculateAges(currentDate, member.birthday);
+                return (`<tr>
+                        <td class="row1">${member.id}</td>
+                        <td>${member.name}</td>
+                        <td>${Ages}</td>
+                        <td>${member.genderDescription}</td>
+                        <td>${member.address.substring(0, 3)}</td>
+                        <td>${member.eMail}</td>
+                        <td>
+                        <button class="btn btn-outline-danger" type="button" onclick="suspend(${member.id})">
+                        停權
+                        </button></td>
+                        </tr>`)
+            })
+            body.innerHTML = members.join("");
+
+            //顯示分頁按鈕
+            let liPages = "", pageCount = 0;
+            MaxPage = data.totalPages;
+            var currentPage = searchData.page;//pickedPage;
+            for (let i = 1; i <= MaxPage; i++) {
+                pageCount++;
+                if (currentPage == i)
+                    liPages += `<li class="page-item active" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+                else
+                    liPages += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+            }
+            ulPaging.innerHTML = '<li class="page-item" onclick="pagingHandler(-1)"><a class="page-link" href="#" style = "margin-right:16px;"><</a></li>' + liPages + '<li class="page-item" onclick="pagingHandler(0)"><a class="page-link" href="#" style = "margin-left:16px;">></a></li>';
+
+        }
+        loadMembers();
+    </script>
+}

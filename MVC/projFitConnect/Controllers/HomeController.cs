@@ -29,6 +29,12 @@ namespace projFitConnect.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("", "home");
+        }
+
         public IActionResult Session([FromForm] C_user user)
         {
             int ID = 0;

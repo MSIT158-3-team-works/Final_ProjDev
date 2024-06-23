@@ -20,7 +20,7 @@
 <body id="page-top">
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background:rgba(128, 128, 128, 0.7)">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background:rgba(128, 128, 128, 1)">
             <div class="container">
                 <a href="https://localhost:7168/Home"><img src="~/assets/img/fitlogo.png" width=80px; alt="FitConnect Logo" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,6 @@
                         <li class="nav-item"><a class="nav-link fs-5" asp-area="" asp-controller="Course" asp-action="Search">找課程</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/gymlist/index">找場地</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/shop/index">商城</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" href="~/healthboard/index">健康專欄</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/BodyCalculator/index">身體計算器</a></li>
 
                         <li></li>
@@ -57,19 +56,19 @@
             <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">FitConnect XXX會員</h5>
         </div>
         <div class="offcanvas-body">
-            <a href="https://localhost:7168/member/profile" >
+            <a href="https://localhost:7168/member/profile">
                 個人資料修改
             </a><br />
-            <a href="https://localhost:7168/member/profile" >
+            <a href="https://localhost:7168/member/profile">
                 我的課程
             </a><br />
-            <a href="https://localhost:7168/member/profile" >
+            <a href="https://localhost:7168/member/profile">
                 我的訂單
             </a><br />
-            <a href="https://localhost:7168/member/profile" >
+            <a href="https://localhost:7168/member/profile">
                 常見問題
             </a><br />
-            <a href="https://localhost:7168/member/profile" >
+            <a href="https://localhost:7168/member/profile">
                 登出
             </a><br />
         </div>
@@ -135,20 +134,27 @@
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    @* <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script> *@
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        let nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY === 0) {
+                nav.style.backgroundColor = 'rgba(128, 128, 128, 1)';
+            } else {
+                nav.style.backgroundColor = 'rgba(128, 128, 128, 0.7)';
+            }
+        });
+
+        window.embeddedChatbotConfig = {
+            chatbotId: "5358InDMvZPUAlPDWgdir",
+            domain: "www.chatbase.co"
+        }
+    </script>
+    <script src="https://www.chatbase.co/embed.min.js"
+            chatbotId="5358InDMvZPUAlPDWgdir"
+            domain="www.chatbase.co"
+            defer>
+    </script>
 </body>
-<script>
-    window.embeddedChatbotConfig = {
-        chatbotId: "5358InDMvZPUAlPDWgdir",
-        domain: "www.chatbase.co"
-    }
-</script>
-<script src="https://www.chatbase.co/embed.min.js"
-        chatbotId="5358InDMvZPUAlPDWgdir"
-        domain="www.chatbase.co"
-        defer>
-</script>
 </html>

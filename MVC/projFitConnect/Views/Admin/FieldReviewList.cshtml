@@ -4,6 +4,15 @@
 
 @section Styles {
     <style>
+        .custom-select-short {
+            width: 150px;
+        }
+
+        .main {
+            width: 92%;
+            margin: auto;
+        }
+
         thead {
             background-color: #101F41;
         }
@@ -11,15 +20,10 @@
         .head {
             color: #D0D0D0 !important;
         }
-
-        .custom-select-short {
-            width: 150px;
-        }
     </style>
 }
-
-<div>
-    <h2>場地清單</h2>
+<h1 style="padding-left:64px;">場地清單</h1>
+<div class="main">
     <select class="form-select custom-select-short" id="review">
         <option value="all">審核狀態</option>
         <option value="open">開放</option>
