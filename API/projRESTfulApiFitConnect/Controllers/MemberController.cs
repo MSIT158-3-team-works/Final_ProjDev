@@ -114,7 +114,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 return NotFound();
 
             var member = _context.TIdentities.Where(x => x.Id == id && x.Activated == true).FirstOrDefault();
-            string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", "20240403154502.jpg");
+            string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", "default.jpg");
             //string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", member.Photo);
             byte[] bytes = System.IO.File.ReadAllBytes(path);
             member.Photo = Convert.ToBase64String(bytes);
