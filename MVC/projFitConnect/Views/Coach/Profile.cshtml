@@ -110,7 +110,7 @@
         const myCourse = document.getElementById('myCourse');
         const field = document.getElementById('field');
         const memberID = 2;
-        const coachID = 6;
+        const coachID = @ViewBag.id
         
         //頁面載入時執行
         document.addEventListener('DOMContentLoaded', async () => {
@@ -233,7 +233,7 @@
         async function findCourse(){
             const updateUrl = '@Url.Content("~/Schdule/Update/")';
             const deleteUrl = '@Url.Content("~/Schdule/Delete/")';
-            let response = await fetch("https://localhost:7199/api/Coach/6");
+            let response = await fetch(`https://localhost:7199/api/Coach/${coachID}`);
             let data = await response.json();
             let openedCourse = Array.from(data.scheduleDatailDtos).filter(x => x.classStatus == '正常開課');
             let reviewCourse = Array.from(data.scheduleDatailDtos).filter(x => x.classStatus == '審核中');
@@ -295,7 +295,7 @@
         };
         //場地
         field.addEventListener('click', async() => {
-            let response = await fetch("https://localhost:7199/api/Coach/6");
+            let response = await fetch(`https://localhost:7199/api/Coach/${coachID}`);
             let data = await response.json();
             let paid = data.fieldDetailDtos.filter(x => x.paymentStatus);
             let unpaid = data.fieldDetailDtos.filter(x => !x.paymentStatus);

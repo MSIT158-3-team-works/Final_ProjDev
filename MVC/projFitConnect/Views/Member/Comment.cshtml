@@ -2,9 +2,6 @@
 @{
     ViewData["Title"] = "Comment";
 }
-
-@* <h1>評論</h1> *@
-
 @section Styles {
     <style>
         .main {
@@ -36,9 +33,10 @@
         }
     </style>
 }
-<h1 style="padding-left:64px; padding-top:85px;">所選課程清單</h1>
+<h1 style="padding-left:64px; padding-top:85px;">已預約課程</h1>
 <div class="main">
     <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
+    <div style="padding-bottom:120px;">
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -48,21 +46,20 @@
                 <th class="head">上課地點</th>
                 <th class="head">上課日期</th>
                 <th class="head">上課時間</th>
-                <th class="head">評論</th>
-                <th class="head">確認</th>
-                <th class="head">刪除</th>
+                <th class="head">評分/評論</th>
             </tr>
         </thead>
         <tbody id="tablebody">
         </tbody>
     </table>
+    </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 42%; width: 42%;">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="commentModalLabel">詳細資訊</h1>
+                <h1 class="modal-title fs-5" id="commentModalLabel">課程/教練評價</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -116,44 +113,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveComment" onclick="saveComment(selectedRateID, selectedReserveID)">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="saveComment" onclick="saveComment(selectedRateID, selectedReserveID)">送出</button>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="approvalModal" tabindex="-1" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#004B97;color:whitesmoke;">
-                <h5 class="modal-title">送出評論</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="background-color:#FBFFFD;color:#000000">
-                <p>確認新增/修改評分及評論?</p>
-            </div>
-            <div class="modal-footer" style="background-color:#FBFFFD;">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-outline-primary" id="exeapprove">確定</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal" id="denialModal" tabindex="-1" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#804040;color:whitesmoke;">
-                <h5 class="modal-title">刪除評分/評論</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="background-color:#FFF7FB;color:#000000">
-                <p>確定刪除評分/評論?</p>
-            </div>
-            <div class="modal-footer" style="background-color:#FFF7FB;color:#000000">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-danger" id="exedeny">刪除</button>
             </div>
         </div>
     </div>
@@ -166,11 +128,12 @@
         const LoginMemberID = "@loginMemberID";
         const body = document.querySelector('#tablebody')
         const personalImage = document.querySelector('#divimage');
-        var approvalModal = new bootstrap.Modal(document.getElementById('approvalModal'));
-        var denialModal = new bootstrap.Modal(document.getElementById('denialModal'));
+        //var approvalModal = new bootstrap.Modal(document.getElementById('approvalModal'));
+        //var denialModal = new bootstrap.Modal(document.getElementById('denialModal'));
         var commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
         let selectedRateID = null;
         let selectedReserveID = null;
+        var data;
 
         //確認新增/修改
         async function saveComment(selectedRateID, selectedReserveID) {
@@ -212,74 +175,34 @@
             commentModal.hide();
             loadSelectClass();
         }
-        // function approval(rateID) {
-        //     approvalModal.show();
-        //     document.querySelector('#exeapprove').addEventListener('click', async () => {
-        //         let url = 'https://localhost:7199/api/Coach/' + id + '/verify';
-        //         let response = await fetch(url, {
-        //             method: 'DELETE'
-        //         });
-        //         let data = await response.text();
-        //         console.log('approval', data);
-        //         approvalModal.hide();
-        //         loadSelectClass();
-        //     })
-        // }
-
-        //刪除
-        // async function denial(id) {
-        //     denialModal.show();
-        //     document.querySelector('#exedeny').addEventListener('click', async () => {
-        //         let url = `https://localhost:7199/api/Comment/${id}`;
-        //         let response = await fetch(url, {
-        //             method: 'DELETE'
-        //         });
-        //         let data = await response.text();
-        //         console.log('denial', data);
-        //         denialModal.hide();
-        //         loadSelectClass();
-        //     });
-        // }
-        // function denial(id) {
-        //     denialModal.show();
-        //     document.querySelector('#exedeny').addEventListener('click', async () => {
-        //         let url = 'https://localhost:7199/api/Coach/' + id + '/denial';
-        //         let response = await fetch(url, {
-        //             method: 'DELETE'
-        //         });
-        //         let data = await response.text();
-        //         console.log('denial', data);
-        //         denialModal.hide();
-        //         loadSelectClass();
-        //     })
-        // }
 
         //載入其一課程
         async function chosenOne(reservedID) {
             selectedReserveID = reservedID;
-            let url = `https://localhost:7199/api/Comment/Rate/${reservedID}`;
-            let response = await fetch(url);
-            let data = await response.json();
-            console.log('commentdetail', data);
+            let url = `https://localhost:7199/api/Comment/Rate/${reservedID}`;            
+            let response1 = await fetch(url);
+            let data1 = await response1.json();
 
-            if (data) {
-                selectedRateID = data.rateId || null;
-                document.querySelector('#classname').value = data.className || '';
-                document.querySelector('#rateclass').value = data.rateClass || '';
-                document.querySelector('#commentclass').value = data.rateClassDescribe || '';
-                document.querySelector('#coachname').value = data.coachName || '';
-                document.querySelector('#ratecoach').value = data.rateCoach || '';
-                document.querySelector('#commentcoach').value = data.rateCoachDescribe || '';
-            } else {
-                selectedRateID = null;
-                document.querySelector('#classname').value = data.className || '';
-                document.querySelector('#rateclass').value = '';
-                document.querySelector('#commentclass').value = '';
-                document.querySelector('#coachname').value = data.coachName || '';
-                document.querySelector('#ratecoach').value = '';
-                document.querySelector('#commentcoach').value = '';
+            if (data1) {
+                selectedRateID = data1.rateId || null;
+                document.querySelector('#classname').value = data1.className || '';
+                document.querySelector('#rateclass').value = data1.rateClass || '';
+                document.querySelector('#commentclass').value = data1.rateClassDescribe || '';
+                document.querySelector('#coachname').value = data1.coachName || '';
+                document.querySelector('#ratecoach').value = data1.rateCoach || '';
+                document.querySelector('#commentcoach').value = data1.rateCoachDescribe || '';
             }
-            console.log(selectedRateID);
+
+            if (data1.status == 404) {
+                var data2;
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].classReserveId == reservedID) {
+                        data2 = data[i]
+                    }
+                }
+                document.querySelector('#classname').value = data2.className;
+                document.querySelector('#coachname').value = data2.coachName;
+            }
             commentModal.show();
         }
         // async function chosenOne(reservedID) {
@@ -304,12 +227,13 @@
         //     }
 
         // }
+
         //載入所有選取課程清單
         const loadSelectClass = async () => {
             let memberid = LoginMemberID;
             let url = `https://localhost:7199/api/Comment?id=${memberid}`;
             let response = await fetch(url);
-            let data = await response.json();
+            data = await response.json();
             console.log(memberid);
             console.log('comment', data);
             //顯示資料
@@ -319,25 +243,20 @@
             const comments = data.map(comment => {
                 const reservedID = comment.classReserveId;
                 const rateID = comment.rates.length > 0 ? comment.rates[0].rateId : '0';
-                console.log(rateID);
+                const classname = comment.className;
+                const coachname = comment.coachName;
+                console.log(rateID, classname, coachname);
                 return (`<tr>
                            <td class="row1">${comment.className}</td>
                             <td>${comment.coachName}</td>
                            <td>${comment.gymName}</td>
                            <td>${comment.courseDate}</td>
-                            <td>${comment.courseStartTime}</td>
+                                    <td>${comment.courseStartTime.toString().substring(0, 5)}</td>
                                  <td>
                                  <button class="btn btn-outline-warning" type="button" data-bs-toggle="modal" data-bs-target="#commentModal" onclick="chosenOne(${reservedID})">
                                  評分/評論
-                                 </button></td>
-                                 <td>
-                                 <button class="btn btn-outline-primary" type="button"  style="margin-right: 20px;" onclick="approval(${rateID})">
-                                 確認
-                                 </button></td>
-                                <td>
-                                 <button class="btn btn-outline-danger" type="button" >
-                                 刪除
-                                 </button></td>
+                                 </button>
+                                 </td>
                                  </tr>`)
             })
             body.innerHTML = comments.join("");
