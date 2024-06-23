@@ -10,8 +10,5 @@ namespace projRESTfulApiFitConnect.DTO.Member
         public DateOnly idBirthday { get; set; }
         public string idPwd { get; set; }
         public int idGender { get; set; }
-        public string photo { get; set; } = null;
-        public string address { get; set; } = null;
-        public string g_desc { get; set; } = null;
     }
 }

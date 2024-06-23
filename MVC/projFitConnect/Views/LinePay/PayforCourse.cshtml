@@ -1,0 +1,281 @@
+﻿@model projFitConnect.ViewModels.PayforCourseVM
+@{
+    string coursePayList = Model.coursePayList;
+    string[] courseList = Model.coursePayList.Trim('[', ']').Split(",");
+}
+
+@foreach (var course in courseList)
+{
+    <p>@course</p>
+    <p>@Model.courseSum</p>
+}
+<h3 class="fw-bolder text-center">訂單資訊</h3>
+<hr />
+<div class="row">
+    <div class="col-8">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-credit-card fs-3"></i>
+            <span class="fw-bolder fs-5 mx-3">付款方式</span>
+        </div>
+
+        <div class="btn-group mt-3" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradioPay" id="btnradio1" autocomplete="off" checked>
+            <label class="btn btn-lg btn-outline-primary" for="btnradio1">LINE Pay</label>
+        </div>
+
+        <div class="shadow col-md-10 text-center d-flex flex-row p-3 justify-content-around mt-3">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div>使用 LINE Pay 付款</div>
+                <ul style="margin:0"><li class="form-text text-muted">確認付款後，畫面將跳轉至 LINE Pay 付款頁面</li></ul>
+            </div>
+            <div class="align-content-center">
+                <img src="~/Images/LinePay.png" style="width:84px;height:24px" />
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center mt-3">
+            <i class="bi bi-receipt-cutoff fs-3"></i>
+            <span class="fw-bolder fs-5 mx-3">發票</span>
+        </div>
+
+        <form class="mb-5">
+            <!-- 發票種類 -->
+            <div class="btn-group mt-3" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradioReceipt" id="btnradioPersonal" autocomplete="off" checked>
+                <label class="btn btn-lg btn-outline-primary" for="btnradioPersonal">個人發票</label>
+                <input type="radio" class="btn-check" name="btnradioReceipt" id="btnradioCompany" autocomplete="off">
+                <label class="btn btn-lg btn-outline-primary" for="btnradioCompany">公司發票</label>
+                <input type="radio" class="btn-check" name="btnradioReceipt" id="btnradioDonate" autocomplete="off">
+                <label class="btn btn-lg btn-outline-primary" for="btnradioDonate">捐贈發票</label>
+            </div>
+            <!-- 個人發票 -->
+            <div class="shadow col-md-10 text-center d-flex flex-row p-3 mt-3" id="divPersonal" style="height:175px">
+                <div class="d-flex flex-column align-items-start justify-content-between w-100">
+                    <div class="mb-3">選擇領取方式</div>
+                    <select class="form-select mb-3" id="receiptOption">
+                        <option value="mobileBarcode">手機條碼</option>
+                        <option value="email">電子信箱</option>
+                    </select>
+                    <div id="displayDivForPersonalReceipt" class="w-100">
+                        <input type="text" class="form-control bg-light" placeholder="/XXXXXXXX (限大寫英數字)" />
+                    </div>
+                </div>
+            </div>
+            <!-- 公司發票 -->
+            <div class="d-flex flex-column shadow col-md-10 p-3 mt-3 d-none justify-content-between" id="divCompany" style="height:175px">
+                <div class="d-flex flex-row align-items-start w-100">
+                    <div class="d-flex flex-column align-items-start w-50">
+                        <label class="form-label">公司統編</label>
+                        <input type="text" class="form-control bg-light mt-3" placeholder="請輸入公司統編" />
+                    </div>
+                    <div class="d-flex flex-column align-items-start ms-3 w-50">
+                        <label class="form-label">公司抬頭</label>
+                        <input type="text" class="form-control bg-light mt-3" placeholder="請輸入公司抬頭" />
+                    </div>
+                </div>
+                <div class="w-100">
+                    <small class="d-block form-text text-muted text-start w-100">
+                        <i class="bi bi-info-circle"></i>結帳完成後，本公司將主動發送通知信至你的電子信箱。
+                    </small>
+                </div>
+            </div>
+            <!-- 捐贈發票 -->
+            <div class="shadow col-md-10 text-center d-flex flex-row p-3 mt-3 d-none" id="divDonate" style="height:175px">
+                <div class="d-flex flex-column align-items-start w-100 justify-content-between">
+                    <div class="mb-3">選擇捐贈單位</div>
+                    <select class="form-select mb-3" id="receiptOption">
+                        <option>財團法人創世社會福利基金會 919</option>
+                        <option>財團法人伊甸社會福利基金會 25885</option>
+                    </select>
+                    <div id="displayDivForPersonalReceipt" class="w-100">
+                        <small type="text" class="d-block form-text text-start text-muted w-100"><i class="bi bi-info-circle"></i>選擇上方捐贈單位，就可以完成雲端發票的捐贈</small>
+                    </div>
+                </div>
+            </div>
+            <!-- 個人資訊 -->
+            <div class="d-flex align-items-center mt-3">
+                <i class="bi bi-person fs-3"></i>
+                <span class="fw-bolder fs-5 mx-3">個人資訊</span>
+            </div>
+            <div class="row">
+                <label for="consignee" class="form-label mt-4">收件人姓名</label>
+                <div>
+                    <input type="text" class="form-control w-25" id="consignee" placeholder="*請輸入姓名">
+                </div>
+
+                <label for="city" class="form-label mt-4">收件地址</label>
+                <div class="d-flex flex-row justify-content-md-start">
+                    <select class="form-select w-25 me-3" id="city"><option>請選擇縣市</option></select>
+                    <select class="form-select w-25 me-3" id="distinction"><option>請選擇鄉鎮區</option></select>
+                    <select class="form-select w-25" id="road"><option>請選擇路名</option></select>
+                </div>
+                <div class="d-flex flex-row mt-3">
+                    <input type="text" class="form-control w-25 me-3" id="zip" disabled />
+                    <input type="text" class="form-control w-50" id="addressDetail" placeholder="*請輸入地址" autocomplete="off" onblur="getFullAddress()" />
+                </div>
+                <input type="text" hidden id="fullAddress" name="fullAddress" />
+            </div>
+        </form>
+    </div>
+    <div class="d-flex flex-column justify-content-center col-4 ">
+        <h4 class="fw-bolder">我的訂單</h4>
+        <div class="d-flex flex-row justify-content-between">
+            <div class="form-label mt-4">課堂售價</div>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+            <div class="form-label mt-4">商品售價</div>
+        </div>
+        <hr />
+        <div class="d-flex flex-row justify-content-between">
+            <div class="form-label mt-2">總金額</div>
+        </div>
+        <button class="btn btn-success col-6 col-md-3 mt-4 form-control" onclick="requestPayment()" id="btnPay">前往付款</button>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+        let baseLoginPayUrl = 'https://localhost:7199/api/LinePay/';
+        const sum = document.getElementById('sum').value;
+
+        const btnradioPersonal = document.getElementById('btnradioPersonal');
+        const btnradioCompany = document.getElementById('btnradioCompany');
+        const btnradioDonate = document.getElementById('btnradioDonate');
+        const divPersonal = document.getElementById("divPersonal");
+        const divCompany = document.getElementById('divCompany');
+        const divDonate = document.getElementById('divDonate');
+        const receiptOption = document.getElementById("receiptOption");
+        const displayDivForPersonalReceipt = document.getElementById("displayDivForPersonalReceipt");
+
+        const city = document.getElementById("city");
+        const distinction = document.getElementById("distinction");
+        const road = document.getElementById("road");
+        const zip = document.getElementById("zip");
+        const addressDetail = document.getElementById("addressDetail");
+        const fullAddress = document.getElementById("fullAddress");
+
+        // 交易訂單資料
+        const payment = {
+            amount: sum,
+            currency: "TWD",
+            orderId: Date.now().toString(), // 使用 Timestamp 當作 orderId
+            packages: [
+                {
+                    id: "20240609I001",
+                    amount: sum,
+                    name: "測試",
+                    products: [
+                        {
+                            name: "測試商品",
+                            imageUrl: "",
+                            quantity: 1,
+                            price: sum,
+                        }
+                    ]
+                },
+            ],
+            RedirectUrls: {
+                ConfirmUrl: "https://localhost:7168/LinePay/Confirm",
+                CancelUrl: "https://6531-211-76-57-112.ngrok-free.app/api/LinePay/Cancel",
+            },
+        };
+        //LINE PAY 付款
+        async function requestPayment() {
+            try {
+                const response = await fetch(baseLoginPayUrl + 'Create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payment),
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                const res = await response.json();
+                window.location = res.info.paymentUrl.web;
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        };
+        //取得完整地址
+        const getFullAddress = () => {
+            fullAddress.value = `${zip.value}${city.value}${distinction.value}${road.value}${addressDetail.value}`;
+        };
+
+        //取得郵遞區號
+        const loadZip = async () => {
+            const response = await fetch(`https://localhost:7199/api/ProfileAddress/GetZip?distinction=${city.value}${distinction.value}&road=${road.value}`);
+            const data = await response.json();
+            zip.value = data;
+        }
+        //取得路名
+        const loadRoad = async () => {
+            const response = await fetch(`https://localhost:7199/api/ProfileAddress/GetRoad?distinction=${city.value}${distinction.value}`);
+            const data = await response.json();
+            const roads = data.map(road => `<option value="${road}">${road}</option>`)
+            road.innerHTML = roads.join("");
+            await loadZip();
+        }
+        //取得鄉鎮
+        const loadDistinct = async () => {
+            const response = await fetch(`https://localhost:7199/api/ProfileAddress/GetDistinction?city=${city.value}`);
+            const data = await response.json();
+            const distinctions = data.map(distinction => `<option value="${distinction}">${distinction}</option>`);
+            distinction.innerHTML = distinctions.join("");
+            await loadRoad();
+        }
+        //取得縣市
+        (async () => {
+            const response = await fetch('https://localhost:7199/api/ProfileAddress/GetCity');
+            const data = await response.json();
+            const cities = data.map(city => `<option>${city}</option>`);
+            city.innerHTML = cities.join("");
+            await loadDistinct();
+        })();
+        city.addEventListener("change", loadDistinct);
+        distinction.addEventListener("change", loadRoad);
+        road.addEventListener("change", loadZip);
+
+        // 切換個人發票、公司發票、捐贈發票
+        btnradioPersonal.addEventListener("click", () => {
+            toggleDisplay(divPersonal, divCompany, divDonate);
+        });
+        btnradioCompany.addEventListener("click", () => {
+            toggleDisplay(divCompany, divPersonal, divDonate);
+        });
+        btnradioDonate.addEventListener("click", () => {
+            toggleDisplay(divDonate, divPersonal, divCompany);
+        });
+        function toggleDisplay(elementToShow, elementToHide1, elementToHide2) {
+            elementToShow.classList.remove('d-none');
+            elementToShow.classList.add('d-block');
+            elementToHide1.classList.remove('d-block');
+            elementToHide1.classList.add('d-none');
+            elementToHide2.classList.remove('d-block');
+            elementToHide2.classList.add('d-none');
+        }
+
+        // 個人發票可使用信箱、手機條碼
+        receiptOption.addEventListener("change", (event) => {
+            switch (event.target.value) {
+                case 'mobileBarcode':
+                    displayDivForPersonalReceipt.innerHTML = `<input type="text" class="form-control bg-light" placeholder="/XXXXXXXX (限大寫英數字)" />`;
+                    break;
+                case 'email':
+                    displayDivForPersonalReceipt.innerHTML = `<div class="w-100"><small class="d-block form-text text-muted text-start w-100"><i class="bi bi-info-circle"></i>若發票中獎，本公司將主動寄信至你的電子信箱通知領獎事宜。</small></div>`;
+                    break;
+            }
+        });
+    </script>
+}
+@section Styles {
+    <style>
+        .form-control::placeholder {
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+}

@@ -1,0 +1,38 @@
+﻿@{
+    int id = ViewBag.id;
+}
+<form asp-controller="Schdule" asp-action="Update" method="post" class="container ">
+    <div class="p-3">
+        <input type="text" id="id" value="@ViewBag.id" hidden />
+        <label class="form-label" for="class">課程名稱</label>
+        <input type="text" class="form-control" id="class" name="class" />
+        <label class="form-label" for="courseTime">時間</label>
+        <input type="text" class="form-control" id="courseTime" name="courseTime" />
+        <label class="form-label" for="courseDate">日期</label>
+        <input type="date" class="form-control" id="courseDate" name="courseDate" />
+        <label class="form-label" for="field">教室</label>
+        <input type="text" class="form-control" id="field" name="field" />
+        <label class="form-label" for="maxStudent">人數上限</label>
+        <input type="number" class="form-control" id="maxStudent" name="maxStudent" />
+        <div class="row mt-3">
+            <div class="col-6 col-md-3">
+                <button class="btn btn-dark form-control">取消</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-success form-control">送出</button>
+            </div>
+        </div>
+    </div>
+</form>
+@section Styles {
+    <style>
+
+    </style>
+}
+@section Scripts {
+    <script>
+        (async () => {
+
+        })();
+    </script>
+}
