@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewData["Title"] = "MemberAuthority";
+}
+
+@section Styles {
+    <style>
+        .main {
+            width: 92%;
+            margin: auto;
+        }
+
+        thead {
+            background-color: #101F41;
+        }
+
+        .head {
+            color: #D0D0D0 !important;
+        }
+
+        .row1 {
+            text-align: center;
+        }
+
+    </style>
+}
+<h1 style="padding-left:64px;">停權會員</h1>
+<div class="main">
+    <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="row1 head">ID</th>
+                <th class="head">Name</th>
+                <th class="head">Age</th>
+                <th class="head">Gender</th>
+                <th class="head">City</th>
+                <th class="head">E-mail</th>
+                <th class="head">Undo</th>
+            </tr>
+        </thead>
+        <tbody id="tablebody">
+        </tbody>
+    </table>
+</div>
+<!-- Modal -->
+<div class="modal" id="activateModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#01814A;color:whitesmoke;">
+                <h5 class="modal-title">解除停權</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:#E8FFF5;color:#000000">
+                <p>確定解除該會員帳號停權?</p>
+            </div>
+            <div class="modal-footer" style="background-color:#E8FFF5;color:#000000">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-outline-success" id="exedeny">解除</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        const body = document.querySelector('#tablebody')
+        var activateModal = new bootstrap.Modal(document.getElementById('activateModal'));
+        //計算年紀
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const currentDate = `${year}/${month}/${day}`;
+        console.log('currentDate', currentDate);
+        let birthday = '1988/06/08';
+        function calculateAges(currentDate, birthday) {
+            const d1 = new Date(currentDate);
+            const d2 = new Date(birthday);
+            let yearDiff = d1.getFullYear() - d2.getFullYear();
+            if (d1.getMonth() < d2.getMonth() ||
+                (d1.getMonth() === d2.getMonth() && d1.getDate() < d2.getDate()))
+                yearDiff--;
+            return yearDiff;
+        }
+        let Ages = calculateAges(currentDate, birthday);
+
+
+        //解除停權
+        function activate(id) {
+            activateModal.show();
+            document.querySelector('#exedeny').addEventListener('click', async () => {
+                let url = 'https://localhost:7199/api/Member/' + id + '/activate';
+                let response = await fetch(url, {
+                    method: 'DELETE'
+                });
+                let data = await response.text();
+                console.log('denial', data);
+                activateModal.hide();
+                loadunactivated();
+            })
+        }
+        //載入所有
+        const loadunactivated = async () => {
+            let url = 'https://localhost:7199/api/Member/unactivated';
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log('members', data);
+            //顯示資料
+            document.getElementById('datafound').innerHTML = `共${data.length}筆資料`;
+            const members = data.map(member => {
+                //address,birthday,eMail,genderDescription,id,name,phone,photo
+                Ages = calculateAges(currentDate,member.birthday );
+                return (`<tr>
+                         <td class="row1">${member.id}</td>
+                        <td>${member.name}</td>
+                        <td>${Ages}</td>
+                        <td>${member.genderDescription}</td>
+                        <td>${member.address.substring(0, 3)}</td>
+                        <td>${member.eMail}</td>
+                        <td>
+                        <button class="btn btn-outline-success" type="button" onclick="activate(${member.id})">
+                        解除停權
+                        </button></td>
+                        </tr>`)
+            })
+            body.innerHTML = members.join("");
+        }
+        loadunactivated();
+    </script>
+}
+

@@ -189,9 +189,7 @@
         }
     </style>
 }
-<a href="https://localhost:7168/shop/merchandise/0" style="text-decoration:none;">
-    <h1 style="margin-top:100px; text-align:center; font-size:4.5em;color:aliceblue;">商城</h1>
-</a>
+
 
 <div id="content">
     <aside class="aside">
@@ -419,6 +417,8 @@
             "sortBy": "",
             "sortType": "asc"
         };
+        document.querySelector('#bannerTitle').style.display = 'block';
+        document.querySelector('#bannerTitle').textContent = '商城';
         //aside---------------------------------------------------------------------------------------------------------
         checkboxAll.addEventListener('click', function () {
             for (var item of everyCheckBox) {
@@ -454,7 +454,7 @@
             const goods = data.productsResult.map(good => {
                 //data:image/jpeg;base64,${good.productImage}
                 //merchandise/${good.productId}
-                return (`<a href="merchandise/${good.productId}" style="text-decoration:none;">
+                return (`<a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
                            <div class="card mb-3 hover" style="max-width: 540px;">
                             <div class="row g-0">
                              <div class="col-md-4" style="text-align:center; padding-top:10px;">
@@ -685,7 +685,7 @@
             //顯示資料
             const goods = data.productsResult.map(good => {
                 //data:image/jpeg;base64,${good.productImage}
-                return (` <a href="merchandise/${good.productId}" style="text-decoration:none;">
+                return (` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
                             <div class="card recommend m-auto hover" style="min-width:150px;padding-top:8px">
                                   <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="recommend" style="width:100%">
                                   <div class="card-body">
@@ -765,7 +765,7 @@
                         <p class="card-text">$${allData[position].unitPrice}NTD</p>
                        </div>
                        <div class="d-grid gap-2">
-                       <a href="merchandise/${allData[position].productId}" class="btn-seemore">商品詳細</a>
+                       <a href="https://localhost:7168/shop/merchandise/${allData[position].productId}" class="btn-seemore">商品詳細</a>
                        </div></div></div>`
             }
             divMain.innerHTML = s;

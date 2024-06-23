@@ -22,11 +22,43 @@
     </style>
 }
 <h1 style="padding-left:64px;">教練清單</h1>
-<div class="input-group w-25 m-auto">
-    <input type="search" placeholder="輸入搜尋..." class="form-control" id="inputSearch" style="margin:0 auto;background-color:darkgrey;" />
-    <button class="btn btn-outline-warning" id="btnNavbarSearch" type="button"><img src="https://cdn4.iconfinder.com/data/icons/essentials-71/24/002_-_Search-32.png" alt="Search"></button>
-</div>
 <div class="main">
+    <div class="row mb-3">
+        <div class="col-5">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    --排序依據--
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item dropdown-sort" data-type="">加入日期</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="GenderID">性別</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="Ages">年齡</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="RegionId">地區</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="Sort1ID">有氧/無氧</a></li>
+                    <li><a class="dropdown-item dropdown-sort" data-type="Sort2ID">專長類別</a></li>
+                </ul>
+                <button class="btn btn-outline-secondary" style="margin-left:12px;" id="orderbtn">正序</button>
+            </div>
+        </div>
+        <div class="col-4" style="text-align:right;">
+            <input type="search" placeholder="輸入搜尋..." class="form-control" id="inputSearch" />
+        </div>
+        <div class="col-3" style="text-align:right;">
+            <label class="form-check-label">顯示筆數：</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="20" checked>
+                <label class="form-check-label" for="inlineRadio1">20</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="40">
+                <label class="form-check-label" for="inlineRadio2">40</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="60">
+                <label class="form-check-label" for="inlineRadio3">60</label>
+            </div>
+        </div>
+    </div>
     <label class="form-check-label" style="color:darkgray;font-style:italic;" id="datafound">共??筆資料</label>
     <table class="table table-striped table-hover">
         <thead>
@@ -38,6 +70,7 @@
                 <th class="head">Gender</th>
                 <th class="head">City</th>
                 <th class="head">E-mail</th>
+                <th class="head">Suspension</th>
             </tr>
         </thead>
         <tbody id="tablebody">
@@ -72,12 +105,34 @@
         <li><a href="#" style="margin-left:16px; border:none;">></a></li>
     </ul>
 </div>
+<!-- Modal -->
+<div class="modal" id="suspendModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#804040;color:whitesmoke;">
+                <h5 class="modal-title">教練停權</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="background-color:#FFF7FB;color:#000000">
+                <p>確定將該教練帳號停權?</p>
+            </div>
+            <div class="modal-footer" style="background-color:#FFF7FB;color:#000000">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" id="exedeny">停權</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts {
     <script>
         let MaxPage = 0;
+        const typeofsort = document.querySelectorAll('.dropdown-sort');
+        const orderby = document.getElementById('orderbtn');
         const inpSearch = document.querySelector('#inputSearch');
+        const pagesize = document.querySelectorAll('[name="inlineRadioOptions"]');
         const body = document.querySelector('#tablebody')
         const ulPaging = document.getElementById('ulpaging');
+        var suspendModal = new bootstrap.Modal(document.getElementById('suspendModal'));
         const searchData = {
             "sort1": "",
             "sort2": "",
@@ -108,6 +163,34 @@
         }
         let Ages = calculateAges(currentDate, birthday);
 
+        //排序依據
+        for (var type of typeofsort) {
+            type.addEventListener('click', function () {
+                //console.log(this.dataset.type);
+                searchData.sortBy = this.dataset.type;
+                searchData.page = 1;
+                loadCoaches();
+            })
+        }
+        //排序
+        var orderClicked = true;
+        orderby.addEventListener('click', (event) => {
+            console.log(event.target);
+            if (orderClicked) {
+                event.target.textContent = "倒序";
+                event.target.className = "btn btn-secondary";
+                orderClicked = false;
+                searchData.sortType = "desc";
+                loadCoaches();
+            } else {
+                event.target.textContent = "正序";
+                event.target.className = "btn btn-outline-secondary";
+                orderClicked = true;
+                searchData.sortType = "asc";
+                loadCoaches();
+            }
+        });
+        //搜尋關鍵字
         inpSearch.addEventListener('keydown', event => {
             if (event.keyCode === 13) {
                 if (event.target.value != null)
@@ -118,6 +201,16 @@
                 loadCoaches();
             }
         })
+        //顯示筆數
+        for (var radio of pagesize) {
+            //console.log(radio.value);
+            radio.addEventListener('click', function () {
+                searchData.pageSize = this.value;
+                searchData.page = 1;
+                loadCoaches();
+            })
+        }
+        //換頁
         const pagingHandler = (page) => {
             if (page === -1) { page = parseInt(searchData.page) - 1; if (page <= 0) return; }
             if (page === 0) { page = parseInt(searchData.page) + 1; if (page > MaxPage) return; }
@@ -125,7 +218,21 @@
             console.log('toPage',searchData.page);
             loadCoaches();
         }
-
+        //停權
+        function suspend(id) {
+            suspendModal.show();
+            document.querySelector('#exedeny').addEventListener('click', async () => {
+                let url = 'https://localhost:7199/api/Member/' + id + '/suspend';
+                let response = await fetch(url, {
+                    method: 'DELETE'
+                });
+                let data = await response.text();
+                console.log('denial', data);
+                suspendModal.hide();
+                loadCoaches();
+            })
+        }
+        //載入所有教練
         const loadCoaches = async () => {
             let url = 'https://localhost:7199/api/Coach/SEARCH';
             let response = await fetch(url, {
@@ -161,6 +268,10 @@
                            <td>${coach.genderDescription}</td>
                            <td>${coach.address.substring(0, 3)}</td>
                            <td>${coach.eMail}</td>
+                           <td>
+                           <button class="btn btn-outline-danger" type="button" onclick="suspend(${coach.id})">
+                           停權
+                           </button></td>
                            </tr>`)
             })
             body.innerHTML = coaches.join("");

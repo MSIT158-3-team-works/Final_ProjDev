@@ -20,6 +20,10 @@ namespace projFitConnect.Controllers
         {
             return View();
         }
+        public IActionResult CoachAuthority()
+        {
+            return View();
+        }
         public IActionResult CoachVerify()
         {
             return View();
@@ -29,10 +33,6 @@ namespace projFitConnect.Controllers
             return View();
         }
         public IActionResult CourseApproval()
-        {
-            return View();
-        }
-        public IActionResult CoachAuthority()
         {
             return View();
         }
