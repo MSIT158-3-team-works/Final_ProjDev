@@ -198,9 +198,6 @@
     </style>
 </head>
 <body>
-
-    <h1 style="margin-top:100px;">健身課程</h1>
-
     <!-- 搜索框 -->
     <div id="search-container" class="search-and-select">
         <input type="text" id="search-input" placeholder="搜索..." class="form-control me-2">
@@ -302,6 +299,8 @@
             "sortBy": "",
             "sortType": "asc"
         };
+        document.querySelector('#bannerTitle').style.display = 'block';
+        document.querySelector('#bannerTitle').textContent = '健身課程';
         //重設
         resetButton.addEventListener('click', () => {
             // 重設表單數據

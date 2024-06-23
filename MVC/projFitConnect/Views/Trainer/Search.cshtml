@@ -1,6 +1,5 @@
 ﻿@{
 }
-<div style="padding-top:85px;">
     <link href="~/css/coachsearch.css" rel="stylesheet" />
     <div class="mt-4" style="margin-top:30px;">
         <div class="d-flex float-start" role="search" style="width:25%">
@@ -62,7 +61,6 @@
             </li>
         </ul>
     </nav>
-</div>
 
 @{
     var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
@@ -96,6 +94,8 @@
             "sortBy": "",
             "sortType": "asc"
         };
+        document.querySelector('#bannerTitle').style.display = 'block';
+        document.querySelector('#bannerTitle').textContent = '找教練';
         //重設
         resetButton.addEventListener('click', () => {
             // 重設表單數據

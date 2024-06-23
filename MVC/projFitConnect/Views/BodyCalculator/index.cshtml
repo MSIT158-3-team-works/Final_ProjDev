@@ -1,8 +1,6 @@
 ﻿@{
     ViewData["Title"] = "index";
 }
-<div style="padding-bottom: 100px"></div>
-<h1 class="main-title">身體計算器</h1>
 <div style="padding-bottom:30px">
     <h3 class="sub-title">bodyCalculator By FitConnect</h3>
     <p style="text-align:center;font-size:19px;font-weight:bold;color:#004B97">輸入您的身高、體重、年紀、性別、活動程度，點擊「計算」按鈕，就能算出您的身體質量指數（BMI）與每日總消耗熱量（TDEE）。</p>
@@ -31,6 +29,8 @@
 
 @section Scripts {
     <script>
+        document.querySelector('#bannerTitle').style.display = 'block';
+        document.querySelector('#bannerTitle').textContent = '身體計算器';
         $(".divOption").hover(function () {
             $(this).children("img").css("border-radius", "50%").css("opacity", "0.2").end().find("h1").css("color", "black").end().children(".divBackground").css("visibility", "hidden");
         }, function () {
