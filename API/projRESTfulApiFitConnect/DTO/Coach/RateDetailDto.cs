@@ -6,6 +6,8 @@
 
         public string? Member { get; set; }
 
+        public string? Coach { get; set; }
+
         public string? Class { get; set; }
 
         public decimal RateClass { get; set; }

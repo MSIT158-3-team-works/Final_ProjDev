@@ -9,6 +9,8 @@ using projRESTfulApiFitConnect.Models;
 using projRESTfulApiFitConnect.DTO.Member.status;
 using projRESTfulApiFitConnect.DTO.Member;
 using projRESTfulApiFitConnect.DTO.Product;
+using projRESTfulApiFitConnect.DTO.Member.comment;
+using projRESTfulApiFitConnect.DTO.Coach;
 
 namespace projRESTfulApiFitConnect.Controllers
 {
@@ -52,22 +54,22 @@ namespace projRESTfulApiFitConnect.Controllers
         [HttpGet("others/{id}")]
         public IActionResult status(int? id)
         {
-            //  get member's other datas by id
-            if (id == null)
-                return NotFound();
+            ////  get member's other datas by id
+            //if (id == null)
+            //    return NotFound();
 
-            if (!_context.TIdentities.Any(x => x.Id == id && x.Activated == true))
-                return NotFound();
+            //if (!_context.TIdentities.Any(x => x.Id == id && x.Activated == true))
+            //    return NotFound();
 
-            MemberProfileDTO mp = new MemberProfileDTO((int)id, _context);
-            var response = new
-            {
-                reserved = mp.li_reservedDetail,
-                follow = mp.li_follow,
-                comments = mp.li_rateClass,
-            };
-            if (mp.status)
-                return Ok(response);
+            //MemberProfileDTO mp = new MemberProfileDTO((int)id, _context);
+            //var response = new
+            //{
+            //    reserved = mp.li_reservedDetail,
+            //    follow = mp.li_follow,
+            //    comments = mp.li_rateClass,
+            //};
+            //if (mp.status)
+            //    return Ok(response);
             return NotFound();
         }
 
@@ -97,7 +99,6 @@ namespace projRESTfulApiFitConnect.Controllers
                         Password = dto.idPwd,
                         Photo = photo,
                         Birthday = dto.idBirthday,
-                        Address = dto.address,
                         GenderId = dto.idGender,
                         Activated = true,
                         Payment = 0,
@@ -206,124 +207,195 @@ namespace projRESTfulApiFitConnect.Controllers
                 }
                 await transaction.CommitAsync();
                 return Ok("requesting...");
-
-
             }
         }
 
-        /*
-        // POST: Member/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RoleId,Name,Phone,EMail,Password,Photo,Birthday,Address,GenderId,Activated,Payment")] TIdentity tIdentity)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetMember(int id)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(tIdentity);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["GenderId"] = new SelectList(_context.TgenderTables, "GenderId", "GenderId", tIdentity.GenderId);
-            ViewData["RoleId"] = new SelectList(_context.TidentityRoleDetails, "RoleId", "RoleId", tIdentity.RoleId);
-            return View(tIdentity);
-        }
+            var member = await GetMemberByIdAsync(id);
 
-        // GET: Member/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            if (member == null)
             {
                 return NotFound();
             }
 
-            var tIdentity = await _context.TIdentities.FindAsync(id);
-            if (tIdentity == null)
+            var base64Image = await GetBase64ImageAsync(member.Photo);
+
+            List<TclassReserve> courses = await GetDistinctClassReservesAsync(id);
+
+            var comments = await GetCommentsAsync(id);
+
+            var followAndBlackList = await GetFollowAndBlackList(id);
+
+            var result = new
             {
-                return NotFound();
-            }
-            ViewData["GenderId"] = new SelectList(_context.TgenderTables, "GenderId", "GenderId", tIdentity.GenderId);
-            ViewData["RoleId"] = new SelectList(_context.TidentityRoleDetails, "RoleId", "RoleId", tIdentity.RoleId);
-            return View(tIdentity);
+                memberDetailDto = MapToMemberDetailDto(member, base64Image),
+                //courses,
+                reserveDetailDtos = await MapToReserveDetailDtosAsync(courses),
+                comments,
+                followAndBlackList
+            };
+
+            return Ok(result);
         }
 
-        // POST: Member/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RoleId,Name,Phone,EMail,Password,Photo,Birthday,Address,GenderId,Activated,Payment")] TIdentity tIdentity)
+        private async Task<FollowAndBlackListDto> GetFollowAndBlackList(int id)
         {
-            if (id != tIdentity.Id)
+            var followAndBlackList = await _context.TmemberFollows.Where(x => x.MemberId == id).Include(x => x.Status).Include(x => x.Coach).ToListAsync();
+            List<C_memberfollow> follow = followAndBlackList.Where(x => x.StatusId == 1).Select(x => new C_memberfollow { id = x.CoachId, name = x.Coach.Name, st_id = 1, status = x.Status.StatusDescribe, experts = _context.TcoachExperts.Where(a => a.CoachId == x.CoachId).Select(a => a.Class.ClassName).ToList() }).ToList();
+            List<C_memberfollow> blackList = followAndBlackList.Where(x => x.StatusId == 2).Select(x => new C_memberfollow { id = x.CoachId, name = x.Coach.Name, st_id = 2, status = x.Status.StatusDescribe, experts = _context.TcoachExperts.Where(a => a.CoachId == x.CoachId).Select(a => a.Class.ClassName).ToList() }).ToList();
+            FollowAndBlackListDto followAndBlackListDto = new FollowAndBlackListDto()
             {
-                return NotFound();
-            }
+                Follow = follow,
+                BlackList = blackList,
+            };
+            return followAndBlackListDto;
+        }
 
-            if (ModelState.IsValid)
+        private async Task<List<RateDetailDto>> GetCommentsAsync(int id)
+        {
+            var rates = await _context.TmemberRateClasses.Where(x => x.MemberId == id).Include(x => x.Reserve.Member).Include(x => x.Coach).ToListAsync();
+            List<RateDetailDto> comments = new List<RateDetailDto>();
+            foreach (var rate in rates)
             {
-                try
+                RateDetailDto rateDetailDto = new RateDetailDto()
                 {
-                    _context.Update(tIdentity);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+                    ReserveId = rate.ReserveId,
+                    Member = rate.Reserve.Member.Name,
+                    Coach = rate.Coach.Name,
+                    RateCoach = rate.RateCoach,
+                    CoachDescribe = rate.CoachDescribe,
+                    Class = rate.Reserve.ClassSchedule.Class.ClassName,
+                    RateClass = rate.RateClass,
+                    ClassDescribe = rate.ClassDescribe
+                };
+                comments.Add(rateDetailDto);
+            }
+            return comments;
+        }
+
+        private async Task<TIdentity> GetMemberByIdAsync(int id)
+        {
+            return await _context.TIdentities
+                .Where(x => x.RoleId == 1 && x.Id == id)
+                .Include(x => x.Gender)
+                .Include(x => x.Role)
+                .FirstOrDefaultAsync();
+        }
+
+        private async Task<string> GetBase64ImageAsync(string photo)
+        {
+            string imagePath = Path.Combine(_env.ContentRootPath, @"Images\MemberImages", photo);
+
+            if (string.IsNullOrEmpty(photo) || !System.IO.File.Exists(imagePath))
+                imagePath = Path.Combine(_env.ContentRootPath, @"Images\MemberImages", "20240409132450.jpg");
+
+            var bytes = await System.IO.File.ReadAllBytesAsync(imagePath);
+
+            return Convert.ToBase64String(bytes);
+        }
+
+        private async Task<List<TclassReserve>> GetDistinctClassReservesAsync(int memberId)
+        {
+            return await _context.TclassReserves
+                .Where(x => x.MemberId == memberId)
+                .Include(x => x.ClassSchedule.Class)
+                .Include(x => x.ClassSchedule.CourseStartTime)
+                .Include(x => x.ClassSchedule.Coach)
+                .Include(x => x.ClassSchedule.Field.Gym.Region.City)
+                .GroupBy(x => new { x.ClassSchedule.ClassId, x.ClassSchedule.CoachId, x.ClassSchedule.FieldId, x.ClassSchedule.CourseDate })
+                .Select(group => group.First())
+                .ToListAsync();
+        }
+
+        private MemberDetailDto MapToMemberDetailDto(TIdentity member, string base64Image)
+        {
+            return new MemberDetailDto
+            {
+                Id = member.Id,
+                Name = member.Name,
+                Phone = member.Phone,
+                EMail = member.EMail,
+                Photo = base64Image,
+                Birthday = member.Birthday.ToDateTime(TimeOnly.MinValue),
+                Address = member.Address,
+                GenderDescription = member.Gender.GenderText,
+                RoleDescription = member.Role.RoleDescribe
+            };
+        }
+
+        private async Task<List<ReserveDetailDto>> MapToReserveDetailDtosAsync(List<TclassReserve> courses)
+        {
+            List<ReserveDetailDto> reserveDetailDtos = new List<ReserveDetailDto>();
+
+            foreach (var item in courses)
+            {
+                var sameCourseButTime = await _context.TclassSchedules
+                    .Where(x => x.ClassId == item.ClassSchedule.ClassId
+                                && x.CoachId == item.ClassSchedule.CoachId
+                                && x.FieldId == item.ClassSchedule.FieldId
+                                && x.CourseDate == item.ClassSchedule.CourseDate)
+                    .Include(x => x.CourseStartTime)
+                    .ToListAsync();
+
+                var timeSpans = sameCourseButTime.Select(time => time.CourseStartTime.TimeName).ToList();
+
+                var dateAndTimeDto = new DateAndTimeDto
                 {
-                    if (!TIdentityExists(tIdentity.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    date = sameCourseButTime.FirstOrDefault().CourseDate,
+                    timeList = [timeSpans.Min().ToTimeSpan(), timeSpans.Max().ToTimeSpan()],
+                };
+
+                var reserveDetailDto = new ReserveDetailDto
+                {
+                    ReserveId = item.ReserveId,
+                    Class = item.ClassSchedule.Class.ClassName,
+                    Schedule_id = item.ClassSchedule.ClassScheduleId,
+                    Coach = item.ClassSchedule.Coach.Name,
+                    Address = item.ClassSchedule.Field.Gym.GymAddress,
+                    Gym = item.ClassSchedule.Field.Gym.GymName,
+                    Field = item.ClassSchedule.Field.FieldName,
+                    Time = dateAndTimeDto,
+                    MaxStudent = item.ClassSchedule.MaxStudent,
+                    CourseFee = item.ClassSchedule.ClassPayment,
+                    PaymentStatus = item.PaymentStatus,
+                    ReserveStatus = item.ReserveStatus
+                };
+
+                reserveDetailDtos.Add(reserveDetailDto);
+            }
+
+            return reserveDetailDtos;
+        }
+
+
+        // PUT: api/Member/5
+        // 修改會員資料
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCoach(PutMemberDto putMemberDto)
+        {
+            var member = await _context.TIdentities.FindAsync(putMemberDto.Id);
+            member.Name = putMemberDto.Name;
+            member.Phone = putMemberDto.Phone;
+            member.Password = putMemberDto.Password;
+            member.EMail = putMemberDto.EMail;
+            if (putMemberDto.Photo != null)
+            {
+                string fileName = Guid.NewGuid() + putMemberDto.Photo.FileName;
+                string path = Path.Combine(_env.ContentRootPath, @"Images\MemberImages", fileName);
+                using (FileStream fs = new FileStream(path, FileMode.Create))
+                {
+                    putMemberDto.Photo.CopyTo(fs);
                 }
-                return RedirectToAction(nameof(Index));
+                member.Photo = fileName;
             }
-            ViewData["GenderId"] = new SelectList(_context.TgenderTables, "GenderId", "GenderId", tIdentity.GenderId);
-            ViewData["RoleId"] = new SelectList(_context.TidentityRoleDetails, "RoleId", "RoleId", tIdentity.RoleId);
-            return View(tIdentity);
-        }
-
-        // GET: Member/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tIdentity = await _context.TIdentities
-                .Include(t => t.Gender)
-                .Include(t => t.Role)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tIdentity == null)
-            {
-                return NotFound();
-            }
-
-            return View(tIdentity);
-        }
-
-        // POST: Member/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var tIdentity = await _context.TIdentities.FindAsync(id);
-            if (tIdentity != null)
-            {
-                _context.TIdentities.Remove(tIdentity);
-            }
-
+            member.Birthday = DateOnly.FromDateTime(putMemberDto.Birthday);
+            member.Address = putMemberDto.Address;
+            member.GenderId = putMemberDto.GenderId;
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
-        private bool TIdentityExists(int id)
-        {
-            return _context.TIdentities.Any(e => e.Id == id);
+            return Ok("會員資訊已成功更新");
         }
-        */
     }
 }

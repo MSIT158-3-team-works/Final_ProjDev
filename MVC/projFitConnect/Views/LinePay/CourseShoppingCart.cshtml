@@ -1,0 +1,140 @@
+﻿@{
+    var coachId = ViewBag.coachId;
+}
+<input type="number" id="coachId" value="@coachId" hidden />
+
+<div class="fw-bolder fs-5"><i class="bi bi-cart4 mx-1"></i><span>繳交場地費用</span></div>
+<!-- 課程清單 -->
+<div class="container">
+    <h5 class="mt-5">場地清單</h5>
+    <table class="mx-auto table table-hover mb-1">
+        <thead>
+            <tr class="shadow">
+                <th>
+                    <input class="form-check-input" type="checkbox" value="" id="allChecked_field" checked="" />
+                    <label class="form-check-label" for="allChecked_field">全選</label>
+                </th>
+                <th scope="col">教室</th>
+                <th scope="col">場館</th>
+                <th scope="col">租借日期</th>
+                <th scope="col">租借時段</th>
+                <th scope="col">場地費/小時</th>
+            </tr>
+        </thead>
+        <tbody id="tbody_field"></tbody>
+    </table>
+</div>
+
+<hr />
+<div class="form-label form-control shadow" id="sumDiv"></div>
+
+
+<form id="coursePayForm" action="/LinePay/PayforCourse" method="post">
+    <input type="text" name="coursePayList" id="coursePayList">
+    <input type="number" name="courseSum" id="courseSum" />
+    <div class="row my-5">
+        <div class="col-6 col-md-3">
+            <button type="submit" class="btn btn-success col-6 col-md-3 form-control" id="btnCheckOut">前往結帳</button>
+        </div>
+        <div class="col-6 col-md-3">
+            <button type="button" class="btn btn-danger col-6 col-md-3 form-control" onclick="goBack()">取消</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        const coachId = document.getElementById('coachId');
+        const sumDiv = document.getElementById('sumDiv');
+        const tbody_field = document.getElementById('tbody_field');
+        const allChecked_field = document.getElementById('allChecked_field');
+        const btnCheckOut = document.getElementById('btnCheckOut');
+        const coursePayForm = document.getElementById('coursePayForm');
+        const coursePayList = document.getElementById('coursePayList');
+        const courseSum = document.getElementById('courseSum');
+
+        (async () => {
+            const response = await fetch(`https://localhost:7199/api/Coach/${coachId.value}`);
+            const data = await response.json();
+            let unpaid = Array.from(data.fieldDetailDtos).filter(x => !x.paymentStatus);
+            console.log(unpaid);
+            let innerHTML = "";
+            unpaid.forEach(item => {
+                let timeParse = parseTime(item.courseEndTime) - parseTime(item.courseStartTime)
+                innerHTML += `<tr class="shadow field">
+                                    <td class="align-content-center"><input class="form-check-input check-value" type="checkbox" value="${item.fieldPayment * timeParse}" data-id="${item.fieldReserveId}" checked=""/></td>
+                                    <td class="align-content-center">${item.field}</td>
+                                    <td class="align-content-center">${item.city} ${item.region} ${item.gym} ${item.floor}</td>
+                                    <td class="align-content-center">${item.courseDate}</td>
+                                    <td class="align-content-center">${item.courseStartTime}~${item.courseEndTime}</td>
+                                    <td class="align-content-center">NT$${item.fieldPayment}</td>
+                                </tr>`
+            });
+            tbody_field.innerHTML = innerHTML;
+            loadSum();
+
+            let field_formCheckInput = document.querySelectorAll('.field .form-check-input');
+            console.log(field_formCheckInput);
+            //場地-全選按鈕被點擊(項目全選選取、全部取消)
+            allChecked_field.addEventListener('click', () => {
+                if (!allChecked_field.checked) {
+                    field_formCheckInput.forEach(item => {
+                        item.checked = false;
+                    });
+                } else {
+                    field_formCheckInput.forEach(item => {
+                        item.checked = true;
+                    });
+                }
+                loadSum();
+            });
+            //場地-項目被點擊
+            field_formCheckInput.forEach(item => {
+                item.addEventListener('click', (event) => {
+                    if (event.target.id == "allChecked_product")
+                        return;
+                    allChecked_field.checked = false;
+                    loadSum();
+                });
+            });
+        })();
+        function goBack() {
+            window.history.back();
+        };
+        //字串轉小時
+        function parseTime(timeStr) {
+            let [hours] = timeStr.split(':').map(Number);
+            return hours;
+        };
+        //金額總計
+        function loadSum() {
+            let checkValues = Array.from(document.querySelectorAll('.check-value'));
+            checkValues = checkValues.filter(x => x.checked == true);
+            sum = 0;
+            checkValues.forEach(input => {
+                sum += parseInt(input.value);
+            })
+            courseSum.value = sum;
+            sumDiv.innerHTML = `總金額:NT${sum}`;
+            if (sum <= 0) {
+                btnCheckOut.disabled = true;
+                return;
+            }
+            btnCheckOut.disabled = false;
+        };
+
+        coursePayForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            let checkValues = Array.from(document.querySelectorAll('.check-value'));
+            let selectedCourseIds = [];
+
+            checkValues.forEach(item => {
+                if (item.checked) {
+                    selectedCourseIds.push(parseInt(item.getAttribute('data-id')));
+                }
+            });
+            document.getElementById('coursePayList').value = JSON.stringify(selectedCourseIds);
+            coursePayForm.submit();
+        });
+    </script>
+}
