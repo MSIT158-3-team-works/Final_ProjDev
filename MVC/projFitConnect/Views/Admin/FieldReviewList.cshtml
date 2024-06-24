@@ -111,7 +111,7 @@
                                         <button class="btn btn-outline-primary view-btn" data-id="${item.fieldId}">檢視</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-outline-warning confirm-btn" data-id="${item.fieldId}" data-status="${item.status}" data-bs-toggle="modal" data-bs-target="#statusModal">更改</button>
+                                        <button class="btn btn-outline-warning confirm-btn" data-id="${item.fieldId}" data-status="${item.status}" data-bs-toggle="modal" data-bs-target="#statusModal">同意</button>
                                     </td>
                                     <td>
                                         <button class="btn btn-outline-danger delete-btn" data-id="${item.fieldId}" data-bs-toggle="modal" data-bs-target="#deleteModal">刪除</button>
@@ -187,10 +187,10 @@
                         if (confirmResponse.ok) {
                             location.reload();
                         } else {
-                            console.error('狀態更新失敗:', confirmResponse.status);
+                            console.error('審核失敗:', confirmResponse.status);
                         }
                     } catch (error) {
-                        console.error('狀態更新請求失敗:', error);
+                        console.error('審核更新請求失敗:', error);
                     } finally {
                         $('#statusModal').modal('hide');
                     }
