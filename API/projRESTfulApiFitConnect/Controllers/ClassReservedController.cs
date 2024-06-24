@@ -26,5 +26,24 @@ namespace projRESTfulApiFitConnect.Controllers
             var reservedClass = await _context.TclassReserves.Where(x => x.ClassScheduleId == id).ToListAsync();
             return Ok(new { currentNumberOfStudent = reservedClass.Count });
         }
+
+        [HttpGet("add/{id}")]
+        public async Task<ActionResult> addClassReserved(int id, int schid)
+        {
+            if (_context.TclassReserves.Any(x => x.MemberId == id && x.ClassScheduleId == schid))
+                return BadRequest();
+
+            TclassReserve newreserve = new TclassReserve
+            {
+                ClassScheduleId = schid,
+                MemberId = id,
+                PaymentStatus = false,
+                ReserveStatus = false,
+            };
+            _context.TclassReserves.Add(newreserve);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

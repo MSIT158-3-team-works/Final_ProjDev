@@ -227,7 +227,7 @@
                         <img src="https://cdn0.iconfinder.com/data/icons/phosphor-fill-vol-3/256/house-fill-256.png" alt="Gym Icon" width="20">
                         瞭解場館
                     </a>
-                    <a href="#" class="button buyCourse">
+                    <a href="#" class="button buyCourse" id="addcartbtn">
                         <img src="https://cdn0.iconfinder.com/data/icons/phosphor-regular-vol-4/256/shopping-cart-256.png" alt="Buy Course Icon" width="20">
                         購買課程
                     </a>
@@ -289,7 +289,15 @@
     <script>
         console.log(@ViewBag.classScheduleId);
         const classScheduleId = @ViewBag.classScheduleId;
-
+        if (classScheduleId) {
+            var _id = @ViewBag.ID;
+            const newbtn = document.getElementById('addcartbtn')
+            newbtn.href = `https://localhost:7199/api/ClassReserved/add/${_id}?schid=${classScheduleId}`
+            newbtn.addEventListener('click', () => {
+                window.alert('新增課程成功')
+                window.location.href = 'https://localhost:7168/Course'
+            })
+        }
 
         //文字摺疊
         document.addEventListener('DOMContentLoaded', function () {
