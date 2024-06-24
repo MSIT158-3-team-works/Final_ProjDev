@@ -1,12 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using projFitConnect.ViewModels;
 
 namespace projFitConnect.Controllers
 {
-    public class MemberController : Controller
+    public class MemberController : memberRouteController
     {
         public IActionResult Profile()
         {
-            return View();
+            C_user member = new C_user
+            {
+                id = HttpContext.Session.GetInt32("ID").ToString(),
+                role_id = HttpContext.Session.GetInt32("role_ID").ToString()
+            };
+
+            return View(member);
         }
         public IActionResult Coachregistered()
         {
