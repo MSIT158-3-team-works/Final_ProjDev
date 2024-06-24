@@ -260,13 +260,16 @@ namespace projRESTfulApiFitConnect.Controllers
             return comments;
         }
 
-        private async Task<TIdentity> GetMemberByIdAsync(int id)
+        private Task<TIdentity> GetMemberByIdAsync(int id)
         {
-            return await _context.TIdentities
-                .Where(x => x.RoleId == 1 && x.Id == id)
+            return _context.TIdentities
+                .Where(x => x.Id == id)
                 .Include(x => x.Gender)
                 .Include(x => x.Role)
                 .FirstOrDefaultAsync();
+
+            //  to make coach available
+            //  .Where(x => x.RoleId == 1 && x.Id == id)
         }
 
         private async Task<string> GetBase64ImageAsync(string photo)
@@ -519,7 +522,6 @@ namespace projRESTfulApiFitConnect.Controllers
 
             }
         }
-
         // DELETE:
         [HttpDelete("{id}/suspend")]
         public async Task<IActionResult> inactiveteMember(int id)

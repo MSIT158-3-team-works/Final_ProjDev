@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using projRESTfulApiFitConnect.DTO;
 using projRESTfulApiFitConnect.DTO.Gym;
 using projRESTfulApiFitConnect.Models;
+using System;
 using System.IO;
 
 
@@ -40,6 +41,7 @@ namespace projRESTfulApiFitConnect.Controllers
 
                 GymDto fieldDto = new GymDto()
                 {
+                    gymId = item.GymId,
                     GymName = item.GymName,
                     GymAddress = item.GymAddress,
                     GymTime = item.GymTime,
