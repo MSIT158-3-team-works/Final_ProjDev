@@ -15,6 +15,56 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <link href="~/css/styles3.css" rel="stylesheet" />
+    <style>
+        .dropdown-btn {
+            margin: 0 10px;
+            padding-bottom: 5px;
+            background-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .nondrop-btn {
+            margin: 0 10px;
+            background-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+            .dropdown-btn:hover .full-width-dropdown {
+                display: block;
+                top: 100%;
+            }
+
+        .full-width-dropdown {
+            width: 180px;
+            left: 25%;
+            transform: translateX(-80%);
+            display: none;
+            position: absolute;
+            z-index: 1000;
+            background-color: #F3F3FA;
+        }
+
+            .full-width-dropdown a:hover {
+                background-color: #004B97;
+                color: #FFFCEC;
+            }
+
+        .subtitle {
+            padding: 12px 0 8px 20px;
+            color: #000079;
+            font-weight: 500;
+            font-size: 1.3em;
+        }
+
+        .layoutstamp {
+            width: 2.8rem;
+            height: 2.8rem;
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body id="page-top">
@@ -35,11 +85,49 @@
                         <li class="nav-item"><a class="nav-link fs-5" href="~/gymlist/index">找場地</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/shop/index">商城</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/BodyCalculator/index">身體計算器</a></li>
-                        <li></li>
-                        <li class="nav-item"><a class="navbar-brand fs-6" href="https://localhost:7168/Home/Login"><img src="~/assets/img/icon_profile.png" id="avatar-img" /></a></li>
-                        <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_shopping_cart.png" /></a></li>
-                        <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_customer_service.png" /></a></li>
-                        <li class="nav-item"><a class="navbar-brand fs-6 " href=""><img src="~/assets/img/icon_heart_like.png" /></a></li>
+                        
+                        <li>
+                            <div class="dropdown-center">
+                                <div class="dropdown-btn">
+                                    <a href="https://localhost:7168/Home/login"><img class="layoutstamp" src="~/assets/img/icon_profile.png" alt="Member" id="avatar-img"></a><br />
+                                    <ul class="dropdown-menu full-width-dropdown">
+                                        <li><a class="dropdown-item subtitle" href="https://localhost:7168/member/profile">會員資料</a></li>
+                                        <li><a class="dropdown-item subtitle" href="https://localhost:7168/Member">會員</a></li>
+                                        <li><a class="dropdown-item subtitle" asp-controller="home" asp-action="logout">登出</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-center">
+                                <div class="dropdown-btn">
+                                    <a href="https://localhost:7168/Home/login"><img class="layoutstamp" src="~/assets/img/icon_shopping_cart.png" alt="ShoppingCart"></a><br />
+                                    <ul class="dropdown-menu full-width-dropdown">
+                                        <li><a class="dropdown-item subtitle" href="#">我的購物車</a></li>
+                                        <li><a class="dropdown-item subtitle" href="#">前往課程</a></li>
+                                        <li><a class="dropdown-item subtitle" href="#">前往商城</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-center">
+                                <div class="dropdown-btn">
+                                    <a href="https://localhost:7168/Home/login"><img class="layoutstamp" src="~/assets/img/icon_heart_like.png" alt="WishList"></a><br />
+                                    <ul class="dropdown-menu full-width-dropdown">
+                                        <li><a class="dropdown-item subtitle" href="#">我的追蹤</a></li>
+                                        <li><a class="dropdown-item subtitle" href="#">我的收藏</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown-center">
+                                <a class="nondrop-btn" href="#">
+                                    <img class="layoutstamp" src="~/assets/img/icon_customer_service.png" alt="CustomerService" /><br />
+                                </a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
