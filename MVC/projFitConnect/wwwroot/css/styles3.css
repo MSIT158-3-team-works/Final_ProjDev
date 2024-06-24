@@ -34,7 +34,7 @@
 
 .colored_a {
     color: white;
-    text-decoration: none; /* 移除下划线 */
+    text-decoration: none; /* 移除底線 */
 }
 
     .colored_a:hover {

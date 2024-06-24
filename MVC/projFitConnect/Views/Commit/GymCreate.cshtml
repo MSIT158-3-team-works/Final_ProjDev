@@ -135,6 +135,7 @@
             <div class="mb-2">
                 <button type="submit" class="btn btn-primary" id="btnsubmit">送出</button>
                 <a href="https://localhost:7168/Home" class="btn btn-outline-secondary">取消</a>
+                <button type="button" class="btn btn-info" id="btnDemo">Demo</button>
             </div>
         </div>
     </div>
@@ -216,6 +217,36 @@
                 });
                 regions.innerHTML = regionOptions;
             };
+
+            // Demo按鈕的功能
+            document.getElementById('btnDemo').addEventListener('click', async () => {
+                document.getElementById('InputOwner').value = "王曉明";
+                document.getElementById('Name').value = "Fit2";
+                document.getElementById('GymPhone').value = "0212345678";
+                document.getElementById('GymName').value = "大安二館";
+                document.getElementById('start_time').value = "09:00";
+                document.getElementById('end_time').value = "22:00";
+                document.getElementById('GymAddress').value = "台北市大安區復興南路一段";
+                document.getElementById('GymPark').value = "大安國民運動中心停車場";
+                document.getElementById('GymTraffic').value = "226公車";
+                document.getElementById('GymDescribe').value = "本場館設有:多功能教室";
+
+                // 模擬選擇縣市和地區
+                document.getElementById('citys').value = "台北市";
+                await loadRegions();  // 確保地區選項正確更新
+                document.getElementById('regions').value = "大安區";
+
+                // 為了讓表單驗證正確通過，手動觸發change事件
+                document.getElementById('InputOwner').dispatchEvent(new Event('change'));
+                document.getElementById('Name').dispatchEvent(new Event('change'));
+                document.getElementById('GymPhone').dispatchEvent(new Event('change'));
+                document.getElementById('GymName').dispatchEvent(new Event('change'));
+                document.getElementById('start_time').dispatchEvent(new Event('change'));
+                document.getElementById('end_time').dispatchEvent(new Event('change'));
+                document.getElementById('GymAddress').dispatchEvent(new Event('change'));
+                document.getElementById('GymDescribe').dispatchEvent(new Event('change'));
+            });
+
             async function init() {
                 await loadData();
                 await loadCities();
