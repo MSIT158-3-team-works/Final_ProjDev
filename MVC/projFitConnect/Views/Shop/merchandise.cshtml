@@ -474,7 +474,7 @@
             let data = await response.text();
             if (response.ok) {
                 setTimeout(() => {
-                    window.location.assign('https://localhost:7168/shop');
+                    window.location.assign('https://localhost:7168/linepay/shoppingcart');
                 }, 100);
             } else {
                 showFailedModal();

@@ -2,6 +2,7 @@
 {
     public class GymDto
     {
+        public int gymId { get; set; }
         public string GymName { get; set; } = null!;
         public string GymAddress { get; set; } = null!;
         public string GymTime { get; set; } = null!;

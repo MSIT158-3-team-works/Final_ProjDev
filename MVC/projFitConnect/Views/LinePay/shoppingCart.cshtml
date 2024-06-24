@@ -106,7 +106,7 @@
             tbody_course.innerHTML = course_innerHTML;
 
             //商品載入購物車
-            const response_product = await fetch(`https://localhost:7199/api/Shoppingcarts/${memberId}`);
+            const response_product = await fetch(`https://localhost:7199/api/Shoppingcarts?id=${memberId}`);
             const data_product = await response_product.json();
             let product_innerHTML = "";
             data_product.forEach(item => {
