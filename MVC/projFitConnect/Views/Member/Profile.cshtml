@@ -1,217 +1,557 @@
-﻿
-@{
-    ViewData["Title"] = "Profile";
-}
-<div class="container-fluid">
-    <div class="row">
-        <!-- 會員專區垂直導覽列 -->
-        <div class="col-lg-3 col-md-4 sidebar">
-            <div class="sidebar__item">
-                <h5>會員專區</h5>
-                <ul>
-                    <li class="active"><a href="#">個人資料</a></li>
-                    <li><a href="#">訂單查詢</a></li>
-                    <li><a href="#">候選教練</a></li>
-                    <li><a href="#">已報名課程</a></li>
-                </ul>
+﻿@model projFitConnect.ViewModels.C_user;
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<style>
+    .pgmargin {
+        padding: 0 10%;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .disable {
+        display: none;
+    }
+
+    .txtcolor {
+        color: black
+    }
+</style>
+
+<div id="page">
+    <div style="padding-top:100px"></div>
+    <div id="upside">
+
+        <div id="info_div" class="pgmargin m-2">
+            <div class="d-flex flex-column float-start m-lg-2 mr-5">
+                <img src="Athena.jpeg" class="rounded-circle" alt="..." height="140px" id="pic1">
+                <button class="btn btn-primary" id="btn">Button</button>
             </div>
-            <a href="#" class="btn btn-secondary">教練專區</a>
+            <div>
+                <p id="txt1">FitConnect會員</p>
+                <div class="p-3" id="txt2"></div>
+                <div class="d-flex flex-row bd-highlight mb-0  pb-0">
+                    <div class="p-2 flex-fill bd-highlight pb-0">
+                        <div class="d-flex flex-row bd-highlight mb-0">
+                            <div class="m-1 mb-0">
+                                <img src="~/images/member.png" class="rounded-circle" alt="..." width="40px">
+                            </div>
+                            <div class="flex-fill bd-highlight mb-0">
+                                <p>加入時間</p>
+                                <p id="span_1"> - - </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight pb-0">
+                        <div class="d-flex flex-row bd-highlight mb-0">
+                            <div class="m-1 mb-0">
+                                <img src="~/images/mail.png" class="rounded-circle" alt="..." width="40px">
+                            </div>
+                            <div class="flex-fill bd-highlight mb-0">
+                                <p>累計課程</p>
+                                <p id="span_2"> - - </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight pb-0">
+                        <div class="d-flex flex-row bd-highlight mb-0">
+                            <div class="m-1 mb-0">
+                                <img src="~/images/comment.png" class="rounded-circle" alt="..." width="40px">
+                            </div>
+                            <div class="flex-fill bd-highlight mb-0">
+                                <p>筆記總數</p>
+                                <p id="span_3"> - - </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 flex-fill bd-highlight pb-0">
+                        <div class="d-flex flex-row bd-highlight mb-0">
+                            <div class="m-1 mb-0">
+                                <img src="~/images/list.png" class="rounded-circle" alt="..." width="40px">
+                            </div>
+                            <div class="flex-fill bd-highlight mb-0">
+                                <p>發布討論</p>
+                                <p id="span_4"> - - </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="m-1" />
         </div>
 
-        <!-- 會員資料顯示和修改區 -->
-        <div class="col-lg-9 col-md-8">
-            <div class="profile-container">
-                <div class="profile-box">
-                    <h1 style="font-weight:700">會員資料編輯</h1>
-                    <div style="margin:auto;text-align:center;">
-                        <img src="~/img/member/defaultImage.jpg" class="profile-pic" id="imgShow" />
-                        <label id="lblPicture" class="profile-pic-label">
-                            <input id="imgLoad" type="file" name="photo" class="form-control" style="display:none;" />
-                            更換頭像
-                        </label>
+        <div id="info_nav" class="pgmargin">
+            <nav class="navbar-light">
+                <ul class="list-group flex-row m-2" id="nav">
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 flex-fill btn btn-outline-secondary">
+                        <span>我的課程</span>
+                        <span class="badge text-bg-primary p-2 rounded-pill txtcolor" id="sp1"></span>
+                        <span hidden>1</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 flex-fill btn btn-outline-secondary">
+                        <span>我的訂單</span>
+                        <span class="badge text-bg-primary p-2 rounded-pill txtcolor" id="sp2"></span>
+                        <span hidden>2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 flex-fill btn btn-outline-secondary">
+                        <span>我的蒐藏</span>
+                        <span class="badge text-bg-primary p-2 rounded-pill txtcolor" id="sp3"></span>
+                        <span hidden>3</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 flex-fill btn btn-outline-secondary">
+                        <span>追蹤列表</span>
+                        <span class="badge text-bg-primary p-2 rounded-pill txtcolor" id="sp4"></span>
+                        <span hidden>4</span>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+    <div id="downside" style="background-color:snow;height:600px;border-radius:10px;padding-top:30px">
+
+        <div id="div_load">
+            <div class="pgmargin">
+                <div style="margin:50px;padding:100px;text-align:center;padding-bottom:0;margin-bottom:0;">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
-                    <form id="profileForm" class="form-horizontal">
-                        <div class="form-group">
-                            <label for="username" class="control-label col-md-2 fw-bold" style="font-size:23px;">用戶名:</label>
-                            <div class="col-md-10">
-                                <input type="text" id="idUserName" name="username" class="form-control" size="16" style="width: 100%;" value="John Doe" />
-                                <span id="spUserName"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="control-label col-md-2 fw-bold" style="font-size:23px;">電子郵件:</label>
-                            <div class="col-md-10">
-                                <input type="email" id="idEmail" name="email" class="form-control" size="16" style="width: 100%;" value="john@example.com" />
-                                <span id="spEmail"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone" class="control-label col-md-2 fw-bold" style="font-size:23px;">電話:</label>
-                            <div class="col-md-10">
-                                <input type="tel" id="idPhone" name="phone" class="form-control" size="16" style="width: 100%;" value="123-456-7890" />
-                                <span id="spPhone"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="address" class="control-label col-md-2 fw-bold" style="font-size:23px;">地址:</label>
-                            <div class="col-md-10">
-                                <input type="text" id="idAddress" name="address" class="form-control" size="16" style="width: 100%;" value="123 Main St" />
-                                <span id="spAddress"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="birthday" class="control-label col-md-2 fw-bold" style="font-size:23px;">生日:</label>
-                            <div class="col-md-10">
-                                <input type="date" id="idBirthday" name="birthday" class="form-control" size="16" style="width: 100%;" value="1990-01-01" />
-                                <span id="spBirthday"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="remarks" class="control-label col-md-2 fw-bold" style="font-size:23px;">備註:</label>
-                            <div class="col-md-10">
-                                <textarea id="idRemarks" name="remarks" class="form-control" rows="3" style="width: 100%;">No remarks</textarea>
-                                <span id="spRemarks"></span>
-                            </div>
-                        </div>
-                        <div class="button-group">
-                            <button type="button" class="btn btn-primary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">保存</button>
-                            <br>
-                            <button type="button" class="btn btn-secondary" id="buttonCancel" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">取消</button>
-                        </div>
-                        <br><br>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
+        <div id="我的課程" class="disable">
+            <div class="pgmargin">
+                <h2 id="list-item-1">課程</h2>
+                <table class="table table-striped table-hover m-2 text-center">
+                    <thead>
+
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">課程</th>
+                            <th scope="col">教練</th>
+                            <th scope="col">地點</th>
+                            <th scope="col">時間</th>
+                            <th scope="col">費用</th>
+                            <th scope="col">狀態</th>
+                            <th scope="col">檢視</th>
+                            <th scope="col">取消</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="tb1">
+                    </tbody>
+                </table>
+
+                <nav aria-label="Page navigation example pagination ">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div id="我的訂單" class="disable">
+            <div class="pgmargin">
+                <h2 id="list-item-2">訂單</h2>
+                <table class="table table-striped table-hover m-2 text-center">
+                    <thead>
+
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">名稱</th>
+                            <th scope="col">類別</th>
+                            <th scope="col">數量</th>
+                            <th scope="col">費用</th>
+                            <th scope="col">時間</th>
+                            <th scope="col">狀態</th>
+                            <th scope="col">檢視</th>
+                            <th scope="col">取消</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="tb2">
+                    </tbody>
+                </table>
+
+                <nav aria-label="Page navigation example pagination ">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button>
+                    前往購物車
+                </button>
+            </div>
+        </div>
+
+        <div id="我的蒐藏" class="disable">
+            <div class="pgmargin">
+                <h2 id="list-item-3">蒐藏</h2>
+                <table class="table table-striped table-hover m-2 text-center">
+                    <thead>
+
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">類別</th>
+                            <th scope="col">名稱</th>
+                            <th scope="col">數量</th>
+                            <th scope="col">時間</th>
+                            <th scope="col">狀態</th>
+                            <th scope="col">檢視</th>
+                            <th scope="col">取消</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="tb3">
+                    </tbody>
+                </table>
+
+                <nav aria-label="Page navigation example pagination ">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div id="追蹤列表" class="disable">
+            <div class="pgmargin">
+                <h2 id="list-item-3">追蹤教練</h2>
+                <table class="table table-striped table-hover m-2 text-center">
+                    <thead>
+
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">名稱</th>
+                            <th scope="col">專業</th>
+                            <th scope="col">狀態</th>
+                            <th scope="col">檢視</th>
+                            <th scope="col">取消</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="tb4">
+                    </tbody>
+                </table>
+
+                <nav aria-label="Page navigation example pagination ">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>
 
 @section Scripts {
     <script>
-        document.querySelector('#imgLoad').addEventListener("change", function () {
-            document.getElementById('imgShow').src = window.URL.createObjectURL(this.files[0]);
-        });
 
-        document.getElementById('buttonSubmit').addEventListener('click', function () {
-            // 取得表單數據
-            var username = document.getElementById('idUserName').value;
-            var email = document.getElementById('idEmail').value;
-            var phone = document.getElementById('idPhone').value;
-            var address = document.getElementById('idAddress').value;
-            var birthday = document.getElementById('idBirthday').value;
-            var remarks = document.getElementById('idRemarks').value;
+        (() => {
+            'use strict'
 
-            // 顯示更新後的內容
-            alert('會員資料已更新: \n' +
-                '用戶名: ' + username + '\n' +
-                '電子郵件: ' + email + '\n' +
-                '電話: ' + phone + '\n' +
-                '地址: ' + address + '\n' +
-                '生日: ' + birthday + '\n' +
-                '備註: ' + remarks);
-        });
+            let _id = @Model.id
+                let cid = @Model.role_id
 
-        document.getElementById('buttonCancel').addEventListener('click', function () {
-            // 重置表單或取消编輯邏輯
-            window.location.href = '/member/profile';
-        });
-    </script>
+                    const lis = document.querySelectorAll('#nav li')
+            const ld = document.getElementById('div_load')
+            var temp = document.getElementById('我的課程')
+            const btn = document.getElementById('btn');
+            const sp1 = document.getElementById('span_1');
+            const sp2 = document.getElementById('span_2');
+            const sp3 = document.getElementById('span_3');
+            const sp4 = document.getElementById('span_4');
+            const sp5 = document.getElementById('sp1');
+            const sp6 = document.getElementById('sp2');
+            const sp7 = document.getElementById('sp3');
+            const sp8 = document.getElementById('sp4');
 
+            var currentDate = new Date();
+            var year = currentDate.getFullYear();
+            var month = currentDate.getMonth() + 1;
+            var day = currentDate.getDate();
+            var formattedDate = `${year}/${month < 10 ? '0' + month : month}/${day < 10 ? '0' + day : day}`;
+            sp1.textContent = formattedDate;
 
-}
+            for (let li of lis) {
+                li.addEventListener('click', async (event) => {
+                    temp.classList.add('disable')
+                    temp = ld
+                    temp.classList.remove('disable')
 
-@section Styles{
-<style>
-        .container-fluid {
-            padding: 0;
-        }
+                    await reload(parseInt(`${li.childNodes[5].textContent}`));
 
-        .sidebar {
-            background-color: #f8f9fa;
-            padding: 20px;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-        }
+                    let txt = li.childNodes[1].textContent
+                    var div = document.getElementById(`${txt}`)
+                    temp.classList.add('disable')
+                    div.classList.remove("disable")
+                    //console.log(temp)
+                    temp = div
+                    //console.log(temp)
+                })
+            };
 
-        .sidebar__item h5 {
-            margin-bottom: 15px;
-        }
+            async function onload() {
+                const response = await fetch(`https://localhost:7199/api/Member/${_id}`);
+                const data = await response.json();
+                console.log('data', data)
+                init(data)
+                reload(1);
+                ld.classList.add('disable')
+                temp.classList.remove("disable")
+            };
 
-        .sidebar__item ul {
-            list-style-type: none;
-            padding: 0;
-        }
+            function init({ memberDetailDto, reserveDetailDtos, comments, followAndBlackList }) {
+                const d1 = document.getElementById('txt1')
+                const p1 = document.getElementById('pic1')
 
-            .sidebar__item ul li {
-                margin-bottom: 10px;
-            }
+                d1.textContent = `您好，${memberDetailDto.roleDescription}${memberDetailDto.name}`
+                p1.src = `data:image/jpeg;base64,${memberDetailDto.photo}`
 
-                .sidebar__item ul li a {
-                    color: #333;
-                    text-decoration: none;
-                }
+                const num_r = reserveDetailDtos.length
+                const num_f = followAndBlackList.follow.length
+                const num_b = followAndBlackList.blackList.length
+                const num_c = comments.length
 
-                    .sidebar__item ul li.active a,
-                    .sidebar__item ul li a:hover {
-                        color: #007bff;
+                sp5.textContent = `${num_r}`
+                sp8.textContent = `${num_f}`
+
+                let classtime = reserveDetailDtos.reduce((sum, reserveDetailDtos) => {
+                    let time1 = parseInt(`${reserveDetailDtos.time.timeList[0].substring(0, 2)}`)
+                    let time2 = parseInt(`${reserveDetailDtos.time.timeList[1].substring(0, 2)}`)
+                    if (time1 === time2) {
+                        return sum + 1
                     }
+                    return sum + (time2 - time1 + 1)
+                }, 0);
+                sp2.textContent = `${num_r}堂，共${classtime}小時`
 
-        .profile-container {
-            padding: 20px;
-        }
+                if (num_c === 0) {
+                    sp4.textContent = '尚未發布文章'
+                } else {
+                    sp4.textContent = `共${num_c}篇`
+                }
+            };
 
-        .profile-box {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
+            onload();
 
-            .profile-box h1 {
-                text-align: center;
-                vertical-align: middle;
-                margin-bottom: 20px;
-            }
+            async function reload(num) {
+                var str = '';
+                switch (num) {
+                    case 1:
+                        const response1 = await fetch(`https://localhost:7199/api/Member/${_id}`);
+                        const data1 = await response1.json();
+                        let courses = data1.reserveDetailDtos
+                        let tb1 = document.getElementById('tb1')
+                        str = ''
+                        for (let i = 0; i < courses.length; i++) {
+                            let time1 = parseInt(`${courses[i].time.timeList[0].substring(0, 2)}`)
+                            let time2 = parseInt(`${courses[i].time.timeList[1].substring(0, 2)}`)
+                            if (time1 === time2) {
+                                time2 = time1 + 1
+                            };
+                            let time_str = `${courses[i].time.date.slice(5, 7)}/${courses[i].time.date.slice(8, 10)} ${time1}:00-${time2}:00`
+                            let stat_txt = ''
+                            if (courses[i].reserveStatus === true) {
+                                stat_txt = '預約成功'
+                            } else {
+                                stat_txt = '未付款'
+                            };
+                            str += `<tr>
+                                        <td>${i + 1}</td>
+                                        <td>${courses[i].class}</td>
+                                        <td>${courses[i].coach}</td>
+                                        <td>${courses[i].address}</td>
+                                        <td>${time_str}</td>
+                                        <td>${courses[i].courseFee}</td>
+                                        <td>${stat_txt}</td>
+                                        <td>
+                                            <a href="https://localhost:7168/course/search/?${courses[i].schedule_id}" >
+                                                <button class="btn btn-outline-primary">檢視
+                                        </td>
+                                        <td>
+                                        <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#Modal1">
+                                            取消預約
+                                        </button>
 
-        .profile-pic {
-            height: 90px;
-            border-radius: 50%;
-        }
+                                        <div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">取消預約確認</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h3>您確定要取消預約嗎?</h3>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">返回</button>
+                                                        <button type="button" class="btn btn-outline-danger">確認</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </td>
+                                        </tr>`
+                        };
+                        tb1.innerHTML = str
+                        //console.log('ss')
+                        return;
+                    case 2:
 
-        .profile-pic-label {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            cursor: pointer;
-            color: #0072E3;
-            font-weight: bold;
-        }
+                        //  訂單
 
-        .form-horizontal .form-group {
-            margin-bottom: 15px;
-        }
 
-        .form-horizontal .control-label {
-            font-weight: bold;
-        }
+                        /*
+                                    <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">名稱</th>
+                                                    <th scope="col">類別</th>
+                                                    <th scope="col">數量</th>
+                                                    <th scope="col">費用</th>
+                                                    <th scope="col">時間</th>
+                                                    <th scope="col">狀態</th>
+                                                    <th scope="col">檢視</th>
+                                                    <th scope="col">取消</th>
+                                                </tr>
+                        */
+                        return;
+                    case 3:
 
-        .form-horizontal .form-control {
-            border-radius: 10px;
-        }
+                        // 蒐藏
 
-        .button-group {
-            margin-top: 10px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+                        /*
+                                    <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">類別</th>
+                                                    <th scope="col">名稱</th>
+                                                    <th scope="col">數量</th>
+                                                    <th scope="col">時間</th>
+                                                    <th scope="col">狀態</th>
+                                                    <th scope="col">檢視</th>
+                                                    <th scope="col">取消</th>
+                                                </tr>
+                        */
+                        return;
+                    case 4:
+                        const response4 = await fetch(`https://localhost:7199/api/Member/${_id}`);
+                        const data4 = await response4.json();
+                        let { follow, blackList } = data4.followAndBlackList
+                        const num_f = follow.length
+                        const num_b = blackList.length
+                        let tb4 = document.getElementById('tb4')
+                        str = ''
+                        if (num_f !== 0) {
+                            for (let i = 0; i < num_f; i++) {
+                                let exp_str = follow[i].experts[0]
+                                if (follow[i].experts[0].length > 1) {
+                                    exp_str = follow[i].experts.join(", ")
+                                };
+                                str += `
+                                        <tr>
+                                        <td>${i + 1}</td>
+                                        <td>${follow[i].name}</td>
+                                        <td>${exp_str}</td>
+                                        <td>${follow[i].status}</td>
+                                        <td>
+                                            <a href="https://localhost:7168/Trainer/Coach?id=${follow[i].id}" >
+                                                <button class="btn btn-outline-primary">檢視
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-outline-danger">取消</button>
+                                        </td>
+                                        </tr>`
+                            };
+                        };
+                        if (num_b !== 0) {
+                            for (let i = 0; i < num_b; i++) {
+                                let exp_str = follow[i].experts[0]
+                                if (exp_str = follow[i].experts[0].length > 1) {
+                                    exp_str = follow[i].experts.join(", ")
+                                }
+                                str += `
+                                        <tr>
+                                        <td>${i + 1}</td>
+                                        <td>${follow[i].name}</td>
+                                        <td>${exp_str}</td>
+                                        <td>${follow[i].status}</td>
+                                        <td>
+                                            <a href="https://localhost:7168/Trainer/Coach?id=${follow[i].id}" >
+                                                <button class="btn btn-outline-primary">檢視
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-outline-danger">取消</button>
+                                        </td>
+                                        </tr>`
+                            }
+                        }
+                        tb4.innerHTML = str
+                        //console.log('ss')
+                        return;
+                    default:
+                        return;
+                };
+            };
 
-            .button-group button {
-                margin-bottom: 10px;
-            }
-</style>
+        })();
+
+    </script>
 }
-
