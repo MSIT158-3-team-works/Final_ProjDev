@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\0624\\MVC\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0624\\mvc\\projfitconnect\\views\\admin\\gymreview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\gymreview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0624\\mvc\\projfitconnect\\views\\admin\\gymreviewlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\gymreviewlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0624\\mvc\\projfitconnect\\views\\home\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\home\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -17,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0624\\mvc\\projfitconnect\\views\\admin\\fieldcreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\fieldcreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0624\\mvc\\projfitconnect\\views\\admin\\gymreviewlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|solutionrelative:projfitconnect\\views\\admin\\gymreviewlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{091D8CD2-2AE8-4758-9E54-8830B2F3783D}|projFitConnect\\projFitConnect.csproj|c:\\users\\user\\desktop\\0624\\mvc\\projfitconnect\\views\\commit\\gymcreate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -103,19 +107,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "GymReview.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Admin\\GymReview.cshtml",
+              "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\GymReview.cshtml",
+              "ToolTip": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Admin\\GymReview.cshtml",
+              "RelativeToolTip": "projFitConnect\\Views\\Admin\\GymReview.cshtml",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAEoAAABHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-24T07:29:54.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Home\\_Layout.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Home\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Home\\_Layout.cshtml",
               "RelativeToolTip": "projFitConnect\\Views\\Home\\_Layout.cshtml",
-              "ViewState": "AQIAAL8AAAAAAAAAAAAAAM0AAABnAAAA",
+              "ViewState": "AQIAANQAAAAAAAAAAAAAAM0AAABnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-06-24T05:40:50.159Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "FieldCreate.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Admin\\FieldCreate.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\FieldCreate.cshtml",
@@ -128,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "FieldReviewList.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Admin\\FieldReviewList.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\FieldReviewList.cshtml",
@@ -141,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "GymReviewList.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Admin\\GymReviewList.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Admin\\GymReviewList.cshtml",
@@ -154,7 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "GymCreate.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Commit\\GymCreate.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Commit\\GymCreate.cshtml",
@@ -167,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Gym\\Index.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Gym\\Index.cshtml",
@@ -180,7 +197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\Shared\\_Layout.cshtml",
@@ -193,7 +210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\Views\\GymList\\Index.cshtml",
               "RelativeDocumentMoniker": "projFitConnect\\Views\\GymList\\Index.cshtml",
@@ -206,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "styles3.css",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\wwwroot\\css\\styles3.css",
               "RelativeDocumentMoniker": "projFitConnect\\wwwroot\\css\\styles3.css",

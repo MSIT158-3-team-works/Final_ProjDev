@@ -17,8 +17,24 @@
       "PackagePath": "staticwebassets\\Images\\Thomas.jpg"
     },
     {
+      "Id": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\wwwroot\\Images\\comment.png",
+      "PackagePath": "staticwebassets\\Images\\comment.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\wwwroot\\Images\\list.png",
+      "PackagePath": "staticwebassets\\Images\\list.png"
+    },
+    {
       "Id": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\wwwroot\\Images\\logo.png",
       "PackagePath": "staticwebassets\\Images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\wwwroot\\Images\\mail.png",
+      "PackagePath": "staticwebassets\\Images\\mail.png"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\wwwroot\\Images\\member.png",
+      "PackagePath": "staticwebassets\\Images\\member.png"
     },
     {
       "Id": "C:\\Users\\User\\Desktop\\0624\\MVC\\projFitConnect\\wwwroot\\Images\\model.jpg",
