@@ -41,6 +41,9 @@
                 <br>
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='https://localhost:7168/home/register'" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">點我註冊</button>
             </div>
+            <div style="text-align:center">
+                <button type="button" id="logindemo1">會員</button><button type="button" id="logindemo2">教練</button><button type="button" id="logindemo3">管理者</button>
+            </div>
         </form>
         <div>
            @*  <hr />
@@ -187,6 +190,23 @@
                 console.log(info_1.value)
                 form.submit()
             };
+
+            document.getElementById('logindemo1').addEventListener('click', () => {
+                //  member demo
+                document.getElementById("idAccount").value = '';
+                document.getElementById("idPwd").value = '';
+            });
+
+            document.getElementById('logindemo2').addEventListener('click', () => {
+                //  coach demo
+                document.getElementById("idAccount").value = '';
+                document.getElementById("idPwd").value = '';
+            });
+
+            document.getElementById('logindemo3').addEventListener('click', () => {
+                document.getElementById("idAccount").value = 'admin@gmail.com';
+                document.getElementById("idPwd").value = 'admin12345!';
+            });
 
         })();
     </script>

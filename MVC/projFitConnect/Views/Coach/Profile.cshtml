@@ -1,5 +1,5 @@
 ﻿<div class="border">
-    <div class="container d-flex">
+    <div class="container d-flex" style="padding-top:100px">
         <div class="w-25 border position-relative d-flex justify-content-center" style="height: 200px">
             <img src="~/images/model.jpg" class="position-absolute h-100" id="headshot" />
             <img src="~/images/mask.png" class="position-absolute h-100" />
@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="border form-control" style="height:1000px" id="displayDiv">
+    <div class="border form-control" style="height:600px" id="displayDiv">
         <!--內容呈現於此-->
     </div>
         
@@ -117,8 +117,8 @@
             let response = await fetch(`https://localhost:7199/api/Coach/${coachID}`);
             let data = await response.json();
             console.log(data);
-            name.innerHTML = data.coachDetailDto.name;
-            intro.innerHTML = data.coachDetailDto.intro;
+            name.textContent = `您好，教練${data.coachDetailDto.name}`;
+            intro.textContent = `個人資訊：${data.coachDetailDto.intro}`;
 
             response = await fetch(`https://localhost:7199/api/Member/${memberID}`);
             data = await response.json();
@@ -241,9 +241,13 @@
             for (const item of openedCourse) {
                 response = await fetch(`https://localhost:7199/api/ClassReserved/${item.classScheduleId}`);
                 data = await response.json();
+
+                let time = parseInt(item.courseStartTime.toString().substring(0, 2))
+                let time1 = `${time}:00`
+                let time2 = `${time + 1}:00`
                 innerHTML += `<tr>
                                     <td class="align-content-center">${item.class}</td>
-                                    <td class="align-content-center">${item.courseStartTime}~${item.courseEndTime}</td>
+                                    <td class="align-content-center">${time1}~${time2}</td>
                                     <td class="align-content-center">${item.courseDate}</td>
                                     <td class="align-content-center">${item.field}</td>
                                     <td class="align-content-center">${data.currentNumberOfStudent}/${item.maxStudent}</td>
@@ -260,9 +264,13 @@
                                 </tr>`
             }; 
             for (const item of reviewCourse) {
+                let time = parseInt(item.courseStartTime.toString().substring(0, 2))
+                let time1 = `${time}:00`
+                let time2 = `${time + 1}:00`
+
                 innerHTML += `<tr>
                                     <td class="align-content-center">${item.class}</td>
-                                    <td class="align-content-center">${item.courseStartTime}~${item.courseEndTime}</td>
+                                    <td class="align-content-center">${time1}~${time2}</td>
                                     <td class="align-content-center">${item.courseDate}</td>
                                     <td class="align-content-center">${item.field}</td>
                                     <td class="align-content-center">${data.currentNumberOfStudent}/${item.maxStudent}</td>
@@ -300,11 +308,12 @@
             let paid = data.fieldDetailDtos.filter(x => x.paymentStatus);
             let unpaid = data.fieldDetailDtos.filter(x => !x.paymentStatus);
             let innerHTML = "";
-            console.log(paid);
+            //scheduleDatailDtos
+            console.log('paid', data.scheduleDatailDtos);
             for (const item of paid) {
                 innerHTML += `<tr>
                                     <td class="align-content-center">${item.field}</td>
-                                    <td class="align-content-center">NT${item.fieldPayment}</td>
+                                    <td class="align-content-center">NT${item.payment}</td>
                                     <td class="align-content-center">${item.courseStartTime}~${item.courseEndTime}</td>
                                     <td class="align-content-center">${item.courseDate}</td>
                                     <td class="align-content-center">${item.city} ${item.region} ${item.gym} ${item.floor}</td>
