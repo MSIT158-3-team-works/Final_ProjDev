@@ -14,7 +14,7 @@
             padding: 20px;
             height: 50vh;
             position: sticky;
-            top: 0;
+            top: 100px;
         }
 
         .sidebar__item h5 {
@@ -91,7 +91,9 @@
     </style>
 }
 
-<h1 style="margin-top:100px; text-align:center; font-size:4.5em;color:aliceblue;">Coachregistered</h1>
+<div style="padding-bottom:100px;">
+    &emsp;
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3 col-md-4 sidebar">
@@ -166,7 +168,7 @@
                     <div class="button-group">
                         <button type="button" class="btn btn-primary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">保存</button>
                         <br>
-                        <button type="button" class="btn btn-secondary" id="buttonCancel" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">取消</button>
+                        <button type="button" class="btn btn-secondary" id="buttonCancel" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">取消</button>
                     </div>
                     <br><br>
                 </div>
@@ -175,7 +177,28 @@
     </div>
 </div>
 
-
+<div class="modal" id="successModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#CECEFF;">
+            <div class="modal-body" style="background-color:#ECFFFF; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#003D79; text-shadow: 1px 1px 2px #D9FFFF; font-weight:700;">已送出申請</h5>
+                <img src="https://cdn.dribbble.com/users/1154535/screenshots/3288650/dribbble-success-2.gif" alt="success" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#CECEFF;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="failedModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#FFECEC;">
+            <div class="modal-body" style="background-color:#FBFFFD; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h3 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#600000; text-shadow: 1px 1px 2px #FFD9EC; font-weight:700;">申請失敗</h3>
+                <img src="https://i.giphy.com/pjFF8YLW996aXqFHAu.webp" alt="Failed" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#FFECEC;">
+            </div>
+        </div>
+    </div>
+</div>
 @{
     var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
 }
@@ -198,6 +221,20 @@
             "intro": "",
             "images": [],
             "moreBase64Images": []
+        }
+        function showSuccessModal() {
+            const modal = new bootstrap.Modal(document.getElementById('successModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 2468);
+        }
+        function showFailedModal() {
+            const modal = new bootstrap.Modal(document.getElementById('failedModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 1357);
         }
 
         // 預覽選擇影像&轉成base64
@@ -273,9 +310,7 @@
         })
         // 取得表單數據
         document.getElementById('buttonSubmit').addEventListener('click', function () {
-            if (username.value == '') { alert('請填寫教練名稱'); return; }
-            if (remarks.value == '') { alert('請填寫教練介紹'); return; }
-            if (putData.expert.length <= 0) { alert('請填選擇專長'); return; }
+            if (username.value == '' || remarks.value == '' || putData.expert.length <= 0) { showFailedModal(); return; }
             if (putData.images.length != putData.moreBase64Images.length) { putData.images = []; putData.moreBase64Images = []; }
             putData.coachName = username.value;
             putData.intro=remarks.value;
@@ -327,11 +362,12 @@
                 }
             });
             let data = await response.text();
-            console.log(data);
-            alert('申請資料已送出');
-            setTimeout(() => {
-                window.location.assign('https://localhost:7168/member/profile');
-            }, 100);
+            if (response.ok) {
+                showSuccessModal();
+                setTimeout(() => {
+                    window.location.assign('https://localhost:7168/member/profile');
+                }, 2800);
+            } else { showFailedModal(); }
         }
     </script>
 
