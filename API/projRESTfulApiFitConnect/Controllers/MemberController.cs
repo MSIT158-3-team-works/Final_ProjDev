@@ -107,14 +107,10 @@ namespace projRESTfulApiFitConnect.Controllers
         [HttpGet("users/{id}")]
         public IActionResult getprofile(int? id)
         {
-            //  get member by id
-            if (id == null)
-                return NotFound();
-
-            if (!_context.TIdentities.Any(x => x.Id == id))
-                return NotFound();
-
             var member = _context.TIdentities.Where(x => x.Id == id && x.Activated == true).FirstOrDefault();
+            if (member == null)
+                return NotFound();
+
             if (member.Photo != null)
             {
                 string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", member.Photo);
@@ -123,8 +119,8 @@ namespace projRESTfulApiFitConnect.Controllers
             }
             else
             {
-                int random = (new Random()).Next(1,5);
-                string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", "default"+ random + ".jpg");
+                int random = (new Random()).Next(1, 5);
+                string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", "default" + random + ".jpg");
                 byte[] bytes = System.IO.File.ReadAllBytes(path);
                 member.Photo = Convert.ToBase64String(bytes);
             }

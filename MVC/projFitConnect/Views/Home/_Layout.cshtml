@@ -63,6 +63,7 @@
             height: 2.8rem;
             object-fit: cover;
             object-position: center;
+            border-radius:50%;
         }
     </style>
     @await RenderSectionAsync("Styles", required: false)
@@ -80,16 +81,18 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0 ">
                         <li class="nav-item"><a class="nav-link fs-5" href="https://localhost:7168/Home">HOME</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" asp-area="" asp-controller="Trainer" asp-action="Search">找教練</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" asp-area="" asp-controller="Course" asp-action="Search">找課程</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" href="~/gymlist/index">找場地</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" href="~/shop/index">商城</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" href="~/BodyCalculator/index">身體計算器</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/Trainer/Search">找教練</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/Course">找課程</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/gymlist">找場地</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/shop">商城</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/BodyCalculator">身體計算器</a></li>
                         
                         <li>
                             <div class="dropdown-center">
                                 <div class="dropdown-btn">
-                                    <a href="https://localhost:7168/Home/login"><img class="layoutstamp" src="~/assets/img/icon_profile.png" alt="Member" id="avatar-img"></a><br />
+                                    <a href="https://localhost:7168/Home/login" id="hyperlinkoflogin">
+                                        <img class="layoutstamp" src="~/assets/img/icon_profile.png" alt="Member" id="avatar-img">
+                                    </a><br />
                                     <ul class="dropdown-menu full-width-dropdown">
                                         <li><a class="dropdown-item subtitle" href="https://localhost:7168/member/profile">個人資料</a></li>
                                         <li><a class="dropdown-item subtitle" href="https://localhost:7168/Coach/profile">教練資料</a></li>
@@ -245,18 +248,41 @@
             defer>
     </script>
     <script>
-        const memberID = 9;
-        const avatarimg = document.querySelector('#avatar-img');
-        const MemberLogin = async () => {
-            let url = 'https://localhost:7199/api/Member/users/' + memberID;
-            //console.log('url=', url);
-            let response = await fetch(url);
-            let data = await response.json();
-            console.log('Login-member',data);
-            //data:image/jpeg;base64,${course.productImage}
-            avatarimg.src = 'data:image/jpeg;base64,' + data.photo;
-        }
-        MemberLogin();
+        (async () => {
+            const hyperlink = document.querySelector('#hyperlinkoflogin');
+            var url = '@Url.Action("Login", "Session")';
+            var response = await fetch(url);
+            if (!response.ok) {
+                hyperlink.href = 'https://localhost:7168/Home/login';
+                return;
+            } else {
+                var user = await response.json();
+                console.log("User:", user);
+                const avatarimg = document.querySelector('#avatar-img');
+
+                if (user.role_id == 3) {
+                    hyperlink.href = 'https://localhost:7168/Admin';
+                } else if (user.role_id == 2) {
+                    hyperlink.href = 'https://localhost:7168/Coach/profile';
+                    let coachResponse = await fetch('https://localhost:7199/api/Coach/' + user.id);
+                    if (!coachResponse.ok)
+                        return;
+                    let coachdata = await coachResponse.json();
+                    console.log('Login-coach', coachdata);
+                    avatarimg.src = 'data:image/jpeg;base64,' + coachdata.coachDetailDto.photo;
+                    avatarimg.style.border = '2px solid #FFFFAA';
+                } else {
+                    hyperlink.href = 'https://localhost:7168/Member/profile';
+                    let memberResponse = await fetch('https://localhost:7199/api/Member/users/' + user.id);
+                    if (!memberResponse.ok)
+                        return;
+                    let memberdata = await memberResponse.json();
+                    console.log('Login-member', memberdata);
+                    avatarimg.src = 'data:image/jpeg;base64,' + memberdata.photo;
+                    avatarimg.style.border = '2px solid #BBFFFF';
+                }
+            }
+        })();
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
