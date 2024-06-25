@@ -13,7 +13,7 @@
     </div>
     <div class="container marketing mx-auto" style="width:75%;">
         <div class="mx-2">
-            <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel" style="height:75vh; background-color:dimgrey;">
+            <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel" style="height:75vh;border-radius:10px; background-color:#BEBEBE;">
                 <div class="carousel-inner" id="divImage">
                     <div class="carousel-item active" data-bs-interval="3000">
                         <img src="https://media.tenor.com/vNB3iUXsxnQAAAAC/loading-gif.gif" class="d-block mx-auto img-fluid " alt="..." style="height:75vh; ">
@@ -59,7 +59,7 @@
         <div id="section-coachdetail" class="section" tabindex="0">
             <div>
                 <h2><strong>教練資料</strong></h2>
-                <div id="coachDetail" class="d-flex" style=" background-color:dimgray; border:solid 3px dimgray; border-radius:5px; padding:5px; ">
+                <div id="coachDetail" class="d-flex" style=" background-color:#BEBEBE;  border-radius:10px; padding:5px; ">
                     <div class="container marketing">
                         <h1 class="chakra-text">Eric 陳伯維</h1>
                         <div class="d-flex">
@@ -139,8 +139,20 @@
             </div>
         </div>
     </div>
-    <hr class="featurette-divider">
-
+    
+    <!-- Modal -->
+    <div class="modal" id="unloginlModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered m-auto">
+            <div class="modal-content" style="position:relative;border-radius:15px;border-color:#FFECEC;">
+                <div class="modal-body" style="background-color:#ECFFFF; padding:0; position:relative; border-radius:15px;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                    <p style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#003D79; text-shadow: 1px 1px 2px #D7FFEE; font-weight:900;font-size:2.5em;">尚未登入</p>
+                    <img src="https://cdn.pixabay.com/animation/2022/12/01/17/03/17-03-11-60_512.gif" alt="Failed" style="height:100%; width:100%; object-fit:cover; border-radius:15px;border-color:#ECFFFF;">
+                    <a href="https://localhost:7168/Home/Login" class="btn btn-primary" id="headtologin" style="position:absolute; top:90%; left:50%; transform:translate(-50%, -50%);">前往登入--></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 @{
     var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
@@ -158,7 +170,7 @@
         const rateDetail = document.querySelector('#rateDetail');//評價資訊
         const classDetail = document.querySelector('#classDetail');//課程卡片
         const coachRecommand = document.querySelector('#coachRecommand');//教練卡
-
+        const unloginlModal = new bootstrap.Modal(document.getElementById('unloginlModal'));
 
         //返回上一頁
         function goBack() {
@@ -192,6 +204,7 @@
         }
         //點擊時判斷是否已追蹤，根據狀態顯示相應圖片
         async function track(eventElement, coachId) {
+
             let isTracked;
             let urlCheck = `https://localhost:7199/api/CoachTrack/check?memberId=${memberId}&coachId=${coachID}`;
 
@@ -223,13 +236,17 @@
                     });
 
                     if (!addResponse.ok) {
-                        //todo:alert需先登入後，跳轉至登入頁面
-                        if (confirm('請先登入/註冊會員')) {
-                            setTimeout(() => {
-                                window.location.assign('https://localhost:7168/Home/Login');
-                            }, 100);
+                        if (LoginMemberID === '0') {
+                            unloginlModal.show();
+                            return;
                         }
-                        // alert('請先登入/註冊會員')
+                        //todo:alert需先登入後，跳轉至登入頁面
+                        // if (confirm('請先登入/註冊會員')) {
+                        //     setTimeout(() => {
+                        //         window.location.assign('https://localhost:7168/Home/Login');
+                        //     }, 100);
+                        // }
+                        // // alert('請先登入/註冊會員')
                         
                         throw new Error('Failed to add track.');
                     }
@@ -278,7 +295,7 @@
                 sum += item.rateCoach;
             });
             if (data.rateDetailDtos.length !== 0) {
-                averageRate = sum / data.rateDetailDtos.length;
+                averageRate = (sum / data.rateDetailDtos.length).toFixed(1);
                 ratediv = `<div class="rate" > <h3>★ ${averageRate} </h3></div >`;
             } else {
                 ratediv = "";
@@ -307,9 +324,9 @@
                             <h1 class="chakra-text">${data.coachDetailDto.name}
                             </h1>
                                 <h5>${aa}</h5>
-                                <h5>性別 : ${data.coachDetailDto.genderDescription}</h5>
-                                 <h5>聯絡電話 : ${data.coachDetailDto.phone}</h5>
-                                 <h5>電子郵件 : ${data.coachDetailDto.eMail}</h5>
+                                <h5><b>性別 :</b> ${data.coachDetailDto.genderDescription}</h5>
+                                 <h5><b>聯絡電話 :</b> ${data.coachDetailDto.phone}</h5>
+                                 <h5><b>電子郵件 :</b> ${data.coachDetailDto.eMail}</h5>
                                  <h3 class="chakra-text"> 教練簡介 </h3>
                                  <div class="container marketing">
                                    <div class="coachDetail">
@@ -365,7 +382,7 @@
             if (rating === '') rating = `</br><h3>還沒有人評價喔~~</h3>`
             //todo:課程卡
             const classCard = data.scheduleDatailDtos.map(item => {
-                return (`<a href="/Course/Search/${item.classScheduleId}" class="card mb-3 act"  style="text-decoration:none; background-color:DimGrey;">
+                return (`<a href="/Course/Search/${item.classScheduleId}" class="card mb-3 act"  style="text-decoration:none; background-color:#BEBEBE;">
                                 <div class="col">
                                                 <div class="card h-100">
                                                             <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
@@ -435,11 +452,11 @@
 
                 //console.log(exps);
                 //console.log(item.experties.classSort2)
-                return (`<a href="/Trainer/Coach?id=${item.id}" class="card mb-3 act"  style="text-decoration:none; background-color:DimGrey;">
+                return (`<a href="/Trainer/Coach?id=${item.id}" class="card mb-3 act"  style="text-decoration:none; background-color:#BEBEBE;">
                                         <div class="card h-100">
                                                     <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 100%; width: auto;">
                                             <div class="card-body">
-                                                 <h5 class="card-title">${item.name}</h5>
+                                                 <h5 class="card-title"><b>${item.name}</b></h5>
                                                   <p class="card-text">${item.intro}</p>
                                                   <p class="card-text">${exps}</p>
                                             </div>
@@ -551,12 +568,12 @@
             right: 10px;
             width: 75px;
             height: 60px;
-            background-color: dimgray;
+            background-color: #FFD306/* #FFFF93 */;
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: #FF8000;
         }
         /*追蹤按鈕*/
         .track {
@@ -582,9 +599,26 @@
         #pills-tab {
             position: sticky;
             top: 85px;
-            border-bottom: solid 3px dimgray;
+            /* border-bottom: solid 3px #BEBEBE; */
             background-color: white;
+            color:lightgray;
             z-index: 1000; /* 确保元素位于其他内容之上 */
+        }
+
+        .nav-pills .nav-link{
+            color:gray;
+            background-color:white;
+            font-weight: normal; /* 正常字體粗細 */
+            border-radius:0;
+        }
+        .nav-pills .nav-link.active,
+        .nav-pills .nav-link:hover,
+        .nav-pills .nav-link:focus {
+            /* background-color: #cce5ff; */ /* 淺藍色 */
+            background-color: white;
+            color: black; 
+            font-weight: bold; /* 粗體字體 */
+                border-bottom: 3px solid #004B97;
         }
 
         /*文字摺疊效果*/
@@ -596,7 +630,6 @@
             overflow: hidden; /* 隐藏超出部分 */
             transition: max-height 0.3s ease; /* 添加过渡效果 */
         }
-
             .coachDetail.expanded {
                 max-height: 800px; /* 设定展开后的高度 */
             }

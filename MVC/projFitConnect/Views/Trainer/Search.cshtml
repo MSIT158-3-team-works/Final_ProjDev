@@ -61,11 +61,12 @@
             </li>
         </ul>
     </nav>
-
+<div style="padding-bottom: 100px"></div>
 @{
     var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
 }
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">jquery設定</script>
     <script>
         const LoginMemberID = "@loginMemberID";
         console.log('LoginMemberID', LoginMemberID);
@@ -128,11 +129,12 @@
                 }
             });
             data = await response.json();
+            div.innerHTML = ''; // 清空目前的教練卡片
             let str = '';
             let exps = '';
             let regs = '';
             //教練卡片生成
-            const card = data.coachResult.map(item => {
+            data.coachResult.map(item => {
                 //專長(不重複)
                 const uniqueExp = {};
                 const exps = item.experties.map(exp => {
@@ -158,9 +160,9 @@
                 //教練評分
                 const coachRates = item.coachRate.map(rate => parseFloat(rate.rateCoach));
                 const sum = coachRates.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-                const averageRate = coachRates.length > 0 ? sum / coachRates.length : "尚無評價";
+                const averageRate = coachRates.length > 0 ? (sum / coachRates.length).toFixed(1) : "尚無評價";
                 //生成教練卡
-                return( `<a href="/Trainer/Coach?id=${item.id}" class="card mb-3" style="max-width:540px; text-decoration:none;">
+                const cardHtml = `<a href="/Trainer/Coach?id=${item.id}" class="card mb-3" style="max-width:540px; text-decoration:none;">
                               <div class="row g-0" style="height: 100%;">
                                 <div class="col-md-4 d-flex align-items-center justify-content-center" style="overflow:hidden; height: 100%;">
                                    <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit:cover; height:100%; width:auto;">
@@ -175,9 +177,19 @@
                                     </div>
                                 </div>
                                 </div>
-                        </a>`)
-            })
-            div.innerHTML = card.join("");
+                                </a>`;
+                // 將教練卡片逐一添加並加入從下往上淡入的效果
+                const $card = $(cardHtml).appendTo(div).css({ opacity: 0, marginTop: '20px' });
+                $card.animate({ opacity: 1, marginTop: '0' }, 'slow');
+                // 將教練卡片逐一添加並加入滑入效果
+                // const $card = $(cardHtml).appendTo(div).css({ opacity: 0, marginLeft: '-100px' });
+                // $card.animate({ opacity: 1, marginLeft: '0' }, 'slow');
+           
+                // 將教練卡片逐一添加並加入淡入效果
+                //$(cardHtml).appendTo(div).fadeIn('slow');
+            });
+
+            //div.innerHTML = card.join("");
             totalcoaches.textContent = `共有${data.totalCount}位教練`;
 
             //顯示分頁按鈕
@@ -353,18 +365,19 @@
             }
             loadCoaches();
         });
-
     </script>
 }
 @section Styles {
 <style>
         /*滑鼠覆蓋卡片效果*/
         .card {
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease; /* 加入 opacity 的過渡效果 */
             cursor: pointer;
+            margin-bottom: 20px; /* 卡片之間的間距 */
         }
             .card:hover {
                 transform: scale(1.03);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             }
 </style>
 }
