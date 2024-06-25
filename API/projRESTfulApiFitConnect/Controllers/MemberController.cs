@@ -11,6 +11,7 @@ using projRESTfulApiFitConnect.DTO.Member;
 using projRESTfulApiFitConnect.DTO.Product;
 using projRESTfulApiFitConnect.DTO.Member.comment;
 using projRESTfulApiFitConnect.DTO.Coach;
+using Microsoft.IdentityModel.Tokens;
 
 namespace projRESTfulApiFitConnect.Controllers
 {
@@ -29,7 +30,7 @@ namespace projRESTfulApiFitConnect.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDetailDto>>> GetMembers()
         {
-            List<MemberDetailDto> memberDetailDtos = await AllCoach();
+            List<MemberDetailDto> memberDetailDtos = await AllMember();
             return Ok(memberDetailDtos);
         }
 
@@ -62,7 +63,7 @@ namespace projRESTfulApiFitConnect.Controllers
             return Ok(memberDetailDtos);
         }
 
-        private async Task<List<MemberDetailDto>> AllCoach()
+        private async Task<List<MemberDetailDto>> AllMember()
         {
             //string filepath = "";
 
@@ -114,11 +115,19 @@ namespace projRESTfulApiFitConnect.Controllers
                 return NotFound();
 
             var member = _context.TIdentities.Where(x => x.Id == id && x.Activated == true).FirstOrDefault();
-            string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", "default.jpg");
-            //string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", member.Photo);
-            byte[] bytes = System.IO.File.ReadAllBytes(path);
-            member.Photo = Convert.ToBase64String(bytes);
-
+            if (member.Photo != null)
+            {
+                string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", member.Photo);
+                byte[] bytes = System.IO.File.ReadAllBytes(path);
+                member.Photo = Convert.ToBase64String(bytes);
+            }
+            else
+            {
+                int random = (new Random()).Next(1,5);
+                string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", "default"+ random + ".jpg");
+                byte[] bytes = System.IO.File.ReadAllBytes(path);
+                member.Photo = Convert.ToBase64String(bytes);
+            }
             return Ok(member);
         }
 
@@ -361,26 +370,32 @@ namespace projRESTfulApiFitConnect.Controllers
         // PUT: api/Member/5
         // 修改會員資料
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCoach(PutMemberDto putMemberDto)
+         public async Task<IActionResult> PutMember(int id ,PutMemberDto putMemberDto)
         {
-            var member = await _context.TIdentities.FindAsync(putMemberDto.Id);
-            member.Name = putMemberDto.Name;
-            member.Phone = putMemberDto.Phone;
-            member.Password = putMemberDto.Password;
-            member.EMail = putMemberDto.EMail;
-            if (putMemberDto.Photo != null)
+            var member = await _context.TIdentities.FindAsync(id);
+
+            if (member == null)
             {
-                string fileName = Guid.NewGuid() + putMemberDto.Photo.FileName;
-                string path = Path.Combine(_env.ContentRootPath, @"Images\MemberImages", fileName);
-                using (FileStream fs = new FileStream(path, FileMode.Create))
-                {
-                    putMemberDto.Photo.CopyTo(fs);
-                }
-                member.Photo = fileName;
+                return NotFound("not found");
             }
-            member.Birthday = DateOnly.FromDateTime(putMemberDto.Birthday);
-            member.Address = putMemberDto.Address;
-            member.GenderId = putMemberDto.GenderId;
+            if (!string.IsNullOrEmpty(putMemberDto.Name))
+                member.Name = putMemberDto.Name;
+            if (!string.IsNullOrEmpty(putMemberDto.Phone))
+                member.Phone = putMemberDto.Phone;
+            if (!string.IsNullOrEmpty(putMemberDto.EMail))
+                member.EMail = putMemberDto.EMail;
+            if (!string.IsNullOrEmpty(putMemberDto.Address))
+                member.Address = putMemberDto.Address;
+            if(!string.IsNullOrEmpty(putMemberDto.Photo) && !string.IsNullOrEmpty(putMemberDto.ImageBase64))
+            {
+                byte[] imageBytes = Convert.FromBase64String(putMemberDto.ImageBase64);
+                string filepath = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", putMemberDto.Photo);
+                await System.IO.File.WriteAllBytesAsync(filepath, imageBytes);
+
+                member.Photo = putMemberDto.Photo;
+            }
+
+            _context.Entry(member).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return Ok("會員資訊已成功更新");
@@ -390,7 +405,7 @@ namespace projRESTfulApiFitConnect.Controllers
         [Route("SEARCH")]
         public async Task<ActionResult<MemberPagingDTO>> GetCoachesSearch(/*[FromQuery]*/ MemberSearchDTO memberSearchDTO)
         {
-            List<MemberDetailDto> memberDetailDtos = await AllCoach();
+            List<MemberDetailDto> memberDetailDtos = await AllMember();
             //根據分類搜尋教練資料
             var everyMember = memberSearchDTO.gender == 0 ? memberDetailDtos : memberDetailDtos.Where(s => s.GenderID == memberSearchDTO.gender);
             //根據關鍵字搜尋會員資料(姓名、性別、教練資訊、專長名稱)

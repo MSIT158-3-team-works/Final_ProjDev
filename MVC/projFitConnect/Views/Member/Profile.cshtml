@@ -18,6 +18,20 @@
     .txtcolor {
         color: black
     }
+
+    .profile-pic {
+        height: 390px;
+        border-radius: 20%;
+    }
+
+    .profile-pic-label {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        cursor: pointer;
+        color: #0072E3;
+        font-weight: bold;
+    }
 </style>
 
 <div id="page">
@@ -27,7 +41,7 @@
         <div id="info_div" class="pgmargin m-2">
             <div class="d-flex flex-column float-start m-lg-2 mr-5">
                 <img src="Athena.jpeg" class="rounded-circle" alt="..." height="140px" id="pic1">
-                <button class="btn btn-primary" id="btn">Button</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#membereditModal" id="btn">修改會員資料</button>
             </div>
             <div>
                 <p id="txt1">FitConnect會員</p>
@@ -294,12 +308,86 @@
                 </nav>
             </div>
         </div>
-
-
-
-
     </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="membereditModal" tabindex="-1" aria-labelledby="membereditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 42%; width: 42%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="membereditModalLabel">修改個人資料</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div style="margin:auto;text-align:center;">
+                    <img src="https://cdn2.iconfinder.com/data/icons/ui-basic-outline-2/512/UI_Basic_outline-47-256.png" class="profile-pic" id="imgShow" onclick="triggerFileInput()" />
+                    <label id="lblPicture" style="display:none;">
+                        <input id="imgLoad" type="file" name="photo" class="form-control" style="display:none;" />
+                        更換頭像
+                    </label>
+                </div>
+                <div style="max-width: 80%; width: 80%; margin:auto;">
+                    <div class="mb-3">
+                        <label for="username" class="control-label">用戶名稱:</label>
+                        <input type="text" id="idUserName" name="username" class="form-control" />
+                        <span id="spUserName"></span>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md">
+                            <label class="col-form-label">生日:</label>
+                            <input type="text" class="form-control" id="idbirthday" disabled>
+                        </div>
+                        <div class="col-md">
+                            <label class="col-form-label">性別:</label>
+                            <input type="text" class="form-control" id="idgender" disabled>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="control-label">電話:</label>
+                        <input type="tel" id="idPhone" name="phone" class="form-control" />
+                        <span id="spPhone"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="col-form-label">電子信箱:</label>
+                        <input type="email" id="idEmail" name="Email" class="form-control" />
+                        <span id="spEmail"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Address" class="col-form-label">地址:</label>
+                        <input type="text" id="idAddress" name="Address" class="form-control" />
+                        <span id="spAddress"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-success" id="buttonSubmit">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="successModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#CECEFF;">
+            <div class="modal-body" style="background-color:#ECFFFF; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#003D79; text-shadow: 1px 1px 2px #D9FFFF; font-weight:700;">修改成功!</h5>
+                <img src="https://cdn.dribbble.com/users/1154535/screenshots/3288650/dribbble-success-2.gif" alt="success" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#CECEFF;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="failedModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#FFECEC;">
+            <div class="modal-body" style="background-color:#FBFFFD; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h3 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#600000; text-shadow: 1px 1px 2px #FFD9EC; font-weight:700;">修改失敗</h3>
+                <img src="https://i.giphy.com/pjFF8YLW996aXqFHAu.webp" alt="Failed" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#FFECEC;">
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
@@ -553,5 +641,122 @@
 
         })();
 
+
+        const LoginMemberID = @Model.id;
+        console.log('LoginMemberID', LoginMemberID);
+        const preview = document.querySelector('#imgShow');
+        const username = document.querySelector('#idUserName');
+        const email = document.querySelector('#idEmail');
+        const phone = document.querySelector('#idPhone');
+        const address = document.querySelector('#idAddress');
+        var membereditModal = new bootstrap.Modal(document.getElementById('membereditModal'));
+        const putData = {
+            "name": "",
+            "phone": "",
+            "eMail": "",
+            "photo": "",
+            "imageBase64": "",
+            "address": ""
+        }
+        function showSuccessModal() {
+            const modal = new bootstrap.Modal(document.getElementById('successModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 2468);
+        }
+        function showFailedModal() {
+            const modal = new bootstrap.Modal(document.getElementById('failedModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 1357);
+        }
+
+        // 預覽選擇影像&轉成base64
+        function triggerFileInput() {
+            document.getElementById('imgLoad').click();
+        }
+        document.getElementById('imgLoad').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const files = fileInput.files;
+            if (files.length > 0) {
+                const file = files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+
+                const byteReader = new FileReader();
+                byteReader.onload = function (e) {
+                    const arrayBuffer = e.target.result;
+                    const byteArray = new Uint8Array(arrayBuffer);
+                    const base64String = btoa(String.fromCharCode.apply(null, byteArray));
+                    console.log('Image in base64:', base64String);
+                    putData.photo = file.name;
+                    putData.imageBase64 = base64String;
+                };
+                byteReader.readAsArrayBuffer(file);
+            }
+        });
+        // 取得表單數據
+        document.getElementById('buttonSubmit').addEventListener('click', function () {
+            if (username.value == '' || email.value == '' || phone.value == '' || address.value == '') { showFailedModal(); return; }
+            putData.name = username.value;
+            putData.phone = phone.value;
+            putData.eMail = email.value;
+            putData.address = address.value;
+            console.log(putData);
+            submission();
+        });
+
+        //載入會員資料
+        (async () => {
+            if (LoginMemberID === '0') {
+                window.location.assign('https://localhost:7168/Home/login');
+            }
+            let url = 'https://localhost:7199/api/Member/users/' + LoginMemberID;
+            //console.log('url=', url);
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data);
+            //photo,address,birthday,eMail,name,phone,genderId
+            putData.name = data.name;
+            putData.eMail = data.eMail;
+            putData.phone = data.phone;
+            putData.photo = data.address;
+            document.querySelector('#idbirthday').value = data.birthday;
+            var gender = '';
+            if (data.genderId == 1) gender = '男性';
+            else if (data.genderId == 2) gender = '女性';
+            else gender = '其他';
+            document.querySelector('#idgender').value = gender;
+
+            username.value = data.name;
+            email.value = data.eMail;
+            phone.value = data.phone;
+            address.value = data.address;
+            preview.src = 'data:image/jpeg;base64,' + data.photo;
+        })();
+
+        //送出修改
+        const submission = async () => {
+            let url = 'https://localhost:7199/api/Member/' + LoginMemberID;
+            let response = await fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(putData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.text();
+            if (response.ok) {
+                showSuccessModal();
+                setTimeout(() => {
+                    window.location.assign('https://localhost:7168/member/profile');
+                }, 2800);
+            } else { showFailedModal(); }
+        }
     </script>
 }
