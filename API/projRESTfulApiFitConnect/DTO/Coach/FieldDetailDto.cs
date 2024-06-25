@@ -14,6 +14,7 @@
 
         public string? Field { get; set; }
 
+        public double Payment { get; set; }
         public bool PaymentStatus { get; set; }
 
         public bool? ReserveStatus { get; set; }

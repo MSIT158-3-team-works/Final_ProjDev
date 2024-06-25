@@ -314,6 +314,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     GymPhone = field.Field.Gym.GymPhone,
                     GymAddress = field.Field.Gym.GymAddress,
                     Field = field.Field.FieldName,
+                    Payment = (double)field.Field.FieldPayment,
                     PaymentStatus = field.PaymentStatus,
                     ReserveStatus = field.ReserveStatus
                 };

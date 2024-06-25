@@ -258,7 +258,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 gym.GymPhoto = dto.GymPhoto;
             }
             gym.ExpiryDate = new DateOnly(2050, 12, 31);
-            gym.GymStatus = false;
+            gym.GymStatus = true;
 
             _context.Entry(gym).State = EntityState.Modified;
 

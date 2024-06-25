@@ -125,7 +125,7 @@ namespace projRESTfulApiFitConnect.Controllers
             existingField.Floor = dto.Floor;
             existingField.FieldPayment = dto.FieldPayment;
             existingField.FieldDescribe = dto.FieldDescribe;
-            existingField.Status = dto.Status;
+            existingField.Status = true;
 
             // 照片更新
             if (dto.UploadedFieldPhoto != null && dto.UploadedFieldPhoto.Length > 0)
