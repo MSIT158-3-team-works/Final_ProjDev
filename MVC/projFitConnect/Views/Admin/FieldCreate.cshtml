@@ -20,7 +20,7 @@
                         <h3>請輸入場地名</h3><br />
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">場地名</span>
-                            <input type="text" class="form-control" placeholder="例:50米游泳池" aria-label="場地名" aria-describedby="basic-addon1" name="FieldName" required>
+                            <input type="text" class="form-control" placeholder="例:50米游泳池" aria-label="場地名" aria-describedby="basic-addon1" name="FieldName" id="FieldName" required>
                             <div class="invalid-feedback">
                                 請輸入場地名
                             </div>
@@ -30,7 +30,7 @@
                         <h3>請輸入場地樓層</h3><br />
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">樓層</span>
-                            <input type="text" class="form-control" placeholder="例:1F" aria-label="樓層" aria-describedby="basic-addon1" name="Floor" required>
+                            <input type="text" class="form-control" placeholder="例:1F" aria-label="樓層" aria-describedby="basic-addon1" name="Floor" id="Floor" required>
                             <div class="invalid-feedback">
                                 請輸入場地樓層
                             </div>
@@ -40,7 +40,7 @@
                         <h3>請輸入場地費用</h3><br />
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">場地費用</span>
-                            <input type="text" class="form-control" placeholder="例:1000" aria-label="場地費用" aria-describedby="basic-addon1" name="FieldPayment" required>
+                            <input type="text" class="form-control" placeholder="例:1000" aria-label="場地費用" aria-describedby="basic-addon1" name="FieldPayment" id="FieldPayment" required>
                             <div class="invalid-feedback">
                                 請輸入場地費用
                             </div>
@@ -49,6 +49,7 @@
                     <br />
                     <button type="submit" class="btn btn-primary" id="btnsubmit">送出並新增</button>
                     <a href="https://localhost:7168/Admin/FieldReviewList" class="btn btn-outline-secondary">取消</a>
+                    <button type="button" class="btn btn-info" id="btnDemo">Demo</button>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -105,6 +106,12 @@
                 preview.src = "";
             }
         }
+        //Demo
+        document.getElementById('btnDemo').addEventListener('click', async () => {
+            document.getElementById('FieldName').value = "多功能教室";
+            document.getElementById('Floor').value = "2F";
+            document.getElementById('FieldPayment').value = "1000";
+        });
         //資料檢查
         (() => {
             'use strict'

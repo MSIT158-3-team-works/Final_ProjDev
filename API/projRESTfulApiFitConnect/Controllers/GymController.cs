@@ -90,7 +90,7 @@ namespace projRESTfulApiFitConnect.Controllers
                 Floor = dto.Floor,
                 FieldPayment = dto.FieldPayment,
                 FieldDescribe = dto.FieldDescribe,
-                Status = false
+                Status = true
             };
             _context.Tfields.Add(newField);
             await _context.SaveChangesAsync();
