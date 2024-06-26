@@ -151,6 +151,7 @@
                             <th scope="col">時間</th>
                             <th scope="col">費用</th>
                             <th scope="col">狀態</th>
+                            <th scope="col">評分/評論</th>
                             <th scope="col">檢視</th>
                             <th scope="col">取消</th>
                         </tr>
@@ -175,12 +176,6 @@
                         </li>
                     </ul>
                 </nav>
-
-                <a href="https://localhost:7168/member/comment">
-                    <button>
-                        評論
-                    </button>
-                </a>
             </div>
         </div>
 
@@ -393,6 +388,55 @@
         </div>
     </div>
 </div>
+<!-- 評論 -->
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 42%; width: 42%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="commentModalLabel">課程/教練評價</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div style="max-width: 80%; width: 80%; margin:auto;">
+                    <div class="mb-3">
+                        <label for="classname" class="col-form-label"><h3>課程:</h3></label>
+                        <input type="text" class="form-control" id="classname" disabled>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md">
+                            <label for="rateclass" class="col-form-label">課程評分:</label>
+                            <input type="text" class="form-control" id="rateclass">
+                        </div>
+                        <div class="col-md"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="commentclass" class="col-form-label">課程評論:</label>
+                        <textarea class="form-control" id="commentclass"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="coachname" class="col-form-label"><h3>教練:</h3></label>
+                        <input type="text" class="form-control" id="coachname" disabled>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md">
+                            <label for="ratecoach" class="col-form-label">教練評分:</label>
+                            <input type="text" class="form-control" id="ratecoach">
+                        </div>
+                        <div class="col-md"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="commentcoach" class="col-form-label">教練評論:</label>
+                        <textarea class="form-control" id="commentcoach"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="saveComment" onclick="saveComment(selectedRateID, selectedReserveID)">送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script>
@@ -415,6 +459,8 @@
             const sp6 = document.getElementById('sp2');
             const sp7 = document.getElementById('sp3');
             const sp8 = document.getElementById('sp4');
+
+           
 
             var currentDate = new Date();
             var year = currentDate.getFullYear();
@@ -512,6 +558,7 @@
                             } else {
                                 stat_txt = '未付款'
                             };
+                            let reservedID = courses[i].reserveId
                             str += `<tr>
                                         <td>${i + 1}</td>
                                         <td>${courses[i].class}</td>
@@ -520,6 +567,11 @@
                                         <td>${time_str}</td>
                                         <td>${courses[i].courseFee}</td>
                                         <td>${stat_txt}</td>
+                                        <td>
+                                        <button class="btn btn-outline-warning" type="button" data-bs-toggle="modal" data-bs-target="#commentModal" onclick="chosenOne(${reservedID})">
+                                         評分/評論
+                                         </button>
+                                         </td>
                                         <td>
                                             <a href="https://localhost:7168/course/search/?${courses[i].schedule_id}" >
                                                 <button class="btn btn-outline-primary">檢視
@@ -659,6 +711,11 @@
         const phone = document.querySelector('#idPhone');
         const address = document.querySelector('#idAddress');
         var membereditModal = new bootstrap.Modal(document.getElementById('membereditModal'));
+        //評論用
+        var commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+        let selectedRateID = null;
+        let selectedReserveID = null;
+
         const putData = {
             "name": "",
             "phone": "",
@@ -766,6 +823,87 @@
                     window.location.assign('https://localhost:7168/member/profile');
                 }, 2800);
             } else { showFailedModal(); }
+        }
+
+      
+        //確認新增/修改
+        async function saveComment(selectedRateID, selectedReserveID) {
+            const rateClass = document.querySelector('#rateclass').value;
+            const commentClass = document.querySelector('#commentclass').value;
+            const rateCoach = document.querySelector('#ratecoach').value;
+            const commentCoach = document.querySelector('#commentcoach').value;
+            var datafeedback;
+            const rateData = {
+                rateClass: rateClass,
+                rateClassDescribe: commentClass,
+                rateCoach: rateCoach,
+                rateCoachDescribe: commentCoach
+            };
+
+            let url;
+            let method;
+
+            if (selectedRateID) {
+                url = `https://localhost:7199/api/Comment/Rate/${selectedRateID}`;
+                method = 'PUT';
+            } else {
+                url = 'https://localhost:7199/api/Comment';
+                method = 'POST';
+                rateData.reserveId = selectedReserveID;
+                rateData.memberId = LoginMemberID;
+            }
+
+            let response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(rateData)
+            });
+
+            let data = await response.text();
+            console.log('saveComment', data);
+            console.log(commentModal);
+            commentModal.hide();
+            if (response.ok) {
+                showSuccessModal();
+                setTimeout(() => {
+                    window.location.assign('https://localhost:7168/member/profile');
+                }, 2800);
+            } else { showFailedModal(); }
+            // location.reload();
+        }
+        //載入其一課程
+        async function chosenOne(reservedID) {
+            let url0 = 'https://localhost:7199/api/Comment?id=' + LoginMemberID;
+            let response = await fetch(url0);
+            data = await response.json();
+            selectedReserveID = reservedID;
+            let url = `https://localhost:7199/api/Comment/Rate/${reservedID}`;
+            let response1 = await fetch(url);
+            let data1 = await response1.json();
+
+            if (data1) {
+                selectedRateID = data1.rateId || null;
+                document.querySelector('#classname').value = data1.className || '';
+                document.querySelector('#rateclass').value = data1.rateClass || '';
+                document.querySelector('#commentclass').value = data1.rateClassDescribe || '';
+                document.querySelector('#coachname').value = data1.coachName || '';
+                document.querySelector('#ratecoach').value = data1.rateCoach || '';
+                document.querySelector('#commentcoach').value = data1.rateCoachDescribe || '';
+            }
+            console.log('foundClass', data);
+            if (data1.status == 404) {
+                var data2;
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].classReserveId == reservedID) {
+                        data2 = data[i]
+                    }
+                }
+                document.querySelector('#classname').value = data2.className;
+                document.querySelector('#coachname').value = data2.coachName;
+            }
+            commentModal.show();
         }
     </script>
 }
