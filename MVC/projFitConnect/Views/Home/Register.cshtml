@@ -79,7 +79,7 @@
             </div>
             <br>
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-secondary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">註冊</button>
+                <button type="button" class="btn btn-secondary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">註冊</button>
             </div>
 
 
@@ -265,15 +265,40 @@
         });
         //registerform
         const btn = document.getElementById('buttonSubmit')
-        // btn.addEventListener('click', (evt) => {
-        //     evt.preventDefault()
-        //     console.log('idName', document.getElementById('idName').value)
-        //     console.log('idPhone', document.getElementById('idPhone').value)
-        //     console.log('idEmail', document.getElementById('idEmail').value)
-        //     console.log('idBirthday', document.getElementById('idBirthday').value)
-        //     console.log('idPwd', document.getElementById('idPwd').value)
-        //     console.log('idGender', document.getElementById('idGender').value)
-        // });
+        btn.addEventListener('click', async (evt) => {
+            evt.preventDefault()
+
+            var user = {
+                idName: document.getElementById('idName').value,
+                idPhone: document.getElementById('idPhone').value,
+                idEmail: document.getElementById('idEmail').value,
+                idBirthday: document.getElementById('idBirthday').value,
+                idPwd: document.getElementById('idPwd').value,
+                idGender: document.getElementById('idGender').value,
+            }
+
+            console.log(user)
+
+            var response = await fetch(`https://localhost:7199/api/member`, {
+                method: 'POST',
+                body: JSON.stringify(user),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            var dt = await response.json()
+            console.log(dt)
+            let { id, roleId } = dt
+            var login = {
+                id: id,
+                r_id: roleId,
+            }
+            console.log(login)
+            response = await fetch(`https://localhost:7168/home/login`, {
+                method: 'POST',
+                body: JSON.stringify(login),
+                headers: { 'Content-Type': 'application/json' },
+            }).then(window.location.href = 'https://localhost:7168/home/')
+            
+        });
     </script>
 }
 

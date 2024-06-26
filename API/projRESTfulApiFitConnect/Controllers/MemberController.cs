@@ -157,7 +157,7 @@ namespace projRESTfulApiFitConnect.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromForm] AddMemberDto dto)
+        public IActionResult Post(AddMemberDto dto)
         {
             //  address null !!
 
@@ -188,7 +188,7 @@ namespace projRESTfulApiFitConnect.Controllers
                     };
                     _context.TIdentities.Add(member);
                     _context.SaveChanges();
-                    break;
+                    return Ok(member);
                 case 1:
                     bool isProcess = _context.TIdentities.Any(x => x.Id == p_id && x.RoleId == 1 && x.Activated == true);
                     if (!isProcess)
@@ -289,7 +289,7 @@ namespace projRESTfulApiFitConnect.Controllers
             string imagePath = Path.Combine(_env.ContentRootPath, @"Images\MemberImages", photo);
 
             if (string.IsNullOrEmpty(photo) || !System.IO.File.Exists(imagePath))
-                imagePath = Path.Combine(_env.ContentRootPath, @"Images\MemberImages", "20240409132450.jpg");
+                imagePath = Path.Combine(_env.ContentRootPath, @"Images\MemberImages", "default1.jpg");
 
             var bytes = await System.IO.File.ReadAllBytesAsync(imagePath);
 
