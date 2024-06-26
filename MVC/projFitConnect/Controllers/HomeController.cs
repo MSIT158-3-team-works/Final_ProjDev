@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
+//using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using projFitConnect.Models;
@@ -97,13 +97,13 @@ namespace projFitConnect.Controllers
             return View();
         }
 
-        public async Task googleLogin()
-        {
-            await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties
-            {
-                RedirectUri = Url.Action("GoogleResponse")
-            });
-        }
+        //public async Task googleLogin()
+        //{
+        //    await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties
+        //    {
+        //        RedirectUri = Url.Action("GoogleResponse")
+        //    });
+        //}
         public async Task<IActionResult> googleResponse()
         {
             var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
