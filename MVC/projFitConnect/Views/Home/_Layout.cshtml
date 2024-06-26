@@ -97,7 +97,7 @@
                                     </a><br />
                                     <ul class="dropdown-menu full-width-dropdown">
                                         <li><a class="dropdown-item subtitle" href="https://localhost:7168/member/profile">個人資料</a></li>
-                                        <li><a class="dropdown-item subtitle" href="https://localhost:7168/Coach/profile">教練資料</a></li>
+                                        <li><a class="dropdown-item subtitle" href="https://localhost:7167/Coach/profile">教練資料</a></li>
                                         <li><a class="dropdown-item subtitle" asp-controller="home" asp-action="logout">登出</a></li>
                                     </ul>
                                 </div>
@@ -256,7 +256,7 @@
                 if (user.role_id == 3) {
                     hyperlink.href = 'https://localhost:7168/Admin';
                 } else if (user.role_id == 2) {
-                    hyperlink.href = 'https://localhost:7168/Coach/profile';
+                    hyperlink.href = 'https://localhost:7167/Coach/profile';
                     let coachResponse = await fetch('https://localhost:7199/api/Coach/' + user.id);
                     if (!coachResponse.ok)
                         return;
