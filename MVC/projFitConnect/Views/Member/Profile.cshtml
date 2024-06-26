@@ -125,7 +125,7 @@
         </div>
     </div>
 
-    <div id="downside" style="background-color:snow;height:600px;border-radius:10px;padding-top:30px">
+    <div id="downside" style="background-color:snow;height:600px;border-radius:10px;padding-top:30px;padding-bottom:10px;">
 
         <div id="div_load">
             <div class="pgmargin">
@@ -140,7 +140,7 @@
         <div id="我的課程" class="disable">
             <div class="pgmargin">
                 <h2 id="list-item-1">課程</h2>
-                <table class="table table-striped table-hover m-2 text-center">
+                <table class="table table-striped table-hover m-2 text-center" id="table_1">
                     <thead>
 
                         <tr>
@@ -163,13 +163,11 @@
                 <nav aria-label="Page navigation example pagination ">
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
+                            <a class="page-link" href="#" aria-label="Previous" disable>
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <li class="page-item"><a class="page-link">1</a></li>
-                        <li class="page-item"><a class="page-link">2</a></li>
-                        <li class="page-item"><a class="page-link">3</a></li>
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
@@ -177,6 +175,12 @@
                         </li>
                     </ul>
                 </nav>
+
+                <a href="https://localhost:7168/member/comment">
+                    <button>
+                        評論
+                    </button>
+                </a>
             </div>
         </div>
 
@@ -397,9 +401,9 @@
             'use strict'
 
             let _id = @Model.id
-                let cid = @Model.role_id
+            let cid = @Model.role_id
 
-                    const lis = document.querySelectorAll('#nav li')
+            const lis = document.querySelectorAll('#nav li')
             const ld = document.getElementById('div_load')
             var temp = document.getElementById('我的課程')
             const btn = document.getElementById('btn');
@@ -490,6 +494,11 @@
                         let courses = data1.reserveDetailDtos
                         let tb1 = document.getElementById('tb1')
                         str = ''
+                        if (courses.length === 0) {
+                            document.getElementById('list-item-1').textContent = '您尚未預約任何課程!'
+                            return;
+                        };
+
                         for (let i = 0; i < courses.length; i++) {
                             let time1 = parseInt(`${courses[i].time.timeList[0].substring(0, 2)}`)
                             let time2 = parseInt(`${courses[i].time.timeList[1].substring(0, 2)}`)

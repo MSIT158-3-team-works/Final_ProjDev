@@ -37,8 +37,8 @@
                 <button type="button" class="btn btn-primary" id="buttonSubmit" style="font-size:24px; height:60px; width:46%; padding-top: 10px; padding-bottom: 10px;">登入</button>
                 <br>
                 @* TODO *@
-                <a href="https://m.shein.tw/" target="_blank" class="login_link" style="font-size:22px;font-weight:bold">忘記密碼</a>
-                <br>
+                @* <a href="https://m.shein.tw/" target="_blank" class="login_link" style="font-size:22px;font-weight:bold">忘記密碼</a>
+                <br> *@
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='https://localhost:7168/home/register'" style="height:30px; width:46%;border-radius:10px;font-size:18px; padding-bottom: 50px;">點我註冊</button>
             </div>
             <div style="text-align:center">
@@ -46,9 +46,9 @@
             </div>
         </form>
         <div>
-           @*  <hr />
+            <hr />
             <partial name="_particalGoogle"></partial>
-            <hr /> *@
+            <hr />
         </div>
         <form action="Session" method="post" id="fetch_data" hidden>
             <input type="text" id="id" name="id" />
