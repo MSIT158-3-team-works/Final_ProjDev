@@ -1,64 +1,66 @@
-﻿@{
+﻿
+@{
+    ViewData["Title"] = "index";
 }
-    <link href="~/css/coachsearch.css" rel="stylesheet" />
-    <div class="mt-4" style="margin-top:30px;">
-        <div class="d-flex float-start" role="search" style="width:25%">
-            <input type="search" class="form-control me-2" aria-label="Search" placeholder="找教練" id="inputSearch" />
-        </div>
-        <form class="d-flex">
-            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="citys">
-                <option>縣市</option>
-            </select>
-            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="region" id="regions">
-                <option>請選擇地區</option>
-            </select>
-            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort1Search">
-                <option>有氧、無氧</option>
-            </select>
-            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort2Search">
-                <option>訓練需求</option>
-            </select>
-            <select class="w-100 mx-3 px-3 rounded-3 form-select" name="gender" aria-label="Default select example" id="genderSearch">
-                <option value="性別">性別</option>
-                <option value="男性">男性</option>
-                <option value="女性">女性</option>
-                <option value="其他">多元性別</option>
-            </select>
-            <button type="button" class="w-50 px-3 rounded-3 btn btn-secondary" id="resetButton" style="width:50px;">重設</button>
-        </form>
+<link href="~/css/coachsearch.css" rel="stylesheet" />
+<div class="mt-4" style="margin-top:30px;">
+    <div class="d-flex float-start" role="search" style="width:25%">
+        <input type="search" class="form-control me-2" aria-label="Search" placeholder="找教練" id="inputSearch" />
     </div>
-    <div style="display: flex; justify-content: space-between;">
-        <div style="width:75%">
-            <h1 class="fw-bold my-4 " id="totalcoaches">共有 -- 位教練</h1>
-        </div>
-            <div style="width:14.89%;margin-right:0; ">
-            <button onclick="checkLogin()" class="w-100 mx-auto my-3 px-3 rounded-3 btn btn-light" id="btnbecomecoach" style="width:100px; font-size:25px;">
-                    <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/location-arrow-48.png"/>
-                    <strong>成為教練</strong>
-                </button>
-            </div>
+    <form class="d-flex">
+        <select class="w-100 mx-3 px-3 rounded-3 form-select" name="city" id="citys">
+            <option>縣市</option>
+        </select>
+        <select class="w-100 mx-3 px-3 rounded-3 form-select" name="region" id="regions">
+            <option>請選擇地區</option>
+        </select>
+        <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort1Search">
+            <option>有氧、無氧</option>
+        </select>
+        <select class="w-100 mx-3 px-3 rounded-3 form-select" name="course" id="sort2Search">
+            <option>訓練需求</option>
+        </select>
+        <select class="w-100 mx-3 px-3 rounded-3 form-select" name="gender" aria-label="Default select example" id="genderSearch">
+            <option value="性別">性別</option>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="其他">多元性別</option>
+        </select>
+        <button type="button" class="w-50 px-3 rounded-3 btn btn-secondary" id="resetButton" style="width:50px;">重設</button>
+    </form>
+</div>
+<div style="display: flex; justify-content: space-between;">
+    <div style="width:75%">
+        <h1 class="fw-bold my-4 " id="totalcoaches">共有 -- 位教練</h1>
     </div>
-    <div class="d-flex flex-row flex-wrap justify-content-between" id="div">
-        教練卡
+    <div style="width:14.89%;margin-right:0; ">
+        <button class="w-100 mx-auto my-3 px-3 rounded-3 btn btn-light" id="btnbecomecoach" style="width:100px; font-size:25px;" type="button">
+            <img src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/location-arrow-48.png" />
+            <strong>成為教練</strong>
+        </button>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" aria-label="Previous" onclick="pagingHandler('prev')">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <nav>
-                <ul class="pagination" id="ulpage">
-                </ul>
-            </nav>
-            <li>
-                <a class="page-link" aria-label="Next" onclick="pagingHandler('next')">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+</div>
+<div class="d-flex flex-row flex-wrap justify-content-between" id="div">
+    教練卡
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" aria-label="Previous" onclick="pagingHandler('prev')">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <nav>
+            <ul class="pagination" id="ulpage">
+            </ul>
+        </nav>
+        <li>
+            <a class="page-link" aria-label="Next" onclick="pagingHandler('next')">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 <!-- Modal -->
 <div class="modal" id="unloginlModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered m-auto">
@@ -129,7 +131,7 @@
             loadCoaches();
         });
 
-        
+
 
         //載入頁面資訊function
         const loadCoaches = async () => {
@@ -176,21 +178,21 @@
                 const averageRate = coachRates.length > 0 ? (sum / coachRates.length).toFixed(1) : "尚無評價";
                 //生成教練卡
                 const cardHtml = `<a href="/Trainer/Coach?id=${item.id}" class="card mb-3" style="max-width:540px; text-decoration:none;">
-                              <div class="row g-0" style="height: 100%;">
-                                <div class="col-md-4 d-flex align-items-center justify-content-center" style="overflow:hidden; height: 100%;">
-                                   <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit:cover; height:100%; width:auto;">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h4 class="card-title">${item.name}</h4>
-                                        <h6 class="card-text"><img src="/assets/img/star1.png">${averageRate}</h6>
-                                        <p class="card-text">${regs}</p>
-                                        <p class="card-text">${item.intro}</p>
-                                        <p class="card-text">${exps}</p>
-                                    </div>
-                                </div>
-                                </div>
-                                </a>`;
+                                      <div class="row g-0" style="height: 100%;">
+                                        <div class="col-md-4 d-flex align-items-center justify-content-center" style="overflow:hidden; height: 100%;">
+                                           <img src="data:image/jpeg;base64,${item.photo}" id="image" class="img-fluid rounded-start" alt="..." style="object-fit:cover; height:100%; width:auto;">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h4 class="card-title">${item.name}</h4>
+                                                <h6 class="card-text"><img src="/assets/img/star1.png">${averageRate}</h6>
+                                                <p class="card-text">${regs}</p>
+                                                <p class="card-text">${item.intro}</p>
+                                                <p class="card-text">${exps}</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </a>`;
                 // 將教練卡片逐一添加並加入從下往上淡入的效果
                 const $card = $(cardHtml).appendTo(div).css({ opacity: 0, marginTop: '20px' });
                 $card.animate({ opacity: 1, marginTop: '0' }, 'slow');
@@ -199,11 +201,17 @@
             totalcoaches.textContent = `共有${data.totalCount}位教練`;
 
             //顯示分頁按鈕
-            let liPages = "";
+            // let liPages = "";
+            // for (let i = 1, max = data.totalPages; i <= max; i++) {
+            //     liPages += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+            // }
+            // ulPaging.innerHTML = liPages;
+            const liPages = [];
             for (let i = 1, max = data.totalPages; i <= max; i++) {
-                liPages += `<li class="page-item" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`
+                const isActive = (i === searchData.page) ? 'active' : '';
+                liPages.push(`<li class="page-item ${isActive}" onclick="pagingHandler(${i})"><a class="page-link" href="#">${i}</a></li>`);
             }
-            ulPaging.innerHTML = liPages;
+            ulPaging.innerHTML = liPages.join("");
         };
 
         //載入sort1選項function
@@ -369,39 +377,37 @@
             }
             loadCoaches();
         });
-
-        //成為教練防呆
-        // document.querySelector('#btnbecomecoach').addEventListener('click', () => {
-        //     if (LoginMemberID === '0') {
-        //             unloginlModal.show();
-        //             return;
-        //         }
-        // })
-        function checkLogin() {
+        document.getElementById('btnbecomecoach').addEventListener('click', (evt) => {
+            evt.preventDefault();
             if (LoginMemberID === '0') {
-                unloginlModal.show();  // 假設 unloginlModal 是顯示未登入訊息的模態對話框函數
+                unloginlModal.show();
                 return;
-            }
-            // 如果登入狀態正確，可以繼續執行其他相應的操作
-            // 例如跳轉至指定的頁面或執行其他功能
-            // setTimeout(() => {
-            //     window.location.assign('https://localhost:7168/Home/Login');
-            // }, 5000);            
-            //window.location.href = "https://localhost:7168/member/Coachregistered";
-        }
+            };
+            window.location.href = "https://localhost:7168/member/Coachregistered";
+        });
     </script>
 }
 @section Styles {
-<style>
+    <style>
         /*滑鼠覆蓋卡片效果*/
         .card {
             transition: transform 0.3s ease, opacity 0.3s ease; /* 加入 opacity 的過渡效果 */
             cursor: pointer;
             margin-bottom: 20px; /* 卡片之間的間距 */
         }
+
             .card:hover {
                 transform: scale(1.03);
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             }
-</style>
+
+        a:hover {
+            color: #000000;
+        }
+
+        .page-item.active .page-link {
+            background-color: #007bff; /* 調整為你希望的顏色 */
+            color: #fff; /* 調整為你希望的顏色 */
+        }
+    </style>
 }

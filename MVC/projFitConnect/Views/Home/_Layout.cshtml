@@ -63,7 +63,10 @@
             height: 2.8rem;
             object-fit: cover;
             object-position: center;
-            border-radius:50%;
+        }
+
+        .roundstamp {
+            border-radius: 50%;
         }
     </style>
     @await RenderSectionAsync("Styles", required: false)
@@ -81,7 +84,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0 ">
                         <li class="nav-item"><a class="nav-link fs-5" href="https://localhost:7168/Home">HOME</a></li>
-                        <li class="nav-item"><a class="nav-link fs-5" href="~/Trainer/Search">找教練</a></li>
+                        <li class="nav-item"><a class="nav-link fs-5" href="~/Trainer">找教練</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/Course">找課程</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/gymlist">找場地</a></li>
                         <li class="nav-item"><a class="nav-link fs-5" href="~/shop">商城</a></li>
@@ -91,7 +94,7 @@
                             <div class="dropdown-center">
                                 <div class="dropdown-btn">
                                     <a href="https://localhost:7168/Home/login" id="hyperlinkoflogin">
-                                        <img class="layoutstamp" src="~/assets/img/icon_profile.png" alt="Member" id="avatar-img">
+                                        <img class="layoutstamp roundstamp" src="~/assets/img/icon_profile.png" alt="Member" id="avatar-img">
                                     </a><br />
                                     <ul class="dropdown-menu full-width-dropdown">
                                         <li><a class="dropdown-item subtitle" href="https://localhost:7168/member/profile">個人資料</a></li>
