@@ -244,7 +244,7 @@
                 if (user.role_id == 3) {
                     hyperlink.href = 'https://localhost:7168/Admin';
                 } else if (user.role_id == 2) {
-                    hyperlink.href = 'https://localhost:7168/Coach/profile';
+                    hyperlink.href = 'https://localhost:7167/Coach/profile';
                     let coachResponse = await fetch('https://localhost:7199/api/Coach/' + user.id);
                     if (!coachResponse.ok)
                         return;
