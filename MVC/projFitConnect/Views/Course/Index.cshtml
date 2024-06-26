@@ -401,6 +401,7 @@
             });
             let data = await response.json();
             console.log('allCourse', data);
+            main.innerHTML = ''
             Maxpage = data.totalPages;
             //顯示資料
             courseCount.innerHTML = `<h2>共有${data.totalCount}個課程</h2>`;
