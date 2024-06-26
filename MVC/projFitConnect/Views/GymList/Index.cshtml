@@ -29,6 +29,27 @@
             width: 70%;
             margin-top: 20px;
         }
+
+        .card2 {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .card2 h5 {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+                color: white;
+                margin: 0;
+                padding: 10px;
+                text-align: center;
+            }
+
+        #tc {
+            color: white;
+        }
     </style>
 }
 <body>
@@ -104,18 +125,20 @@
                 slicedData.forEach(item => {
                     str += `
                                             <div class="card mb-3">
+                                                        <a href="../gym?id=${item.gymId}" style="color:black;" onclick="openGymDetails(event, '${item.gymId}')">
                                                 <div class="row g-0">
                                                     <div class="col-md-5">
                                                         <img src="data:image/png;base64,${item.gymPhoto}" class="img-fluid rounded-start">
                                                     </div>
                                                     <div class="col-md-7">
                                                         <div class="card-body">
-                                                            <a href="../gym?id=${item.gymId}" onclick="openGymDetails(event, '${item.gymId}')"><h5><b>${item.gymName}</b></h5></a>
+                                                            <h5><b>${item.gymName}</b></h5>
                                                             <p class="card-text"><b>營業時間:</b> ${item.gymTime}</p>
                                                             <p class="card-text"><b>地址:</b> ${item.gymAddress}</p>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                        </a>
                                             </div>
                                         `;
                 });
@@ -163,13 +186,13 @@
 
                                     const content = `
                                                     <div>
-                                                        <h5><b>${item.gymName}</b></h5>
-                                                        <div>
+                                                        <div class="card2">
                                                             <img src="data:image/png;base64,${item.gymPhoto}" class="img-fluid rounded-start imgsize">
-                                                        </div>
+                                                             <h5 id="tc"><b>${item.gymName}</b></h5>
+                                                            </div>
                                                         <div class="mt-2">
                                                             <p class="card-text"><b>營業時間:</b> ${item.gymTime}</p>
-                                                            <p class="card-text"><b>地址:</b> ${item.gymAddress}</p>
+                                                            <p class="card-text"><b>地址:</b> </br>${item.gymAddress}</p>
                                                             <button class="btn btn-outline-info" onclick="openGymDetails(event, '${item.gymId}')">查看場館</button>
                                                         </div>
                                                     </div>

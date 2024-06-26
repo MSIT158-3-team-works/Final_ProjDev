@@ -296,7 +296,7 @@
             });
             if (data.rateDetailDtos.length !== 0) {
                 averageRate = (sum / data.rateDetailDtos.length).toFixed(1);
-                ratediv = `<div class="rate" > <h3>★ ${averageRate} </h3></div >`;
+                ratediv = `<div class="rate" > <h2 style="color:yellow;">★</h2><h3> ${averageRate} </h3></div >`;
             } else {
                 ratediv = "";
             }
@@ -323,7 +323,7 @@
                               </button>
                             <h1 class="chakra-text">${data.coachDetailDto.name}
                             </h1>
-                                <h5>${aa}</h5>
+                                <h5 style="font-style:italic">${aa}</h5>
                                 <h5><b>性別 :</b> ${data.coachDetailDto.genderDescription}</h5>
                                  <h5><b>聯絡電話 :</b> ${data.coachDetailDto.phone}</h5>
                                  <h5><b>電子郵件 :</b> ${data.coachDetailDto.eMail}</h5>
@@ -568,12 +568,13 @@
             right: 10px;
             width: 75px;
             height: 60px;
-            background-color: #FFD306/* #FFFF93 */;
+            background-color: #ADADAD /* #FFFF93 */;
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #FF8000;
+            color: #FFFFF4;
+            text-shadow: 0.5px 1px 0.2px #4B0091;
         }
         /*追蹤按鈕*/
         .track {

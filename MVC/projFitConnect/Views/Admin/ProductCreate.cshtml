@@ -49,7 +49,7 @@
     </style>
 }
 
-<h1 style="padding-left:64px;margin:15px 0;">上架商品</h1>
+<h1 style="padding-left:64px;margin:15px 0;" id="createheading">上架商品</h1>
 
 <div id="content">
     <aside class="aside">
@@ -93,7 +93,7 @@
                 <div class="col-4 ">
                     <label class="form-label">類別</label>
                     <select class="form-select" aria-label="Default select example" id="category">
-                        <option selected value="">--選擇類別--</option>
+                        <option selected value="" id="categorywaitforselect">--選擇類別--</option>
                         <option value="1">乳清蛋白</option>
                         <option value="2">健康食品</option>
                         <option value="3">運動配件</option>
@@ -297,6 +297,18 @@
             } else { showFailedModal(); }
         }
 
+
+        //DEMO
+        document.querySelector('#createheading').addEventListener('click', () => {
+            productName.value = 'NutroOne 單手調節專業啞鈴（5-45磅）';
+            document.getElementById('categorywaitforselect').textContent = '健身器材';
+            thePrice.value = '5999';
+            detail.value = `新一代可調啞鈴，調重更快捷方便，打造你的私人家用健身室。現在只要一對啞鈴, 便相當於16支不同重量的啞鈴。<ul><li>新款尺寸更纖巧，節省空間，同時能降低預算</li><li>單手操作，轉動啞鈴手抽位置，最快1秒極速調重</li><li>根據個人需要，方便調節重量，定立個人全身訓練目標</li><li>加強物料，沿用安全設計，讓你訓練時更安心</li></ul>`;
+            postData.productName = productName.value;
+            postData.categoryId = 4;
+            postData.productUnitprice = 5999;
+            postData.productDetail = detail.value;
+        })
     </script>
 }
 
