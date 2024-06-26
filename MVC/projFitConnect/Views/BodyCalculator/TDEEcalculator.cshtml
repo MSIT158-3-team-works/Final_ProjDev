@@ -22,7 +22,7 @@
                 </div>
             </div>
             <!-- TDEE計算器 -->
-            <div class="col-lg-6 tdee-container">
+            <div class="col-lg-6 tdee-container" style="margin-top:130px;">
                 <form method="post" id="frmTDEE">
                     <br />
                     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -62,7 +62,7 @@
                         <div style="text-align: center;">
                             <button type="button" class="site-btn" id="btnCalculateTDEE">開始計算!</button>
                             <br />
-                            <button type="button" class="btn btn-outline-success" id="btnDemo">Demo</button>
+                            @* <button type="button" class="btn btn-outline-success" id="btnDemo">Demo</button> *@
                         </div>
                     </div>
                 </form>
@@ -94,7 +94,7 @@
                             </tr>
                             <tr>
                                 <td class="guidance" style="background-color: #fff;">
-                                    <p id="pWeightLoss" style="font-size: 18px; color: ; font-weight: bold;">減重：</p>
+                                    <p id="pWeightLoss" style="font-size: 18px; color:#E74C3C ; font-weight: bold;">減重：</p>
                                     <p style="font-size: 16px;">如果您希望減重，建議每天攝取 <span id="weightLossCalories" style="font-size: 20px; font-weight: bold;">0</span> 卡路里。</p>
                                     <p style="font-size: 16px;color:#E74C3C">推薦控制總熱量攝入，增加蔬菜和瘦肉等低熱量食物，並進行有氧運動和重量訓練以促進脂肪燃燒。</p>
                                 </td>
@@ -172,13 +172,13 @@
             }, 1000);
         });
 
-        document.getElementById("btnDemo").addEventListener("click", function () {
-            document.getElementById("inpAge").value = 25;
-            document.getElementById("inpHeight").value = 175;
-            document.getElementById("inpWeight").value = 70;
-            document.getElementById("selWorkload").value = 1.55;
-            //document.getElementById("btnCalculateTDEE").click();
-        });
+        // document.getElementById("btnDemo").addEventListener("click", function () {
+        //     document.getElementById("inpAge").value = 25;
+        //     document.getElementById("inpHeight").value = 175;
+        //     document.getElementById("inpWeight").value = 70;
+        //     document.getElementById("selWorkload").value = 1.55;
+        //     //document.getElementById("btnCalculateTDEE").click();
+        // });
     </script>
 }
 
@@ -191,7 +191,7 @@
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-            padding-top: 50px;
+           
             padding-bottom: 100px;
         }
 
@@ -389,7 +389,6 @@
 
         .section-title {
             text-align: center;
-            margin-top: 20px;
         }
 
 

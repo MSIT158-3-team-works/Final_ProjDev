@@ -344,11 +344,11 @@
             //coachResult{name,intro,photo}
             //顯示資料
             for (var coach of data.coachResult) {
-                s += `<div class="team-member" style="overflow:hidden">
+                s += `<div class="team-member" style="overflow:hidden;text-align:center;margin:30px 20px;">
                                 <a href="https://localhost:7168/Trainer/Coach?id=${coach.id}" style="text-decoration:none;">
                                 <img class="rounded-circle coach-photo" src="data:image/jpeg;base64,${coach.photo}" style="width:14rem;height:14rem;object-fit:cover;object-position:center"/>
-                                    <h4>${coach.name}</h4>
-                                    <p class="text-muted">${coach.intro}</p>
+                                    <h4 style="margin-top:12px;">${coach.name}</h4>
+                                    <p class="text-muted" style="font-size:larger">${coach.intro.substring(0,25)}...</p>
                                 </a>
                             </div>`;
             }
