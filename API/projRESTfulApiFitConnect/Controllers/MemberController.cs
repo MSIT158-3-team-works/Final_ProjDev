@@ -114,16 +114,23 @@ namespace projRESTfulApiFitConnect.Controllers
             if (member.Photo != null)
             {
                 string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", member.Photo);
-                byte[] bytes = System.IO.File.ReadAllBytes(path);
-                member.Photo = Convert.ToBase64String(bytes);
+                if (System.IO.File.Exists(path))
+                {
+                    byte[] bytes = System.IO.File.ReadAllBytes(path);
+                    member.Photo = Convert.ToBase64String(bytes);
+                }
+                else
+                {
+                    int random = (new Random()).Next(1, 5);
+                    string imgpath = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", "default" + random + ".jpg");
+                    if (System.IO.File.Exists(imgpath))
+                    {
+                        byte[] bytes = System.IO.File.ReadAllBytes(imgpath);
+                        member.Photo = Convert.ToBase64String(bytes);
+                    }
+                }
             }
-            else
-            {
-                int random = (new Random()).Next(1, 5);
-                string path = Path.Combine(_env.ContentRootPath, "Images", "MemberImages", "default" + random + ".jpg");
-                byte[] bytes = System.IO.File.ReadAllBytes(path);
-                member.Photo = Convert.ToBase64String(bytes);
-            }
+
             return Ok(member);
         }
 
