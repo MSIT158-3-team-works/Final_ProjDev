@@ -141,6 +141,15 @@
             #returnButton:hover {
                 text-decoration: none;
             }
+        /*滑鼠覆蓋卡片效果*/
+        .act {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+            .act:hover {
+                transform: scale(0.98);
+            }
     </style>
     }
 
@@ -285,6 +294,29 @@
         </div>
     </div>
 </div>
+
+<div class="modal" id="coursereserveModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:10px;border-color:#CECEFF;">
+            <div class="modal-body" style="background-color:#ECFFFF; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#003D79; text-shadow: 1px 1px 2px #D9FFFF; font-weight:700;">預約課程成功!</h5>
+                <img src="https://cdn.dribbble.com/users/1154535/screenshots/3288650/dribbble-success-2.gif" alt="success" style="height:100%; width:100%; object-fit:cover; border-radius:10px;border-color:#CECEFF;">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="alreadyaddModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" style="border-radius:10px; overflow:hidden;">
+        <div class="modal-content" style="height:300px;width:400px;position:relative;border-radius:20px;border-color:#CECEFF;">
+            <div class="modal-body" style="background-color:#FFED97; padding:0; position:relative; border-radius:10px;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position:absolute; top:10px; right:10px;"></button>
+                <h5 style="position:absolute; top:10%; left:50%; transform:translate(-50%, -50%); color:#272727; text-shadow: 1px 1px 2px #FFFFDF; font-weight:700;">已預約過此課程~</h5>
+                <img src="https://cdn.dribbble.com/users/5669337/screenshots/13958426/light_bulb.gif" alt="Already" style="height:100%; width:100%; object-fit:cover; border-radius:20px;border-color:#CECEFF;">
+            </div>
+        </div>
+    </div>
+</div>
 @{
     var loginMemberID = ViewBag.ID != null ? ViewBag.ID : 0;
 }
@@ -294,7 +326,20 @@
         const loginMemberID = @loginMemberID;
         console.log(@ViewBag.classScheduleId);
         const classScheduleId = '@ViewBag.classScheduleId';
-
+        function showCoursereservModal() {
+            const modal = new bootstrap.Modal(document.getElementById('coursereserveModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 2468);
+        }
+        function showAlreadyAddModal() {
+            const modal = new bootstrap.Modal(document.getElementById('alreadyaddModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 999);
+        }
         if (classScheduleId) {
             const newbtn = document.getElementById('addcartbtn');
             newbtn.addEventListener('click', async (event) => {
@@ -308,9 +353,11 @@
                     method: 'GET'
                 });
                 if (response.ok) {
-                    window.alert('新增課程成功!');
+                    showCoursereservModal();
+                    //window.alert('新增課程成功!');
                 } else {
-                    window.alert('該課程已在購物車內');
+                    showAlreadyAddModal();
+                    //window.alert('該課程已在購物車內');
                 }
             });
         }
