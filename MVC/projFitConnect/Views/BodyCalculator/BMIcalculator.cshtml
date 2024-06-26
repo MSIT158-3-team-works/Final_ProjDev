@@ -40,7 +40,7 @@
                 <br />
                 <div class="text-center">
                     <button class="site-btn" id="btnGetBMI">開始計算!</button><br /><br />
-                    <button type="button" class="btn btn-outline-success" id="btnDemo">Demo</button>
+                @*     <button type="button" class="btn btn-outline-success" id="btnDemo">Demo</button> *@
                 </div>
                 <div>
                     <div class="section-title product__discount__title hidden" style="margin-bottom: 2vw;">
@@ -127,15 +127,15 @@
             });
 
             // Demo按鈕
-            document.getElementById("btnDemo").addEventListener("click", function () {
-                document.getElementById("FHeight").value = "167";
-                document.getElementById("FWeight").value = "75";
-                document.getElementById("hResult").textContent = ""; // Clear previous BMI result
-                document.querySelectorAll(".divResult").forEach(div => div.style.display = "none");
-                document.querySelectorAll('.hidden').forEach(element => {
-                    element.style.display = 'none'; // Hide elements again on demo click
-                });
-            });
+            // document.getElementById("btnDemo").addEventListener("click", function () {
+            //     document.getElementById("FHeight").value = "167";
+            //     document.getElementById("FWeight").value = "75";
+            //     document.getElementById("hResult").textContent = ""; // Clear previous BMI result
+            //     document.querySelectorAll(".divResult").forEach(div => div.style.display = "none");
+            //     document.querySelectorAll('.hidden').forEach(element => {
+            //         element.style.display = 'none'; // Hide elements again on demo click
+            //     });
+            // });
 
             // 課程推薦部分
             const HomepageCourses = async () => {
