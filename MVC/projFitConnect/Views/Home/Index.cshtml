@@ -102,44 +102,69 @@
         <h2 class="section-heading text-uppercase">商城</h2>
         <h3 class="section-subheading text-muted">FitConnect Shop</h3>
     </div>
-        <div style="text-decoration:none;text-align:right;margin-right:30px;">
-            <a href="https://localhost:7168/shop/index" class="btn btn-outline-primary">前往商城>></a>
-        </div>
-        <div id="carouselAutoplayingMerchandise" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active carousel-shopgoods">
-                    <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop">
-                        <div class="card m-3 hover" style="min-width:150px;padding-top:8px">
-                            <img class="card-img-top" src="~/assets/img/header-backgrd.jpg" alt=".C" style="width:97%;max-height:150px;">
-                            <div class="card-body">
-                                <h4 class="card-title">Joy</h4>
-                                <span class="" style="font-style:italic;color:lightblue;">#category</span>
-                                <p class="card-text">$1.99 USD</p>
-                            </div>
+    <div style="text-decoration:none;text-align:right;margin-right:30px;">
+        <a href="https://localhost:7168/shop/index" class="btn btn-outline-primary">前往商城>></a>
+    </div>
+    <div id="carouselAutoplayingMerchandise" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active carousel-shopgoods">
+                <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop">
+                    <div class="card m-3 hover" style="min-width:150px;padding-top:8px">
+                        <img class="card-img-top" src="~/assets/img/header-backgrd.jpg" alt=".C" style="width:97%;max-height:150px;">
+                        <div class="card-body">
+                            <h4 class="card-title">Joy</h4>
+                            <span class="" style="font-style:italic;color:lightblue;">#category</span>
+                            <p class="card-text">$1.99 USD</p>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item carousel-shopgoods">
-                    <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop2">
-                    </div>
-                </div>
-                <div class="carousel-item carousel-shopgoods">
-                    <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop3">
-                    </div>
+            </div>
+            <div class="carousel-item carousel-shopgoods">
+                <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop2">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutoplayingMerchandise" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselAutoplayingMerchandise" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <div class="carousel-item carousel-shopgoods">
+                <div class="row row-cols-1 row-cols-md-4 g-4 m-1" id="homepageShop3">
+                </div>
+            </div>
         </div>
-    
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutoplayingMerchandise" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselAutoplayingMerchandise" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
 </section>
 
+<!-- 身體測量器-->
+<section class="row">
+    <div class="text-center" style="margin:auto;">
+        <h2 class="section-heading text-uppercase">身體測量器</h2>
+        <p style="text-align:center;font-size:19px;font-weight:bold;color:#004B97">輸入您的身高、體重、年紀、性別、活動程度，點擊「計算」按鈕，就能算出您的身體質量指數（BMI）與每日總消耗熱量（TDEE）。</p>
+    </div>
+    <div class="col-lg-6 reveal_b1">
+        <a href="../BodyCalculator/BMIcalculator">
+            <div class="divOption">
+                <img src="~/assets/img/body/BMI.jpg" />
+                <div class="divBackground"></div>
+                <div><h1>BMI<br />計算器</h1></div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-6 reveal_b2">
+        <a href="../BodyCalculator/TDEEcalculator">
+            <div class="divOption">
+                <img src="~/assets/img/body/BMII.jpg" />
+                <div class="divBackground"></div>
+                <div><h1>TDEE<br />計算器</h1></div>
+            </div>
+        </a>
+    </div>
+</section>
 <!-- 健康專欄-->
 <section class="from-blog spad">
     <div class="container">
@@ -200,6 +225,7 @@
         </div>
     </div>
 </section>
+
 
 @section Scripts {
     <script>
@@ -270,136 +296,145 @@
             //courseResult{class,classScheduleId,courseDate,introduction,photo}
             for (var course of data.courseResult) {
                 x += `<div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" href="https://localhost:7168/course/search/${course.classScheduleId}">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                <div class="portfolio-item">
+                                    <a class="portfolio-link" href="https://localhost:7168/course/search/${course.classScheduleId}">
+                                        <div class="portfolio-hover">
+                                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                        </div>
+                                        <img class="img-fluid" src="data:image/jpeg;base64,${course.photo}" />
+                                    </a>
+                                    <div class="portfolio-caption">
+                                        <div class="portfolio-caption-heading">${course.class}</div>
+                                        <div class="portfolio-caption-subheading text-muted">${course.introduction.substring(0, 25)}...</div>
+                                    </div>
                                 </div>
-                                <img class="img-fluid" src="data:image/jpeg;base64,${course.photo}" />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">${course.class}</div>
-                                <div class="portfolio-caption-subheading text-muted">${course.introduction.substring(0, 25)}...</div>
-                            </div>
-                        </div>
-                    </div>`;
+                            </div>`;
             }
             document.querySelector('#courses').innerHTML = x;
         }
 
         //教練
-            const HomepageCoaches = async () => {
-                var s = '';
-                let sortBy = ["", "RegionId", "Sort1ID", "GenderID"];
-                let sortType = ["asc", "desc"];
-                let randomBy = Math.floor(Math.random() * 4);
-                let randomType = Math.floor(Math.random() * 2);
-                let url = 'https://localhost:7199/api/Coach/SEARCH';
-                let response = await fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        "sort1": "",
-                        "sort2": "",
-                        "gender": "",
-                        "city": "",
-                        "region": "",
-                        "classId": 0,
-                        "keyword": "",
-                        "page": 1,
-                        "pageSize": 6,
-                        "sortBy": sortBy[randomBy],
-                        "sortType": sortType[randomType]
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                let data = await response.json();
-                //coachResult{name,intro,photo}
-                //顯示資料
-                for (var coach of data.coachResult) {
+        const HomepageCoaches = async () => {
+            var s = '';
+            let sortBy = ["", "RegionId", "Sort1ID", "GenderID"];
+            let sortType = ["asc", "desc"];
+            let randomBy = Math.floor(Math.random() * 4);
+            let randomType = Math.floor(Math.random() * 2);
+            let url = 'https://localhost:7199/api/Coach/SEARCH';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "sort1": "",
+                    "sort2": "",
+                    "gender": "",
+                    "city": "",
+                    "region": "",
+                    "classId": 0,
+                    "keyword": "",
+                    "page": 1,
+                    "pageSize": 6,
+                    "sortBy": sortBy[randomBy],
+                    "sortType": sortType[randomType]
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            let data = await response.json();
+            //coachResult{name,intro,photo}
+            //顯示資料
+            for (var coach of data.coachResult) {
                 s += `<div class="team-member" style="overflow:hidden">
-                        <a href="https://localhost:7168/Trainer/Coach?id=${coach.id}" style="text-decoration:none;">
-                        <img class="rounded-circle coach-photo" src="data:image/jpeg;base64,${coach.photo}" style="width:14rem;height:14rem;object-fit:cover;object-position:center"/>
-                            <h4>${coach.name}</h4>
-                            <p class="text-muted">${coach.intro}</p>
-                        </a>
-                    </div>`;
-                }
-                //console.log('coaches_text', s)
-                document.querySelector('#trainer-slider').innerHTML = s;
-            };
-        
-        
+                                <a href="https://localhost:7168/Trainer/Coach?id=${coach.id}" style="text-decoration:none;">
+                                <img class="rounded-circle coach-photo" src="data:image/jpeg;base64,${coach.photo}" style="width:14rem;height:14rem;object-fit:cover;object-position:center"/>
+                                    <h4>${coach.name}</h4>
+                                    <p class="text-muted">${coach.intro}</p>
+                                </a>
+                            </div>`;
+            }
+            //console.log('coaches_text', s)
+            document.querySelector('#trainer-slider').innerHTML = s;
+        };
+
+
         //商城
-            const HomepageProducts = async () => {
-                var x = '', y = '', z = '';
-                let already = 0
-                let sortBy = ["", "popular", "unitPrice", "categoryId"];
-                let sortType = ["asc", "desc"];
-                let randomBy = Math.floor(Math.random() * 4);
-                let randomType = Math.floor(Math.random() * 2);
-                //console.log(sortBy[randomBy]); console.log(sortType[randomType]);
-                let url = 'https://localhost:7199/api/Products/search';
-                let response = await fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        "categoryId": 0,
-                        "keyword": "",
-                        "page": 3,
-                        "pageSize": 12,
-                        "sortBy": sortBy[randomBy],
-                        "sortType": sortType[randomType]
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                let data = await response.json();
-                //顯示資料
-                for (var good of data.productsResult) {
-                    //data:image/jpeg;base64,${good.productImage}
-                    already++;
-                    if (already < 5)
-                        x += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
-                                                <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
-                                                 <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
-                                                  <div class="card-body">
-                                                     <h6 class="card-title">${good.productName}</h6>
-                                                     <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
-                                                     <p class="card-text">$${good.unitPrice}NTD</p>
-                                                  </div> </div></a>`;
-                    else if (already < 9)
-                        y += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
-                                                     <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
-                                                       <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
-                                                         <div class="card-body">
-                                                           <h6 class="card-title">${good.productName}</h6>
-                                                           <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
-                                                           <p class="card-text">$${good.unitPrice}NTD</p>
-                                                         </div> </div></a>`;
-                    else
-                        z += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
-                                                     <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
-                                                        <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
-                                                           <div class="card-body">
-                                                              <h6 class="card-title">${good.productName}</h6>
-                                                              <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
-                                                              <p class="card-text">$${good.unitPrice}NTD</p>
-                                                            </div> </div></a>`;
+        const HomepageProducts = async () => {
+            var x = '', y = '', z = '';
+            let already = 0
+            let sortBy = ["", "popular", "unitPrice", "categoryId"];
+            let sortType = ["asc", "desc"];
+            let randomBy = Math.floor(Math.random() * 4);
+            let randomType = Math.floor(Math.random() * 2);
+            //console.log(sortBy[randomBy]); console.log(sortType[randomType]);
+            let url = 'https://localhost:7199/api/Products/search';
+            let response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
+                    "categoryId": 0,
+                    "keyword": "",
+                    "page": 3,
+                    "pageSize": 12,
+                    "sortBy": sortBy[randomBy],
+                    "sortType": sortType[randomType]
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-                document.getElementById('homepageShop').innerHTML = x;
-                document.getElementById('homepageShop2').innerHTML = y;
-                document.getElementById('homepageShop3').innerHTML = z;
-            };
+            });
+            let data = await response.json();
+            //顯示資料
+            for (var good of data.productsResult) {
+                //data:image/jpeg;base64,${good.productImage}
+                already++;
+                if (already < 5)
+                    x += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
+                                                        <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
+                                                         <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
+                                                          <div class="card-body">
+                                                             <h6 class="card-title">${good.productName}</h6>
+                                                             <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
+                                                             <p class="card-text">$${good.unitPrice}NTD</p>
+                                                          </div> </div></a>`;
+                else if (already < 9)
+                    y += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
+                                                             <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
+                                                               <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
+                                                                 <div class="card-body">
+                                                                   <h6 class="card-title">${good.productName}</h6>
+                                                                   <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
+                                                                   <p class="card-text">$${good.unitPrice}NTD</p>
+                                                                 </div> </div></a>`;
+                else
+                    z += ` <a href="https://localhost:7168/shop/merchandise/${good.productId}" style="text-decoration:none;">
+                                                             <div class="card m-auto hover" style="min-width:150px;padding-top:8px">
+                                                                <img class="card-img-top" src="data:image/jpeg;base64,${good.productImage}" alt="fitconnectShop" style="width:97%;max-height:289px;">
+                                                                   <div class="card-body">
+                                                                      <h6 class="card-title">${good.productName}</h6>
+                                                                      <span class="" style="font-style:italic;color:lightblue;">#${good.productCategory}</span>
+                                                                      <p class="card-text">$${good.unitPrice}NTD</p>
+                                                                    </div> </div></a>`;
+            }
+            document.getElementById('homepageShop').innerHTML = x;
+            document.getElementById('homepageShop2').innerHTML = y;
+            document.getElementById('homepageShop3').innerHTML = z;
+        };
         HomepageCourses();
         HomepageCoaches();
         HomepageProducts();
+
+        //身體測量器
+        $(".divOption").hover(function () {
+            $(this).children("img").css("border-radius", "10%").css("opacity", "1").end().find("h1").css("color", "black").end().children(".divBackground").css("visibility", "visible");
+        }, function () {
+            $(this).children("img").css("border-radius", "15%").css("opacity", "0.8").end().find("h1").css("color", "#ffffff").end().children(".divBackground").css("visibility", "visible");
+        });
+
     </script>
 
 }
 @section Styles {
     <style>
+        section{padding-bottom:80px;}
         .row {
             display: flex;
             align-items: center;
@@ -469,9 +504,9 @@
         /*課程*/
         .img-fluid {
             width: 100%;
-            height: 200px; 
-            object-fit: cover; 
-            object-position: center; 
+            height: 200px;
+            object-fit: cover;
+            object-position: center;
         }
 
         .portfolio-item {
@@ -483,8 +518,85 @@
             text-align: center;
         }
 
+   /*==============================================身體測量器===============================================================*/
+        .main-title {
+            text-align: center;
+        }
 
+        .sub-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
+        .divOption {
+            position: relative;
+            width: 100%;
+            transition: background .2s linear, opacity .2s linear;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 180px; 
+        }
+
+            .divOption > img {
+                transition: transform 0.3s ease-out, border-radius 0.3s ease-out; 
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                opacity: 0.8;
+                border-radius: 15px;
+                transform: scale(1);
+            }
+
+            .divOption:hover > img {
+                transform: scale(0.95); 
+                border-radius: 50%; 
+            }
+
+            .divOption:hover {
+                background-color: rgba(190, 190, 190, 0.3); 
+            } 
+
+            .divOption > div {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-align: center;
+                transition: 0.5s;
+            }
+
+            .divOption:hover > div {
+                opacity: 1;
+            }
+
+            .divOption > div > h1 {
+                transition: 0.5s;
+                font-family: "Cairo", sans-serif;
+                color: #ffffff !important;
+                font-weight: 700;
+                margin: 0;
+            }
+
+        .divBackground {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: dimgrey;
+            opacity: 0.3;
+            border-radius: 15px;
+        }
 
     </style>
 
