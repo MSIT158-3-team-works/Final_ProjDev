@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitConnect</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
             display: flex;
@@ -108,6 +109,17 @@
             font-size: 1.5em;
         }
 
+        .card {
+            transition: transform 0.3s ease, opacity 0.3s ease; /* 加入 opacity 的過渡效果 */
+            cursor: pointer;
+            margin-bottom: 20px; /* 卡片之間的間距 */
+        }
+
+            .card:hover {
+                transform: scale(1.03);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+
         .card-body {
             background-color: whitesmoke;
         }
@@ -195,6 +207,7 @@
             .pagination a:hover:not(.active) {
                 background-color: #ddd;
             }
+
     </style>
 </head>
 <body>
@@ -204,7 +217,7 @@
 
         <!-- 地區下拉式選單 -->
         <select id="gym-select" class="form-select" aria-label="Default select example">
-            <option value="">選擇地區</option>
+            <option value="">選擇場館</option>
         </select>
 
         <!-- 課程類別下拉式選單 -->
@@ -234,29 +247,7 @@
     </div>
     <!-- 內容 -->
     <div class="row row-cols-1 row-cols-md-2 g-4" id="main_div">
-        <div class="col">
-            <div class="card">
-                <img src="~/Images/pilatis.jpg" class="card-img-top" width="200px" height="200px" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">[團體班] 超級小班 | 器械皮拉提斯</h5>
-                    <p class="card-text">
-                        2~4人精緻小班教學，強度依上課學員調整。
-                        皮拉提斯是一個低衝擊性的動作與瑜珈看起來非常相似，但在動作上更著重在學習肌肉控制、核心穩定及肌力訓練...
-                    </p>
-                    <div class="info">
-                        <img src="https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/clock-time-ticker-times-hour-16.png" /><p>2024.7.15</p>
-                    </div>
-                    <div class="info">
-                        <img src="https://cdn1.iconfinder.com/data/icons/ui-essential-17/32/UI_Essential_Outline_2_essential-app-ui-location-map-pin-22-16.png" /><p>大安區</p>
-                    </div>
-                    <div>
-                        <p class="price">每堂7,990元</p>
-                    </div>
-
-                    <a href="#" class="button">了解更多</a>
-                </div>
-            </div>
-        </div>
+       
     </div>
     <!-- 分頁控制元素的HTML -->
     <div id="pagination">
@@ -413,9 +404,8 @@
             Maxpage = data.totalPages;
             //顯示資料
             courseCount.innerHTML = `<h2>共有${data.totalCount}個課程</h2>`;
-            const courses = data.courseResult.map(course => {
-                //data:image/jpeg;base64,${course.photo}
-                return (`<div class="col">
+            data.courseResult.map(course => {
+            const cardHtml = `<div class="col">
                                            <div class="card card-container">
                                    <input type="hidden" value="${course.classScheduleId}" id="course-select"/>
                                                                 <img src="data:image/jpeg;base64,${course.photo}" object-fit="cover" width="400px" height="300px" class="card-img-top" alt="...">
@@ -434,10 +424,11 @@
                                             <a href="https://localhost:7168/course/search/${course.classScheduleId}" class="button">了解更多</a>
                                           </div>
                                         </div>
-                                     </div>
-        `)
-            })
-             main.innerHTML = courses.join("");
+                                     </div>`;
+            const $card = $(cardHtml).appendTo(main).css({ opacity: 0, marginTop: '20px' });
+            $card.animate({ opacity: 1, marginTop: '0' }, 'slow');
+            });
+             
 
              //載入場館
             loadGym();
